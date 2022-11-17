@@ -238,5 +238,245 @@ namespace ClipboardTool.Properties {
                 this["sendPaste"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool hkUpperCtrl {
+            get {
+                return ((bool)(this["hkUpperCtrl"]));
+            }
+            set {
+                this["hkUpperCtrl"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool hkUpperAlt {
+            get {
+                return ((bool)(this["hkUpperAlt"]));
+            }
+            set {
+                this["hkUpperAlt"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool hkUpperShift {
+            get {
+                return ((bool)(this["hkUpperShift"]));
+            }
+            set {
+                this["hkUpperShift"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool hkUpperWin {
+            get {
+                return ((bool)(this["hkUpperWin"]));
+            }
+            set {
+                this["hkUpperWin"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool hkLowerCtrl {
+            get {
+                return ((bool)(this["hkLowerCtrl"]));
+            }
+            set {
+                this["hkLowerCtrl"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool hkLowerAlt {
+            get {
+                return ((bool)(this["hkLowerAlt"]));
+            }
+            set {
+                this["hkLowerAlt"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool hkLowerShift {
+            get {
+                return ((bool)(this["hkLowerShift"]));
+            }
+            set {
+                this["hkLowerShift"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool hkLowerWin {
+            get {
+                return ((bool)(this["hkLowerWin"]));
+            }
+            set {
+                this["hkLowerWin"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool hkPlainCtrl {
+            get {
+                return ((bool)(this["hkPlainCtrl"]));
+            }
+            set {
+                this["hkPlainCtrl"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool hkPlainAlt {
+            get {
+                return ((bool)(this["hkPlainAlt"]));
+            }
+            set {
+                this["hkPlainAlt"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool hkPlainShift {
+            get {
+                return ((bool)(this["hkPlainShift"]));
+            }
+            set {
+                this["hkPlainShift"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool hkPlainWin {
+            get {
+                return ((bool)(this["hkPlainWin"]));
+            }
+            set {
+                this["hkPlainWin"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool hkProcessCtrl {
+            get {
+                return ((bool)(this["hkProcessCtrl"]));
+            }
+            set {
+                this["hkProcessCtrl"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool hkProcessAlt {
+            get {
+                return ((bool)(this["hkProcessAlt"]));
+            }
+            set {
+                this["hkProcessAlt"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool hkProcessShift {
+            get {
+                return ((bool)(this["hkProcessShift"]));
+            }
+            set {
+                this["hkProcessShift"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool hkProcessWin {
+            get {
+                return ((bool)(this["hkProcessWin"]));
+            }
+            set {
+                this["hkProcessWin"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool hkCapsCtrl {
+            get {
+                return ((bool)(this["hkCapsCtrl"]));
+            }
+            set {
+                this["hkCapsCtrl"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool hkCapsAlt {
+            get {
+                return ((bool)(this["hkCapsAlt"]));
+            }
+            set {
+                this["hkCapsAlt"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool hkCapsShift {
+            get {
+                return ((bool)(this["hkCapsShift"]));
+            }
+            set {
+                this["hkCapsShift"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool hkCapsWin {
+            get {
+                return ((bool)(this["hkCapsWin"]));
+            }
+            set {
+                this["hkCapsWin"] = value;
+            }
+        }
     }
 }

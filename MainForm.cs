@@ -55,11 +55,15 @@ namespace ClipboardTool
             bool hkAlt = Properties.Settings.Default.hkAlt;
             bool hkShift = Properties.Settings.Default.hkShift;
             bool hkWin = Properties.Settings.Default.hkWin;
-            ghkUpper = LoadHotkey(out hotkeys.UpperCase, Properties.Settings.Default.hkUpperKey , hkCtrl, hkAlt, hkShift, hkWin);
-            ghkLower = LoadHotkey(out hotkeys.LowerCase, Properties.Settings.Default.hkLowerKey , hkCtrl, hkAlt, hkShift, hkWin);
-            ghkCapsLock = LoadHotkey(out hotkeys.CapsLock, Properties.Settings.Default.hkCapsLockKey, hkCtrl, hkAlt, hkShift, hkWin);
-            ghkPlainText = LoadHotkey(out hotkeys.PlainText, Properties.Settings.Default.hkPlainKey, hkCtrl, hkAlt, hkShift, hkWin);
-            ghkProcessText = LoadHotkey(out hotkeys.ProcessText, Properties.Settings.Default.hkProcessTextKey, hkCtrl, hkAlt, hkShift, hkWin);
+            Settings settings = new Settings();
+            
+
+            //------------------------------- TODO: FIX MODIFIERS PER HOTKEY
+            ghkUpper = LoadHotkey(out hotkeys.UpperCase, settings.hkUpperKey , settings.hkUpperCtrl, settings.hkUpperAlt, settings.hkUpperShift, settings.hkUpperWin);
+            ghkLower = LoadHotkey(out hotkeys.LowerCase, settings.hkLowerKey , settings.hkLowerCtrl, settings.hkLowerAlt, settings.hkLowerShift, settings.hkLowerWin);
+            ghkCapsLock = LoadHotkey(out hotkeys.CapsLock, settings.hkCapsLockKey, settings.hkCapsCtrl, settings.hkCapsAlt, settings.hkCapsShift, settings.hkCapsWin);
+            ghkPlainText = LoadHotkey(out hotkeys.PlainText, settings.hkPlainKey, settings.hkPlainCtrl, settings.hkPlainAlt, settings.hkPlainShift, settings.hkPlainWin);
+            ghkProcessText = LoadHotkey(out hotkeys.ProcessText, settings.hkProcessTextKey, settings.hkProcessCtrl, settings.hkProcessAlt, settings.hkProcessShift, settings.hkProcessWin);
 
         }
 
@@ -125,8 +129,8 @@ namespace ClipboardTool
                 "$v Split value in slot 1 with ;, output value[number]";            
             toolTipProcess.SetToolTip(textCustom, tooltipText);
             toolTipProcess.SetToolTip(panel1, tooltipText);
-            
 
+            textCustom.Text = loadTextFromFile("process.txt");
             textBox1.Text = loadTextFromFile("mem1.txt");
             textBox2.Text = loadTextFromFile("mem2.txt");
             textBox3.Text = loadTextFromFile("mem3.txt");
@@ -207,7 +211,7 @@ namespace ClipboardTool
             {
                 if (!ghk.Register())
                 {
-                    //writeMessage("register hotkey failed");                    
+                    //writeMessage("register hotkey failed");
                 }
             }
         }

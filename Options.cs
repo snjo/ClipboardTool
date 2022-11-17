@@ -149,11 +149,30 @@ namespace ClipboardTool
             Properties.Settings.Default.hkCapsLockKey = mainForm.hotkeys.CapsLock.key;
             Properties.Settings.Default.hkProcessTextKey = mainForm.hotkeys.ProcessText.key;
 
-            //---------------------------------- TODO : save modifiers properly
-            Properties.Settings.Default.hkCtrl = mainForm.hotkeys.UpperCase.Ctrl;
-            Properties.Settings.Default.hkAlt = mainForm.hotkeys.UpperCase.Alt;
-            Properties.Settings.Default.hkShift = mainForm.hotkeys.UpperCase.Shift;
-            Properties.Settings.Default.hkWin = mainForm.hotkeys.UpperCase.Win;
+            Properties.Settings.Default.hkUpperCtrl = mainForm.hotkeys.UpperCase.Ctrl;
+            Properties.Settings.Default.hkUpperAlt = mainForm.hotkeys.UpperCase.Alt;
+            Properties.Settings.Default.hkUpperShift = mainForm.hotkeys.UpperCase.Shift;
+            Properties.Settings.Default.hkUpperWin = mainForm.hotkeys.UpperCase.Win;
+
+            Properties.Settings.Default.hkLowerCtrl = mainForm.hotkeys.LowerCase.Ctrl;
+            Properties.Settings.Default.hkLowerAlt = mainForm.hotkeys.LowerCase.Alt;
+            Properties.Settings.Default.hkLowerShift = mainForm.hotkeys.LowerCase.Shift;
+            Properties.Settings.Default.hkLowerWin = mainForm.hotkeys.LowerCase.Win;
+
+            Properties.Settings.Default.hkPlainCtrl = mainForm.hotkeys.PlainText.Ctrl;
+            Properties.Settings.Default.hkPlainAlt = mainForm.hotkeys.PlainText.Alt;
+            Properties.Settings.Default.hkPlainShift = mainForm.hotkeys.PlainText.Shift;
+            Properties.Settings.Default.hkPlainWin = mainForm.hotkeys.PlainText.Win;
+
+            Properties.Settings.Default.hkCapsCtrl = mainForm.hotkeys.CapsLock.Ctrl;
+            Properties.Settings.Default.hkCapsAlt = mainForm.hotkeys.CapsLock.Alt;
+            Properties.Settings.Default.hkCapsShift = mainForm.hotkeys.CapsLock.Shift;
+            Properties.Settings.Default.hkCapsWin = mainForm.hotkeys.CapsLock.Win;
+
+            Properties.Settings.Default.hkProcessCtrl = mainForm.hotkeys.ProcessText.Ctrl;
+            Properties.Settings.Default.hkProcessAlt = mainForm.hotkeys.ProcessText.Alt;
+            Properties.Settings.Default.hkProcessShift = mainForm.hotkeys.ProcessText.Shift;
+            Properties.Settings.Default.hkProcessWin = mainForm.hotkeys.ProcessText.Win;
 
             Properties.Settings.Default.Save();
         }

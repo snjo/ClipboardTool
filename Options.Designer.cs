@@ -71,6 +71,7 @@
             this.optionCut = new System.Windows.Forms.CheckBox();
             this.optionType = new System.Windows.Forms.CheckBox();
             this.optionPaste = new System.Windows.Forms.CheckBox();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
             // optionStartHidden
@@ -125,19 +126,18 @@
             // 
             // textMemorySlotFolder
             // 
-            this.textMemorySlotFolder.Location = new System.Drawing.Point(202, 81);
+            this.textMemorySlotFolder.Location = new System.Drawing.Point(202, 108);
             this.textMemorySlotFolder.Name = "textMemorySlotFolder";
             this.textMemorySlotFolder.Size = new System.Drawing.Size(252, 23);
             this.textMemorySlotFolder.TabIndex = 5;
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(202, 63);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(228, 15);
+            this.label1.Size = new System.Drawing.Size(252, 42);
             this.label1.TabIndex = 6;
-            this.label1.Text = "Memory slot txt file folder (mem1.txt etc.)";
+            this.label1.Text = ".txt file folder. Use process.txt, mem1.txt mem2.txt, mem3.txt:";
             // 
             // label2
             // 
@@ -464,9 +464,9 @@
             this.optionType.AutoSize = true;
             this.optionType.Location = new System.Drawing.Point(12, 110);
             this.optionType.Name = "optionType";
-            this.optionType.Size = new System.Drawing.Size(213, 19);
+            this.optionType.Size = new System.Drawing.Size(181, 19);
             this.optionType.TabIndex = 41;
-            this.optionType.Text = "Send keystrokes when using hotkey";
+            this.optionType.Text = "Send keys when using hotkey";
             this.optionType.UseVisualStyleBackColor = true;
             // 
             // optionPaste
@@ -479,11 +479,22 @@
             this.optionPaste.Text = "Ctrl+V when using hotkey";
             this.optionPaste.UseVisualStyleBackColor = true;
             // 
+            // panel2
+            // 
+            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Location = new System.Drawing.Point(195, 12);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(1, 125);
+            this.panel2.TabIndex = 43;
+            // 
             // Options
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(479, 360);
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.optionPaste);
             this.Controls.Add(this.optionType);
             this.Controls.Add(this.optionCut);
@@ -579,5 +590,6 @@
         private CheckBox optionCut;
         private CheckBox optionType;
         private CheckBox optionPaste;
+        private Panel panel2;
     }
 }
