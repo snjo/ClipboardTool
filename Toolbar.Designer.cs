@@ -154,5 +154,7 @@
        private Button button7;
        private Button button8;*/
         #endregion
+
+        private ToolTip toolTip1;
     }
 }

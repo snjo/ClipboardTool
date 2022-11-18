@@ -32,6 +32,8 @@ namespace Hotkeys
         public bool Alt;
         public bool Shift;
         public bool Win;
+        public GlobalHotkey ghk;
+        //public bool registered; // TODO
 
         public int Modifiers() // bool Ctrl, bool Alt, bool Shift, bool Win)
         {
@@ -87,20 +89,26 @@ namespace Hotkeys
         private int key;
         private IntPtr hWnd;
         public int id;
+        public Hotkey hotkey;
+        public bool registered;
+        private bool validKey;
 
         public Keys stringToKey(string keystring)
         {
+            //MessageBox.Show("keystring "+keystring+", length " + keystring.Length);
             if (keystring.Length > 0)
             {
                 if (keystring.Length == 1)
                 {
-                    char ch = keystring[0];                    
-                    return (Keys)ch;
+                    char ch = keystring[0];
+                    validKey = true;
+                    return (Keys)ch;                    
                 }
                 else
                 {
+                    //MessageBox.Show("keystring " + keystring + ", length " + keystring.Length);
                     Keys key;
-                    Enum.TryParse(keystring, out key);
+                    validKey = Enum.TryParse(keystring, out key);
                     return (Keys)key;
                 }
             }
@@ -113,6 +121,7 @@ namespace Hotkeys
             this.key = (int)key;
             this.hWnd = form.Handle;
             id = this.GetHashCode();
+            validKey = true;
         }
 
         public GlobalHotkey(int modifier, string keystring, Form form)
@@ -129,6 +138,7 @@ namespace Hotkeys
             this.key = (int)modifiedkey;
             this.hWnd = form.Handle;
             id = this.GetHashCode();
+            validKey = true;
         }
 
         public override int GetHashCode()
@@ -138,14 +148,26 @@ namespace Hotkeys
 
         public bool Register()
         {
+            if (validKey == false)
+            {
+                registered = false;
+                return registered;
+            }
             if (id != 0)
-                return RegisterHotKey(hWnd, id, modifier, key);
+            {
+                registered = RegisterHotKey(hWnd, id, modifier, key);
+                return registered;
+            }
             else
-                return false;
+            {
+                registered = false;
+                return registered;
+            }
         }
 
         public bool Unregister()
         {
+            registered = false;
             return UnregisterHotKey(hWnd, id);
         }
 

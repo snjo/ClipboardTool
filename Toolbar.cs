@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ToolBar;
 
 namespace ClipboardTool
 {
@@ -22,10 +23,10 @@ namespace ClipboardTool
         {
             InitializeComponent();
             FormBorderStyle = FormBorderStyle.FixedToolWindow;
-            //string tooltipText = "...";
-            //toolTip1.SetToolTip(buttonMemory1, tooltipText);
-            //toolTip1.SetToolTip(buttonMemory2, tooltipText);
-            //toolTip1.SetToolTip(buttonMemory3, tooltipText);
+            string tooltipText = "...";
+            toolTip1.SetToolTip(button1, tooltipText);
+            toolTip1.SetToolTip(button2, tooltipText);
+            toolTip1.SetToolTip(button3, tooltipText);
 
         }
 
@@ -112,24 +113,24 @@ namespace ClipboardTool
             }
         }
 
-        private void updateTooltip(int num)
+        private void updateTooltip(System.Windows.Forms.Button button, int num)
         {
-            //toolTip1.SetToolTip(button1, "Left Click to load to clipboard\nRight Click to save clipboard to this slot\n\n" + mainform.getMemorySlot(num));
+            toolTip1.SetToolTip(button, "Left Click to load to clipboard\nRight Click to save clipboard to this slot\n\n" + mainform.getMemorySlot(num));
         }
 
         private void updateTooltip1(object sender, EventArgs e)
         {
-            updateTooltip(1);
+            updateTooltip(button1, 1);
         }
 
         private void updateTooltip2(object sender, EventArgs e)
         {
-            updateTooltip(2);
+            updateTooltip(button2, 2);
         }
 
         private void updateTooltip3(object sender, EventArgs e)
         {
-            updateTooltip(3);
+            updateTooltip(button3, 3);
         }
 
         private System.Windows.Forms.Button buttonPin;
@@ -144,6 +145,7 @@ namespace ClipboardTool
 
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Toolbar));
             this.buttonPin = new System.Windows.Forms.Button();
             this.buttonhide = new System.Windows.Forms.Button();
@@ -154,6 +156,7 @@ namespace ClipboardTool
             this.buttonPlain = new System.Windows.Forms.Button();
             this.buttonUpper = new System.Windows.Forms.Button();
             this.buttonLower = new System.Windows.Forms.Button();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
             // buttonPin
@@ -184,6 +187,7 @@ namespace ClipboardTool
             this.button1.TabIndex = 12;
             this.button1.Text = "1";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.MouseHover += new System.EventHandler(this.updateTooltip1);
             this.button1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.saveload1);
             // 
             // button2
@@ -194,6 +198,7 @@ namespace ClipboardTool
             this.button2.TabIndex = 13;
             this.button2.Text = "2";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.MouseHover += new System.EventHandler(this.updateTooltip2);
             this.button2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.saveload2);
             // 
             // button3
@@ -204,6 +209,7 @@ namespace ClipboardTool
             this.button3.TabIndex = 14;
             this.button3.Text = "3";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.MouseHover += new System.EventHandler(this.updateTooltip3);
             this.button3.MouseUp += new System.Windows.Forms.MouseEventHandler(this.saveload3);
             // 
             // buttonProcess

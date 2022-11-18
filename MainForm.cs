@@ -38,6 +38,21 @@ namespace ClipboardTool
         public Form Current;
         public HotkeyList hotkeys = new HotkeyList();
         private bool hotkeysSet = false;
+        HelpForm helpForm = new HelpForm();
+        string delayedKeystrokes = "";
+
+        string tooltipText =
+                "$d date\n" +
+                "$t time\n" +
+                "$cp clipboard contents\n" +
+                "$cl / $cu clipboard in lower/upper case\n" +
+                "$i number\n" +
+                "$+ number, then increment it\n" +
+                "$- number, then decrement it\n" +
+                "$n2, $n3 use 1-3 digits in number (01, 001)\n" +
+                "$1 - $3 contents of the memory slots\n" +
+                "$eq Convert \"\" to \", and removes single \"\n" +
+                "$v Split value in slot 1 with ;, output value[number]";
 
         public MainForm()
         {
@@ -47,6 +62,7 @@ namespace ClipboardTool
             
             iconUpper = notifyIcon1.Icon;
             iconLower = systrayIcon.Icon;
+            helpForm.setText(tooltipText);
         }
 
         public void LoadHotkeys()
@@ -81,6 +97,8 @@ namespace ClipboardTool
                 if (hotkey.key != "") //!=0
                 {
                     result = new Hotkeys.GlobalHotkey(hotkey.Modifiers(), hotkey.key, this);
+                    hotkey.ghk = result;
+                    //result.hotkey = hotkey;
                 }
                 else
                 {
@@ -115,20 +133,9 @@ namespace ClipboardTool
             }
 
             updateHotkeyLabels();
-            string tooltipText =
-                "$d date\n" +
-                "$t time\n" +
-                "$cp clipboard contents\n" +
-                "$cl / $cu clipboard in lower/upper case\n" +
-                "$i number\n" +
-                "$+ number, then increment it\n" +
-                "$- number, then decrement it\n" +
-                "$n2, $n3 use 1-3 digits in number (01, 001)\n" +
-                "$1 - $3 contents of the memory slots\n" +
-                "$eq Convert \"\" to \", and removes single \"\n" +
-                "$v Split value in slot 1 with ;, output value[number]";            
+            
             toolTipProcess.SetToolTip(textCustom, tooltipText);
-            toolTipProcess.SetToolTip(panel1, tooltipText);
+            //toolTipProcess.SetToolTip(panel1, tooltipText);
 
             textCustom.Text = loadTextFromFile("process.txt");
             textBox1.Text = loadTextFromFile("mem1.txt");
@@ -181,7 +188,18 @@ namespace ClipboardTool
         private void updateHotkeyLabel(Hotkey hotkey, Label label)
         {
             if (hotkey != null)
-                label.Text = hotkey.text();
+            {
+                if (hotkey.ghk.registered)
+                {
+                    label.Text = hotkey.text();
+                }
+                else
+                {
+                    label.Text = "invalid hotkey: " + hotkey.key;
+                }
+            }
+
+
         }
 
         public void RegisterHotKeys()
@@ -356,18 +374,43 @@ namespace ClipboardTool
         {
             if (Properties.Settings.Default.sendPaste)
             {
-                SendKeys.SendWait("^v");                
+                delayKeystrokes("^v");
+                //SendKeys.SendWait("^v");
             }
             else if (Properties.Settings.Default.sendType)
             {
-                SendKeys.SendWait(Clipboard.GetText());
+                delayKeystrokes(Clipboard.GetText());
+                //SendKeys.SendWait(Clipboard.GetText());
+            }
+        }
+
+        private void delayKeystrokes(string keystrokes)
+        {
+            delayedKeystrokes = keystrokes;
+            timerKeystrokes.Start();
+        }
+
+
+
+        private void sendKeystrokes(string keystrokes)
+        {
+            SendKeys.SendWait(keystrokes);
+        }
+
+        private void actionDelayedKeystrokes(object sender, EventArgs e)
+        {
+            if (ModifierKeys == Keys.None)
+            {
+                timerKeystrokes.Stop();
+                if (delayedKeystrokes != null)
+                    sendKeystrokes(delayedKeystrokes);                
             }
         }
 
         private void PlainTextOnce()
         {
             clipBoardText = Clipboard.GetText(TextDataFormat.Text);
-            Clipboard.SetText(clipBoardText);
+            setClipBoard(clipBoardText);
         }
 
         private void UpperCaseOnce()
@@ -375,8 +418,10 @@ namespace ClipboardTool
             if (Clipboard.ContainsText())
             {
                 clipBoardText = Clipboard.GetText(TextDataFormat.Text);
+
                 clipBoardText = clipBoardText.ToUpper();
-                Clipboard.SetText(clipBoardText);
+                setClipBoard(clipBoardText);
+                //Clipboard.SetText(clipBoardText);
             }
         }
 
@@ -386,7 +431,19 @@ namespace ClipboardTool
             {
                 clipBoardText = Clipboard.GetText(TextDataFormat.Text);
                 clipBoardText = clipBoardText.ToLower();
+                setClipBoard(clipBoardText);
+            }
+        }
+
+        private void setClipBoard(string clipBoardText)
+        {
+            if (clipBoardText.Length > 0)
+            {
                 Clipboard.SetText(clipBoardText);
+            }
+            else
+            {
+                Clipboard.Clear();
             }
         }
 
@@ -720,5 +777,23 @@ namespace ClipboardTool
                 TopMost = false;
             }
         }
+
+        private void actionShowHelp(object sender, EventArgs e)
+        {
+            if (helpForm == null || helpForm.IsDisposed)
+            {
+                helpForm = new HelpForm();                
+            }
+
+            helpForm.setText(tooltipText);
+            helpForm.Show();            
+        }
+
+        private void actionSaveCustomText(object sender, EventArgs e)
+        {            
+            saveTextToFile("process.txt", textCustom.Text);
+        }
+
+
     }
 }

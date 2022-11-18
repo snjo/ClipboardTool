@@ -70,6 +70,9 @@
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.systrayIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.toolTipProcess = new System.Windows.Forms.ToolTip(this.components);
+            this.button7 = new System.Windows.Forms.Button();
+            this.button8 = new System.Windows.Forms.Button();
+            this.timerKeystrokes = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -264,7 +267,7 @@
             this.textCustom.Location = new System.Drawing.Point(8, 188);
             this.textCustom.Multiline = true;
             this.textCustom.Name = "textCustom";
-            this.textCustom.Size = new System.Drawing.Size(236, 92);
+            this.textCustom.Size = new System.Drawing.Size(205, 92);
             this.textCustom.TabIndex = 17;
             // 
             // label1
@@ -456,11 +459,39 @@
             this.systrayIcon.Visible = true;
             this.systrayIcon.Click += new System.EventHandler(this.actionCapsLock);
             // 
+            // button7
+            // 
+            this.button7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button7.Location = new System.Drawing.Point(214, 188);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(30, 23);
+            this.button7.TabIndex = 28;
+            this.button7.Text = "?";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.actionShowHelp);
+            // 
+            // button8
+            // 
+            this.button8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button8.Location = new System.Drawing.Point(214, 217);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(30, 23);
+            this.button8.TabIndex = 29;
+            this.button8.Text = "💾";
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.actionSaveCustomText);
+            // 
+            // timerKeystrokes
+            // 
+            this.timerKeystrokes.Tick += new System.EventHandler(this.actionDelayedKeystrokes);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(251, 404);
+            this.Controls.Add(this.button8);
+            this.Controls.Add(this.button7);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.textBox3);
@@ -541,5 +572,8 @@
         private ToolStripMenuItem lowerCaseClipboardToolStripMenuItem;
         private ToolStripMenuItem plainTextClipboardToolStripMenuItem;
         private ToolStripMenuItem exitToolStripMenuItem;
+        private Button button7;
+        private Button button8;
+        private System.Windows.Forms.Timer timerKeystrokes;
     }
 }
