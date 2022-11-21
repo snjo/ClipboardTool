@@ -441,7 +441,7 @@ namespace ClipboardTool
 
         private void setClipBoard(string clipBoardText)
         {
-            if (!settings.updateClipboard) return;
+            if (!settings.updateClipboard && settings.sendType) return;
             if (clipBoardText.Length > 0)
             {
                 Clipboard.SetText(clipBoardText);
