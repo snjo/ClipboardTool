@@ -24,6 +24,7 @@ namespace ClipboardTool
         [DllImport("user32.dll")]
         static extern void keybd_event(byte bVk, byte bScan, uint dwFlags, UIntPtr dwExtraInfo);
 
+        Settings settings = Properties.Settings.Default;
         string clipBoardText;
         private Hotkeys.GlobalHotkey ghkUpper;
         private Hotkeys.GlobalHotkey ghkLower;
@@ -67,19 +68,19 @@ namespace ClipboardTool
 
         public void LoadHotkeys()
         {
-            bool hkCtrl = Properties.Settings.Default.hkCtrl;
-            bool hkAlt = Properties.Settings.Default.hkAlt;
-            bool hkShift = Properties.Settings.Default.hkShift;
-            bool hkWin = Properties.Settings.Default.hkWin;
-            Settings settings = new Settings();
+            bool hkCtrl = settings.hkCtrl;
+            bool hkAlt = settings.hkAlt;
+            bool hkShift = settings.hkShift;
+            bool hkWin = settings.hkWin;
+            Settings newSettings = new Settings();
             
 
             //------------------------------- TODO: FIX MODIFIERS PER HOTKEY
-            ghkUpper = LoadHotkey(out hotkeys.UpperCase, settings.hkUpperKey , settings.hkUpperCtrl, settings.hkUpperAlt, settings.hkUpperShift, settings.hkUpperWin);
-            ghkLower = LoadHotkey(out hotkeys.LowerCase, settings.hkLowerKey , settings.hkLowerCtrl, settings.hkLowerAlt, settings.hkLowerShift, settings.hkLowerWin);
-            ghkCapsLock = LoadHotkey(out hotkeys.CapsLock, settings.hkCapsLockKey, settings.hkCapsCtrl, settings.hkCapsAlt, settings.hkCapsShift, settings.hkCapsWin);
-            ghkPlainText = LoadHotkey(out hotkeys.PlainText, settings.hkPlainKey, settings.hkPlainCtrl, settings.hkPlainAlt, settings.hkPlainShift, settings.hkPlainWin);
-            ghkProcessText = LoadHotkey(out hotkeys.ProcessText, settings.hkProcessTextKey, settings.hkProcessCtrl, settings.hkProcessAlt, settings.hkProcessShift, settings.hkProcessWin);
+            ghkUpper = LoadHotkey(out hotkeys.UpperCase, newSettings.hkUpperKey , newSettings.hkUpperCtrl, newSettings.hkUpperAlt, newSettings.hkUpperShift, newSettings.hkUpperWin);
+            ghkLower = LoadHotkey(out hotkeys.LowerCase, newSettings.hkLowerKey , newSettings.hkLowerCtrl, newSettings.hkLowerAlt, newSettings.hkLowerShift, newSettings.hkLowerWin);
+            ghkCapsLock = LoadHotkey(out hotkeys.CapsLock, newSettings.hkCapsLockKey, newSettings.hkCapsCtrl, newSettings.hkCapsAlt, newSettings.hkCapsShift, newSettings.hkCapsWin);
+            ghkPlainText = LoadHotkey(out hotkeys.PlainText, newSettings.hkPlainKey, newSettings.hkPlainCtrl, newSettings.hkPlainAlt, newSettings.hkPlainShift, newSettings.hkPlainWin);
+            ghkProcessText = LoadHotkey(out hotkeys.ProcessText, newSettings.hkProcessTextKey, newSettings.hkProcessCtrl, newSettings.hkProcessAlt, newSettings.hkProcessShift, newSettings.hkProcessWin);
 
         }
 
@@ -117,7 +118,7 @@ namespace ClipboardTool
             LoadHotkeys();
             RegisterHotKeys();
 
-            if (Properties.Settings.Default.StartHidden)
+            if (settings.StartHidden)
             {
                 WindowState = FormWindowState.Minimized;
                 Hide();
@@ -127,7 +128,7 @@ namespace ClipboardTool
                 this.WindowState = FormWindowState.Normal;
             }
 
-            if (Properties.Settings.Default.StartToolbar)
+            if (settings.StartToolbar)
             {
                 actionShowToolbar(sender, e);
             }
@@ -145,7 +146,7 @@ namespace ClipboardTool
 
         private string loadTextFromFile(string filename)
         {
-            string folder = Properties.Settings.Default.MemorySlotFolder;
+            string folder = settings.MemorySlotFolder;
             if (folder.Length > 0)
             {
                 if (folder.Substring(folder.Length - 1, 1) != "\\")
@@ -160,7 +161,7 @@ namespace ClipboardTool
 
         public void saveTextToFile(string filename, string text)
         {
-            string folder = Properties.Settings.Default.MemorySlotFolder;
+            string folder = settings.MemorySlotFolder;
             if (folder.Length > 0)
             {
                 if (Directory.Exists(folder))
@@ -204,7 +205,7 @@ namespace ClipboardTool
 
         public void RegisterHotKeys()
         {
-            if (!Properties.Settings.Default.RegisterHotkeys) return;
+            if (!settings.RegisterHotkeys) return;
 
             hotkeysSet = true;
 
@@ -314,8 +315,8 @@ namespace ClipboardTool
                 if (id == ghkLower.id)
                 {
                     sendCut();
-                    LowerCaseOnce();
-                    sendPaste();
+                    
+                    sendPaste(LowerCaseOnce());
                 }
             }
 
@@ -324,8 +325,8 @@ namespace ClipboardTool
                 if (id == ghkUpper.id)
                 {
                     sendCut();
-                    UpperCaseOnce();
-                    sendPaste();
+                    
+                    sendPaste(UpperCaseOnce());
                 }
             }
 
@@ -342,8 +343,8 @@ namespace ClipboardTool
                 if (id == ghkPlainText.id)
                 {
                     sendCut();
-                    PlainTextOnce();
-                    sendPaste();
+                    
+                    sendPaste(PlainTextOnce());
                 }
             }
 
@@ -352,15 +353,15 @@ namespace ClipboardTool
                 if (id == ghkProcessText.id)
                 {
                     sendCut();
-                    ProcessTextVariables();
-                    sendPaste();
+                    
+                    sendPaste(ProcessTextVariables());
                 }
             }
         }
 
         private void sendCut()
         {
-            if (Properties.Settings.Default.sendCut)
+            if (settings.sendCut)
             {
                 SendKeys.SendWait("^x");
             }
@@ -370,17 +371,17 @@ namespace ClipboardTool
             //}
         }
 
-        private void sendPaste()
+        private void sendPaste(string output)
         {
-            if (Properties.Settings.Default.sendPaste)
+            if (settings.sendPaste)
             {
                 delayKeystrokes("^v");
                 //SendKeys.SendWait("^v");
             }
-            else if (Properties.Settings.Default.sendType)
+            else if (settings.sendType)
             {
-                delayKeystrokes(Clipboard.GetText());
-                //SendKeys.SendWait(Clipboard.GetText());
+                //delayKeystrokes(Clipboard.GetText());
+                delayKeystrokes(output);
             }
         }
 
@@ -407,36 +408,40 @@ namespace ClipboardTool
             }
         }
 
-        private void PlainTextOnce()
+        private string PlainTextOnce()
         {
-            clipBoardText = Clipboard.GetText(TextDataFormat.Text);
-            setClipBoard(clipBoardText);
+            string result = Clipboard.GetText(TextDataFormat.Text);
+            setClipBoard(result);
+            return result;
+            //setClipBoard(clipBoardText);
         }
 
-        private void UpperCaseOnce()
+        private string UpperCaseOnce()
         {
             if (Clipboard.ContainsText())
             {
-                clipBoardText = Clipboard.GetText(TextDataFormat.Text);
-
-                clipBoardText = clipBoardText.ToUpper();
-                setClipBoard(clipBoardText);
-                //Clipboard.SetText(clipBoardText);
+                string result = Clipboard.GetText(TextDataFormat.Text).ToUpper();
+                setClipBoard(result);
+                return result;
             }
+            else return string.Empty;
         }
 
-        private void LowerCaseOnce()
+        private string LowerCaseOnce()
         {
             if (Clipboard.ContainsText())
             {
-                clipBoardText = Clipboard.GetText(TextDataFormat.Text);
-                clipBoardText = clipBoardText.ToLower();
-                setClipBoard(clipBoardText);
+                string result = Clipboard.GetText(TextDataFormat.Text).ToLower();
+                setClipBoard(result);
+                return result;
+                
             }
+            else return string.Empty;
         }
 
         private void setClipBoard(string clipBoardText)
         {
+            if (!settings.updateClipboard) return;
             if (clipBoardText.Length > 0)
             {
                 Clipboard.SetText(clipBoardText);
@@ -566,7 +571,7 @@ namespace ClipboardTool
             //toolbar.Parent = this;
         }
 
-        private void ProcessTextVariables()
+        private string ProcessTextVariables()
         {
             string customText = textCustom.Text;
             if (customText != null)
@@ -637,14 +642,16 @@ namespace ClipboardTool
 
                 if (customText.Length < 1)
                 {
-                    Clipboard.Clear();
+                    //Clipboard.Clear();
+                    return String.Empty;
                 }
                 else
                 {
-                    Clipboard.SetText(customText);
+                    setClipBoard(customText);
+                    return customText;
                 }
             }
-
+            return String.Empty;
         }
 
         public void actionProcessText(object sender, EventArgs e)

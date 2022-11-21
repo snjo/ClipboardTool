@@ -478,5 +478,17 @@ namespace ClipboardTool.Properties {
                 this["hkCapsWin"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool updateClipboard {
+            get {
+                return ((bool)(this["updateClipboard"]));
+            }
+            set {
+                this["updateClipboard"] = value;
+            }
+        }
     }
 }

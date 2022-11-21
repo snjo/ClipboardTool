@@ -38,7 +38,7 @@ namespace ClipboardTool
             optionCut.Checked = Properties.Settings.Default.sendCut;
             optionType.Checked = Properties.Settings.Default.sendType;
             optionPaste.Checked = Properties.Settings.Default.sendPaste;
-
+            optionUpdateClipboard.Checked = Properties.Settings.Default.updateClipboard;
 
             fillInputs(UpperInputs, mainForm.hotkeys.UpperCase);
             fillInputs(LowerInputs, mainForm.hotkeys.LowerCase);
@@ -135,6 +135,7 @@ namespace ClipboardTool
             Properties.Settings.Default.sendCut = optionCut.Checked;
             Properties.Settings.Default.sendType = optionType.Checked;
             Properties.Settings.Default.sendPaste = optionPaste.Checked;
+            Properties.Settings.Default.updateClipboard = optionUpdateClipboard.Checked;
 
             mainForm.hotkeys.UpperCase = readInputs(UpperInputs, mainForm.hotkeys.UpperCase);
             mainForm.hotkeys.LowerCase = readInputs(LowerInputs, mainForm.hotkeys.LowerCase);
