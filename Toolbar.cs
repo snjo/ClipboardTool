@@ -269,6 +269,7 @@ namespace ClipboardTool
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Toolbar";
             this.Text = "Toolbar";
+            this.TopMost = true;
             this.ResumeLayout(false);
 
         }

@@ -408,40 +408,40 @@ namespace ClipboardTool
             }
         }
 
-        private string PlainTextOnce()
+        private string PlainTextOnce(bool forceClipboardUpdate=false)
         {
             string result = Clipboard.GetText(TextDataFormat.Text);
-            setClipBoard(result);
+            setClipBoard(result, forceClipboardUpdate);
             return result;
             //setClipBoard(clipBoardText);
         }
 
-        private string UpperCaseOnce()
+        private string UpperCaseOnce(bool forceClipboardUpdate = false)
         {
             if (Clipboard.ContainsText())
             {
                 string result = Clipboard.GetText(TextDataFormat.Text).ToUpper();
-                setClipBoard(result);
+                setClipBoard(result, forceClipboardUpdate);
                 return result;
             }
             else return string.Empty;
         }
 
-        private string LowerCaseOnce()
+        private string LowerCaseOnce(bool forceClipboardUpdate = false)
         {
             if (Clipboard.ContainsText())
             {
                 string result = Clipboard.GetText(TextDataFormat.Text).ToLower();
-                setClipBoard(result);
+                setClipBoard(result, forceClipboardUpdate);
                 return result;
                 
             }
             else return string.Empty;
         }
 
-        private void setClipBoard(string clipBoardText)
+        private void setClipBoard(string clipBoardText, bool forceClipboardUpdate = false)
         {
-            if (!settings.updateClipboard && settings.sendType) return;
+            if (!settings.updateClipboard && settings.sendType && !forceClipboardUpdate) return;
             if (clipBoardText.Length > 0)
             {
                 Clipboard.SetText(clipBoardText);
@@ -544,12 +544,12 @@ namespace ClipboardTool
 
         public void actionUpperCaseOnce(object sender, EventArgs e)
         {
-            UpperCaseOnce();
+            UpperCaseOnce(true);
         }
 
         public void actionLowerCaseOnce(object sender, EventArgs e)
         {
-            LowerCaseOnce();
+            LowerCaseOnce(true);
         }
 
         public void actionHideFromTaskbar(object sender, EventArgs e)
@@ -559,7 +559,7 @@ namespace ClipboardTool
 
         public void actionPlainTextOnce(object sender, EventArgs e)
         {
-            PlainTextOnce();
+            PlainTextOnce(true);
         }
 
         private void actionShowToolbar(object sender, EventArgs e)
@@ -571,7 +571,7 @@ namespace ClipboardTool
             //toolbar.Parent = this;
         }
 
-        private string ProcessTextVariables()
+        private string ProcessTextVariables(bool forceClipboardUpdate = false)
         {
             string customText = textCustom.Text;
             if (customText != null)
@@ -647,7 +647,7 @@ namespace ClipboardTool
                 }
                 else
                 {
-                    setClipBoard(customText);
+                    setClipBoard(customText, forceClipboardUpdate);
                     return customText;
                 }
             }
@@ -656,7 +656,7 @@ namespace ClipboardTool
 
         public void actionProcessText(object sender, EventArgs e)
         {
-            ProcessTextVariables();
+            ProcessTextVariables(true);
         }
 
         private void actionShowOptions(object sender, EventArgs e)
