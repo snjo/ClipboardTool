@@ -10,11 +10,13 @@ using System.Resources;
 using System.Runtime.InteropServices;
 using System.Security.AccessControl;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ClipboardTool.Properties;
 using Hotkeys;
-
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using TextBox = System.Windows.Forms.TextBox;
 
 namespace ClipboardTool
 {
@@ -135,7 +137,8 @@ namespace ClipboardTool
 
             updateHotkeyLabels();
             
-            toolTipProcess.SetToolTip(textCustom, tooltipText);
+            //toolTipProcess.SetToolTip(textCustom, tooltipText);
+            
             //toolTipProcess.SetToolTip(panel1, tooltipText);
 
             textCustom.Text = loadTextFromFile("process.txt");
@@ -395,6 +398,7 @@ namespace ClipboardTool
 
         private void sendKeystrokes(string keystrokes)
         {
+            keystrokes = Regex.Replace(keystrokes, "[+^%~()]", "{$0}");
             SendKeys.SendWait(keystrokes);
         }
 
@@ -801,6 +805,29 @@ namespace ClipboardTool
             saveTextToFile("process.txt", textCustom.Text);
         }
 
+        private void showToolTipHide(object sender, EventArgs e)
+        {
+            toolTip.SetToolTip(buttonHide, "Hide Window");
+        }
 
+        private void showTooltipPin(object sender, EventArgs e)
+        {
+            toolTip.SetToolTip(buttonPin, "Pin program (Always on top)");
+        }
+
+        private void showTooltipSettings(object sender, EventArgs e)
+        {
+            toolTip.SetToolTip(buttonOptions, "Settings");
+        }
+
+        private void showTooltipHelp(object sender, EventArgs e)
+        {
+            toolTip.SetToolTip(buttonHelp, "Help: Processing variables");
+        }
+
+        private void showTooltipSaveCustom(object sender, EventArgs e)
+        {
+            toolTip.SetToolTip(buttonSaveCustom, "Save text. Text will load on start");
+        }
     }
 }

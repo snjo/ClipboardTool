@@ -69,9 +69,9 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.systrayIcon = new System.Windows.Forms.NotifyIcon(this.components);
-            this.toolTipProcess = new System.Windows.Forms.ToolTip(this.components);
-            this.button7 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
+            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.buttonHelp = new System.Windows.Forms.Button();
+            this.buttonSaveCustom = new System.Windows.Forms.Button();
             this.timerKeystrokes = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
@@ -164,6 +164,7 @@
             this.buttonOptions.Text = "⚙️";
             this.buttonOptions.UseVisualStyleBackColor = true;
             this.buttonOptions.Click += new System.EventHandler(this.actionShowOptions);
+            this.buttonOptions.MouseHover += new System.EventHandler(this.showTooltipSettings);
             // 
             // buttonPin
             // 
@@ -175,6 +176,7 @@
             this.buttonPin.Text = "📌";
             this.buttonPin.UseVisualStyleBackColor = true;
             this.buttonPin.Click += new System.EventHandler(this.actionAlwaysOnTop);
+            this.buttonPin.MouseHover += new System.EventHandler(this.showTooltipPin);
             // 
             // buttonHide
             // 
@@ -186,6 +188,7 @@
             this.buttonHide.Text = "👻";
             this.buttonHide.UseVisualStyleBackColor = true;
             this.buttonHide.Click += new System.EventHandler(this.actionHideFromTaskbar);
+            this.buttonHide.MouseHover += new System.EventHandler(this.showToolTipHide);
             // 
             // buttonToolbar
             // 
@@ -459,27 +462,33 @@
             this.systrayIcon.Visible = true;
             this.systrayIcon.Click += new System.EventHandler(this.actionCapsLock);
             // 
-            // button7
+            // toolTip
             // 
-            this.button7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button7.Location = new System.Drawing.Point(214, 188);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(30, 23);
-            this.button7.TabIndex = 28;
-            this.button7.Text = "?";
-            this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.actionShowHelp);
+            this.toolTip.AutomaticDelay = 200;
             // 
-            // button8
+            // buttonHelp
             // 
-            this.button8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button8.Location = new System.Drawing.Point(214, 217);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(30, 23);
-            this.button8.TabIndex = 29;
-            this.button8.Text = "💾";
-            this.button8.UseVisualStyleBackColor = true;
-            this.button8.Click += new System.EventHandler(this.actionSaveCustomText);
+            this.buttonHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonHelp.Location = new System.Drawing.Point(214, 188);
+            this.buttonHelp.Name = "buttonHelp";
+            this.buttonHelp.Size = new System.Drawing.Size(30, 23);
+            this.buttonHelp.TabIndex = 28;
+            this.buttonHelp.Text = "?";
+            this.buttonHelp.UseVisualStyleBackColor = true;
+            this.buttonHelp.Click += new System.EventHandler(this.actionShowHelp);
+            this.buttonHelp.MouseHover += new System.EventHandler(this.showTooltipHelp);
+            // 
+            // buttonSaveCustom
+            // 
+            this.buttonSaveCustom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonSaveCustom.Location = new System.Drawing.Point(214, 217);
+            this.buttonSaveCustom.Name = "buttonSaveCustom";
+            this.buttonSaveCustom.Size = new System.Drawing.Size(30, 23);
+            this.buttonSaveCustom.TabIndex = 29;
+            this.buttonSaveCustom.Text = "💾";
+            this.buttonSaveCustom.UseVisualStyleBackColor = true;
+            this.buttonSaveCustom.Click += new System.EventHandler(this.actionSaveCustomText);
+            this.buttonSaveCustom.MouseHover += new System.EventHandler(this.showTooltipSaveCustom);
             // 
             // timerKeystrokes
             // 
@@ -490,8 +499,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(251, 404);
-            this.Controls.Add(this.button8);
-            this.Controls.Add(this.button7);
+            this.Controls.Add(this.buttonSaveCustom);
+            this.Controls.Add(this.buttonHelp);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.textBox3);
@@ -564,7 +573,7 @@
         private ContextMenuStrip contextMenuStrip1;
         private NotifyIcon notifyIcon1;
         private NotifyIcon systrayIcon;
-        private ToolTip toolTipProcess;
+        private ToolTip toolTip;
         private ToolStripMenuItem hideToolStripMenuItem;
         private ToolStripMenuItem showToolStripMenuItem;
         private ToolStripMenuItem capsLockToolStripMenuItem;
@@ -572,8 +581,8 @@
         private ToolStripMenuItem lowerCaseClipboardToolStripMenuItem;
         private ToolStripMenuItem plainTextClipboardToolStripMenuItem;
         private ToolStripMenuItem exitToolStripMenuItem;
-        private Button button7;
-        private Button button8;
+        private Button buttonHelp;
+        private Button buttonSaveCustom;
         private System.Windows.Forms.Timer timerKeystrokes;
     }
 }
