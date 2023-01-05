@@ -410,7 +410,9 @@ namespace ClipboardTool
                     SendKeys.SendWait("^c");
                 break;
                 default:
-                    keystrokes = Regex.Replace(keystrokes, "[+^%~()]", "{$0}");
+                    keystrokes = Regex.Replace(keystrokes, "[+^%~(){}]", "{$0}");
+                    //keystrokes = Regex.Replace(keystrokes, "[+%~(){}]", "{$0}");
+                    //keystrokes = keystrokes.Replace("^", "%(94)");
                     SendKeys.SendWait(keystrokes);
                 break;
             }
