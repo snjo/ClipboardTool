@@ -412,13 +412,14 @@ namespace ClipboardTool
                 default:
                     keystrokes = Regex.Replace(keystrokes, "[+^%~(){}]", "{$0}");
                     //keystrokes = Regex.Replace(keystrokes, "[+%~(){}]", "{$0}");
-                    //keystrokes = keystrokes.Replace("^", "%(94)");
+                    //keystrokes = keystrokes.Replace("^", "%(94)");  //alt ascii code doesn't work :(
                     SendKeys.SendWait(keystrokes);
                 break;
             }
 
             // warning: ^'s will become &'s on non-US keyboards:
-            // https://stackoverflow.com/questions/47635218/sending-a-caret-with-system-windows-forms-sendkeys-send-will-send-ampersand            
+            // https://stackoverflow.com/questions/47635218/sending-a-caret-with-system-windows-forms-sendkeys-send-will-send-ampersand
+            // use paste method instead of sendkeys if the text includes carets
         }
 
         private void actionDelayedKeystrokes(object sender, EventArgs e)
