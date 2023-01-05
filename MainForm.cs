@@ -398,7 +398,22 @@ namespace ClipboardTool
 
         private void sendKeystrokes(string keystrokes)
         {
-            keystrokes = Regex.Replace(keystrokes, "[+^%~()]", "{$0}");
+            switch (keystrokes)
+            {
+                case "^v":
+                    SendKeys.SendWait("^v");
+                break;
+                case "^x":
+                    SendKeys.SendWait("^v");
+                break;
+                default:
+                    keystrokes = Regex.Replace(keystrokes, "[+^%~()]", "{$0}");
+                break;
+            }
+
+            // warning: ^'s will become &'s on non-US keyboards:
+            // https://stackoverflow.com/questions/47635218/sending-a-caret-with-system-windows-forms-sendkeys-send-will-send-ampersand
+
             SendKeys.SendWait(keystrokes);
         }
 
