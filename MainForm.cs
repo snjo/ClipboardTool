@@ -411,13 +411,12 @@ namespace ClipboardTool
                 break;
                 default:
                     keystrokes = Regex.Replace(keystrokes, "[+^%~()]", "{$0}");
+                    SendKeys.SendWait(keystrokes);
                 break;
             }
 
             // warning: ^'s will become &'s on non-US keyboards:
-            // https://stackoverflow.com/questions/47635218/sending-a-caret-with-system-windows-forms-sendkeys-send-will-send-ampersand
-
-            SendKeys.SendWait(keystrokes);
+            // https://stackoverflow.com/questions/47635218/sending-a-caret-with-system-windows-forms-sendkeys-send-will-send-ampersand            
         }
 
         private void actionDelayedKeystrokes(object sender, EventArgs e)
