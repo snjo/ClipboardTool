@@ -404,7 +404,10 @@ namespace ClipboardTool
                     SendKeys.SendWait("^v");
                 break;
                 case "^x":
-                    SendKeys.SendWait("^v");
+                    SendKeys.SendWait("^x");
+                break;
+                case "^c":
+                    SendKeys.SendWait("^c");
                 break;
                 default:
                     keystrokes = Regex.Replace(keystrokes, "[+^%~()]", "{$0}");
