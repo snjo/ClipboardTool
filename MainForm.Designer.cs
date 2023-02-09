@@ -270,6 +270,7 @@
             this.textCustom.Location = new System.Drawing.Point(8, 188);
             this.textCustom.Multiline = true;
             this.textCustom.Name = "textCustom";
+            this.textCustom.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.textCustom.Size = new System.Drawing.Size(205, 92);
             this.textCustom.TabIndex = 17;
             // 

@@ -55,7 +55,8 @@ namespace ClipboardTool
                 "$n2, $n3 use 1-3 digits in number (01, 001)\n" +
                 "$1 - $3 contents of the memory slots\n" +
                 "$eq Convert \"\" to \", and removes single \"\n" +
-                "$v Split value in slot 1 with ;, output value[number]";
+                "$v Split value in slot 1 with ;, output value[number]\n" +
+                "$list Split lines in main textbox (skips line 1), output value[number]\n";
 
         public MainForm()
         {
@@ -76,8 +77,6 @@ namespace ClipboardTool
             bool hkWin = settings.hkWin;
             Settings newSettings = new Settings();
             
-
-            //------------------------------- TODO: FIX MODIFIERS PER HOTKEY
             ghkUpper = LoadHotkey(out hotkeys.UpperCase, newSettings.hkUpperKey , newSettings.hkUpperCtrl, newSettings.hkUpperAlt, newSettings.hkUpperShift, newSettings.hkUpperWin);
             ghkLower = LoadHotkey(out hotkeys.LowerCase, newSettings.hkLowerKey , newSettings.hkLowerCtrl, newSettings.hkLowerAlt, newSettings.hkLowerShift, newSettings.hkLowerWin);
             ghkCapsLock = LoadHotkey(out hotkeys.CapsLock, newSettings.hkCapsLockKey, newSettings.hkCapsCtrl, newSettings.hkCapsAlt, newSettings.hkCapsShift, newSettings.hkCapsWin);
@@ -101,7 +100,6 @@ namespace ClipboardTool
                 {
                     result = new Hotkeys.GlobalHotkey(hotkey.Modifiers(), hotkey.key, this);
                     hotkey.ghk = result;
-                    //result.hotkey = hotkey;
                 }
                 else
                 {
@@ -137,9 +135,6 @@ namespace ClipboardTool
 
             updateHotkeyLabels();
             
-            //toolTipProcess.SetToolTip(textCustom, tooltipText);
-            
-            //toolTipProcess.SetToolTip(panel1, tooltipText);
 
             textCustom.Text = loadTextFromFile("process.txt");
             textBox1.Text = loadTextFromFile("mem1.txt");
@@ -262,56 +257,9 @@ namespace ClipboardTool
             }
         }
 
-        private void changeCase()
-        {
-            //--------------------------------------------- FUNCTIONALITY REMOVED
-            /*
-            try
-            {
-                if (!radioOff.Checked)
-                {
-                    if (Clipboard.ContainsText())
-                    {
-                        clipBoardText = Clipboard.GetText(TextDataFormat.Text);
-                        if (clipBoardText.Length > 0)
-                        {
-                            if (radioLower.Checked)
-                            {
-                                clipBoardText = clipBoardText.ToLower();
-                                Clipboard.SetText(clipBoardText);
-                            }
-                            else if (radioUpper.Checked)
-                            {
-                                clipBoardText = clipBoardText.ToUpper();
-                                Clipboard.SetText(clipBoardText);
-                            }
-                            else if (radioPlain.Checked)
-                            {
-                                Clipboard.SetText(clipBoardText);
-                            }
-                        }
-                    }
-                }
-            }
-            catch
-            {
-
-            }
-            */
-        }
-
-        /*private void timer1_Tick(object sender, EventArgs e)
-        {
-            changeCase();
-            UpdateCapsLock();
-        }*/
 
         private void HandleHotkey(int id)
         {
-            //hotkey pressed
-            //MessageBox.Show("Hotkey pressed");
-
-            //writeMessage("Hotkey pressed");
 
             if (ghkLower != null)
             {
@@ -658,6 +606,26 @@ namespace ClipboardTool
                     if (numericUpDown1.Value < numericUpDown1.Maximum)
                         numericUpDown1.Value++;
 
+                }
+
+                if(customText.Contains("$list")) {
+                    //string[] values = textCustom.Text.Split(new string[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
+                    string[] values = textCustom.Text.Split(Environment.NewLine, StringSplitOptions.None);
+
+                    if (numericUpDown1.Value < 2) numericUpDown1.Value = 2; // skip the first line with the $list
+
+                    if (values.Length > 0 && numericUpDown1.Value <= values.Length && numericUpDown1.Value >= 1)
+                    {                        
+                        customText = values[(int)numericUpDown1.Value - 1];
+                    }
+                    else
+                    {
+                        //customText = customText.Replace("$list", String.Empty);
+                        customText = String.Empty;
+                    }
+
+                    if (numericUpDown1.Value < numericUpDown1.Maximum)
+                        numericUpDown1.Value++;
                 }
 
                 customText = customText.Replace("$1", textBox1.Text);
