@@ -133,6 +133,26 @@ namespace ClipboardTool
             updateTooltip(button3, 3);
         }
 
+        private void updateTooltipLower(object sender, EventArgs e)
+        {
+            toolTip1.SetToolTip(buttonLower, "Converts clipboard text to lower case");
+        }
+
+        private void updateTooltipUpper(object sender, EventArgs e)
+        {
+            toolTip1.SetToolTip(buttonUpper, "Converts clipboard text to upper case");
+        }
+
+        private void updateTooltipPlain(object sender, EventArgs e)
+        {
+            toolTip1.SetToolTip(buttonPlain, "Converts clipboard text to plain text");
+        }
+
+        private void updateTooltipProcess(object sender, EventArgs e)
+        {
+            toolTip1.SetToolTip(buttonProcess, "Updates clipboard using values from the main window Process text box");
+        }
+
         private System.Windows.Forms.Button buttonPin;
         private System.Windows.Forms.Button buttonhide;
         private System.Windows.Forms.Button button1;
@@ -145,134 +165,138 @@ namespace ClipboardTool
 
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Toolbar));
-            this.buttonPin = new System.Windows.Forms.Button();
-            this.buttonhide = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.buttonProcess = new System.Windows.Forms.Button();
-            this.buttonPlain = new System.Windows.Forms.Button();
-            this.buttonUpper = new System.Windows.Forms.Button();
-            this.buttonLower = new System.Windows.Forms.Button();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.SuspendLayout();
+            components = new Container();
+            ComponentResourceManager resources = new ComponentResourceManager(typeof(Toolbar));
+            buttonPin = new System.Windows.Forms.Button();
+            buttonhide = new System.Windows.Forms.Button();
+            button1 = new System.Windows.Forms.Button();
+            button2 = new System.Windows.Forms.Button();
+            button3 = new System.Windows.Forms.Button();
+            buttonProcess = new System.Windows.Forms.Button();
+            buttonPlain = new System.Windows.Forms.Button();
+            buttonUpper = new System.Windows.Forms.Button();
+            buttonLower = new System.Windows.Forms.Button();
+            toolTip1 = new System.Windows.Forms.ToolTip(components);
+            SuspendLayout();
             // 
             // buttonPin
             // 
-            this.buttonPin.Location = new System.Drawing.Point(185, 1);
-            this.buttonPin.Name = "buttonPin";
-            this.buttonPin.Size = new System.Drawing.Size(23, 23);
-            this.buttonPin.TabIndex = 10;
-            this.buttonPin.Text = "📌";
-            this.buttonPin.UseVisualStyleBackColor = true;
-            this.buttonPin.Click += new System.EventHandler(this.actionAlwaysOnTop);
+            buttonPin.Location = new Point(185, 1);
+            buttonPin.Name = "buttonPin";
+            buttonPin.Size = new Size(23, 23);
+            buttonPin.TabIndex = 10;
+            buttonPin.Text = "📌";
+            buttonPin.UseVisualStyleBackColor = true;
+            buttonPin.Click += actionAlwaysOnTop;
             // 
             // buttonhide
             // 
-            this.buttonhide.Location = new System.Drawing.Point(163, 1);
-            this.buttonhide.Name = "buttonhide";
-            this.buttonhide.Size = new System.Drawing.Size(23, 23);
-            this.buttonhide.TabIndex = 11;
-            this.buttonhide.Text = "—";
-            this.buttonhide.UseVisualStyleBackColor = true;
-            this.buttonhide.Click += new System.EventHandler(this.actionBorderToggle);
+            buttonhide.Location = new Point(163, 1);
+            buttonhide.Name = "buttonhide";
+            buttonhide.Size = new Size(23, 23);
+            buttonhide.TabIndex = 11;
+            buttonhide.Text = "—";
+            buttonhide.UseVisualStyleBackColor = true;
+            buttonhide.Click += actionBorderToggle;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(93, 1);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(23, 23);
-            this.button1.TabIndex = 12;
-            this.button1.Text = "1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.MouseHover += new System.EventHandler(this.updateTooltip1);
-            this.button1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.saveload1);
+            button1.Location = new Point(93, 1);
+            button1.Name = "button1";
+            button1.Size = new Size(23, 23);
+            button1.TabIndex = 12;
+            button1.Text = "1";
+            button1.UseVisualStyleBackColor = true;
+            button1.MouseHover += updateTooltip1;
+            button1.MouseUp += saveload1;
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(115, 1);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(23, 23);
-            this.button2.TabIndex = 13;
-            this.button2.Text = "2";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.MouseHover += new System.EventHandler(this.updateTooltip2);
-            this.button2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.saveload2);
+            button2.Location = new Point(115, 1);
+            button2.Name = "button2";
+            button2.Size = new Size(23, 23);
+            button2.TabIndex = 13;
+            button2.Text = "2";
+            button2.UseVisualStyleBackColor = true;
+            button2.MouseHover += updateTooltip2;
+            button2.MouseUp += saveload2;
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(137, 1);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(23, 23);
-            this.button3.TabIndex = 14;
-            this.button3.Text = "3";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.MouseHover += new System.EventHandler(this.updateTooltip3);
-            this.button3.MouseUp += new System.Windows.Forms.MouseEventHandler(this.saveload3);
+            button3.Location = new Point(137, 1);
+            button3.Name = "button3";
+            button3.Size = new Size(23, 23);
+            button3.TabIndex = 14;
+            button3.Text = "3";
+            button3.UseVisualStyleBackColor = true;
+            button3.MouseHover += updateTooltip3;
+            button3.MouseUp += saveload3;
             // 
             // buttonProcess
             // 
-            this.buttonProcess.Location = new System.Drawing.Point(71, 1);
-            this.buttonProcess.Name = "buttonProcess";
-            this.buttonProcess.Size = new System.Drawing.Size(23, 23);
-            this.buttonProcess.TabIndex = 15;
-            this.buttonProcess.Text = "$";
-            this.buttonProcess.UseVisualStyleBackColor = true;
-            this.buttonProcess.Click += new System.EventHandler(this.actionProcess);
+            buttonProcess.Location = new Point(71, 1);
+            buttonProcess.Name = "buttonProcess";
+            buttonProcess.Size = new Size(23, 23);
+            buttonProcess.TabIndex = 15;
+            buttonProcess.Text = "$";
+            buttonProcess.UseVisualStyleBackColor = true;
+            buttonProcess.Click += actionProcess;
+            buttonProcess.MouseHover += updateTooltipProcess;
             // 
             // buttonPlain
             // 
-            this.buttonPlain.Location = new System.Drawing.Point(45, 1);
-            this.buttonPlain.Name = "buttonPlain";
-            this.buttonPlain.Size = new System.Drawing.Size(23, 23);
-            this.buttonPlain.TabIndex = 16;
-            this.buttonPlain.Text = "t";
-            this.buttonPlain.UseVisualStyleBackColor = true;
-            this.buttonPlain.Click += new System.EventHandler(this.actionPlain);
+            buttonPlain.Location = new Point(45, 1);
+            buttonPlain.Name = "buttonPlain";
+            buttonPlain.Size = new Size(23, 23);
+            buttonPlain.TabIndex = 16;
+            buttonPlain.Text = "t";
+            buttonPlain.UseVisualStyleBackColor = true;
+            buttonPlain.Click += actionPlain;
+            buttonPlain.MouseHover += updateTooltipPlain;
             // 
             // buttonUpper
             // 
-            this.buttonUpper.Location = new System.Drawing.Point(23, 1);
-            this.buttonUpper.Name = "buttonUpper";
-            this.buttonUpper.Size = new System.Drawing.Size(23, 23);
-            this.buttonUpper.TabIndex = 17;
-            this.buttonUpper.Text = "A";
-            this.buttonUpper.UseVisualStyleBackColor = true;
-            this.buttonUpper.Click += new System.EventHandler(this.actionUpper);
+            buttonUpper.Location = new Point(23, 1);
+            buttonUpper.Name = "buttonUpper";
+            buttonUpper.Size = new Size(23, 23);
+            buttonUpper.TabIndex = 17;
+            buttonUpper.Text = "A";
+            buttonUpper.UseVisualStyleBackColor = true;
+            buttonUpper.Click += actionUpper;
+            buttonUpper.MouseHover += updateTooltipUpper;
             // 
             // buttonLower
             // 
-            this.buttonLower.Location = new System.Drawing.Point(1, 1);
-            this.buttonLower.Name = "buttonLower";
-            this.buttonLower.Size = new System.Drawing.Size(23, 23);
-            this.buttonLower.TabIndex = 18;
-            this.buttonLower.Text = "a";
-            this.buttonLower.UseVisualStyleBackColor = true;
-            this.buttonLower.Click += new System.EventHandler(this.actionLower);
+            buttonLower.Location = new Point(1, 1);
+            buttonLower.Name = "buttonLower";
+            buttonLower.Size = new Size(23, 23);
+            buttonLower.TabIndex = 18;
+            buttonLower.Text = "a";
+            buttonLower.UseVisualStyleBackColor = true;
+            buttonLower.Click += actionLower;
+            buttonLower.MouseHover += updateTooltipLower;
             // 
             // Toolbar
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(209, 25);
-            this.Controls.Add(this.buttonLower);
-            this.Controls.Add(this.buttonUpper);
-            this.Controls.Add(this.buttonPlain);
-            this.Controls.Add(this.buttonProcess);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.buttonhide);
-            this.Controls.Add(this.buttonPin);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "Toolbar";
-            this.Text = "Toolbar";
-            this.TopMost = true;
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(209, 25);
+            Controls.Add(buttonLower);
+            Controls.Add(buttonUpper);
+            Controls.Add(buttonPlain);
+            Controls.Add(buttonProcess);
+            Controls.Add(button3);
+            Controls.Add(button2);
+            Controls.Add(button1);
+            Controls.Add(buttonhide);
+            Controls.Add(buttonPin);
+            Icon = (Icon)resources.GetObject("$this.Icon");
+            Name = "Toolbar";
+            Text = "Toolbar";
+            TopMost = true;
+            ResumeLayout(false);
         }
+
     }
 
 
