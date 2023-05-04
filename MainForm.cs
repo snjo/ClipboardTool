@@ -47,18 +47,23 @@ namespace ClipboardTool
         string delayedKeystrokes = "";
 
         string tooltipText =
-                "$d date\n" +
-                "$t time\n" +
-                "$cp clipboard contents\n" +
-                "$cl / $cu clipboard in lower/upper case\n" +
-                "$i number\n" +
-                "$+ number, then increment it\n" +
-                "$- number, then decrement it\n" +
-                "$n2, $n3 use 1-3 digits in number (01, 001)\n" +
-                "$1 - $3 contents of the memory slots\n" +
-                "$eq Convert \"\" to \", and removes single \"\n" +
-                "$v Split value in slot 1 with ;, output value[number]\n" +
-                "$list Split lines in main textbox (skips line 1), output value[number]\n";
+            "$d date\n" +
+            "$t time\n" +
+            "$cp clipboard contents\n" +
+            "$cl / $cu clipboard in lower/upper case\n" +
+            "$i number\n" +
+            "$+ number, then increment it\n" +
+            "$- number, then decrement it\n" +
+            "$n2, $n3 use 1-3 digits in number (01, 001)\n" +
+            "$1 - $3 contents of the memory slots\n" +
+            "$eq Convert \"\" to \", and removes single \"\n" +
+            "$v Split value in slot 1 with ;, output value[number]\n" +
+            "$list Split lines in main textbox (skips line 1), output value[number]\n" +
+            "\n" +
+            "Tap the date hotkey 1-3 times while holding the modifier keys:\n" +
+            "1: Just the date\n" +
+            "2: Date and Time\n" +
+            "3: Just the Time\n";
 
         public MainForm()
         {

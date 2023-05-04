@@ -79,6 +79,7 @@
             checkDateCtrl = new CheckBox();
             textHotkeyDate = new TextBox();
             label8 = new Label();
+            label9 = new Label();
             SuspendLayout();
             // 
             // optionStartHidden
@@ -114,7 +115,7 @@
             // optionResetCounter
             // 
             optionResetCounter.AutoSize = true;
-            optionResetCounter.Location = new Point(202, 12);
+            optionResetCounter.Location = new Point(222, 12);
             optionResetCounter.Name = "optionResetCounter";
             optionResetCounter.Size = new Size(252, 19);
             optionResetCounter.TabIndex = 3;
@@ -124,7 +125,7 @@
             // optionSaveMemorySlots
             // 
             optionSaveMemorySlots.AutoSize = true;
-            optionSaveMemorySlots.Location = new Point(202, 37);
+            optionSaveMemorySlots.Location = new Point(222, 37);
             optionSaveMemorySlots.Name = "optionSaveMemorySlots";
             optionSaveMemorySlots.Size = new Size(158, 19);
             optionSaveMemorySlots.TabIndex = 4;
@@ -133,16 +134,17 @@
             // 
             // textMemorySlotFolder
             // 
-            textMemorySlotFolder.Location = new Point(202, 108);
+            textMemorySlotFolder.Location = new Point(222, 104);
             textMemorySlotFolder.Name = "textMemorySlotFolder";
-            textMemorySlotFolder.Size = new Size(252, 23);
+            textMemorySlotFolder.Size = new Size(229, 23);
             textMemorySlotFolder.TabIndex = 5;
             // 
             // label1
             // 
-            label1.Location = new Point(202, 63);
+            label1.Font = new Font("Segoe UI", 9F, FontStyle.Italic, GraphicsUnit.Point);
+            label1.Location = new Point(222, 59);
             label1.Name = "label1";
-            label1.Size = new Size(252, 42);
+            label1.Size = new Size(232, 42);
             label1.TabIndex = 6;
             label1.Text = ".txt file folder. Use process.txt, mem1.txt mem2.txt, mem3.txt:";
             // 
@@ -439,7 +441,7 @@
             // buttonSave
             // 
             buttonSave.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            buttonSave.Location = new Point(393, 388);
+            buttonSave.Location = new Point(393, 416);
             buttonSave.Name = "buttonSave";
             buttonSave.Size = new Size(75, 23);
             buttonSave.TabIndex = 38;
@@ -450,7 +452,7 @@
             // buttonCancel
             // 
             buttonCancel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            buttonCancel.Location = new Point(312, 388);
+            buttonCancel.Location = new Point(312, 416);
             buttonCancel.Name = "buttonCancel";
             buttonCancel.Size = new Size(75, 23);
             buttonCancel.TabIndex = 39;
@@ -563,11 +565,22 @@
             label8.TabIndex = 45;
             label8.Text = "Hotkey Date/Time";
             // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Font = new Font("Segoe UI", 9F, FontStyle.Italic, GraphicsUnit.Point);
+            label9.Location = new Point(27, 379);
+            label9.Name = "label9";
+            label9.Size = new Size(279, 15);
+            label9.TabIndex = 51;
+            label9.Text = "Tap 1-3 times for Date/Time while holding Modifiers";
+            // 
             // Options
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(478, 418);
+            ClientSize = new Size(478, 446);
+            Controls.Add(label9);
             Controls.Add(checkDateWin);
             Controls.Add(checkDateShift);
             Controls.Add(checkDateAlt);
@@ -678,5 +691,6 @@
         private CheckBox checkDateCtrl;
         private TextBox textHotkeyDate;
         private Label label8;
+        private Label label9;
     }
 }
