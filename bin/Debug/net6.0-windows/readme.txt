@@ -8,19 +8,18 @@ https://github.com/snjo/ClipboardTool
 -----------------------------------------
 Variables for text processing:
 
-$d		date
-$t		time
-$cp		clipboard contents
-$cl		clipboard in lower case
-$cu		clipboard in upper case
-$i		the number set in the number spinner
-$+		the number, then increment it
-$-		the number, then decrement it
-$n2		use 2 digits in the number (01)
-$n3		use 3 digits in number (001)
-$1-$3	contents of the memory slots
-$eq		Convert "" to ", and removes single "
-$v		Split value in slot 1 with ;, output value[number]
+$d date
+$t time
+$cp clipboard contents
+$cl / $cu clipboard in lower/upper case
+$i number
+$+ number, then increment it
+$- number, then decrement it
+$n2, $n3 use 1-3 digits in number (01, 001)
+$1 - $3 contents of the memory slots
+$eq Convert \"\" to \", and removes single \"
+$v Split value in slot 1 with ;, output value[number]
+$list Split lines in main textbox (skips line 1), output value[number]
 
 -----------------------------------------
 Key codes for hotkey options:

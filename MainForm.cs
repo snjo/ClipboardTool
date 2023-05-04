@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Media;
 using System.Net.Security;
 using System.Resources;
 using System.Runtime.InteropServices;
@@ -33,6 +34,7 @@ namespace ClipboardTool
         private Hotkeys.GlobalHotkey ghkCapsLock;
         private Hotkeys.GlobalHotkey ghkPlainText;
         private Hotkeys.GlobalHotkey ghkProcessText;
+        private Hotkeys.GlobalHotkey ghkDate;
         private Icon iconUpper;
         private Icon iconLower;
         private bool oldCapslockState;
@@ -82,7 +84,7 @@ namespace ClipboardTool
             ghkCapsLock = LoadHotkey(out hotkeys.CapsLock, newSettings.hkCapsLockKey, newSettings.hkCapsCtrl, newSettings.hkCapsAlt, newSettings.hkCapsShift, newSettings.hkCapsWin);
             ghkPlainText = LoadHotkey(out hotkeys.PlainText, newSettings.hkPlainKey, newSettings.hkPlainCtrl, newSettings.hkPlainAlt, newSettings.hkPlainShift, newSettings.hkPlainWin);
             ghkProcessText = LoadHotkey(out hotkeys.ProcessText, newSettings.hkProcessTextKey, newSettings.hkProcessCtrl, newSettings.hkProcessAlt, newSettings.hkProcessShift, newSettings.hkProcessWin);
-
+            ghkDate = LoadHotkey(out hotkeys.Date, newSettings.hkDateKey, newSettings.hkDateCtrl, newSettings.hkDateAlt, newSettings.hkDateShift, newSettings.hkDateWin);
         }
 
         private GlobalHotkey LoadHotkey(out Hotkey hotkey, string settingHotkey, bool Ctrl, bool Alt, bool Shift, bool Win) //char settingHotkey
@@ -215,6 +217,7 @@ namespace ClipboardTool
             RegisterHotKey(ghkCapsLock);
             RegisterHotKey(ghkPlainText);
             RegisterHotKey(ghkProcessText);
+            RegisterHotKey(ghkDate);
 
             if (errorMessages.Length > 0)
             {
@@ -247,6 +250,7 @@ namespace ClipboardTool
             ReleaseHotkey(ghkCapsLock);
             ReleaseHotkey(ghkPlainText);
             ReleaseHotkey(ghkProcessText);
+            ReleaseHotkey(ghkDate);
         }
 
         private void ReleaseHotkey(GlobalHotkey ghk)
@@ -308,6 +312,59 @@ namespace ClipboardTool
                     sendPaste(ProcessTextVariables());
                 }
             }
+
+            if (ghkDate != null)
+            {
+                if (id == ghkDate.id)
+                {
+                    sendDate();
+                }
+            }
+        }
+
+        private enum SendDateOption
+        {
+            NotStarted,
+            JustDate,            
+            DateAndTime,
+            JustTime,
+            END
+        }
+        private SendDateOption sendDateChoice = SendDateOption.NotStarted;
+
+        private void sendDate()
+        {
+            if (sendDateChoice < SendDateOption.END - 1)
+            {
+                sendDateChoice = sendDateChoice + 1;
+            }
+
+            delayKeystrokes("$SendDate");
+        }
+
+        private string SendDateText()
+        {
+            string outDate = "init outDate";
+            switch (sendDateChoice)
+            {
+                case SendDateOption.NotStarted:
+                    outDate = "not started";
+                    break;
+                case SendDateOption.JustDate:
+                    outDate = DateTime.Now.ToShortDateString();
+                    break;
+                case SendDateOption.DateAndTime:
+                    outDate = DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString();
+                    break;
+                case SendDateOption.JustTime:
+                    outDate = DateTime.Now.ToShortTimeString();
+                    break;
+                default:
+                    outDate = "pressed beyond the enum";
+                    break;
+            }
+
+            return outDate;
         }
 
         private void sendCut()
@@ -316,10 +373,6 @@ namespace ClipboardTool
             {
                 SendKeys.SendWait("^x");
             }
-            //else if (Properties.Settings.Default.sendType)
-            //{
-            //    SendKeys.SendWait("^c");
-            //}
         }
 
         private void sendPaste(string output)
@@ -327,11 +380,9 @@ namespace ClipboardTool
             if (settings.sendPaste)
             {
                 delayKeystrokes("^v");
-                //SendKeys.SendWait("^v");
             }
             else if (settings.sendType)
             {
-                //delayKeystrokes(Clipboard.GetText());
                 delayKeystrokes(output);
             }
         }
@@ -356,6 +407,10 @@ namespace ClipboardTool
                 break;
                 case "^c":
                     SendKeys.SendWait("^c");
+                break;
+                case "$SendDate":
+                    SendKeys.SendWait(SendDateText());
+                    sendDateChoice = SendDateOption.NotStarted;
                 break;
                 default:
                     keystrokes = Regex.Replace(keystrokes, "[+^%~(){}]", "{$0}");

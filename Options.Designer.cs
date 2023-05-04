@@ -28,533 +28,601 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.optionStartHidden = new System.Windows.Forms.CheckBox();
-            this.optionStartToolbar = new System.Windows.Forms.CheckBox();
-            this.optionRegisterHotkeys = new System.Windows.Forms.CheckBox();
-            this.optionResetCounter = new System.Windows.Forms.CheckBox();
-            this.optionSaveMemorySlots = new System.Windows.Forms.CheckBox();
-            this.textMemorySlotFolder = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.textHotkeyUpper = new System.Windows.Forms.TextBox();
-            this.checkUpperCtrl = new System.Windows.Forms.CheckBox();
-            this.checkUpperAlt = new System.Windows.Forms.CheckBox();
-            this.checkUpperShift = new System.Windows.Forms.CheckBox();
-            this.checkUpperWin = new System.Windows.Forms.CheckBox();
-            this.checkLowerWin = new System.Windows.Forms.CheckBox();
-            this.checkLowerShift = new System.Windows.Forms.CheckBox();
-            this.checkLowerAlt = new System.Windows.Forms.CheckBox();
-            this.checkLowerCtrl = new System.Windows.Forms.CheckBox();
-            this.textHotkeyLower = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.checkCapsWin = new System.Windows.Forms.CheckBox();
-            this.checkCapsShift = new System.Windows.Forms.CheckBox();
-            this.checkCapsAlt = new System.Windows.Forms.CheckBox();
-            this.checkCapsCtrl = new System.Windows.Forms.CheckBox();
-            this.textHotkeyCaps = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.checkPlainWin = new System.Windows.Forms.CheckBox();
-            this.checkPlainShift = new System.Windows.Forms.CheckBox();
-            this.checkPlainAlt = new System.Windows.Forms.CheckBox();
-            this.checkPlainCtrl = new System.Windows.Forms.CheckBox();
-            this.textHotkeyPlain = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.checkProcessWin = new System.Windows.Forms.CheckBox();
-            this.checkProcessShift = new System.Windows.Forms.CheckBox();
-            this.checkProcessAlt = new System.Windows.Forms.CheckBox();
-            this.checkProcessCtrl = new System.Windows.Forms.CheckBox();
-            this.textHotkeyProcess = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.buttonSave = new System.Windows.Forms.Button();
-            this.buttonCancel = new System.Windows.Forms.Button();
-            this.optionCut = new System.Windows.Forms.CheckBox();
-            this.optionType = new System.Windows.Forms.CheckBox();
-            this.optionPaste = new System.Windows.Forms.CheckBox();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.optionUpdateClipboard = new System.Windows.Forms.CheckBox();
-            this.SuspendLayout();
+            optionStartHidden = new CheckBox();
+            optionStartToolbar = new CheckBox();
+            optionRegisterHotkeys = new CheckBox();
+            optionResetCounter = new CheckBox();
+            optionSaveMemorySlots = new CheckBox();
+            textMemorySlotFolder = new TextBox();
+            label1 = new Label();
+            label2 = new Label();
+            label3 = new Label();
+            textHotkeyUpper = new TextBox();
+            checkUpperCtrl = new CheckBox();
+            checkUpperAlt = new CheckBox();
+            checkUpperShift = new CheckBox();
+            checkUpperWin = new CheckBox();
+            checkLowerWin = new CheckBox();
+            checkLowerShift = new CheckBox();
+            checkLowerAlt = new CheckBox();
+            checkLowerCtrl = new CheckBox();
+            textHotkeyLower = new TextBox();
+            label4 = new Label();
+            checkCapsWin = new CheckBox();
+            checkCapsShift = new CheckBox();
+            checkCapsAlt = new CheckBox();
+            checkCapsCtrl = new CheckBox();
+            textHotkeyCaps = new TextBox();
+            label5 = new Label();
+            checkPlainWin = new CheckBox();
+            checkPlainShift = new CheckBox();
+            checkPlainAlt = new CheckBox();
+            checkPlainCtrl = new CheckBox();
+            textHotkeyPlain = new TextBox();
+            label6 = new Label();
+            checkProcessWin = new CheckBox();
+            checkProcessShift = new CheckBox();
+            checkProcessAlt = new CheckBox();
+            checkProcessCtrl = new CheckBox();
+            textHotkeyProcess = new TextBox();
+            label7 = new Label();
+            buttonSave = new Button();
+            buttonCancel = new Button();
+            optionCut = new CheckBox();
+            optionType = new CheckBox();
+            optionPaste = new CheckBox();
+            panel2 = new Panel();
+            optionUpdateClipboard = new CheckBox();
+            checkDateWin = new CheckBox();
+            checkDateShift = new CheckBox();
+            checkDateAlt = new CheckBox();
+            checkDateCtrl = new CheckBox();
+            textHotkeyDate = new TextBox();
+            label8 = new Label();
+            SuspendLayout();
             // 
             // optionStartHidden
             // 
-            this.optionStartHidden.AutoSize = true;
-            this.optionStartHidden.Location = new System.Drawing.Point(12, 12);
-            this.optionStartHidden.Name = "optionStartHidden";
-            this.optionStartHidden.Size = new System.Drawing.Size(92, 19);
-            this.optionStartHidden.TabIndex = 0;
-            this.optionStartHidden.Text = "Start Hidden";
-            this.optionStartHidden.UseVisualStyleBackColor = true;
+            optionStartHidden.AutoSize = true;
+            optionStartHidden.Location = new Point(12, 12);
+            optionStartHidden.Name = "optionStartHidden";
+            optionStartHidden.Size = new Size(92, 19);
+            optionStartHidden.TabIndex = 0;
+            optionStartHidden.Text = "Start Hidden";
+            optionStartHidden.UseVisualStyleBackColor = true;
             // 
             // optionStartToolbar
             // 
-            this.optionStartToolbar.AutoSize = true;
-            this.optionStartToolbar.Location = new System.Drawing.Point(12, 37);
-            this.optionStartToolbar.Name = "optionStartToolbar";
-            this.optionStartToolbar.Size = new System.Drawing.Size(118, 19);
-            this.optionStartToolbar.TabIndex = 1;
-            this.optionStartToolbar.Text = "Start with Toolbar";
-            this.optionStartToolbar.UseVisualStyleBackColor = true;
+            optionStartToolbar.AutoSize = true;
+            optionStartToolbar.Location = new Point(12, 37);
+            optionStartToolbar.Name = "optionStartToolbar";
+            optionStartToolbar.Size = new Size(118, 19);
+            optionStartToolbar.TabIndex = 1;
+            optionStartToolbar.Text = "Start with Toolbar";
+            optionStartToolbar.UseVisualStyleBackColor = true;
             // 
             // optionRegisterHotkeys
             // 
-            this.optionRegisterHotkeys.AutoSize = true;
-            this.optionRegisterHotkeys.Location = new System.Drawing.Point(12, 168);
-            this.optionRegisterHotkeys.Name = "optionRegisterHotkeys";
-            this.optionRegisterHotkeys.Size = new System.Drawing.Size(112, 19);
-            this.optionRegisterHotkeys.TabIndex = 2;
-            this.optionRegisterHotkeys.Text = "Register hotkeys";
-            this.optionRegisterHotkeys.UseVisualStyleBackColor = true;
+            optionRegisterHotkeys.AutoSize = true;
+            optionRegisterHotkeys.Location = new Point(12, 168);
+            optionRegisterHotkeys.Name = "optionRegisterHotkeys";
+            optionRegisterHotkeys.Size = new Size(112, 19);
+            optionRegisterHotkeys.TabIndex = 2;
+            optionRegisterHotkeys.Text = "Register hotkeys";
+            optionRegisterHotkeys.UseVisualStyleBackColor = true;
             // 
             // optionResetCounter
             // 
-            this.optionResetCounter.AutoSize = true;
-            this.optionResetCounter.Location = new System.Drawing.Point(202, 12);
-            this.optionResetCounter.Name = "optionResetCounter";
-            this.optionResetCounter.Size = new System.Drawing.Size(252, 19);
-            this.optionResetCounter.TabIndex = 3;
-            this.optionResetCounter.Text = "Reset number when updating memory slot";
-            this.optionResetCounter.UseVisualStyleBackColor = true;
+            optionResetCounter.AutoSize = true;
+            optionResetCounter.Location = new Point(202, 12);
+            optionResetCounter.Name = "optionResetCounter";
+            optionResetCounter.Size = new Size(252, 19);
+            optionResetCounter.TabIndex = 3;
+            optionResetCounter.Text = "Reset number when updating memory slot";
+            optionResetCounter.UseVisualStyleBackColor = true;
             // 
             // optionSaveMemorySlots
             // 
-            this.optionSaveMemorySlots.AutoSize = true;
-            this.optionSaveMemorySlots.Location = new System.Drawing.Point(202, 37);
-            this.optionSaveMemorySlots.Name = "optionSaveMemorySlots";
-            this.optionSaveMemorySlots.Size = new System.Drawing.Size(158, 19);
-            this.optionSaveMemorySlots.TabIndex = 4;
-            this.optionSaveMemorySlots.Text = "Save memory slots to file";
-            this.optionSaveMemorySlots.UseVisualStyleBackColor = true;
+            optionSaveMemorySlots.AutoSize = true;
+            optionSaveMemorySlots.Location = new Point(202, 37);
+            optionSaveMemorySlots.Name = "optionSaveMemorySlots";
+            optionSaveMemorySlots.Size = new Size(158, 19);
+            optionSaveMemorySlots.TabIndex = 4;
+            optionSaveMemorySlots.Text = "Save memory slots to file";
+            optionSaveMemorySlots.UseVisualStyleBackColor = true;
             // 
             // textMemorySlotFolder
             // 
-            this.textMemorySlotFolder.Location = new System.Drawing.Point(202, 108);
-            this.textMemorySlotFolder.Name = "textMemorySlotFolder";
-            this.textMemorySlotFolder.Size = new System.Drawing.Size(252, 23);
-            this.textMemorySlotFolder.TabIndex = 5;
+            textMemorySlotFolder.Location = new Point(202, 108);
+            textMemorySlotFolder.Name = "textMemorySlotFolder";
+            textMemorySlotFolder.Size = new Size(252, 23);
+            textMemorySlotFolder.TabIndex = 5;
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(202, 63);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(252, 42);
-            this.label1.TabIndex = 6;
-            this.label1.Text = ".txt file folder. Use process.txt, mem1.txt mem2.txt, mem3.txt:";
+            label1.Location = new Point(202, 63);
+            label1.Name = "label1";
+            label1.Size = new Size(252, 42);
+            label1.TabIndex = 6;
+            label1.Text = ".txt file folder. Use process.txt, mem1.txt mem2.txt, mem3.txt:";
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(12, 190);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(257, 15);
-            this.label2.TabIndex = 7;
-            this.label2.Text = "Restart the program to register new hotkeys";
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label2.Location = new Point(12, 190);
+            label2.Name = "label2";
+            label2.Size = new Size(257, 15);
+            label2.TabIndex = 7;
+            label2.Text = "Restart the program to register new hotkeys";
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 214);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(108, 15);
-            this.label3.TabIndex = 8;
-            this.label3.Text = "Hotkey Upper Case";
+            label3.AutoSize = true;
+            label3.Location = new Point(12, 214);
+            label3.Name = "label3";
+            label3.Size = new Size(108, 15);
+            label3.TabIndex = 8;
+            label3.Text = "Hotkey Upper Case";
             // 
             // textHotkeyUpper
             // 
-            this.textHotkeyUpper.Location = new System.Drawing.Point(131, 209);
-            this.textHotkeyUpper.Name = "textHotkeyUpper";
-            this.textHotkeyUpper.Size = new System.Drawing.Size(63, 23);
-            this.textHotkeyUpper.TabIndex = 9;
+            textHotkeyUpper.Location = new Point(131, 209);
+            textHotkeyUpper.Name = "textHotkeyUpper";
+            textHotkeyUpper.Size = new Size(63, 23);
+            textHotkeyUpper.TabIndex = 9;
             // 
             // checkUpperCtrl
             // 
-            this.checkUpperCtrl.AutoSize = true;
-            this.checkUpperCtrl.Location = new System.Drawing.Point(202, 213);
-            this.checkUpperCtrl.Name = "checkUpperCtrl";
-            this.checkUpperCtrl.Size = new System.Drawing.Size(45, 19);
-            this.checkUpperCtrl.TabIndex = 10;
-            this.checkUpperCtrl.Text = "Ctrl";
-            this.checkUpperCtrl.UseVisualStyleBackColor = true;
+            checkUpperCtrl.AutoSize = true;
+            checkUpperCtrl.Location = new Point(202, 213);
+            checkUpperCtrl.Name = "checkUpperCtrl";
+            checkUpperCtrl.Size = new Size(45, 19);
+            checkUpperCtrl.TabIndex = 10;
+            checkUpperCtrl.Text = "Ctrl";
+            checkUpperCtrl.UseVisualStyleBackColor = true;
             // 
             // checkUpperAlt
             // 
-            this.checkUpperAlt.AutoSize = true;
-            this.checkUpperAlt.Location = new System.Drawing.Point(253, 213);
-            this.checkUpperAlt.Name = "checkUpperAlt";
-            this.checkUpperAlt.Size = new System.Drawing.Size(41, 19);
-            this.checkUpperAlt.TabIndex = 11;
-            this.checkUpperAlt.Text = "Alt";
-            this.checkUpperAlt.UseVisualStyleBackColor = true;
+            checkUpperAlt.AutoSize = true;
+            checkUpperAlt.Location = new Point(253, 213);
+            checkUpperAlt.Name = "checkUpperAlt";
+            checkUpperAlt.Size = new Size(41, 19);
+            checkUpperAlt.TabIndex = 11;
+            checkUpperAlt.Text = "Alt";
+            checkUpperAlt.UseVisualStyleBackColor = true;
             // 
             // checkUpperShift
             // 
-            this.checkUpperShift.AutoSize = true;
-            this.checkUpperShift.Location = new System.Drawing.Point(300, 213);
-            this.checkUpperShift.Name = "checkUpperShift";
-            this.checkUpperShift.Size = new System.Drawing.Size(50, 19);
-            this.checkUpperShift.TabIndex = 12;
-            this.checkUpperShift.Text = "Shift";
-            this.checkUpperShift.UseVisualStyleBackColor = true;
+            checkUpperShift.AutoSize = true;
+            checkUpperShift.Location = new Point(300, 213);
+            checkUpperShift.Name = "checkUpperShift";
+            checkUpperShift.Size = new Size(50, 19);
+            checkUpperShift.TabIndex = 12;
+            checkUpperShift.Text = "Shift";
+            checkUpperShift.UseVisualStyleBackColor = true;
             // 
             // checkUpperWin
             // 
-            this.checkUpperWin.AutoSize = true;
-            this.checkUpperWin.Location = new System.Drawing.Point(356, 213);
-            this.checkUpperWin.Name = "checkUpperWin";
-            this.checkUpperWin.Size = new System.Drawing.Size(47, 19);
-            this.checkUpperWin.TabIndex = 13;
-            this.checkUpperWin.Text = "Win";
-            this.checkUpperWin.UseVisualStyleBackColor = true;
+            checkUpperWin.AutoSize = true;
+            checkUpperWin.Location = new Point(356, 213);
+            checkUpperWin.Name = "checkUpperWin";
+            checkUpperWin.Size = new Size(47, 19);
+            checkUpperWin.TabIndex = 13;
+            checkUpperWin.Text = "Win";
+            checkUpperWin.UseVisualStyleBackColor = true;
             // 
             // checkLowerWin
             // 
-            this.checkLowerWin.AutoSize = true;
-            this.checkLowerWin.Location = new System.Drawing.Point(356, 240);
-            this.checkLowerWin.Name = "checkLowerWin";
-            this.checkLowerWin.Size = new System.Drawing.Size(47, 19);
-            this.checkLowerWin.TabIndex = 19;
-            this.checkLowerWin.Text = "Win";
-            this.checkLowerWin.UseVisualStyleBackColor = true;
+            checkLowerWin.AutoSize = true;
+            checkLowerWin.Location = new Point(356, 240);
+            checkLowerWin.Name = "checkLowerWin";
+            checkLowerWin.Size = new Size(47, 19);
+            checkLowerWin.TabIndex = 19;
+            checkLowerWin.Text = "Win";
+            checkLowerWin.UseVisualStyleBackColor = true;
             // 
             // checkLowerShift
             // 
-            this.checkLowerShift.AutoSize = true;
-            this.checkLowerShift.Location = new System.Drawing.Point(300, 240);
-            this.checkLowerShift.Name = "checkLowerShift";
-            this.checkLowerShift.Size = new System.Drawing.Size(50, 19);
-            this.checkLowerShift.TabIndex = 18;
-            this.checkLowerShift.Text = "Shift";
-            this.checkLowerShift.UseVisualStyleBackColor = true;
+            checkLowerShift.AutoSize = true;
+            checkLowerShift.Location = new Point(300, 240);
+            checkLowerShift.Name = "checkLowerShift";
+            checkLowerShift.Size = new Size(50, 19);
+            checkLowerShift.TabIndex = 18;
+            checkLowerShift.Text = "Shift";
+            checkLowerShift.UseVisualStyleBackColor = true;
             // 
             // checkLowerAlt
             // 
-            this.checkLowerAlt.AutoSize = true;
-            this.checkLowerAlt.Location = new System.Drawing.Point(253, 240);
-            this.checkLowerAlt.Name = "checkLowerAlt";
-            this.checkLowerAlt.Size = new System.Drawing.Size(41, 19);
-            this.checkLowerAlt.TabIndex = 17;
-            this.checkLowerAlt.Text = "Alt";
-            this.checkLowerAlt.UseVisualStyleBackColor = true;
+            checkLowerAlt.AutoSize = true;
+            checkLowerAlt.Location = new Point(253, 240);
+            checkLowerAlt.Name = "checkLowerAlt";
+            checkLowerAlt.Size = new Size(41, 19);
+            checkLowerAlt.TabIndex = 17;
+            checkLowerAlt.Text = "Alt";
+            checkLowerAlt.UseVisualStyleBackColor = true;
             // 
             // checkLowerCtrl
             // 
-            this.checkLowerCtrl.AutoSize = true;
-            this.checkLowerCtrl.Location = new System.Drawing.Point(202, 240);
-            this.checkLowerCtrl.Name = "checkLowerCtrl";
-            this.checkLowerCtrl.Size = new System.Drawing.Size(45, 19);
-            this.checkLowerCtrl.TabIndex = 16;
-            this.checkLowerCtrl.Text = "Ctrl";
-            this.checkLowerCtrl.UseVisualStyleBackColor = true;
+            checkLowerCtrl.AutoSize = true;
+            checkLowerCtrl.Location = new Point(202, 240);
+            checkLowerCtrl.Name = "checkLowerCtrl";
+            checkLowerCtrl.Size = new Size(45, 19);
+            checkLowerCtrl.TabIndex = 16;
+            checkLowerCtrl.Text = "Ctrl";
+            checkLowerCtrl.UseVisualStyleBackColor = true;
             // 
             // textHotkeyLower
             // 
-            this.textHotkeyLower.Location = new System.Drawing.Point(131, 236);
-            this.textHotkeyLower.Name = "textHotkeyLower";
-            this.textHotkeyLower.Size = new System.Drawing.Size(63, 23);
-            this.textHotkeyLower.TabIndex = 15;
+            textHotkeyLower.Location = new Point(131, 236);
+            textHotkeyLower.Name = "textHotkeyLower";
+            textHotkeyLower.Size = new Size(63, 23);
+            textHotkeyLower.TabIndex = 15;
             // 
             // label4
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 241);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(108, 15);
-            this.label4.TabIndex = 14;
-            this.label4.Text = "Hotkey Lower Case";
+            label4.AutoSize = true;
+            label4.Location = new Point(12, 241);
+            label4.Name = "label4";
+            label4.Size = new Size(108, 15);
+            label4.TabIndex = 14;
+            label4.Text = "Hotkey Lower Case";
             // 
             // checkCapsWin
             // 
-            this.checkCapsWin.AutoSize = true;
-            this.checkCapsWin.Location = new System.Drawing.Point(356, 295);
-            this.checkCapsWin.Name = "checkCapsWin";
-            this.checkCapsWin.Size = new System.Drawing.Size(47, 19);
-            this.checkCapsWin.TabIndex = 31;
-            this.checkCapsWin.Text = "Win";
-            this.checkCapsWin.UseVisualStyleBackColor = true;
+            checkCapsWin.AutoSize = true;
+            checkCapsWin.Location = new Point(356, 295);
+            checkCapsWin.Name = "checkCapsWin";
+            checkCapsWin.Size = new Size(47, 19);
+            checkCapsWin.TabIndex = 31;
+            checkCapsWin.Text = "Win";
+            checkCapsWin.UseVisualStyleBackColor = true;
             // 
             // checkCapsShift
             // 
-            this.checkCapsShift.AutoSize = true;
-            this.checkCapsShift.Location = new System.Drawing.Point(300, 295);
-            this.checkCapsShift.Name = "checkCapsShift";
-            this.checkCapsShift.Size = new System.Drawing.Size(50, 19);
-            this.checkCapsShift.TabIndex = 30;
-            this.checkCapsShift.Text = "Shift";
-            this.checkCapsShift.UseVisualStyleBackColor = true;
+            checkCapsShift.AutoSize = true;
+            checkCapsShift.Location = new Point(300, 295);
+            checkCapsShift.Name = "checkCapsShift";
+            checkCapsShift.Size = new Size(50, 19);
+            checkCapsShift.TabIndex = 30;
+            checkCapsShift.Text = "Shift";
+            checkCapsShift.UseVisualStyleBackColor = true;
             // 
             // checkCapsAlt
             // 
-            this.checkCapsAlt.AutoSize = true;
-            this.checkCapsAlt.Location = new System.Drawing.Point(253, 295);
-            this.checkCapsAlt.Name = "checkCapsAlt";
-            this.checkCapsAlt.Size = new System.Drawing.Size(41, 19);
-            this.checkCapsAlt.TabIndex = 29;
-            this.checkCapsAlt.Text = "Alt";
-            this.checkCapsAlt.UseVisualStyleBackColor = true;
+            checkCapsAlt.AutoSize = true;
+            checkCapsAlt.Location = new Point(253, 295);
+            checkCapsAlt.Name = "checkCapsAlt";
+            checkCapsAlt.Size = new Size(41, 19);
+            checkCapsAlt.TabIndex = 29;
+            checkCapsAlt.Text = "Alt";
+            checkCapsAlt.UseVisualStyleBackColor = true;
             // 
             // checkCapsCtrl
             // 
-            this.checkCapsCtrl.AutoSize = true;
-            this.checkCapsCtrl.Location = new System.Drawing.Point(202, 295);
-            this.checkCapsCtrl.Name = "checkCapsCtrl";
-            this.checkCapsCtrl.Size = new System.Drawing.Size(45, 19);
-            this.checkCapsCtrl.TabIndex = 28;
-            this.checkCapsCtrl.Text = "Ctrl";
-            this.checkCapsCtrl.UseVisualStyleBackColor = true;
+            checkCapsCtrl.AutoSize = true;
+            checkCapsCtrl.Location = new Point(202, 295);
+            checkCapsCtrl.Name = "checkCapsCtrl";
+            checkCapsCtrl.Size = new Size(45, 19);
+            checkCapsCtrl.TabIndex = 28;
+            checkCapsCtrl.Text = "Ctrl";
+            checkCapsCtrl.UseVisualStyleBackColor = true;
             // 
             // textHotkeyCaps
             // 
-            this.textHotkeyCaps.Location = new System.Drawing.Point(131, 291);
-            this.textHotkeyCaps.Name = "textHotkeyCaps";
-            this.textHotkeyCaps.Size = new System.Drawing.Size(63, 23);
-            this.textHotkeyCaps.TabIndex = 27;
+            textHotkeyCaps.Location = new Point(131, 291);
+            textHotkeyCaps.Name = "textHotkeyCaps";
+            textHotkeyCaps.Size = new Size(63, 23);
+            textHotkeyCaps.TabIndex = 27;
             // 
             // label5
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(12, 296);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(102, 15);
-            this.label5.TabIndex = 26;
-            this.label5.Text = "Hotkey Caps Lock";
+            label5.AutoSize = true;
+            label5.Location = new Point(12, 296);
+            label5.Name = "label5";
+            label5.Size = new Size(102, 15);
+            label5.TabIndex = 26;
+            label5.Text = "Hotkey Caps Lock";
             // 
             // checkPlainWin
             // 
-            this.checkPlainWin.AutoSize = true;
-            this.checkPlainWin.Location = new System.Drawing.Point(356, 268);
-            this.checkPlainWin.Name = "checkPlainWin";
-            this.checkPlainWin.Size = new System.Drawing.Size(47, 19);
-            this.checkPlainWin.TabIndex = 25;
-            this.checkPlainWin.Text = "Win";
-            this.checkPlainWin.UseVisualStyleBackColor = true;
+            checkPlainWin.AutoSize = true;
+            checkPlainWin.Location = new Point(356, 268);
+            checkPlainWin.Name = "checkPlainWin";
+            checkPlainWin.Size = new Size(47, 19);
+            checkPlainWin.TabIndex = 25;
+            checkPlainWin.Text = "Win";
+            checkPlainWin.UseVisualStyleBackColor = true;
             // 
             // checkPlainShift
             // 
-            this.checkPlainShift.AutoSize = true;
-            this.checkPlainShift.Location = new System.Drawing.Point(300, 268);
-            this.checkPlainShift.Name = "checkPlainShift";
-            this.checkPlainShift.Size = new System.Drawing.Size(50, 19);
-            this.checkPlainShift.TabIndex = 24;
-            this.checkPlainShift.Text = "Shift";
-            this.checkPlainShift.UseVisualStyleBackColor = true;
+            checkPlainShift.AutoSize = true;
+            checkPlainShift.Location = new Point(300, 268);
+            checkPlainShift.Name = "checkPlainShift";
+            checkPlainShift.Size = new Size(50, 19);
+            checkPlainShift.TabIndex = 24;
+            checkPlainShift.Text = "Shift";
+            checkPlainShift.UseVisualStyleBackColor = true;
             // 
             // checkPlainAlt
             // 
-            this.checkPlainAlt.AutoSize = true;
-            this.checkPlainAlt.Location = new System.Drawing.Point(253, 268);
-            this.checkPlainAlt.Name = "checkPlainAlt";
-            this.checkPlainAlt.Size = new System.Drawing.Size(41, 19);
-            this.checkPlainAlt.TabIndex = 23;
-            this.checkPlainAlt.Text = "Alt";
-            this.checkPlainAlt.UseVisualStyleBackColor = true;
+            checkPlainAlt.AutoSize = true;
+            checkPlainAlt.Location = new Point(253, 268);
+            checkPlainAlt.Name = "checkPlainAlt";
+            checkPlainAlt.Size = new Size(41, 19);
+            checkPlainAlt.TabIndex = 23;
+            checkPlainAlt.Text = "Alt";
+            checkPlainAlt.UseVisualStyleBackColor = true;
             // 
             // checkPlainCtrl
             // 
-            this.checkPlainCtrl.AutoSize = true;
-            this.checkPlainCtrl.Location = new System.Drawing.Point(202, 268);
-            this.checkPlainCtrl.Name = "checkPlainCtrl";
-            this.checkPlainCtrl.Size = new System.Drawing.Size(45, 19);
-            this.checkPlainCtrl.TabIndex = 22;
-            this.checkPlainCtrl.Text = "Ctrl";
-            this.checkPlainCtrl.UseVisualStyleBackColor = true;
+            checkPlainCtrl.AutoSize = true;
+            checkPlainCtrl.Location = new Point(202, 268);
+            checkPlainCtrl.Name = "checkPlainCtrl";
+            checkPlainCtrl.Size = new Size(45, 19);
+            checkPlainCtrl.TabIndex = 22;
+            checkPlainCtrl.Text = "Ctrl";
+            checkPlainCtrl.UseVisualStyleBackColor = true;
             // 
             // textHotkeyPlain
             // 
-            this.textHotkeyPlain.Location = new System.Drawing.Point(131, 264);
-            this.textHotkeyPlain.Name = "textHotkeyPlain";
-            this.textHotkeyPlain.Size = new System.Drawing.Size(63, 23);
-            this.textHotkeyPlain.TabIndex = 21;
+            textHotkeyPlain.Location = new Point(131, 264);
+            textHotkeyPlain.Name = "textHotkeyPlain";
+            textHotkeyPlain.Size = new Size(63, 23);
+            textHotkeyPlain.TabIndex = 21;
             // 
             // label6
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(12, 269);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(98, 15);
-            this.label6.TabIndex = 20;
-            this.label6.Text = "Hotkey Plain Text";
+            label6.AutoSize = true;
+            label6.Location = new Point(12, 269);
+            label6.Name = "label6";
+            label6.Size = new Size(98, 15);
+            label6.TabIndex = 20;
+            label6.Text = "Hotkey Plain Text";
             // 
             // checkProcessWin
             // 
-            this.checkProcessWin.AutoSize = true;
-            this.checkProcessWin.Location = new System.Drawing.Point(356, 324);
-            this.checkProcessWin.Name = "checkProcessWin";
-            this.checkProcessWin.Size = new System.Drawing.Size(47, 19);
-            this.checkProcessWin.TabIndex = 37;
-            this.checkProcessWin.Text = "Win";
-            this.checkProcessWin.UseVisualStyleBackColor = true;
+            checkProcessWin.AutoSize = true;
+            checkProcessWin.Location = new Point(356, 324);
+            checkProcessWin.Name = "checkProcessWin";
+            checkProcessWin.Size = new Size(47, 19);
+            checkProcessWin.TabIndex = 37;
+            checkProcessWin.Text = "Win";
+            checkProcessWin.UseVisualStyleBackColor = true;
             // 
             // checkProcessShift
             // 
-            this.checkProcessShift.AutoSize = true;
-            this.checkProcessShift.Location = new System.Drawing.Point(300, 324);
-            this.checkProcessShift.Name = "checkProcessShift";
-            this.checkProcessShift.Size = new System.Drawing.Size(50, 19);
-            this.checkProcessShift.TabIndex = 36;
-            this.checkProcessShift.Text = "Shift";
-            this.checkProcessShift.UseVisualStyleBackColor = true;
+            checkProcessShift.AutoSize = true;
+            checkProcessShift.Location = new Point(300, 324);
+            checkProcessShift.Name = "checkProcessShift";
+            checkProcessShift.Size = new Size(50, 19);
+            checkProcessShift.TabIndex = 36;
+            checkProcessShift.Text = "Shift";
+            checkProcessShift.UseVisualStyleBackColor = true;
             // 
             // checkProcessAlt
             // 
-            this.checkProcessAlt.AutoSize = true;
-            this.checkProcessAlt.Location = new System.Drawing.Point(253, 324);
-            this.checkProcessAlt.Name = "checkProcessAlt";
-            this.checkProcessAlt.Size = new System.Drawing.Size(41, 19);
-            this.checkProcessAlt.TabIndex = 35;
-            this.checkProcessAlt.Text = "Alt";
-            this.checkProcessAlt.UseVisualStyleBackColor = true;
+            checkProcessAlt.AutoSize = true;
+            checkProcessAlt.Location = new Point(253, 324);
+            checkProcessAlt.Name = "checkProcessAlt";
+            checkProcessAlt.Size = new Size(41, 19);
+            checkProcessAlt.TabIndex = 35;
+            checkProcessAlt.Text = "Alt";
+            checkProcessAlt.UseVisualStyleBackColor = true;
             // 
             // checkProcessCtrl
             // 
-            this.checkProcessCtrl.AutoSize = true;
-            this.checkProcessCtrl.Location = new System.Drawing.Point(202, 324);
-            this.checkProcessCtrl.Name = "checkProcessCtrl";
-            this.checkProcessCtrl.Size = new System.Drawing.Size(45, 19);
-            this.checkProcessCtrl.TabIndex = 34;
-            this.checkProcessCtrl.Text = "Ctrl";
-            this.checkProcessCtrl.UseVisualStyleBackColor = true;
+            checkProcessCtrl.AutoSize = true;
+            checkProcessCtrl.Location = new Point(202, 324);
+            checkProcessCtrl.Name = "checkProcessCtrl";
+            checkProcessCtrl.Size = new Size(45, 19);
+            checkProcessCtrl.TabIndex = 34;
+            checkProcessCtrl.Text = "Ctrl";
+            checkProcessCtrl.UseVisualStyleBackColor = true;
             // 
             // textHotkeyProcess
             // 
-            this.textHotkeyProcess.Location = new System.Drawing.Point(131, 320);
-            this.textHotkeyProcess.Name = "textHotkeyProcess";
-            this.textHotkeyProcess.Size = new System.Drawing.Size(63, 23);
-            this.textHotkeyProcess.TabIndex = 33;
+            textHotkeyProcess.Location = new Point(131, 320);
+            textHotkeyProcess.Name = "textHotkeyProcess";
+            textHotkeyProcess.Size = new Size(63, 23);
+            textHotkeyProcess.TabIndex = 33;
             // 
             // label7
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(12, 325);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(112, 15);
-            this.label7.TabIndex = 32;
-            this.label7.Text = "Hotkey Process Text";
+            label7.AutoSize = true;
+            label7.Location = new Point(12, 325);
+            label7.Name = "label7";
+            label7.Size = new Size(112, 15);
+            label7.TabIndex = 32;
+            label7.Text = "Hotkey Process Text";
             // 
             // buttonSave
             // 
-            this.buttonSave.Location = new System.Drawing.Point(391, 351);
-            this.buttonSave.Name = "buttonSave";
-            this.buttonSave.Size = new System.Drawing.Size(75, 23);
-            this.buttonSave.TabIndex = 38;
-            this.buttonSave.Text = "Save";
-            this.buttonSave.UseVisualStyleBackColor = true;
-            this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
+            buttonSave.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            buttonSave.Location = new Point(393, 388);
+            buttonSave.Name = "buttonSave";
+            buttonSave.Size = new Size(75, 23);
+            buttonSave.TabIndex = 38;
+            buttonSave.Text = "Save";
+            buttonSave.UseVisualStyleBackColor = true;
+            buttonSave.Click += buttonSave_Click;
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(310, 351);
-            this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(75, 23);
-            this.buttonCancel.TabIndex = 39;
-            this.buttonCancel.Text = "Cancel";
-            this.buttonCancel.UseVisualStyleBackColor = true;
-            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
+            buttonCancel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            buttonCancel.Location = new Point(312, 388);
+            buttonCancel.Name = "buttonCancel";
+            buttonCancel.Size = new Size(75, 23);
+            buttonCancel.TabIndex = 39;
+            buttonCancel.Text = "Cancel";
+            buttonCancel.UseVisualStyleBackColor = true;
+            buttonCancel.Click += buttonCancel_Click;
             // 
             // optionCut
             // 
-            this.optionCut.AutoSize = true;
-            this.optionCut.Location = new System.Drawing.Point(12, 63);
-            this.optionCut.Name = "optionCut";
-            this.optionCut.Size = new System.Drawing.Size(163, 19);
-            this.optionCut.TabIndex = 40;
-            this.optionCut.Text = "Ctrl+X when using hotkey";
-            this.optionCut.UseVisualStyleBackColor = true;
+            optionCut.AutoSize = true;
+            optionCut.Location = new Point(12, 63);
+            optionCut.Name = "optionCut";
+            optionCut.Size = new Size(163, 19);
+            optionCut.TabIndex = 40;
+            optionCut.Text = "Ctrl+X when using hotkey";
+            optionCut.UseVisualStyleBackColor = true;
             // 
             // optionType
             // 
-            this.optionType.AutoSize = true;
-            this.optionType.Location = new System.Drawing.Point(12, 110);
-            this.optionType.Name = "optionType";
-            this.optionType.Size = new System.Drawing.Size(181, 19);
-            this.optionType.TabIndex = 41;
-            this.optionType.Text = "Send keys when using hotkey";
-            this.optionType.UseVisualStyleBackColor = true;
+            optionType.AutoSize = true;
+            optionType.Location = new Point(12, 110);
+            optionType.Name = "optionType";
+            optionType.Size = new Size(181, 19);
+            optionType.TabIndex = 41;
+            optionType.Text = "Send keys when using hotkey";
+            optionType.UseVisualStyleBackColor = true;
             // 
             // optionPaste
             // 
-            this.optionPaste.AutoSize = true;
-            this.optionPaste.Location = new System.Drawing.Point(12, 88);
-            this.optionPaste.Name = "optionPaste";
-            this.optionPaste.Size = new System.Drawing.Size(163, 19);
-            this.optionPaste.TabIndex = 42;
-            this.optionPaste.Text = "Ctrl+V when using hotkey";
-            this.optionPaste.UseVisualStyleBackColor = true;
+            optionPaste.AutoSize = true;
+            optionPaste.Location = new Point(12, 88);
+            optionPaste.Name = "optionPaste";
+            optionPaste.Size = new Size(163, 19);
+            optionPaste.TabIndex = 42;
+            optionPaste.Text = "Ctrl+V when using hotkey";
+            optionPaste.UseVisualStyleBackColor = true;
             // 
             // panel2
             // 
-            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel2.Location = new System.Drawing.Point(195, 12);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(0, 125);
-            this.panel2.TabIndex = 43;
+            panel2.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            panel2.BorderStyle = BorderStyle.FixedSingle;
+            panel2.Location = new Point(195, 12);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(0, 125);
+            panel2.TabIndex = 43;
             // 
             // optionUpdateClipboard
             // 
-            this.optionUpdateClipboard.AutoSize = true;
-            this.optionUpdateClipboard.Location = new System.Drawing.Point(12, 135);
-            this.optionUpdateClipboard.Name = "optionUpdateClipboard";
-            this.optionUpdateClipboard.Size = new System.Drawing.Size(237, 19);
-            this.optionUpdateClipboard.TabIndex = 44;
-            this.optionUpdateClipboard.Text = "Update clipboard when using Send Keys";
-            this.optionUpdateClipboard.UseVisualStyleBackColor = true;
+            optionUpdateClipboard.AutoSize = true;
+            optionUpdateClipboard.Location = new Point(12, 135);
+            optionUpdateClipboard.Name = "optionUpdateClipboard";
+            optionUpdateClipboard.Size = new Size(237, 19);
+            optionUpdateClipboard.TabIndex = 44;
+            optionUpdateClipboard.Text = "Update clipboard when using Send Keys";
+            optionUpdateClipboard.UseVisualStyleBackColor = true;
+            // 
+            // checkDateWin
+            // 
+            checkDateWin.AutoSize = true;
+            checkDateWin.Location = new Point(356, 352);
+            checkDateWin.Name = "checkDateWin";
+            checkDateWin.Size = new Size(47, 19);
+            checkDateWin.TabIndex = 50;
+            checkDateWin.Text = "Win";
+            checkDateWin.UseVisualStyleBackColor = true;
+            // 
+            // checkDateShift
+            // 
+            checkDateShift.AutoSize = true;
+            checkDateShift.Location = new Point(300, 352);
+            checkDateShift.Name = "checkDateShift";
+            checkDateShift.Size = new Size(50, 19);
+            checkDateShift.TabIndex = 49;
+            checkDateShift.Text = "Shift";
+            checkDateShift.UseVisualStyleBackColor = true;
+            // 
+            // checkDateAlt
+            // 
+            checkDateAlt.AutoSize = true;
+            checkDateAlt.Location = new Point(253, 352);
+            checkDateAlt.Name = "checkDateAlt";
+            checkDateAlt.Size = new Size(41, 19);
+            checkDateAlt.TabIndex = 48;
+            checkDateAlt.Text = "Alt";
+            checkDateAlt.UseVisualStyleBackColor = true;
+            // 
+            // checkDateCtrl
+            // 
+            checkDateCtrl.AutoSize = true;
+            checkDateCtrl.Location = new Point(202, 352);
+            checkDateCtrl.Name = "checkDateCtrl";
+            checkDateCtrl.Size = new Size(45, 19);
+            checkDateCtrl.TabIndex = 47;
+            checkDateCtrl.Text = "Ctrl";
+            checkDateCtrl.UseVisualStyleBackColor = true;
+            // 
+            // textHotkeyDate
+            // 
+            textHotkeyDate.Location = new Point(131, 348);
+            textHotkeyDate.Name = "textHotkeyDate";
+            textHotkeyDate.Size = new Size(63, 23);
+            textHotkeyDate.TabIndex = 46;
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Location = new Point(12, 353);
+            label8.Name = "label8";
+            label8.Size = new Size(103, 15);
+            label8.TabIndex = 45;
+            label8.Text = "Hotkey Date/Time";
             // 
             // Options
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(478, 381);
-            this.Controls.Add(this.optionUpdateClipboard);
-            this.Controls.Add(this.panel2);
-            this.Controls.Add(this.optionPaste);
-            this.Controls.Add(this.optionType);
-            this.Controls.Add(this.optionCut);
-            this.Controls.Add(this.buttonCancel);
-            this.Controls.Add(this.buttonSave);
-            this.Controls.Add(this.checkProcessWin);
-            this.Controls.Add(this.checkProcessShift);
-            this.Controls.Add(this.checkProcessAlt);
-            this.Controls.Add(this.checkProcessCtrl);
-            this.Controls.Add(this.textHotkeyProcess);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.checkCapsWin);
-            this.Controls.Add(this.checkCapsShift);
-            this.Controls.Add(this.checkCapsAlt);
-            this.Controls.Add(this.checkCapsCtrl);
-            this.Controls.Add(this.textHotkeyCaps);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.checkPlainWin);
-            this.Controls.Add(this.checkPlainShift);
-            this.Controls.Add(this.checkPlainAlt);
-            this.Controls.Add(this.checkPlainCtrl);
-            this.Controls.Add(this.textHotkeyPlain);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.checkLowerWin);
-            this.Controls.Add(this.checkLowerShift);
-            this.Controls.Add(this.checkLowerAlt);
-            this.Controls.Add(this.checkLowerCtrl);
-            this.Controls.Add(this.textHotkeyLower);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.checkUpperWin);
-            this.Controls.Add(this.checkUpperShift);
-            this.Controls.Add(this.checkUpperAlt);
-            this.Controls.Add(this.checkUpperCtrl);
-            this.Controls.Add(this.textHotkeyUpper);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.textMemorySlotFolder);
-            this.Controls.Add(this.optionSaveMemorySlots);
-            this.Controls.Add(this.optionResetCounter);
-            this.Controls.Add(this.optionRegisterHotkeys);
-            this.Controls.Add(this.optionStartToolbar);
-            this.Controls.Add(this.optionStartHidden);
-            this.Name = "Options";
-            this.Text = "Options";
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(478, 418);
+            Controls.Add(checkDateWin);
+            Controls.Add(checkDateShift);
+            Controls.Add(checkDateAlt);
+            Controls.Add(checkDateCtrl);
+            Controls.Add(textHotkeyDate);
+            Controls.Add(label8);
+            Controls.Add(optionUpdateClipboard);
+            Controls.Add(panel2);
+            Controls.Add(optionPaste);
+            Controls.Add(optionType);
+            Controls.Add(optionCut);
+            Controls.Add(buttonCancel);
+            Controls.Add(buttonSave);
+            Controls.Add(checkProcessWin);
+            Controls.Add(checkProcessShift);
+            Controls.Add(checkProcessAlt);
+            Controls.Add(checkProcessCtrl);
+            Controls.Add(textHotkeyProcess);
+            Controls.Add(label7);
+            Controls.Add(checkCapsWin);
+            Controls.Add(checkCapsShift);
+            Controls.Add(checkCapsAlt);
+            Controls.Add(checkCapsCtrl);
+            Controls.Add(textHotkeyCaps);
+            Controls.Add(label5);
+            Controls.Add(checkPlainWin);
+            Controls.Add(checkPlainShift);
+            Controls.Add(checkPlainAlt);
+            Controls.Add(checkPlainCtrl);
+            Controls.Add(textHotkeyPlain);
+            Controls.Add(label6);
+            Controls.Add(checkLowerWin);
+            Controls.Add(checkLowerShift);
+            Controls.Add(checkLowerAlt);
+            Controls.Add(checkLowerCtrl);
+            Controls.Add(textHotkeyLower);
+            Controls.Add(label4);
+            Controls.Add(checkUpperWin);
+            Controls.Add(checkUpperShift);
+            Controls.Add(checkUpperAlt);
+            Controls.Add(checkUpperCtrl);
+            Controls.Add(textHotkeyUpper);
+            Controls.Add(label3);
+            Controls.Add(label2);
+            Controls.Add(label1);
+            Controls.Add(textMemorySlotFolder);
+            Controls.Add(optionSaveMemorySlots);
+            Controls.Add(optionResetCounter);
+            Controls.Add(optionRegisterHotkeys);
+            Controls.Add(optionStartToolbar);
+            Controls.Add(optionStartHidden);
+            Name = "Options";
+            Text = "Options";
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -604,5 +672,11 @@
         private CheckBox optionPaste;
         private Panel panel2;
         private CheckBox optionUpdateClipboard;
+        private CheckBox checkDateWin;
+        private CheckBox checkDateShift;
+        private CheckBox checkDateAlt;
+        private CheckBox checkDateCtrl;
+        private TextBox textHotkeyDate;
+        private Label label8;
     }
 }

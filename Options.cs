@@ -22,6 +22,7 @@ namespace ClipboardTool
         private HotkeyControls PlainInputs = new HotkeyControls();
         private HotkeyControls CapsInputs = new HotkeyControls();
         private HotkeyControls ProcessInputs = new HotkeyControls();
+        private HotkeyControls DateInputs = new HotkeyControls();
 
         public Options(MainForm formParent)
         {
@@ -45,8 +46,8 @@ namespace ClipboardTool
             fillInputs(PlainInputs, mainForm.hotkeys.PlainText);
             fillInputs(CapsInputs, mainForm.hotkeys.CapsLock);
             fillInputs(ProcessInputs, mainForm.hotkeys.ProcessText);
+            fillInputs(DateInputs, mainForm.hotkeys.Date);
 
-            
         }
 
         private void fillInputs(HotkeyControls input, Hotkey hotkey)
@@ -93,6 +94,12 @@ namespace ClipboardTool
             ProcessInputs.Alt = checkProcessAlt;
             ProcessInputs.Shift = checkProcessShift;
             ProcessInputs.Win = checkProcessWin;
+
+            DateInputs.text = textHotkeyDate;
+            DateInputs.Ctrl = checkDateCtrl;
+            DateInputs.Alt = checkDateAlt;
+            DateInputs.Shift = checkDateShift;
+            DateInputs.Win = checkDateWin;
 
         }
 
@@ -142,6 +149,7 @@ namespace ClipboardTool
             mainForm.hotkeys.PlainText = readInputs(PlainInputs, mainForm.hotkeys.PlainText);
             mainForm.hotkeys.CapsLock = readInputs(CapsInputs, mainForm.hotkeys.CapsLock);
             mainForm.hotkeys.ProcessText = readInputs(ProcessInputs, mainForm.hotkeys.ProcessText);
+            mainForm.hotkeys.Date = readInputs(DateInputs, mainForm.hotkeys.Date);
 
 
             Properties.Settings.Default.hkUpperKey = mainForm.hotkeys.UpperCase.key;
@@ -175,18 +183,12 @@ namespace ClipboardTool
             Properties.Settings.Default.hkProcessShift = mainForm.hotkeys.ProcessText.Shift;
             Properties.Settings.Default.hkProcessWin = mainForm.hotkeys.ProcessText.Win;
 
+            Properties.Settings.Default.hkDateCtrl = mainForm.hotkeys.Date.Ctrl;
+            Properties.Settings.Default.hkDateAlt = mainForm.hotkeys.Date.Alt;
+            Properties.Settings.Default.hkDateShift = mainForm.hotkeys.Date.Shift;
+            Properties.Settings.Default.hkDateWin = mainForm.hotkeys.Date.Win;
+
             Properties.Settings.Default.Save();
         }
-
-
-    }
-    public class HotkeyControls
-    {
-        public TextBox text;
-        public CheckBox Ctrl;
-        public CheckBox Alt;
-        public CheckBox Shift;
-        public CheckBox Win;
-        public Hotkey hotkey;
     }
 }

@@ -21,6 +21,7 @@ namespace Hotkeys
         public Hotkey PlainText = new Hotkey();
         public Hotkey CapsLock = new Hotkey();
         public Hotkey ProcessText = new Hotkey();
+        public Hotkey Date = new Hotkey();
     }
 
     [Serializable]
