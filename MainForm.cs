@@ -349,11 +349,11 @@ namespace ClipboardTool
 
         private string SendDateText()
         {
-            string outDate = "init outDate";
+            string outDate = "init outDate (SendDate error)";
             switch (sendDateChoice)
             {
                 case SendDateOption.NotStarted:
-                    outDate = "not started";
+                    outDate = "Use Date/Time hotkey (SendDate error)";
                     break;
                 case SendDateOption.JustDate:
                     outDate = DateTime.Now.ToShortDateString();
@@ -365,7 +365,7 @@ namespace ClipboardTool
                     outDate = DateTime.Now.ToShortTimeString();
                     break;
                 default:
-                    outDate = "pressed beyond the enum";
+                    outDate = "Pressed beyond the enum (SendDate error)";
                     break;
             }
 
