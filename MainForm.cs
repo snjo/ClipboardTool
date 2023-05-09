@@ -55,7 +55,7 @@ namespace ClipboardTool
             "$+ number, then increment it\n" +
             "$- number, then decrement it\n" +
             "$n2, $n3 use 1-3 digits in number (01, 001)\n" +
-            "$1 - $3 contents of the memory slots\n" +
+            "$m1-$m3 contents of the memory slots\n" +
             "$eq Convert \"\" to \", and removes single \"\n" +
             "$v Split value in slot 1 with ;, output value[number]\n" +
             "$list Split lines in main textbox (skips line 1), output value[number]\n" +
@@ -688,9 +688,9 @@ namespace ClipboardTool
                         numericUpDown1.Value++;
                 }
 
-                customText = customText.Replace("$1", textBox1.Text);
-                customText = customText.Replace("$2", textBox2.Text);
-                customText = customText.Replace("$3", textBox3.Text);
+                customText = customText.Replace("$m1", textBox1.Text);
+                customText = customText.Replace("$m2", textBox2.Text);
+                customText = customText.Replace("$m3", textBox3.Text);
 
                 if (customText.Length < 1)
                 {

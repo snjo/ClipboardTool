@@ -22,6 +22,22 @@ $v Split value in slot 1 with ;, output value[number]
 $list Split lines in main textbox (skips line 1), output value[number]
 
 -----------------------------------------
+Hotkeys
+
+
+Function					Default hotkey
+Convert to upper case		Ctrl+Shift+U
+Convert to lower case		Ctrl+Shift+D
+Convert to plain text		Ctrl+Shift+T
+Process text using $'s		Ctrl+Shift+P
+Caps Lock toggle			Ctrl+Shift+Backspace
+Date/Time					Ctrl+Shift+D
+	Tap the date hotkey 1-3 times while holding the modifier keys:
+	1: Types out just the date
+	2: Types out the Date and Time
+	3: Types out just the Time
+
+-----------------------------------------
 Key codes for hotkey options:
 https://learn.microsoft.com/en-us/dotnet/api/system.windows.forms.keys?view=windowsdesktop-7.0
 
