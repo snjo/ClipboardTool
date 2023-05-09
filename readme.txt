@@ -24,12 +24,14 @@ $list Split lines in main textbox (skips line 1), output value[number]
 -----------------------------------------
 Text Files in the program folder
 
-process.txt			Preset contents of the Proccess text area (The main text box in the application)
-					You can update the text file by using the Save button next to the textbox (diskette icon)
+process.txt		Preset contents of the Proccess text area (The main text box in the application)
+			You can update the text file by using the Save button next to the textbox (diskette icon)
+
 mem1.txt-mem3.txt	Preset contents of the three memory slots at the bottom of the applications.
-					Use this for commonly typed phrases, or as part of the variables in the process text field.
-					The text file is not overwritten by the program when you update these fields
-readme.txt			This file
+			Use this for commonly typed phrases, or as part of the variables in the process text field.
+			The text file is not overwritten by the program when you update these fields
+
+readme.txt		This file
 
 -----------------------------------------
 Hotkeys
@@ -40,8 +42,8 @@ Convert to upper case		Ctrl+Shift+U
 Convert to lower case		Ctrl+Shift+D
 Convert to plain text		Ctrl+Shift+T
 Process text using $'s		Ctrl+Shift+P
-Caps Lock toggle			Ctrl+Shift+Backspace
-Date/Time					Ctrl+Shift+D
+Caps Lock toggle		Ctrl+Shift+Backspace
+Date/Time			Ctrl+Shift+D
 	Tap the date hotkey 1-3 times while holding the modifier keys:
 	1: Types out just the date
 	2: Types out the Date and Time
