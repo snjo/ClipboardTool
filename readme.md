@@ -5,8 +5,7 @@
 Source code:
 https://github.com/snjo/ClipboardTool
 
-![image](clipboardtool.png)
-
+![image](clipboardtool1.png)
 
 -----------------------------------------
 ## Variables for text processing:
