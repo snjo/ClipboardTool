@@ -1,4 +1,21 @@
-﻿Clipboard tool
+﻿
+
+---------------------------------------------------------
+|                                                       |
+|    This file is deprecated, check readme.md           |
+|                                                       |
+---------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+Clipboard tool
 by Andreas Aakvik Gogstad
 2022
 
