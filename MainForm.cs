@@ -70,7 +70,7 @@ namespace ClipboardTool
             InitializeComponent();
             Current = this;
             timerStatus.Start();
-            
+
             iconUpper = notifyIcon1.Icon;
             iconLower = systrayIcon.Icon;
             helpForm.setText(tooltipText);
@@ -83,9 +83,9 @@ namespace ClipboardTool
             bool hkShift = settings.hkShift;
             bool hkWin = settings.hkWin;
             Settings newSettings = new Settings();
-            
-            ghkUpper = LoadHotkey(out hotkeys.UpperCase, newSettings.hkUpperKey , newSettings.hkUpperCtrl, newSettings.hkUpperAlt, newSettings.hkUpperShift, newSettings.hkUpperWin);
-            ghkLower = LoadHotkey(out hotkeys.LowerCase, newSettings.hkLowerKey , newSettings.hkLowerCtrl, newSettings.hkLowerAlt, newSettings.hkLowerShift, newSettings.hkLowerWin);
+
+            ghkUpper = LoadHotkey(out hotkeys.UpperCase, newSettings.hkUpperKey, newSettings.hkUpperCtrl, newSettings.hkUpperAlt, newSettings.hkUpperShift, newSettings.hkUpperWin);
+            ghkLower = LoadHotkey(out hotkeys.LowerCase, newSettings.hkLowerKey, newSettings.hkLowerCtrl, newSettings.hkLowerAlt, newSettings.hkLowerShift, newSettings.hkLowerWin);
             ghkCapsLock = LoadHotkey(out hotkeys.CapsLock, newSettings.hkCapsLockKey, newSettings.hkCapsCtrl, newSettings.hkCapsAlt, newSettings.hkCapsShift, newSettings.hkCapsWin);
             ghkPlainText = LoadHotkey(out hotkeys.PlainText, newSettings.hkPlainKey, newSettings.hkPlainCtrl, newSettings.hkPlainAlt, newSettings.hkPlainShift, newSettings.hkPlainWin);
             ghkProcessText = LoadHotkey(out hotkeys.ProcessText, newSettings.hkProcessTextKey, newSettings.hkProcessCtrl, newSettings.hkProcessAlt, newSettings.hkProcessShift, newSettings.hkProcessWin);
@@ -141,7 +141,7 @@ namespace ClipboardTool
             }
 
             updateHotkeyLabels();
-            
+
 
             textCustom.Text = loadTextFromFile("process.txt");
             textBox1.Text = loadTextFromFile("mem1.txt");
@@ -275,7 +275,7 @@ namespace ClipboardTool
                 if (id == ghkLower.id)
                 {
                     sendCut();
-                    
+
                     sendPaste(LowerCaseOnce());
                 }
             }
@@ -285,7 +285,7 @@ namespace ClipboardTool
                 if (id == ghkUpper.id)
                 {
                     sendCut();
-                    
+
                     sendPaste(UpperCaseOnce());
                 }
             }
@@ -303,7 +303,7 @@ namespace ClipboardTool
                 if (id == ghkPlainText.id)
                 {
                     sendCut();
-                    
+
                     sendPaste(PlainTextOnce());
                 }
             }
@@ -313,7 +313,7 @@ namespace ClipboardTool
                 if (id == ghkProcessText.id)
                 {
                     sendCut();
-                    
+
                     sendPaste(ProcessTextVariables());
                 }
             }
@@ -330,7 +330,7 @@ namespace ClipboardTool
         private enum SendDateOption
         {
             NotStarted,
-            JustDate,            
+            JustDate,
             DateAndTime,
             JustTime,
             END
@@ -406,23 +406,23 @@ namespace ClipboardTool
             {
                 case "^v":
                     SendKeys.SendWait("^v");
-                break;
+                    break;
                 case "^x":
                     SendKeys.SendWait("^x");
-                break;
+                    break;
                 case "^c":
                     SendKeys.SendWait("^c");
-                break;
+                    break;
                 case "$SendDate":
                     SendKeys.SendWait(SendDateText());
                     sendDateChoice = SendDateOption.NotStarted;
-                break;
+                    break;
                 default:
                     keystrokes = Regex.Replace(keystrokes, "[+^%~(){}]", "{$0}");
                     //keystrokes = Regex.Replace(keystrokes, "[+%~(){}]", "{$0}");
                     //keystrokes = keystrokes.Replace("^", "%(94)");  //alt ascii code doesn't work :(
                     SendKeys.SendWait(keystrokes);
-                break;
+                    break;
             }
 
             // warning: ^'s will become &'s on non-US keyboards:
@@ -436,11 +436,11 @@ namespace ClipboardTool
             {
                 timerKeystrokes.Stop();
                 if (delayedKeystrokes != null)
-                    sendKeystrokes(delayedKeystrokes);                
+                    sendKeystrokes(delayedKeystrokes);
             }
         }
 
-        private string PlainTextOnce(bool forceClipboardUpdate=false)
+        private string PlainTextOnce(bool forceClipboardUpdate = false)
         {
             string result = Clipboard.GetText(TextDataFormat.Text);
             setClipBoard(result, forceClipboardUpdate);
@@ -466,7 +466,7 @@ namespace ClipboardTool
                 string result = Clipboard.GetText(TextDataFormat.Text).ToLower();
                 setClipBoard(result, forceClipboardUpdate);
                 return result;
-                
+
             }
             else return string.Empty;
         }
@@ -597,7 +597,7 @@ namespace ClipboardTool
         private void actionShowToolbar(object sender, EventArgs e)
         {
             Toolbar toolbar = new Toolbar();
-            
+
             toolbar.mainform = this;
             toolbar.Show();
             //toolbar.Parent = this;
@@ -668,14 +668,15 @@ namespace ClipboardTool
 
                 }
 
-                if(customText.Contains("$list")) {
+                if (customText.Contains("$list"))
+                {
                     //string[] values = textCustom.Text.Split(new string[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
                     string[] values = textCustom.Text.Split(Environment.NewLine, StringSplitOptions.None);
 
                     if (numericUpDown1.Value < 2) numericUpDown1.Value = 2; // skip the first line with the $list
 
                     if (values.Length > 0 && numericUpDown1.Value <= values.Length && numericUpDown1.Value >= 1)
-                    {                        
+                    {
                         customText = values[(int)numericUpDown1.Value - 1];
                     }
                     else
@@ -841,15 +842,15 @@ namespace ClipboardTool
         {
             if (helpForm == null || helpForm.IsDisposed)
             {
-                helpForm = new HelpForm();                
+                helpForm = new HelpForm();
             }
 
             helpForm.setText(tooltipText);
-            helpForm.Show();            
+            helpForm.Show();
         }
 
         private void actionSaveCustomText(object sender, EventArgs e)
-        {            
+        {
             saveTextToFile("process.txt", textCustom.Text);
         }
 
@@ -876,6 +877,16 @@ namespace ClipboardTool
         private void showTooltipSaveCustom(object sender, EventArgs e)
         {
             toolTip.SetToolTip(buttonSaveCustom, "Save text. Text will load on start");
+        }
+
+        private void showToolTipMemSave(object sender, EventArgs e)
+        {
+            toolTip.SetToolTip((Control)sender, "Use clipboard text in this slot");
+        }
+
+        private void showToolTipMemLoad(object sender, EventArgs e)
+        {
+            toolTip.SetToolTip((Control)sender, "Update clipboard contents with this slot's text");
         }
     }
 }
