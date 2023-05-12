@@ -314,7 +314,7 @@ namespace ClipboardTool
                 {
                     sendCut();
 
-                    sendPaste(ProcessTextVariables());
+                    sendPaste(ProcessTextVariables(textCustom.Text));
                 }
             }
 
@@ -603,113 +603,135 @@ namespace ClipboardTool
             //toolbar.Parent = this;
         }
 
-        private string ProcessTextVariables(bool forceClipboardUpdate = false)
-        {
-            string customText = textCustom.Text;
-            if (customText != null)
+        private string ProcessTextVariables(string customText, bool forceClipboardUpdate = false)
+        {            
+            if (customText == null) return String.Empty;
+
+            int padNumber = 1;
+            string clip = Clipboard.GetText();
+
+            // date and time
+            customText = customText.Replace("$d", DateTime.Now.ToShortDateString());
+            customText = customText.Replace("$t", DateTime.Now.ToShortTimeString());
+
+            // clipboard, case conversion
+            customText = customText.Replace("$cp", clip);
+            customText = customText.Replace("$cl", clip.ToLower());
+            customText = customText.Replace("$cu", clip.ToUpper());
+
+            // pad number with leading zeroes
+            if (customText.Contains("$n"))
             {
-                int padNumber = 1;
-                string clip = Clipboard.GetText();
-                if (customText.Contains("$n"))
+                if (customText.Contains("$n2"))
                 {
-                    if (customText.Contains("$n2"))
-                    {
-                        customText = customText.Replace("$n2", "");
-                        padNumber = 2;
-                    }
-                    if (customText.Contains("$n3"))
-                    {
-                        customText = customText.Replace("$n3", "");
-                        padNumber = 3;
-                    }
+                    customText = customText.Replace("$n2", "");
+                    padNumber = 2;
                 }
-
-
-                customText = customText.Replace("$d", DateTime.Now.ToShortDateString());
-                customText = customText.Replace("$t", DateTime.Now.ToShortTimeString());
-                customText = customText.Replace("$cp", clip);
-                customText = customText.Replace("$cl", clip.ToLower());
-                customText = customText.Replace("$cu", clip.ToUpper());
-                customText = customText.Replace("$i", numericUpDown1.Value.ToString().PadLeft(padNumber, '0'));
-                if (customText.Contains("$+"))
+                if (customText.Contains("$n3"))
                 {
-                    customText = customText.Replace("$+", numericUpDown1.Value.ToString().PadLeft(padNumber, '0'));
-                    if (numericUpDown1.Value < numericUpDown1.Maximum)
-                        numericUpDown1.Value++;
+                    customText = customText.Replace("$n3", "");
+                    padNumber = 3;
                 }
-                if (customText.Contains("$-"))
+            }
+
+            // output counter number
+            customText = customText.Replace("$i", numericUpDown1.Value.ToString().PadLeft(padNumber, '0'));
+
+            // output counter number, then increment it
+            if (customText.Contains("$+"))
+            {
+                customText = customText.Replace("$+", numericUpDown1.Value.ToString().PadLeft(padNumber, '0'));
+                if (numericUpDown1.Value < numericUpDown1.Maximum)
+                    numericUpDown1.Value++;
+            }
+
+            // output counter number, then decrement it
+            if (customText.Contains("$-"))
+            {
+                customText = customText.Replace("$-", numericUpDown1.Value.ToString().PadLeft(padNumber, '0'));
+                if (numericUpDown1.Value > numericUpDown1.Minimum)
+                    numericUpDown1.Value--;
+            }
+
+            // Excel double quote fix
+            if (customText.Contains("$eq"))
+            {
+                customText = customText.Replace("$eq", "");
+                customText = customText.Replace("\"\"", "£Q");
+                customText = customText.Replace("\"", "");
+                customText = customText.Replace("£Q", "\"");
+            }
+
+            // split text in mem slot 1, output lines by counter number
+            if (customText.Contains("$v"))
+            {
+                string[] values = textBox1.Text.Split(';');
+                if (values.Length > 0 && numericUpDown1.Value <= values.Length && numericUpDown1.Value >= 1)
                 {
-                    customText = customText.Replace("$-", numericUpDown1.Value.ToString().PadLeft(padNumber, '0'));
-                    if (numericUpDown1.Value > numericUpDown1.Minimum)
-                        numericUpDown1.Value--;
-                }
-                if (customText.Contains("$eq"))
-                {
-                    customText = customText.Replace("$eq", "");
-                    customText = customText.Replace("\"\"", "£Q");
-                    customText = customText.Replace("\"", "");
-                    customText = customText.Replace("£Q", "\"");
-                }
-
-                if (customText.Contains("$v"))
-                {
-                    string[] values = textBox1.Text.Split(';');
-                    if (values.Length > 0 && numericUpDown1.Value <= values.Length && numericUpDown1.Value >= 1)
-                    {
-                        customText = customText.Replace("$v", values[(int)numericUpDown1.Value - 1]);
-                        //customText = values[(int)numericUpDown1.Value];
-                    }
-                    else
-                    {
-                        customText = customText.Replace("$v", String.Empty);
-                    }
-                    if (numericUpDown1.Value < numericUpDown1.Maximum)
-                        numericUpDown1.Value++;
-
-                }
-
-                if (customText.Contains("$list"))
-                {
-                    //string[] values = textCustom.Text.Split(new string[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
-                    string[] values = textCustom.Text.Split(Environment.NewLine, StringSplitOptions.None);
-
-                    if (numericUpDown1.Value < 2) numericUpDown1.Value = 2; // skip the first line with the $list
-
-                    if (values.Length > 0 && numericUpDown1.Value <= values.Length && numericUpDown1.Value >= 1)
-                    {
-                        customText = values[(int)numericUpDown1.Value - 1];
-                    }
-                    else
-                    {
-                        //customText = customText.Replace("$list", String.Empty);
-                        customText = String.Empty;
-                    }
-
-                    if (numericUpDown1.Value < numericUpDown1.Maximum)
-                        numericUpDown1.Value++;
-                }
-
-                customText = customText.Replace("$m1", textBox1.Text);
-                customText = customText.Replace("$m2", textBox2.Text);
-                customText = customText.Replace("$m3", textBox3.Text);
-
-                if (customText.Length < 1)
-                {
-                    //Clipboard.Clear();
-                    return String.Empty;
+                    customText = customText.Replace("$v", values[(int)numericUpDown1.Value - 1]);
+                    //customText = values[(int)numericUpDown1.Value];
                 }
                 else
                 {
-                    setClipBoard(customText, forceClipboardUpdate);
-                    return customText;
+                    customText = customText.Replace("$v", String.Empty);
                 }
+                if (numericUpDown1.Value < numericUpDown1.Maximum)
+                    numericUpDown1.Value++;
+
             }
-            return String.Empty;
+
+            // split lines in main textbox, output lines by counter number
+            if (customText.Contains("$list"))
+            {
+                string[] values = customText.Split(Environment.NewLine, StringSplitOptions.None);
+                
+                if (numericUpDown1.Value < 1) numericUpDown1.Value = 1; // skip the first line with the $list
+                
+                int num = (int)numericUpDown1.Value;
+                if (num >= values.Length)
+                {                    
+                    return String.Empty;
+                }
+
+                string currentline = values[num];                                
+
+                if (values.Length > 0)
+                {
+                    if (currentline.Contains("$list")) //skip this line
+                    {
+                        //MessageBox.Show("Error using $list. Recursive lists is not allowed");
+                        numericUpDown1.Value++;
+                        return String.Empty;
+                    }
+                    customText = ProcessTextVariables(currentline, false);
+                }
+                else
+                {
+                    customText = String.Empty;
+                }
+
+                if (numericUpDown1.Value < numericUpDown1.Maximum)
+                    numericUpDown1.Value++;
+            }
+
+            customText = customText.Replace("$m1", textBox1.Text);
+            customText = customText.Replace("$m2", textBox2.Text);
+            customText = customText.Replace("$m3", textBox3.Text);
+
+            if (customText.Length < 1)
+            {
+                return String.Empty;
+            }
+            else
+            {
+                setClipBoard(customText, forceClipboardUpdate);
+                return customText;
+            }
         }
 
         public void actionProcessText(object sender, EventArgs e)
         {
-            ProcessTextVariables(true);
+            ProcessTextVariables(textCustom.Text, true);
         }
 
         private void actionShowOptions(object sender, EventArgs e)

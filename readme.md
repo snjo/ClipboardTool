@@ -31,7 +31,7 @@ https://github.com/snjo/ClipboardTool
 | Text file              | Function                                                                          | Comment	                                                                                   |
 |------------------------|-----------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------|
 | process.txt            | Preset contents of the Proccess text area (The main text box in the application). | You can update the text file by using the Save button next to the textbox (diskette icon)   |
-| mem1.txt-mem3.txt      | Preset contents of the three memory slots at the bottom of the applications.      | Use this for commonly typed phrases, or as part of the variables in the process text field. The text file is not overwritten by the program when you update these fields |
+| mem1.txt-mem3.txt      | Preset contents of the three memory slots at the bottom of the applications.      | Use this for commonly typed phrases, or as part of the variables in the process text field. The text file is only overwritten by the program if configured in the settings |
 
 -----------------------------------------
 ## Hotkeys

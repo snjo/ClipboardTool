@@ -1,0 +1,6 @@
+$list
+hello $i
+world $i
+how are $t
+you $t
+you $t
