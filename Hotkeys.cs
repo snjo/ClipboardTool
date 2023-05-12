@@ -16,24 +16,24 @@ namespace Hotkeys
     [Serializable]
     public class HotkeyList// : ApplicationSettingsBase
     {
-        public Hotkey UpperCase = new Hotkey();
-        public Hotkey LowerCase = new Hotkey();
-        public Hotkey PlainText = new Hotkey();
-        public Hotkey CapsLock = new Hotkey();
-        public Hotkey ProcessText = new Hotkey();
-        public Hotkey Date = new Hotkey();
+        public Hotkey UpperCase = new();
+        public Hotkey LowerCase = new();
+        public Hotkey PlainText = new();
+        public Hotkey CapsLock = new();
+        public Hotkey ProcessText = new();
+        public Hotkey Date = new();
     }
 
     [Serializable]
     public class Hotkey
     {
         //public char key;
-        public string key;
+        public string key = String.Empty;
         public bool Ctrl;
         public bool Alt;
         public bool Shift;
         public bool Win;
-        public GlobalHotkey ghk;
+        public GlobalHotkey? ghk;
         //public bool registered; // TODO
 
         public int Modifiers() // bool Ctrl, bool Alt, bool Shift, bool Win)
@@ -47,7 +47,7 @@ namespace Hotkeys
 
         }
 
-        public string text()
+        public string Text()
         {
             string result = "";
             if (key != "") // != 0   if key is char 
@@ -90,7 +90,7 @@ namespace Hotkeys
         private int key;
         private IntPtr hWnd;
         public int id;
-        public Hotkey hotkey;
+        public Hotkey? hotkey;
         public bool registered;
         private bool validKey;
 
@@ -108,8 +108,7 @@ namespace Hotkeys
                 else
                 {
                     //MessageBox.Show("keystring " + keystring + ", length " + keystring.Length);
-                    Keys key;
-                    validKey = Enum.TryParse(keystring, out key);
+                    validKey = Enum.TryParse(keystring, out Keys key);
                     return (Keys)key;
                 }
             }

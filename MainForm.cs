@@ -28,13 +28,13 @@ namespace ClipboardTool
         static extern void keybd_event(byte bVk, byte bScan, uint dwFlags, UIntPtr dwExtraInfo);
 
         Settings settings = Properties.Settings.Default;
-        string clipBoardText;
-        private Hotkeys.GlobalHotkey ghkUpper;
-        private Hotkeys.GlobalHotkey ghkLower;
-        private Hotkeys.GlobalHotkey ghkCapsLock;
-        private Hotkeys.GlobalHotkey ghkPlainText;
-        private Hotkeys.GlobalHotkey ghkProcessText;
-        private Hotkeys.GlobalHotkey ghkDate;
+        string clipBoardText = String.Empty;
+        private Hotkeys.GlobalHotkey? ghkUpper; //nullable (?) to avoid warning in MainForm method
+        private Hotkeys.GlobalHotkey? ghkLower;
+        private Hotkeys.GlobalHotkey? ghkCapsLock;
+        private Hotkeys.GlobalHotkey? ghkPlainText;
+        private Hotkeys.GlobalHotkey? ghkProcessText;
+        private Hotkeys.GlobalHotkey? ghkDate;
         private Icon iconUpper;
         private Icon iconLower;
         private bool oldCapslockState;
@@ -82,7 +82,7 @@ namespace ClipboardTool
             bool hkAlt = settings.hkAlt;
             bool hkShift = settings.hkShift;
             bool hkWin = settings.hkWin;
-            Settings newSettings = new Settings();
+            Settings newSettings = new();
 
             ghkUpper = LoadHotkey(out hotkeys.UpperCase, newSettings.hkUpperKey, newSettings.hkUpperCtrl, newSettings.hkUpperAlt, newSettings.hkUpperShift, newSettings.hkUpperWin);
             ghkLower = LoadHotkey(out hotkeys.LowerCase, newSettings.hkLowerKey, newSettings.hkLowerCtrl, newSettings.hkLowerAlt, newSettings.hkLowerShift, newSettings.hkLowerWin);
@@ -94,7 +94,7 @@ namespace ClipboardTool
 
         private GlobalHotkey LoadHotkey(out Hotkey hotkey, string settingHotkey, bool Ctrl, bool Alt, bool Shift, bool Win) //char settingHotkey
         {
-            GlobalHotkey result = null;
+            GlobalHotkey? result = null;
             hotkey = new Hotkey();
             hotkey.key = settingHotkey;
             hotkey.Ctrl = Ctrl;
@@ -195,17 +195,29 @@ namespace ClipboardTool
         {
             if (hotkey != null)
             {
-                if (hotkey.ghk.registered)
+                if (hotkey.ghk != null)
                 {
-                    label.Text = hotkey.text();
+                    if (hotkey.ghk.registered)
+                    {
+                        label.Text = hotkey.Text();
+                        return;
+                    }
+                }
+                
+                if (hotkey.key == "")
+                {
+                    label.Text = "No hotkey" + hotkey.key;
                 }
                 else
                 {
-                    label.Text = "invalid hotkey: " + hotkey.key;
+                    label.Text = "Invalid hotkey: " + hotkey.key;
                 }
+                
             }
-
-
+            else
+            {
+                label.Text = "No hotkey";
+            }
         }
 
         public void RegisterHotKeys()
@@ -443,7 +455,7 @@ namespace ClipboardTool
         private string PlainTextOnce(bool forceClipboardUpdate = false)
         {
             string result = Clipboard.GetText(TextDataFormat.Text);
-            setClipBoard(result, forceClipboardUpdate);
+            SetClipBoard(result, forceClipboardUpdate);
             return result;
             //setClipBoard(clipBoardText);
         }
@@ -453,7 +465,7 @@ namespace ClipboardTool
             if (Clipboard.ContainsText())
             {
                 string result = Clipboard.GetText(TextDataFormat.Text).ToUpper();
-                setClipBoard(result, forceClipboardUpdate);
+                SetClipBoard(result, forceClipboardUpdate);
                 return result;
             }
             else return string.Empty;
@@ -464,14 +476,14 @@ namespace ClipboardTool
             if (Clipboard.ContainsText())
             {
                 string result = Clipboard.GetText(TextDataFormat.Text).ToLower();
-                setClipBoard(result, forceClipboardUpdate);
+                SetClipBoard(result, forceClipboardUpdate);
                 return result;
 
             }
             else return string.Empty;
         }
 
-        private void setClipBoard(string clipBoardText, bool forceClipboardUpdate = false)
+        private void SetClipBoard(string clipBoardText, bool forceClipboardUpdate = false)
         {
             if (!settings.updateClipboard && settings.sendType && !forceClipboardUpdate) return;
             if (clipBoardText.Length > 0)
@@ -724,7 +736,7 @@ namespace ClipboardTool
             }
             else
             {
-                setClipBoard(customText, forceClipboardUpdate);
+                SetClipBoard(customText, forceClipboardUpdate);
                 return customText;
             }
         }
