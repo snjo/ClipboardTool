@@ -22,7 +22,9 @@ https://github.com/snjo/ClipboardTool
 | $n2, $n3  | use 1-3 digits in number (01, 001)                               |
 | $1 - $3   | contents of the memory slots                                     |
 | $eq       | Convert \"\" to \", and removes single \"                        |
-| $v        | Split value in slot 1 with ;, output value[number]               |
+| $vcm      | Split value in slot 1 with comma, output value[number]           |
+| $vsc      | Split value in slot 1 with semicolon, output value[number]       |
+| $vsp      | Split value in slot 1 with space, output value[number]           |
 | $list     | Split lines in main textbox (skips line 1), output value[number] |
 
 -----------------------------------------

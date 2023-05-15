@@ -9,6 +9,7 @@ using System.Media;
 using System.Net.Security;
 using System.Resources;
 using System.Runtime.InteropServices;
+using System.Runtime.Intrinsics.X86;
 using System.Security.AccessControl;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -57,7 +58,9 @@ namespace ClipboardTool
             "$n2, $n3 use 1-3 digits in number (01, 001)\n" +
             "$m1-$m3 contents of the memory slots\n" +
             "$eq Convert \"\" to \", and removes single \"\n" +
-            "$v Split value in slot 1 with ;, output value[number]\n" +
+            "$vcm Split value in slot 1 with comma, output value[number]\n" +
+            "$vsc Split value in slot 1 with semicolon, output value[number]\n" +
+            "$vsp Split value in slot 1 with space, output value[number]\n" +
             "$list Split lines in main textbox (skips line 1), output value[number]\n" +
             "\n" +
             "Tap the date hotkey 1-3 times while holding the modifier keys:\n" +
@@ -410,8 +413,6 @@ namespace ClipboardTool
             timerKeystrokes.Start();
         }
 
-
-
         private void sendKeystrokes(string keystrokes)
         {
             switch (keystrokes)
@@ -564,56 +565,7 @@ namespace ClipboardTool
             ToggleCapsLock();
         }
 
-        private void actionCapsLock(object sender, EventArgs e)
-        {
-            ToggleCapsLock();
-        }
 
-        private void actionShowWindow(object sender, EventArgs e)
-        {
-            Show();
-            this.WindowState = FormWindowState.Normal;
-            Show();
-        }
-
-        private void actionExit(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-
-        public void actionCapsLock(object sender, MouseEventArgs e)
-        {
-            ToggleCapsLock();
-        }
-
-        public void actionUpperCaseOnce(object sender, EventArgs e)
-        {
-            UpperCaseOnce(true);
-        }
-
-        public void actionLowerCaseOnce(object sender, EventArgs e)
-        {
-            LowerCaseOnce(true);
-        }
-
-        public void actionHideFromTaskbar(object sender, EventArgs e)
-        {
-            Hide();
-        }
-
-        public void actionPlainTextOnce(object sender, EventArgs e)
-        {
-            PlainTextOnce(true);
-        }
-
-        private void actionShowToolbar(object sender, EventArgs e)
-        {
-            Toolbar toolbar = new Toolbar();
-
-            toolbar.mainform = this;
-            toolbar.Show();
-            //toolbar.Parent = this;
-        }
 
         private string ProcessTextVariables(string customText, bool forceClipboardUpdate = false)
         {            
@@ -677,19 +629,7 @@ namespace ClipboardTool
             // split text in mem slot 1, output lines by counter number
             if (customText.Contains("$v"))
             {
-                string[] values = textBox1.Text.Split(';');
-                if (values.Length > 0 && numericUpDown1.Value <= values.Length && numericUpDown1.Value >= 1)
-                {
-                    customText = customText.Replace("$v", values[(int)numericUpDown1.Value - 1]);
-                    //customText = values[(int)numericUpDown1.Value];
-                }
-                else
-                {
-                    customText = customText.Replace("$v", String.Empty);
-                }
-                if (numericUpDown1.Value < numericUpDown1.Maximum)
-                    numericUpDown1.Value++;
-
+                customText = SeparatorList(customText);                
             }
 
             // split lines in main textbox, output lines by counter number
@@ -741,45 +681,51 @@ namespace ClipboardTool
             }
         }
 
-        public void actionProcessText(object sender, EventArgs e)
+        private string SeparatorList(string customText, int slot=1)
         {
-            ProcessTextVariables(textCustom.Text, true);
+            char separator = ',';
+            string command = "$v";
+            if (customText.Contains("$vcm")) // semicolon separator
+            {
+                separator = ',';
+                command = "$vcm";
+            }
+            else if (customText.Contains("$vsc")) // semicolon separator
+            {
+                separator = ';';
+                command = "$vsc";
+            }
+            else if (customText.Contains("$vsp")) // semicolon separator
+            {
+                separator = ' ';
+                command = "$vsp";
+            }
+            
+
+            string[] values = memorySlot(slot).Text.Split(separator);
+            if (values.Length > 0 && numericUpDown1.Value <= values.Length && numericUpDown1.Value >= 1)
+            {
+                customText = customText.Replace(command, values[(int)numericUpDown1.Value - 1]);
+                //customText = values[(int)numericUpDown1.Value];
+            }
+            else
+            {
+                customText = customText.Replace(command, String.Empty);
+            }
+            if (numericUpDown1.Value < numericUpDown1.Maximum)
+                numericUpDown1.Value++;
+            return customText;
         }
 
-        private void actionShowOptions(object sender, EventArgs e)
+        private TextBox memorySlot(int num)
         {
-            Options options = new Options(this);
-            options.ShowDialog();
-        }
-
-        public void actionSave1(object sender = null, EventArgs e = null)
-        {
-            setTextBoxFromClipboard(1);
-        }
-
-        public void actionLoad1(object sender = null, EventArgs e = null)
-        {
-            setClipboardFromTextBox(1);
-        }
-
-        public void actionSave2(object sender = null, EventArgs e = null)
-        {
-            setTextBoxFromClipboard(2);
-        }
-
-        public void actionLoad2(object sender = null, EventArgs e = null)
-        {
-            setClipboardFromTextBox(2);
-        }
-
-        public void actionSave3(object sender = null, EventArgs e = null)
-        {
-            setTextBoxFromClipboard(3);
-        }
-
-        public void actionLoad3(object sender = null, EventArgs e = null)
-        {
-            setClipboardFromTextBox(3);
+            if (num == 1)
+                return textBox1;
+            if (num == 2)
+                return textBox2;
+            if (num == 3)
+                return textBox3;
+            return textBox1;
         }
 
         public void setTextBoxFromClipboard(int num)
@@ -921,6 +867,98 @@ namespace ClipboardTool
         private void showToolTipMemLoad(object sender, EventArgs e)
         {
             toolTip.SetToolTip((Control)sender, "Update clipboard contents with this slot's text");
+        }
+
+        private void actionCapsLock(object sender, EventArgs e)
+        {
+            ToggleCapsLock();
+        }
+
+        private void actionShowWindow(object sender, EventArgs e)
+        {
+            Show();
+            this.WindowState = FormWindowState.Normal;
+            Show();
+        }
+
+        private void actionExit(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        public void actionCapsLock(object sender, MouseEventArgs e)
+        {
+            ToggleCapsLock();
+        }
+
+        public void actionUpperCaseOnce(object sender, EventArgs e)
+        {
+            UpperCaseOnce(true);
+        }
+
+        public void actionLowerCaseOnce(object sender, EventArgs e)
+        {
+            LowerCaseOnce(true);
+        }
+
+        public void actionHideFromTaskbar(object sender, EventArgs e)
+        {
+            Hide();
+        }
+
+        public void actionPlainTextOnce(object sender, EventArgs e)
+        {
+            PlainTextOnce(true);
+        }
+
+        private void actionShowToolbar(object sender, EventArgs e)
+        {
+            Toolbar toolbar = new Toolbar();
+
+            toolbar.mainform = this;
+            toolbar.Show();
+            //toolbar.Parent = this;
+        }
+
+        public void actionProcessText(object sender, EventArgs e)
+        {
+            ProcessTextVariables(textCustom.Text, true);
+        }
+
+        private void actionShowOptions(object sender, EventArgs e)
+        {
+            Options options = new Options(this);
+            options.ShowDialog();
+        }
+
+        public void actionSave1(object sender = null, EventArgs e = null)
+        {
+            setTextBoxFromClipboard(1);
+        }
+
+        public void actionLoad1(object sender = null, EventArgs e = null)
+        {
+            setClipboardFromTextBox(1);
+        }
+
+        public void actionSave2(object sender = null, EventArgs e = null)
+        {
+            setTextBoxFromClipboard(2);
+        }
+
+        public void actionLoad2(object sender = null, EventArgs e = null)
+        {
+            setClipboardFromTextBox(2);
+        }
+
+        public void actionSave3(object sender = null, EventArgs e = null)
+        {
+            setTextBoxFromClipboard(3);
+        }
+
+        public void actionLoad3(object sender = null, EventArgs e = null)
+        {
+            setClipboardFromTextBox(3);
         }
     }
 }
