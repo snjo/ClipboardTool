@@ -206,7 +206,7 @@ namespace ClipboardTool
                         return;
                     }
                 }
-                
+
                 if (hotkey.key == "")
                 {
                     label.Text = "No hotkey" + hotkey.key;
@@ -215,7 +215,7 @@ namespace ClipboardTool
                 {
                     label.Text = "Invalid hotkey: " + hotkey.key;
                 }
-                
+
             }
             else
             {
@@ -568,7 +568,7 @@ namespace ClipboardTool
 
 
         private string ProcessTextVariables(string customText, bool forceClipboardUpdate = false)
-        {            
+        {
             if (customText == null) return String.Empty;
 
             int padNumber = 1;
@@ -629,23 +629,23 @@ namespace ClipboardTool
             // split text in mem slot 1, output lines by counter number
             if (customText.Contains("$v"))
             {
-                customText = SeparatorList(customText);                
+                customText = SeparatorList(customText);
             }
 
             // split lines in main textbox, output lines by counter number
             if (customText.Contains("$list"))
             {
                 string[] values = customText.Split(Environment.NewLine, StringSplitOptions.None);
-                
+
                 if (numericUpDown1.Value < 1) numericUpDown1.Value = 1; // skip the first line with the $list
-                
+
                 int num = (int)numericUpDown1.Value;
                 if (num >= values.Length)
-                {                    
+                {
                     return String.Empty;
                 }
 
-                string currentline = values[num];                                
+                string currentline = values[num];
 
                 if (values.Length > 0)
                 {
@@ -681,7 +681,7 @@ namespace ClipboardTool
             }
         }
 
-        private string SeparatorList(string customText, int slot=1)
+        private string SeparatorList(string customText, int slot = 1)
         {
             char separator = ',';
             string command = "$v";
@@ -700,7 +700,7 @@ namespace ClipboardTool
                 separator = ' ';
                 command = "$vsp";
             }
-            
+
 
             string[] values = memorySlot(slot).Text.Split(separator);
             if (values.Length > 0 && numericUpDown1.Value <= values.Length && numericUpDown1.Value >= 1)
@@ -959,6 +959,11 @@ namespace ClipboardTool
         public void actionLoad3(object sender = null, EventArgs e = null)
         {
             setClipboardFromTextBox(3);
+        }
+
+        private void splitContainer2_SplitterMoved(object sender, SplitterEventArgs e)
+        {
+
         }
     }
 }
