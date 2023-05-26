@@ -575,11 +575,11 @@ namespace ClipboardTool
             int padNumber = 1;
             string clip = Clipboard.GetText();
 
-            // replace text in clipboard string. place first to allow for other $'s in replacement. Uses mem slots 1 & 2
+            // replace text in clipboard string. place first to allow for other processing on the result text. Uses mem slots 1 & 2
             if (customText.Contains("$rep"))
             {
                 customText = customText.Replace("$rep", String.Empty);
-                clip = clip.Replace(memorySlot(1).Text, memorySlot(2).Text);                
+                clip = clip.Replace(memorySlot(1).Text, memorySlot(2).Text);
                 //customText += "|" + memorySlot(1).Text + "|" + memorySlot(2).Text + "|";
             }
 
@@ -681,7 +681,7 @@ namespace ClipboardTool
 
             if (customText.Length < 1)
             {
-                return String.Empty;
+                return "";
             }
             else
             {
@@ -748,7 +748,7 @@ namespace ClipboardTool
 
                 if (Properties.Settings.Default.SaveMemorySlots)
                 {
-                    saveTextToFile(".\\mem" + num + ".txt", newText);
+                    saveMemSlotToFile(num);
                 }
 
                 if (Properties.Settings.Default.ResetCounterWhenSet)
@@ -757,6 +757,11 @@ namespace ClipboardTool
                 }
 
             }
+        }
+
+        private void saveMemSlotToFile(int num)
+        {
+            saveTextToFile(".\\mem" + num + ".txt", SetTextBoxTarget(num).Text);
         }
 
         public void setClipboardFromTextBox(int num)//(TextBox textBox)
@@ -973,6 +978,21 @@ namespace ClipboardTool
         private void splitContainer2_SplitterMoved(object sender, SplitterEventArgs e)
         {
 
+        }
+
+        private void actionSaveToFile1(object sender, EventArgs e)
+        {
+            saveMemSlotToFile(1);
+        }
+
+        private void actionSaveToFile2(object sender, EventArgs e)
+        {
+            saveMemSlotToFile(2);
+        }
+
+        private void actionSaveToFile3(object sender, EventArgs e)
+        {
+            saveMemSlotToFile(3);
         }
     }
 }

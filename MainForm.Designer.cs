@@ -52,11 +52,7 @@
             textBox1 = new TextBox();
             buttonSave1 = new Button();
             buttonLoad1 = new Button();
-            button1 = new Button();
-            button4 = new Button();
             textBox2 = new TextBox();
-            button5 = new Button();
-            button6 = new Button();
             textBox3 = new TextBox();
             timerStatus = new System.Windows.Forms.Timer(components);
             contextMenuStrip1 = new ContextMenuStrip(components);
@@ -74,7 +70,14 @@
             buttonSaveCustom = new Button();
             timerKeystrokes = new System.Windows.Forms.Timer(components);
             splitContainer1 = new SplitContainer();
+            button7 = new Button();
             splitContainer2 = new SplitContainer();
+            button1 = new Button();
+            button4 = new Button();
+            button5 = new Button();
+            button6 = new Button();
+            button8 = new Button();
+            button9 = new Button();
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
             contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
@@ -167,7 +170,7 @@
             // buttonOptions
             // 
             buttonOptions.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            buttonOptions.Location = new Point(265, 5);
+            buttonOptions.Location = new Point(334, 5);
             buttonOptions.Name = "buttonOptions";
             buttonOptions.Size = new Size(23, 23);
             buttonOptions.TabIndex = 8;
@@ -179,7 +182,7 @@
             // buttonPin
             // 
             buttonPin.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            buttonPin.Location = new Point(241, 5);
+            buttonPin.Location = new Point(310, 5);
             buttonPin.Name = "buttonPin";
             buttonPin.Size = new Size(23, 23);
             buttonPin.TabIndex = 9;
@@ -191,7 +194,7 @@
             // buttonHide
             // 
             buttonHide.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            buttonHide.Location = new Point(217, 5);
+            buttonHide.Location = new Point(286, 5);
             buttonHide.Name = "buttonHide";
             buttonHide.Size = new Size(23, 23);
             buttonHide.TabIndex = 10;
@@ -203,7 +206,7 @@
             // buttonToolbar
             // 
             buttonToolbar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            buttonToolbar.Location = new Point(144, 5);
+            buttonToolbar.Location = new Point(213, 5);
             buttonToolbar.Name = "buttonToolbar";
             buttonToolbar.Size = new Size(72, 23);
             buttonToolbar.TabIndex = 11;
@@ -217,7 +220,7 @@
             panel1.BorderStyle = BorderStyle.FixedSingle;
             panel1.Location = new Point(8, 34);
             panel1.Name = "panel1";
-            panel1.Size = new Size(282, 1);
+            panel1.Size = new Size(351, 1);
             panel1.TabIndex = 12;
             // 
             // panel2
@@ -226,13 +229,13 @@
             panel2.BorderStyle = BorderStyle.FixedSingle;
             panel2.Location = new Point(7, 146);
             panel2.Name = "panel2";
-            panel2.Size = new Size(282, 1);
+            panel2.Size = new Size(351, 1);
             panel2.TabIndex = 13;
             // 
             // numericUpDown1
             // 
             numericUpDown1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            numericUpDown1.Location = new Point(221, 155);
+            numericUpDown1.Location = new Point(290, 155);
             numericUpDown1.Maximum = new decimal(new int[] { 10000, 0, 0, 0 });
             numericUpDown1.Name = "numericUpDown1";
             numericUpDown1.Size = new Size(67, 23);
@@ -265,7 +268,7 @@
             textCustom.Multiline = true;
             textCustom.Name = "textCustom";
             textCustom.ScrollBars = ScrollBars.Vertical;
-            textCustom.Size = new Size(249, 92);
+            textCustom.Size = new Size(318, 92);
             textCustom.TabIndex = 17;
             // 
             // label1
@@ -285,17 +288,17 @@
             textBox1.Multiline = true;
             textBox1.Name = "textBox1";
             textBox1.ScrollBars = ScrollBars.Vertical;
-            textBox1.Size = new Size(207, 47);
+            textBox1.Size = new Size(280, 34);
             textBox1.TabIndex = 19;
             // 
             // buttonSave1
             // 
             buttonSave1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            buttonSave1.Location = new Point(213, 2);
+            buttonSave1.Location = new Point(306, 2);
             buttonSave1.Name = "buttonSave1";
-            buttonSave1.Size = new Size(30, 23);
+            buttonSave1.Size = new Size(23, 23);
             buttonSave1.TabIndex = 20;
-            buttonSave1.Text = "S";
+            buttonSave1.Text = "▽";
             buttonSave1.UseVisualStyleBackColor = true;
             buttonSave1.Click += actionSave1;
             buttonSave1.MouseHover += showToolTipMemSave;
@@ -303,38 +306,14 @@
             // buttonLoad1
             // 
             buttonLoad1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            buttonLoad1.Location = new Point(244, 2);
+            buttonLoad1.Location = new Point(330, 2);
             buttonLoad1.Name = "buttonLoad1";
-            buttonLoad1.Size = new Size(30, 23);
+            buttonLoad1.Size = new Size(23, 23);
             buttonLoad1.TabIndex = 21;
-            buttonLoad1.Text = "L";
+            buttonLoad1.Text = "△";
             buttonLoad1.UseVisualStyleBackColor = true;
             buttonLoad1.Click += actionLoad1;
             buttonLoad1.MouseHover += showToolTipMemLoad;
-            // 
-            // button1
-            // 
-            button1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            button1.Location = new Point(244, 3);
-            button1.Name = "button1";
-            button1.Size = new Size(30, 23);
-            button1.TabIndex = 24;
-            button1.Text = "L";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += actionLoad2;
-            button1.MouseHover += showToolTipMemLoad;
-            // 
-            // button4
-            // 
-            button4.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            button4.Location = new Point(213, 3);
-            button4.Name = "button4";
-            button4.Size = new Size(30, 23);
-            button4.TabIndex = 23;
-            button4.Text = "S";
-            button4.UseVisualStyleBackColor = true;
-            button4.Click += actionSave2;
-            button4.MouseHover += showToolTipMemSave;
             // 
             // textBox2
             // 
@@ -344,32 +323,8 @@
             textBox2.Multiline = true;
             textBox2.Name = "textBox2";
             textBox2.ScrollBars = ScrollBars.Vertical;
-            textBox2.Size = new Size(207, 47);
+            textBox2.Size = new Size(276, 32);
             textBox2.TabIndex = 22;
-            // 
-            // button5
-            // 
-            button5.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            button5.Location = new Point(244, 3);
-            button5.Name = "button5";
-            button5.Size = new Size(30, 23);
-            button5.TabIndex = 27;
-            button5.Text = "L";
-            button5.UseVisualStyleBackColor = true;
-            button5.Click += actionLoad3;
-            button5.MouseHover += showToolTipMemLoad;
-            // 
-            // button6
-            // 
-            button6.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            button6.Location = new Point(213, 2);
-            button6.Name = "button6";
-            button6.Size = new Size(30, 23);
-            button6.TabIndex = 26;
-            button6.Text = "S";
-            button6.UseVisualStyleBackColor = true;
-            button6.Click += actionSave3;
-            button6.MouseHover += showToolTipMemSave;
             // 
             // textBox3
             // 
@@ -379,7 +334,7 @@
             textBox3.Multiline = true;
             textBox3.Name = "textBox3";
             textBox3.ScrollBars = ScrollBars.Vertical;
-            textBox3.Size = new Size(207, 47);
+            textBox3.Size = new Size(276, 35);
             textBox3.TabIndex = 25;
             // 
             // timerStatus
@@ -463,7 +418,7 @@
             // buttonHelp
             // 
             buttonHelp.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            buttonHelp.Location = new Point(258, 188);
+            buttonHelp.Location = new Point(327, 188);
             buttonHelp.Name = "buttonHelp";
             buttonHelp.Size = new Size(30, 23);
             buttonHelp.TabIndex = 28;
@@ -475,7 +430,7 @@
             // buttonSaveCustom
             // 
             buttonSaveCustom.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            buttonSaveCustom.Location = new Point(258, 217);
+            buttonSaveCustom.Location = new Point(327, 217);
             buttonSaveCustom.Name = "buttonSaveCustom";
             buttonSaveCustom.Size = new Size(30, 23);
             buttonSaveCustom.TabIndex = 29;
@@ -498,6 +453,7 @@
             // 
             // splitContainer1.Panel1
             // 
+            splitContainer1.Panel1.Controls.Add(button7);
             splitContainer1.Panel1.Controls.Add(textBox1);
             splitContainer1.Panel1.Controls.Add(buttonSave1);
             splitContainer1.Panel1.Controls.Add(buttonLoad1);
@@ -505,9 +461,20 @@
             // splitContainer1.Panel2
             // 
             splitContainer1.Panel2.Controls.Add(splitContainer2);
-            splitContainer1.Size = new Size(285, 164);
-            splitContainer1.SplitterDistance = 53;
+            splitContainer1.Size = new Size(354, 124);
+            splitContainer1.SplitterDistance = 40;
             splitContainer1.TabIndex = 30;
+            // 
+            // button7
+            // 
+            button7.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            button7.Location = new Point(282, 2);
+            button7.Name = "button7";
+            button7.Size = new Size(23, 23);
+            button7.TabIndex = 30;
+            button7.Text = "💾";
+            button7.UseVisualStyleBackColor = true;
+            button7.Click += actionSaveToFile1;
             // 
             // splitContainer2
             // 
@@ -519,25 +486,93 @@
             // 
             // splitContainer2.Panel1
             // 
-            splitContainer2.Panel1.Controls.Add(textBox2);
             splitContainer2.Panel1.Controls.Add(button1);
             splitContainer2.Panel1.Controls.Add(button4);
+            splitContainer2.Panel1.Controls.Add(button5);
+            splitContainer2.Panel1.Controls.Add(textBox2);
             // 
             // splitContainer2.Panel2
             // 
-            splitContainer2.Panel2.Controls.Add(textBox3);
             splitContainer2.Panel2.Controls.Add(button6);
-            splitContainer2.Panel2.Controls.Add(button5);
-            splitContainer2.Size = new Size(283, 107);
-            splitContainer2.SplitterDistance = 53;
+            splitContainer2.Panel2.Controls.Add(button8);
+            splitContainer2.Panel2.Controls.Add(button9);
+            splitContainer2.Panel2.Controls.Add(textBox3);
+            splitContainer2.Size = new Size(352, 80);
+            splitContainer2.SplitterDistance = 38;
             splitContainer2.TabIndex = 28;
             splitContainer2.SplitterMoved += splitContainer2_SplitterMoved;
+            // 
+            // button1
+            // 
+            button1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            button1.Location = new Point(281, 3);
+            button1.Name = "button1";
+            button1.Size = new Size(23, 23);
+            button1.TabIndex = 33;
+            button1.Text = "💾";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += actionSaveToFile2;
+            // 
+            // button4
+            // 
+            button4.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            button4.Location = new Point(305, 3);
+            button4.Name = "button4";
+            button4.Size = new Size(23, 23);
+            button4.TabIndex = 31;
+            button4.Text = "▽";
+            button4.UseVisualStyleBackColor = true;
+            button4.Click += actionSave2;
+            // 
+            // button5
+            // 
+            button5.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            button5.Location = new Point(329, 3);
+            button5.Name = "button5";
+            button5.Size = new Size(23, 23);
+            button5.TabIndex = 32;
+            button5.Text = "△";
+            button5.UseVisualStyleBackColor = true;
+            button5.Click += actionLoad2;
+            // 
+            // button6
+            // 
+            button6.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            button6.Location = new Point(281, 2);
+            button6.Name = "button6";
+            button6.Size = new Size(23, 23);
+            button6.TabIndex = 33;
+            button6.Text = "💾";
+            button6.UseVisualStyleBackColor = true;
+            button6.Click += actionSaveToFile3;
+            // 
+            // button8
+            // 
+            button8.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            button8.Location = new Point(305, 2);
+            button8.Name = "button8";
+            button8.Size = new Size(23, 23);
+            button8.TabIndex = 31;
+            button8.Text = "▽";
+            button8.UseVisualStyleBackColor = true;
+            button8.Click += actionSave3;
+            // 
+            // button9
+            // 
+            button9.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            button9.Location = new Point(329, 2);
+            button9.Name = "button9";
+            button9.Size = new Size(23, 23);
+            button9.TabIndex = 32;
+            button9.Text = "△";
+            button9.UseVisualStyleBackColor = true;
+            button9.Click += actionLoad3;
             // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(295, 482);
+            ClientSize = new Size(364, 442);
             Controls.Add(splitContainer1);
             Controls.Add(buttonSaveCustom);
             Controls.Add(buttonHelp);
@@ -605,11 +640,7 @@
         private TextBox textBox1;
         private Button buttonSave1;
         private Button buttonLoad1;
-        private Button button1;
-        private Button button4;
         private TextBox textBox2;
-        private Button button5;
-        private Button button6;
         private TextBox textBox3;
         private System.Windows.Forms.Timer timerStatus;
         private ContextMenuStrip contextMenuStrip1;
@@ -628,5 +659,12 @@
         private System.Windows.Forms.Timer timerKeystrokes;
         private SplitContainer splitContainer1;
         private SplitContainer splitContainer2;
+        private Button button7;
+        private Button button1;
+        private Button button4;
+        private Button button5;
+        private Button button6;
+        private Button button8;
+        private Button button9;
     }
 }
