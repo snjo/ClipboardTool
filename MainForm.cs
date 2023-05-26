@@ -58,6 +58,7 @@ namespace ClipboardTool
             "$n2, $n3 use 1-3 digits in number (01, 001)\n" +
             "$m1-$m3 contents of the memory slots\n" +
             "$eq Convert \"\" to \", and removes single \"\n" +
+            "$rep Replace text in clipboard. Use mem slot 1 & 2 as from/to strings.\n" +
             "$vcm Split value in slot 1 with comma, output value[number]\n" +
             "$vsc Split value in slot 1 with semicolon, output value[number]\n" +
             "$vsp Split value in slot 1 with space, output value[number]\n" +
@@ -573,6 +574,14 @@ namespace ClipboardTool
 
             int padNumber = 1;
             string clip = Clipboard.GetText();
+
+            // replace text in clipboard string. place first to allow for other $'s in replacement. Uses mem slots 1 & 2
+            if (customText.Contains("$rep"))
+            {
+                customText = customText.Replace("$rep", String.Empty);
+                clip = clip.Replace(memorySlot(1).Text, memorySlot(2).Text);                
+                //customText += "|" + memorySlot(1).Text + "|" + memorySlot(2).Text + "|";
+            }
 
             // date and time
             customText = customText.Replace("$d", DateTime.Now.ToShortDateString());
