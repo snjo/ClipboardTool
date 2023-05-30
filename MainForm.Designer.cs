@@ -298,9 +298,10 @@
             buttonSave1.Name = "buttonSave1";
             buttonSave1.Size = new Size(23, 23);
             buttonSave1.TabIndex = 20;
+            buttonSave1.Tag = "1";
             buttonSave1.Text = "▽";
             buttonSave1.UseVisualStyleBackColor = true;
-            buttonSave1.Click += actionSave1;
+            buttonSave1.Click += actionSave;
             buttonSave1.MouseHover += showToolTipMemSave;
             // 
             // buttonLoad1
@@ -310,9 +311,10 @@
             buttonLoad1.Name = "buttonLoad1";
             buttonLoad1.Size = new Size(23, 23);
             buttonLoad1.TabIndex = 21;
+            buttonLoad1.Tag = "1";
             buttonLoad1.Text = "△";
             buttonLoad1.UseVisualStyleBackColor = true;
-            buttonLoad1.Click += actionLoad1;
+            buttonLoad1.Click += actionLoad;
             buttonLoad1.MouseHover += showToolTipMemLoad;
             // 
             // textBox2
@@ -472,9 +474,10 @@
             button7.Name = "button7";
             button7.Size = new Size(23, 23);
             button7.TabIndex = 30;
+            button7.Tag = "1";
             button7.Text = "💾";
             button7.UseVisualStyleBackColor = true;
-            button7.Click += actionSaveToFile1;
+            button7.Click += actionSaveToFile;
             // 
             // splitContainer2
             // 
@@ -500,7 +503,6 @@
             splitContainer2.Size = new Size(352, 80);
             splitContainer2.SplitterDistance = 38;
             splitContainer2.TabIndex = 28;
-            splitContainer2.SplitterMoved += splitContainer2_SplitterMoved;
             // 
             // button1
             // 
@@ -509,9 +511,10 @@
             button1.Name = "button1";
             button1.Size = new Size(23, 23);
             button1.TabIndex = 33;
+            button1.Tag = "2";
             button1.Text = "💾";
             button1.UseVisualStyleBackColor = true;
-            button1.Click += actionSaveToFile2;
+            button1.Click += actionSaveToFile;
             // 
             // button4
             // 
@@ -520,9 +523,10 @@
             button4.Name = "button4";
             button4.Size = new Size(23, 23);
             button4.TabIndex = 31;
+            button4.Tag = "2";
             button4.Text = "▽";
             button4.UseVisualStyleBackColor = true;
-            button4.Click += actionSave2;
+            button4.Click += actionSave;
             // 
             // button5
             // 
@@ -531,9 +535,10 @@
             button5.Name = "button5";
             button5.Size = new Size(23, 23);
             button5.TabIndex = 32;
+            button5.Tag = "2";
             button5.Text = "△";
             button5.UseVisualStyleBackColor = true;
-            button5.Click += actionLoad2;
+            button5.Click += actionLoad;
             // 
             // button6
             // 
@@ -542,9 +547,10 @@
             button6.Name = "button6";
             button6.Size = new Size(23, 23);
             button6.TabIndex = 33;
+            button6.Tag = "3";
             button6.Text = "💾";
             button6.UseVisualStyleBackColor = true;
-            button6.Click += actionSaveToFile3;
+            button6.Click += actionSaveToFile;
             // 
             // button8
             // 
@@ -553,9 +559,10 @@
             button8.Name = "button8";
             button8.Size = new Size(23, 23);
             button8.TabIndex = 31;
+            button8.Tag = "3";
             button8.Text = "▽";
             button8.UseVisualStyleBackColor = true;
-            button8.Click += actionSave3;
+            button8.Click += actionSave;
             // 
             // button9
             // 
@@ -564,9 +571,10 @@
             button9.Name = "button9";
             button9.Size = new Size(23, 23);
             button9.TabIndex = 32;
+            button9.Tag = "3";
             button9.Text = "△";
             button9.UseVisualStyleBackColor = true;
-            button9.Click += actionLoad3;
+            button9.Click += actionLoad;
             // 
             // MainForm
             // 

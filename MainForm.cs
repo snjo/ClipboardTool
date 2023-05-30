@@ -945,54 +945,25 @@ namespace ClipboardTool
             options.ShowDialog();
         }
 
-        public void actionSave1(object sender = null, EventArgs e = null)
+        public void actionSave(object sender = null, EventArgs e = null)
         {
-            setTextBoxFromClipboard(1);
+            var button = (System.Windows.Forms.Button)sender;
+            int num = int.Parse(button.Tag.ToString());
+            setTextBoxFromClipboard(num);
         }
 
-        public void actionLoad1(object sender = null, EventArgs e = null)
+        public void actionLoad(object sender = null, EventArgs e = null)
         {
-            setClipboardFromTextBox(1);
+            var button = (System.Windows.Forms.Button)sender;
+            int num = int.Parse(button.Tag.ToString());
+            setClipboardFromTextBox(num);
         }
 
-        public void actionSave2(object sender = null, EventArgs e = null)
+        private void actionSaveToFile(object sender, EventArgs e)
         {
-            setTextBoxFromClipboard(2);
-        }
-
-        public void actionLoad2(object sender = null, EventArgs e = null)
-        {
-            setClipboardFromTextBox(2);
-        }
-
-        public void actionSave3(object sender = null, EventArgs e = null)
-        {
-            setTextBoxFromClipboard(3);
-        }
-
-        public void actionLoad3(object sender = null, EventArgs e = null)
-        {
-            setClipboardFromTextBox(3);
-        }
-
-        private void splitContainer2_SplitterMoved(object sender, SplitterEventArgs e)
-        {
-
-        }
-
-        private void actionSaveToFile1(object sender, EventArgs e)
-        {
-            saveMemSlotToFile(1);
-        }
-
-        private void actionSaveToFile2(object sender, EventArgs e)
-        {
-            saveMemSlotToFile(2);
-        }
-
-        private void actionSaveToFile3(object sender, EventArgs e)
-        {
-            saveMemSlotToFile(3);
+            var button = (System.Windows.Forms.Button)sender;
+            int num = int.Parse(button.Tag.ToString());
+            saveMemSlotToFile(num);
         }
     }
 }
