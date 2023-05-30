@@ -95,7 +95,7 @@
             buttonLower.Location = new Point(5, 41);
             buttonLower.Name = "buttonLower";
             buttonLower.Size = new Size(75, 23);
-            buttonLower.TabIndex = 0;
+            buttonLower.TabIndex = 20;
             buttonLower.Text = "lower";
             buttonLower.UseVisualStyleBackColor = true;
             buttonLower.Click += actionLowerCaseOnce;
@@ -105,7 +105,7 @@
             button2.Location = new Point(5, 66);
             button2.Name = "button2";
             button2.Size = new Size(75, 23);
-            button2.TabIndex = 1;
+            button2.TabIndex = 21;
             button2.Text = "UPPER";
             button2.UseVisualStyleBackColor = true;
             button2.Click += actionUpperCaseOnce;
@@ -115,7 +115,7 @@
             button3.Location = new Point(5, 91);
             button3.Name = "button3";
             button3.Size = new Size(75, 23);
-            button3.TabIndex = 2;
+            button3.TabIndex = 22;
             button3.Text = "Plain";
             button3.UseVisualStyleBackColor = true;
             button3.Click += actionPlainTextOnce;
@@ -162,7 +162,7 @@
             checkBoxCapsLock.Location = new Point(8, 121);
             checkBoxCapsLock.Name = "checkBoxCapsLock";
             checkBoxCapsLock.Size = new Size(80, 19);
-            checkBoxCapsLock.TabIndex = 7;
+            checkBoxCapsLock.TabIndex = 23;
             checkBoxCapsLock.Text = "Caps Lock";
             checkBoxCapsLock.UseVisualStyleBackColor = true;
             checkBoxCapsLock.Click += checkBoxCapsLock_Click;
@@ -173,7 +173,7 @@
             buttonOptions.Location = new Point(334, 5);
             buttonOptions.Name = "buttonOptions";
             buttonOptions.Size = new Size(23, 23);
-            buttonOptions.TabIndex = 8;
+            buttonOptions.TabIndex = 13;
             buttonOptions.Text = "⚙️";
             buttonOptions.UseVisualStyleBackColor = true;
             buttonOptions.Click += actionShowOptions;
@@ -185,7 +185,7 @@
             buttonPin.Location = new Point(310, 5);
             buttonPin.Name = "buttonPin";
             buttonPin.Size = new Size(23, 23);
-            buttonPin.TabIndex = 9;
+            buttonPin.TabIndex = 12;
             buttonPin.Text = "📌";
             buttonPin.UseVisualStyleBackColor = true;
             buttonPin.Click += actionAlwaysOnTop;
@@ -197,7 +197,7 @@
             buttonHide.Location = new Point(286, 5);
             buttonHide.Name = "buttonHide";
             buttonHide.Size = new Size(23, 23);
-            buttonHide.TabIndex = 10;
+            buttonHide.TabIndex = 11;
             buttonHide.Text = "👻";
             buttonHide.UseVisualStyleBackColor = true;
             buttonHide.Click += actionHideFromTaskbar;
@@ -209,7 +209,7 @@
             buttonToolbar.Location = new Point(213, 5);
             buttonToolbar.Name = "buttonToolbar";
             buttonToolbar.Size = new Size(72, 23);
-            buttonToolbar.TabIndex = 11;
+            buttonToolbar.TabIndex = 10;
             buttonToolbar.Text = "toolbar";
             buttonToolbar.UseVisualStyleBackColor = true;
             buttonToolbar.Click += actionShowToolbar;
@@ -239,7 +239,7 @@
             numericUpDown1.Maximum = new decimal(new int[] { 10000, 0, 0, 0 });
             numericUpDown1.Name = "numericUpDown1";
             numericUpDown1.Size = new Size(67, 23);
-            numericUpDown1.TabIndex = 14;
+            numericUpDown1.TabIndex = 31;
             numericUpDown1.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
             // labelProcess
@@ -256,7 +256,7 @@
             buttonProcess.Location = new Point(9, 156);
             buttonProcess.Name = "buttonProcess";
             buttonProcess.Size = new Size(75, 23);
-            buttonProcess.TabIndex = 16;
+            buttonProcess.TabIndex = 30;
             buttonProcess.Text = "Process";
             buttonProcess.UseVisualStyleBackColor = true;
             buttonProcess.Click += actionProcessText;
@@ -269,7 +269,7 @@
             textCustom.Name = "textCustom";
             textCustom.ScrollBars = ScrollBars.Vertical;
             textCustom.Size = new Size(318, 92);
-            textCustom.TabIndex = 17;
+            textCustom.TabIndex = 32;
             // 
             // label1
             // 
@@ -289,7 +289,7 @@
             textBox1.Name = "textBox1";
             textBox1.ScrollBars = ScrollBars.Vertical;
             textBox1.Size = new Size(280, 34);
-            textBox1.TabIndex = 19;
+            textBox1.TabIndex = 40;
             // 
             // buttonSave1
             // 
@@ -297,7 +297,7 @@
             buttonSave1.Location = new Point(306, 2);
             buttonSave1.Name = "buttonSave1";
             buttonSave1.Size = new Size(23, 23);
-            buttonSave1.TabIndex = 20;
+            buttonSave1.TabIndex = 42;
             buttonSave1.Tag = "1";
             buttonSave1.Text = "▽";
             buttonSave1.UseVisualStyleBackColor = true;
@@ -310,7 +310,7 @@
             buttonLoad1.Location = new Point(330, 2);
             buttonLoad1.Name = "buttonLoad1";
             buttonLoad1.Size = new Size(23, 23);
-            buttonLoad1.TabIndex = 21;
+            buttonLoad1.TabIndex = 43;
             buttonLoad1.Tag = "1";
             buttonLoad1.Text = "△";
             buttonLoad1.UseVisualStyleBackColor = true;
@@ -326,7 +326,7 @@
             textBox2.Name = "textBox2";
             textBox2.ScrollBars = ScrollBars.Vertical;
             textBox2.Size = new Size(276, 32);
-            textBox2.TabIndex = 22;
+            textBox2.TabIndex = 50;
             // 
             // textBox3
             // 
@@ -337,7 +337,7 @@
             textBox3.Name = "textBox3";
             textBox3.ScrollBars = ScrollBars.Vertical;
             textBox3.Size = new Size(276, 35);
-            textBox3.TabIndex = 25;
+            textBox3.TabIndex = 60;
             // 
             // timerStatus
             // 
@@ -423,7 +423,7 @@
             buttonHelp.Location = new Point(327, 188);
             buttonHelp.Name = "buttonHelp";
             buttonHelp.Size = new Size(30, 23);
-            buttonHelp.TabIndex = 28;
+            buttonHelp.TabIndex = 33;
             buttonHelp.Text = "?";
             buttonHelp.UseVisualStyleBackColor = true;
             buttonHelp.Click += actionShowHelp;
@@ -435,7 +435,7 @@
             buttonSaveCustom.Location = new Point(327, 217);
             buttonSaveCustom.Name = "buttonSaveCustom";
             buttonSaveCustom.Size = new Size(30, 23);
-            buttonSaveCustom.TabIndex = 29;
+            buttonSaveCustom.TabIndex = 34;
             buttonSaveCustom.Text = "💾";
             buttonSaveCustom.UseVisualStyleBackColor = true;
             buttonSaveCustom.Click += actionSaveCustomText;
@@ -465,7 +465,7 @@
             splitContainer1.Panel2.Controls.Add(splitContainer2);
             splitContainer1.Size = new Size(354, 124);
             splitContainer1.SplitterDistance = 40;
-            splitContainer1.TabIndex = 30;
+            splitContainer1.TabIndex = 49;
             // 
             // button7
             // 
@@ -473,7 +473,7 @@
             button7.Location = new Point(282, 2);
             button7.Name = "button7";
             button7.Size = new Size(23, 23);
-            button7.TabIndex = 30;
+            button7.TabIndex = 41;
             button7.Tag = "1";
             button7.Text = "💾";
             button7.UseVisualStyleBackColor = true;
@@ -502,7 +502,7 @@
             splitContainer2.Panel2.Controls.Add(textBox3);
             splitContainer2.Size = new Size(352, 80);
             splitContainer2.SplitterDistance = 38;
-            splitContainer2.TabIndex = 28;
+            splitContainer2.TabIndex = 59;
             // 
             // button1
             // 
@@ -510,7 +510,7 @@
             button1.Location = new Point(281, 3);
             button1.Name = "button1";
             button1.Size = new Size(23, 23);
-            button1.TabIndex = 33;
+            button1.TabIndex = 51;
             button1.Tag = "2";
             button1.Text = "💾";
             button1.UseVisualStyleBackColor = true;
@@ -522,7 +522,7 @@
             button4.Location = new Point(305, 3);
             button4.Name = "button4";
             button4.Size = new Size(23, 23);
-            button4.TabIndex = 31;
+            button4.TabIndex = 52;
             button4.Tag = "2";
             button4.Text = "▽";
             button4.UseVisualStyleBackColor = true;
@@ -534,7 +534,7 @@
             button5.Location = new Point(329, 3);
             button5.Name = "button5";
             button5.Size = new Size(23, 23);
-            button5.TabIndex = 32;
+            button5.TabIndex = 53;
             button5.Tag = "2";
             button5.Text = "△";
             button5.UseVisualStyleBackColor = true;
@@ -546,7 +546,7 @@
             button6.Location = new Point(281, 2);
             button6.Name = "button6";
             button6.Size = new Size(23, 23);
-            button6.TabIndex = 33;
+            button6.TabIndex = 61;
             button6.Tag = "3";
             button6.Text = "💾";
             button6.UseVisualStyleBackColor = true;
@@ -558,7 +558,7 @@
             button8.Location = new Point(305, 2);
             button8.Name = "button8";
             button8.Size = new Size(23, 23);
-            button8.TabIndex = 31;
+            button8.TabIndex = 62;
             button8.Tag = "3";
             button8.Text = "▽";
             button8.UseVisualStyleBackColor = true;
@@ -570,7 +570,7 @@
             button9.Location = new Point(329, 2);
             button9.Name = "button9";
             button9.Size = new Size(23, 23);
-            button9.TabIndex = 32;
+            button9.TabIndex = 63;
             button9.Tag = "3";
             button9.Text = "△";
             button9.UseVisualStyleBackColor = true;

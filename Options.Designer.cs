@@ -71,7 +71,6 @@
             optionCut = new CheckBox();
             optionType = new CheckBox();
             optionPaste = new CheckBox();
-            panel2 = new Panel();
             optionUpdateClipboard = new CheckBox();
             checkDateWin = new CheckBox();
             checkDateShift = new CheckBox();
@@ -80,6 +79,7 @@
             textHotkeyDate = new TextBox();
             label8 = new Label();
             label9 = new Label();
+            backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             SuspendLayout();
             // 
             // optionStartHidden
@@ -115,7 +115,7 @@
             // optionResetCounter
             // 
             optionResetCounter.AutoSize = true;
-            optionResetCounter.Location = new Point(222, 12);
+            optionResetCounter.Location = new Point(261, 12);
             optionResetCounter.Name = "optionResetCounter";
             optionResetCounter.Size = new Size(252, 19);
             optionResetCounter.TabIndex = 3;
@@ -125,7 +125,7 @@
             // optionSaveMemorySlots
             // 
             optionSaveMemorySlots.AutoSize = true;
-            optionSaveMemorySlots.Location = new Point(222, 37);
+            optionSaveMemorySlots.Location = new Point(261, 37);
             optionSaveMemorySlots.Name = "optionSaveMemorySlots";
             optionSaveMemorySlots.Size = new Size(158, 19);
             optionSaveMemorySlots.TabIndex = 4;
@@ -134,7 +134,7 @@
             // 
             // textMemorySlotFolder
             // 
-            textMemorySlotFolder.Location = new Point(222, 104);
+            textMemorySlotFolder.Location = new Point(261, 104);
             textMemorySlotFolder.Name = "textMemorySlotFolder";
             textMemorySlotFolder.Size = new Size(229, 23);
             textMemorySlotFolder.TabIndex = 5;
@@ -142,9 +142,9 @@
             // label1
             // 
             label1.Font = new Font("Segoe UI", 9F, FontStyle.Italic, GraphicsUnit.Point);
-            label1.Location = new Point(222, 59);
+            label1.Location = new Point(261, 71);
             label1.Name = "label1";
-            label1.Size = new Size(232, 42);
+            label1.Size = new Size(232, 30);
             label1.TabIndex = 6;
             label1.Text = ".txt file folder. Use process.txt, mem1.txt mem2.txt, mem3.txt:";
             // 
@@ -441,7 +441,7 @@
             // buttonSave
             // 
             buttonSave.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            buttonSave.Location = new Point(393, 416);
+            buttonSave.Location = new Point(433, 416);
             buttonSave.Name = "buttonSave";
             buttonSave.Size = new Size(75, 23);
             buttonSave.TabIndex = 38;
@@ -452,7 +452,7 @@
             // buttonCancel
             // 
             buttonCancel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            buttonCancel.Location = new Point(312, 416);
+            buttonCancel.Location = new Point(352, 416);
             buttonCancel.Name = "buttonCancel";
             buttonCancel.Size = new Size(75, 23);
             buttonCancel.TabIndex = 39;
@@ -489,15 +489,6 @@
             optionPaste.TabIndex = 42;
             optionPaste.Text = "Ctrl+V when using hotkey";
             optionPaste.UseVisualStyleBackColor = true;
-            // 
-            // panel2
-            // 
-            panel2.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            panel2.BorderStyle = BorderStyle.FixedSingle;
-            panel2.Location = new Point(195, 12);
-            panel2.Name = "panel2";
-            panel2.Size = new Size(0, 125);
-            panel2.TabIndex = 43;
             // 
             // optionUpdateClipboard
             // 
@@ -579,7 +570,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(478, 446);
+            ClientSize = new Size(518, 446);
             Controls.Add(label9);
             Controls.Add(checkDateWin);
             Controls.Add(checkDateShift);
@@ -588,7 +579,6 @@
             Controls.Add(textHotkeyDate);
             Controls.Add(label8);
             Controls.Add(optionUpdateClipboard);
-            Controls.Add(panel2);
             Controls.Add(optionPaste);
             Controls.Add(optionType);
             Controls.Add(optionCut);
@@ -683,7 +673,6 @@
         private CheckBox optionCut;
         private CheckBox optionType;
         private CheckBox optionPaste;
-        private Panel panel2;
         private CheckBox optionUpdateClipboard;
         private CheckBox checkDateWin;
         private CheckBox checkDateShift;
@@ -692,5 +681,6 @@
         private TextBox textHotkeyDate;
         private Label label8;
         private Label label9;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }
