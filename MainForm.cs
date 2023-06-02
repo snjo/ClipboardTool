@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.IO;
@@ -30,12 +31,30 @@ namespace ClipboardTool
 
         Settings settings = Properties.Settings.Default;
         string clipBoardText = String.Empty;
-        private Hotkeys.GlobalHotkey? ghkUpper; //nullable (?) to avoid warning in MainForm method
-        private Hotkeys.GlobalHotkey? ghkLower;
-        private Hotkeys.GlobalHotkey? ghkCapsLock;
-        private Hotkeys.GlobalHotkey? ghkPlainText;
-        private Hotkeys.GlobalHotkey? ghkProcessText;
-        private Hotkeys.GlobalHotkey? ghkDate;
+
+        public Dictionary<string, Hotkey> HotkeyList = new Dictionary<string, Hotkey>
+        {
+            //{"UpperCase", new GlobalHotkey(new Hotkey())},
+            {"UpperCase", new Hotkey(new GlobalHotkey())},
+            {"LowerCase", new Hotkey(new GlobalHotkey())},
+            {"PlainText", new Hotkey(new GlobalHotkey())},
+            {"CapsLock", new Hotkey(new GlobalHotkey())},
+            {"ProcessText", new Hotkey(new GlobalHotkey())},
+            {"Date", new Hotkey(new GlobalHotkey())},
+            {"MemSlot1", new Hotkey(new GlobalHotkey())},
+            {"MemSlot2", new Hotkey(new GlobalHotkey())},
+            {"MemSlot3", new Hotkey(new GlobalHotkey())},
+        };
+        /*private GlobalHotkey? ghkUpperCase; //nullable (?) to avoid warning in MainForm method
+        private GlobalHotkey? ghkLowerCase;
+        private GlobalHotkey? ghkCapsLock;
+        private GlobalHotkey? ghkPlainText;
+        private GlobalHotkey? ghkProcessText;
+        private GlobalHotkey? ghkDate;
+        private GlobalHotkey? ghkMemSlot1;
+        private GlobalHotkey? ghkMemSlot2;
+        private GlobalHotkey? ghkMemSlot3;*/
+
         private Icon iconUpper;
         private Icon iconLower;
         private bool oldCapslockState;
@@ -46,6 +65,7 @@ namespace ClipboardTool
         private bool hotkeysSet = false;
         HelpForm helpForm = new HelpForm();
         string delayedKeystrokes = "";
+            
 
         string tooltipText =
             "$d date\n" +
@@ -82,18 +102,37 @@ namespace ClipboardTool
 
         public void LoadHotkeys()
         {
-            bool hkCtrl = settings.hkCtrl;
-            bool hkAlt = settings.hkAlt;
-            bool hkShift = settings.hkShift;
-            bool hkWin = settings.hkWin;
-            Settings newSettings = new();
+            Settings newSettings = new();                        
+            
+            foreach (KeyValuePair<string, Hotkey> kvp in HotkeyList )
+            {
+                HotkeyList[kvp.Key] = LoadHotkey(kvp.Key);
+            }            
+        }
 
-            ghkUpper = LoadHotkey(out hotkeys.UpperCase, newSettings.hkUpperKey, newSettings.hkUpperCtrl, newSettings.hkUpperAlt, newSettings.hkUpperShift, newSettings.hkUpperWin);
-            ghkLower = LoadHotkey(out hotkeys.LowerCase, newSettings.hkLowerKey, newSettings.hkLowerCtrl, newSettings.hkLowerAlt, newSettings.hkLowerShift, newSettings.hkLowerWin);
-            ghkCapsLock = LoadHotkey(out hotkeys.CapsLock, newSettings.hkCapsLockKey, newSettings.hkCapsCtrl, newSettings.hkCapsAlt, newSettings.hkCapsShift, newSettings.hkCapsWin);
-            ghkPlainText = LoadHotkey(out hotkeys.PlainText, newSettings.hkPlainKey, newSettings.hkPlainCtrl, newSettings.hkPlainAlt, newSettings.hkPlainShift, newSettings.hkPlainWin);
-            ghkProcessText = LoadHotkey(out hotkeys.ProcessText, newSettings.hkProcessTextKey, newSettings.hkProcessCtrl, newSettings.hkProcessAlt, newSettings.hkProcessShift, newSettings.hkProcessWin);
-            ghkDate = LoadHotkey(out hotkeys.Date, newSettings.hkDateKey, newSettings.hkDateCtrl, newSettings.hkDateAlt, newSettings.hkDateShift, newSettings.hkDateWin);
+        private Hotkey LoadHotkey(string hotkeyName) //char settingHotkey
+        {
+            //Settings.Default["hk" + hotkeyName + "Key"]
+            Hotkey hotkey = new Hotkey();
+            hotkey.key = Settings.Default["hk" + hotkeyName + "Key"].ToString();
+            hotkey.Ctrl = (bool)Settings.Default["hk" + hotkeyName + "Ctrl"];
+            hotkey.Alt = (bool)Settings.Default["hk" + hotkeyName + "Alt"];
+            hotkey.Shift = (bool)Settings.Default["hk" + hotkeyName + "Shift"];
+            hotkey.Win = (bool)Settings.Default["hk" + hotkeyName + "Win"];
+            hotkey.ghk = new Hotkeys.GlobalHotkey(hotkey.Modifiers(), hotkey.key, this);
+            return hotkey;
+        }
+
+        private Hotkey LoadHotkey(string settingHotkey, bool Ctrl, bool Alt, bool Shift, bool Win) //char settingHotkey
+        {            
+            Hotkey hotkey = new Hotkey();
+            hotkey.key = settingHotkey;
+            hotkey.Ctrl = Ctrl;
+            hotkey.Alt = Alt;
+            hotkey.Shift = Shift;
+            hotkey.Win = Win;
+            hotkey.ghk = new Hotkeys.GlobalHotkey(hotkey.Modifiers(), hotkey.key, this);            
+            return hotkey;
         }
 
         private GlobalHotkey LoadHotkey(out Hotkey hotkey, string settingHotkey, bool Ctrl, bool Alt, bool Shift, bool Win) //char settingHotkey
@@ -123,6 +162,45 @@ namespace ClipboardTool
             }
             return result;
         }
+
+        private void updateHotkeyLabels()
+        {
+            updateHotkeyLabel(HotkeyList["UpperCase"], labelUpper);            
+            updateHotkeyLabel(HotkeyList["LowerCase"], labelLower);
+            updateHotkeyLabel(HotkeyList["PlainText"], labelPlain);
+            updateHotkeyLabel(HotkeyList["CapsLock"], labelCaps);
+            updateHotkeyLabel(HotkeyList["ProcessText"], labelProcess);
+        }
+
+        private void updateHotkeyLabel(Hotkey hotkey, Label label)
+        {
+            if (hotkey != null)
+            {
+                if (hotkey.ghk != null)
+                {
+                    if (hotkey.ghk.registered)
+                    {
+                        label.Text = hotkey.Text();
+                        return;
+                    }
+                }
+
+                if (hotkey.key == "")
+                {
+                    label.Text = "No hotkey" + hotkey.key;
+                }
+                else
+                {
+                    label.Text = "Invalid hotkey: " + hotkey.key;
+                }
+
+            }
+            else
+            {
+                label.Text = "Hotkey error";
+            }
+        }
+
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -186,44 +264,6 @@ namespace ClipboardTool
             }
         }
 
-        private void updateHotkeyLabels()
-        {
-            updateHotkeyLabel(hotkeys.LowerCase, labelLower);
-            updateHotkeyLabel(hotkeys.UpperCase, labelUpper);
-            updateHotkeyLabel(hotkeys.PlainText, labelPlain);
-            updateHotkeyLabel(hotkeys.CapsLock, labelCaps);
-            updateHotkeyLabel(hotkeys.ProcessText, labelProcess);
-        }
-
-        private void updateHotkeyLabel(Hotkey hotkey, Label label)
-        {
-            if (hotkey != null)
-            {
-                if (hotkey.ghk != null)
-                {
-                    if (hotkey.ghk.registered)
-                    {
-                        label.Text = hotkey.Text();
-                        return;
-                    }
-                }
-
-                if (hotkey.key == "")
-                {
-                    label.Text = "No hotkey" + hotkey.key;
-                }
-                else
-                {
-                    label.Text = "Invalid hotkey: " + hotkey.key;
-                }
-
-            }
-            else
-            {
-                label.Text = "No hotkey";
-            }
-        }
-
         public void RegisterHotKeys()
         {
             if (!settings.RegisterHotkeys) return;
@@ -233,12 +273,10 @@ namespace ClipboardTool
             string errorMessages = "";
             //trying to register hotkey
 
-            RegisterHotKey(ghkUpper);
-            RegisterHotKey(ghkLower);
-            RegisterHotKey(ghkCapsLock);
-            RegisterHotKey(ghkPlainText);
-            RegisterHotKey(ghkProcessText);
-            RegisterHotKey(ghkDate);
+            foreach (KeyValuePair<string, Hotkey> ghk in HotkeyList)
+            {
+                RegisterHotKey(ghk.Value.ghk);
+            }
 
             if (errorMessages.Length > 0)
             {
@@ -266,12 +304,10 @@ namespace ClipboardTool
         {
             if (!hotkeysSet) return;
 
-            ReleaseHotkey(ghkLower);
-            ReleaseHotkey(ghkUpper);
-            ReleaseHotkey(ghkCapsLock);
-            ReleaseHotkey(ghkPlainText);
-            ReleaseHotkey(ghkProcessText);
-            ReleaseHotkey(ghkDate);
+            foreach (KeyValuePair<string, Hotkey> ghk in HotkeyList)
+            {
+                ReleaseHotkey(ghk.Value.ghk);
+            }
         }
 
         private void ReleaseHotkey(GlobalHotkey ghk)
@@ -286,19 +322,21 @@ namespace ClipboardTool
         private void HandleHotkey(int id)
         {
 
-            if (ghkLower != null)
+            if (HotkeyList["LowerCase"] != null)
             {
-                if (id == ghkLower.id)
+                if (id == HotkeyList["LowerCase"].ghk.id)
                 {
                     sendCut();
 
                     sendPaste(LowerCaseOnce());
                 }
             }
-
-            if (ghkUpper != null)
+            
+            //if (ghkUpperCase != null)
+            if (HotkeyList["UpperCase"] != null)
             {
-                if (id == ghkUpper.id)
+                //if (id == ghkUpperCase.id)
+                if (id == HotkeyList["UpperCase"].ghk.id)
                 {
                     sendCut();
 
@@ -306,17 +344,17 @@ namespace ClipboardTool
                 }
             }
 
-            if (ghkCapsLock != null)
+            if (HotkeyList["CapsLock"] != null)
             {
-                if (id == ghkCapsLock.id)
+                if (id == HotkeyList["CapsLock"].ghk.id)
                 {
                     ToggleCapsLock();
                 }
             }
 
-            if (ghkPlainText != null)
+            if (HotkeyList["PlainText"] != null)
             {
-                if (id == ghkPlainText.id)
+                if (id == HotkeyList["PlainText"].ghk.id)
                 {
                     sendCut();
 
@@ -324,9 +362,9 @@ namespace ClipboardTool
                 }
             }
 
-            if (ghkProcessText != null)
+            if (HotkeyList["ProcessText"] != null)
             {
-                if (id == ghkProcessText.id)
+                if (id == HotkeyList["ProcessText"].ghk.id)
                 {
                     sendCut();
 
@@ -334,9 +372,9 @@ namespace ClipboardTool
                 }
             }
 
-            if (ghkDate != null)
+            if (HotkeyList["Date"] != null)
             {
-                if (id == ghkDate.id)
+                if (id == HotkeyList["Date"].ghk.id)
                 {
                     sendDate();
                 }
@@ -575,6 +613,11 @@ namespace ClipboardTool
             int padNumber = 1;
             string clip = Clipboard.GetText();
 
+            // get mem slot data first, so you can run other processing on it
+            customText = customText.Replace("$m1", textBox1.Text);
+            customText = customText.Replace("$m2", textBox2.Text);
+            customText = customText.Replace("$m3", textBox3.Text);
+
             // replace text in clipboard string. place first to allow for other processing on the result text. Uses mem slots 1 & 2
             if (customText.Contains("$rep"))
             {
@@ -675,11 +718,14 @@ namespace ClipboardTool
                     numericUpDown1.Value++;
             }
 
-            customText = customText.Replace("$m1", textBox1.Text);
-            customText = customText.Replace("$m2", textBox2.Text);
-            customText = customText.Replace("$m3", textBox3.Text);
+            // debug hotkey output
+            if (customText.Contains("$debug"))
+            {
+                //string debug = HotkeyList["UpperCase"].hotkey.key;
+                //customText.Replace("$debug", debug);
+            }
 
-            if (customText.Length < 1)
+                if (customText.Length < 1)
             {
                 return "";
             }

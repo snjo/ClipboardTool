@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.Configuration;
+using ClipboardTool;
 
 namespace Hotkeys
 {
@@ -21,8 +22,12 @@ namespace Hotkeys
         public Hotkey PlainText = new();
         public Hotkey CapsLock = new();
         public Hotkey ProcessText = new();
-        public Hotkey Date = new();
+        public Hotkey Date = new();  
+        public Hotkey MemSlot1 = new();
+        public Hotkey MemSlot2 = new();
+        public Hotkey MemSlot3 = new();
     }
+    
 
     [Serializable]
     public class Hotkey
@@ -33,8 +38,17 @@ namespace Hotkeys
         public bool Alt;
         public bool Shift;
         public bool Win;
-        public GlobalHotkey? ghk;
+        public GlobalHotkey? ghk;      
         //public bool registered; // TODO
+
+        public Hotkey()
+        {
+        }
+
+        public Hotkey(GlobalHotkey globalHK)
+        {
+            ghk = globalHK;
+        }
 
         public int Modifiers() // bool Ctrl, bool Alt, bool Shift, bool Win)
         {
@@ -139,6 +153,18 @@ namespace Hotkeys
             this.hWnd = form.Handle;
             id = this.GetHashCode();
             validKey = true;
+        }
+
+        public GlobalHotkey(Hotkey hk)
+        {
+            hotkey = hk;
+            this.key = 0;
+            id = this.GetHashCode();
+            validKey = false;
+        }
+
+        public GlobalHotkey()
+        {
         }
 
         public override int GetHashCode()

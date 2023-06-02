@@ -11,13 +11,13 @@
     <Setting Name="RegisterHotkeys" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="hkUpperKey" Type="System.String" Scope="User">
+    <Setting Name="hkUpperCaseKey" Type="System.String" Scope="User">
       <Value Profile="(Default)">U</Value>
     </Setting>
-    <Setting Name="hkLowerKey" Type="System.String" Scope="User">
+    <Setting Name="hkLowerCaseKey" Type="System.String" Scope="User">
       <Value Profile="(Default)">L</Value>
     </Setting>
-    <Setting Name="hkPlainKey" Type="System.String" Scope="User">
+    <Setting Name="hkPlainTextKey" Type="System.String" Scope="User">
       <Value Profile="(Default)">T</Value>
     </Setting>
     <Setting Name="hkCapsLockKey" Type="System.String" Scope="User">
@@ -35,18 +35,6 @@
     <Setting Name="ResetCounterWhenSet" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="hkCtrl" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
-    </Setting>
-    <Setting Name="hkAlt" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
-    </Setting>
-    <Setting Name="hkShift" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
-    </Setting>
-    <Setting Name="hkWin" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
-    </Setting>
     <Setting Name="sendCut" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
@@ -56,64 +44,64 @@
     <Setting Name="sendPaste" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="hkUpperCtrl" Type="System.Boolean" Scope="User">
+    <Setting Name="hkUpperCaseCtrl" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="hkUpperAlt" Type="System.Boolean" Scope="User">
+    <Setting Name="hkUpperCaseAlt" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="hkUpperShift" Type="System.Boolean" Scope="User">
+    <Setting Name="hkUpperCaseShift" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="hkUpperWin" Type="System.Boolean" Scope="User">
+    <Setting Name="hkUpperCaseWin" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="hkLowerCtrl" Type="System.Boolean" Scope="User">
+    <Setting Name="hkLowerCaseCtrl" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="hkLowerAlt" Type="System.Boolean" Scope="User">
+    <Setting Name="hkLowerCaseAlt" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="hkLowerShift" Type="System.Boolean" Scope="User">
+    <Setting Name="hkLowerCaseShift" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="hkLowerWin" Type="System.Boolean" Scope="User">
+    <Setting Name="hkLowerCaseWin" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="hkPlainCtrl" Type="System.Boolean" Scope="User">
+    <Setting Name="hkPlainTextCtrl" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="hkPlainAlt" Type="System.Boolean" Scope="User">
+    <Setting Name="hkPlainTextAlt" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="hkPlainShift" Type="System.Boolean" Scope="User">
+    <Setting Name="hkPlainTextShift" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="hkPlainWin" Type="System.Boolean" Scope="User">
+    <Setting Name="hkPlainTextWin" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="hkProcessCtrl" Type="System.Boolean" Scope="User">
+    <Setting Name="hkProcessTextCtrl" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="hkProcessAlt" Type="System.Boolean" Scope="User">
+    <Setting Name="hkProcessTextAlt" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="hkProcessShift" Type="System.Boolean" Scope="User">
+    <Setting Name="hkProcessTextShift" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="hkProcessWin" Type="System.Boolean" Scope="User">
+    <Setting Name="hkProcessTextWin" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="hkCapsCtrl" Type="System.Boolean" Scope="User">
+    <Setting Name="hkCapsLockCtrl" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="hkCapsAlt" Type="System.Boolean" Scope="User">
+    <Setting Name="hkCapsLockAlt" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="hkCapsShift" Type="System.Boolean" Scope="User">
+    <Setting Name="hkCapsLockShift" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="hkCapsWin" Type="System.Boolean" Scope="User">
+    <Setting Name="hkCapsLockWin" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="updateClipboard" Type="System.Boolean" Scope="User">
@@ -132,6 +120,51 @@
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="hkDateWin" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="hkMemSlot1Key" Type="System.String" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="hkMemSlot1Ctrl" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="hkMemSlot1Alt" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="hkMemSlot1Shift" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="hkMemSlot1Win" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="hkMemSlot2Key" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="hkMemSlot2Ctrl" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="hkMemSlot2Alt" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="hkMemSlot2Shift" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="hkMemSlot2Win" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="hkMemSlot3Key" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="hkMemSlot3Ctrl" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="hkMemSlot3Alt" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="hkMemSlot3Shift" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="hkMemSlot3Win" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>
