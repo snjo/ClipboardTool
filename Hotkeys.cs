@@ -120,8 +120,7 @@ namespace Hotkeys
                     return (Keys)ch;                    
                 }
                 else
-                {
-                    //MessageBox.Show("keystring " + keystring + ", length " + keystring.Length);
+                {                    
                     validKey = Enum.TryParse(keystring, out Keys key);
                     return (Keys)key;
                 }
@@ -129,6 +128,7 @@ namespace Hotkeys
             return new Keys();
         }
 
+        /*
         public GlobalHotkey(int modifier, Keys key, Form form)
         {
             this.modifier = modifier;
@@ -136,35 +136,39 @@ namespace Hotkeys
             this.hWnd = form.Handle;
             id = this.GetHashCode();
             validKey = true;
-        }
+        }*/
 
+        
         public GlobalHotkey(int modifier, string keystring, Form form)
         {
             this.modifier = modifier;
-            Keys key = stringToKey(keystring);
+            Keys key = stringToKey(keystring);  // assigns validKey
             this.key = (int)key;
             this.hWnd = form.Handle;
             id = this.GetHashCode();
         }
 
+        /*
         public GlobalHotkey(Keys modifiedkey, Form form)
         {
             this.key = (int)modifiedkey;
             this.hWnd = form.Handle;
             id = this.GetHashCode();
             validKey = true;
-        }
+        }*/
 
+        /*
         public GlobalHotkey(Hotkey hk)
         {
             hotkey = hk;
             this.key = 0;
             id = this.GetHashCode();
             validKey = false;
-        }
+        }*/
 
         public GlobalHotkey()
         {
+            validKey = false;
         }
 
         public override int GetHashCode()

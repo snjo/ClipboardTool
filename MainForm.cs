@@ -744,10 +744,14 @@ namespace ClipboardTool
             }
 
             // debug hotkey output
-            if (customText.Contains("$debug"))
+            if (customText.Contains("$Debug"))
             {
-                //string debug = HotkeyList["UpperCase"].hotkey.key;
-                //customText.Replace("$debug", debug);
+                
+                var path = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal).FilePath;
+                string debug = path;
+                //writeMessage(debug);
+                customText = customText.Replace("$Debug", debug);
+                //customText = debug;
             }
 
                 if (customText.Length < 1)

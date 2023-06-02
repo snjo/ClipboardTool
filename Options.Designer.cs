@@ -28,256 +28,291 @@
         /// </summary>
         private void InitializeComponent()
         {
-            optionStartHidden = new CheckBox();
-            optionStartToolbar = new CheckBox();
-            optionRegisterHotkeys = new CheckBox();
-            optionResetCounter = new CheckBox();
-            optionSaveMemorySlots = new CheckBox();
-            textMemorySlotFolder = new TextBox();
-            label1 = new Label();
-            label2 = new Label();
-            buttonSave = new Button();
-            buttonCancel = new Button();
-            optionCut = new CheckBox();
-            optionType = new CheckBox();
-            optionPaste = new CheckBox();
-            optionUpdateClipboard = new CheckBox();
-            label9 = new Label();
-            backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            HotkeyGrid = new DataGridView();
-            Function = new DataGridViewTextBoxColumn();
-            Key = new DataGridViewTextBoxColumn();
-            Ctrl = new DataGridViewCheckBoxColumn();
-            Alt = new DataGridViewCheckBoxColumn();
-            Shift = new DataGridViewCheckBoxColumn();
-            Win = new DataGridViewCheckBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)HotkeyGrid).BeginInit();
-            SuspendLayout();
+            this.optionStartHidden = new System.Windows.Forms.CheckBox();
+            this.optionStartToolbar = new System.Windows.Forms.CheckBox();
+            this.optionRegisterHotkeys = new System.Windows.Forms.CheckBox();
+            this.optionResetCounter = new System.Windows.Forms.CheckBox();
+            this.optionSaveMemorySlots = new System.Windows.Forms.CheckBox();
+            this.textMemorySlotFolder = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.buttonSave = new System.Windows.Forms.Button();
+            this.buttonCancel = new System.Windows.Forms.Button();
+            this.optionCut = new System.Windows.Forms.CheckBox();
+            this.optionType = new System.Windows.Forms.CheckBox();
+            this.optionPaste = new System.Windows.Forms.CheckBox();
+            this.optionUpdateClipboard = new System.Windows.Forms.CheckBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.HotkeyGrid = new System.Windows.Forms.DataGridView();
+            this.Function = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Key = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Ctrl = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.Alt = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.Shift = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.Win = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.linkLabel2 = new System.Windows.Forms.LinkLabel();
+            ((System.ComponentModel.ISupportInitialize)(this.HotkeyGrid)).BeginInit();
+            this.SuspendLayout();
             // 
             // optionStartHidden
             // 
-            optionStartHidden.AutoSize = true;
-            optionStartHidden.Location = new Point(12, 12);
-            optionStartHidden.Name = "optionStartHidden";
-            optionStartHidden.Size = new Size(92, 19);
-            optionStartHidden.TabIndex = 0;
-            optionStartHidden.Text = "Start Hidden";
-            optionStartHidden.UseVisualStyleBackColor = true;
+            this.optionStartHidden.AutoSize = true;
+            this.optionStartHidden.Location = new System.Drawing.Point(12, 12);
+            this.optionStartHidden.Name = "optionStartHidden";
+            this.optionStartHidden.Size = new System.Drawing.Size(92, 19);
+            this.optionStartHidden.TabIndex = 0;
+            this.optionStartHidden.Text = "Start Hidden";
+            this.optionStartHidden.UseVisualStyleBackColor = true;
             // 
             // optionStartToolbar
             // 
-            optionStartToolbar.AutoSize = true;
-            optionStartToolbar.Location = new Point(12, 37);
-            optionStartToolbar.Name = "optionStartToolbar";
-            optionStartToolbar.Size = new Size(118, 19);
-            optionStartToolbar.TabIndex = 1;
-            optionStartToolbar.Text = "Start with Toolbar";
-            optionStartToolbar.UseVisualStyleBackColor = true;
+            this.optionStartToolbar.AutoSize = true;
+            this.optionStartToolbar.Location = new System.Drawing.Point(12, 37);
+            this.optionStartToolbar.Name = "optionStartToolbar";
+            this.optionStartToolbar.Size = new System.Drawing.Size(118, 19);
+            this.optionStartToolbar.TabIndex = 1;
+            this.optionStartToolbar.Text = "Start with Toolbar";
+            this.optionStartToolbar.UseVisualStyleBackColor = true;
             // 
             // optionRegisterHotkeys
             // 
-            optionRegisterHotkeys.AutoSize = true;
-            optionRegisterHotkeys.Location = new Point(12, 168);
-            optionRegisterHotkeys.Name = "optionRegisterHotkeys";
-            optionRegisterHotkeys.Size = new Size(112, 19);
-            optionRegisterHotkeys.TabIndex = 2;
-            optionRegisterHotkeys.Text = "Register hotkeys";
-            optionRegisterHotkeys.UseVisualStyleBackColor = true;
+            this.optionRegisterHotkeys.AutoSize = true;
+            this.optionRegisterHotkeys.Location = new System.Drawing.Point(12, 168);
+            this.optionRegisterHotkeys.Name = "optionRegisterHotkeys";
+            this.optionRegisterHotkeys.Size = new System.Drawing.Size(112, 19);
+            this.optionRegisterHotkeys.TabIndex = 2;
+            this.optionRegisterHotkeys.Text = "Register hotkeys";
+            this.optionRegisterHotkeys.UseVisualStyleBackColor = true;
             // 
             // optionResetCounter
             // 
-            optionResetCounter.AutoSize = true;
-            optionResetCounter.Location = new Point(261, 12);
-            optionResetCounter.Name = "optionResetCounter";
-            optionResetCounter.Size = new Size(252, 19);
-            optionResetCounter.TabIndex = 3;
-            optionResetCounter.Text = "Reset number when updating memory slot";
-            optionResetCounter.UseVisualStyleBackColor = true;
+            this.optionResetCounter.AutoSize = true;
+            this.optionResetCounter.Location = new System.Drawing.Point(261, 12);
+            this.optionResetCounter.Name = "optionResetCounter";
+            this.optionResetCounter.Size = new System.Drawing.Size(252, 19);
+            this.optionResetCounter.TabIndex = 3;
+            this.optionResetCounter.Text = "Reset number when updating memory slot";
+            this.optionResetCounter.UseVisualStyleBackColor = true;
             // 
             // optionSaveMemorySlots
             // 
-            optionSaveMemorySlots.AutoSize = true;
-            optionSaveMemorySlots.Location = new Point(261, 37);
-            optionSaveMemorySlots.Name = "optionSaveMemorySlots";
-            optionSaveMemorySlots.Size = new Size(158, 19);
-            optionSaveMemorySlots.TabIndex = 4;
-            optionSaveMemorySlots.Text = "Save memory slots to file";
-            optionSaveMemorySlots.UseVisualStyleBackColor = true;
+            this.optionSaveMemorySlots.AutoSize = true;
+            this.optionSaveMemorySlots.Location = new System.Drawing.Point(261, 37);
+            this.optionSaveMemorySlots.Name = "optionSaveMemorySlots";
+            this.optionSaveMemorySlots.Size = new System.Drawing.Size(158, 19);
+            this.optionSaveMemorySlots.TabIndex = 4;
+            this.optionSaveMemorySlots.Text = "Save memory slots to file";
+            this.optionSaveMemorySlots.UseVisualStyleBackColor = true;
             // 
             // textMemorySlotFolder
             // 
-            textMemorySlotFolder.Location = new Point(261, 104);
-            textMemorySlotFolder.Name = "textMemorySlotFolder";
-            textMemorySlotFolder.Size = new Size(229, 23);
-            textMemorySlotFolder.TabIndex = 5;
+            this.textMemorySlotFolder.Location = new System.Drawing.Point(261, 104);
+            this.textMemorySlotFolder.Name = "textMemorySlotFolder";
+            this.textMemorySlotFolder.Size = new System.Drawing.Size(229, 23);
+            this.textMemorySlotFolder.TabIndex = 5;
             // 
             // label1
             // 
-            label1.Font = new Font("Segoe UI", 9F, FontStyle.Italic, GraphicsUnit.Point);
-            label1.Location = new Point(261, 71);
-            label1.Name = "label1";
-            label1.Size = new Size(232, 30);
-            label1.TabIndex = 6;
-            label1.Text = ".txt file folder. Use process.txt, mem1.txt mem2.txt, mem3.txt:";
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
+            this.label1.Location = new System.Drawing.Point(261, 71);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(232, 30);
+            this.label1.TabIndex = 6;
+            this.label1.Text = ".txt file folder. Use process.txt, mem1.txt mem2.txt, mem3.txt:";
             // 
             // label2
             // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label2.Location = new Point(12, 190);
-            label2.Name = "label2";
-            label2.Size = new Size(257, 15);
-            label2.TabIndex = 7;
-            label2.Text = "Restart the program to register new hotkeys";
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label2.Location = new System.Drawing.Point(12, 190);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(257, 15);
+            this.label2.TabIndex = 7;
+            this.label2.Text = "Restart the program to register new hotkeys";
             // 
             // buttonSave
             // 
-            buttonSave.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            buttonSave.Location = new Point(433, 523);
-            buttonSave.Name = "buttonSave";
-            buttonSave.Size = new Size(75, 23);
-            buttonSave.TabIndex = 38;
-            buttonSave.Text = "Save";
-            buttonSave.UseVisualStyleBackColor = true;
-            buttonSave.Click += buttonSave_Click;
+            this.buttonSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonSave.Location = new System.Drawing.Point(433, 524);
+            this.buttonSave.Name = "buttonSave";
+            this.buttonSave.Size = new System.Drawing.Size(75, 23);
+            this.buttonSave.TabIndex = 38;
+            this.buttonSave.Text = "Save";
+            this.buttonSave.UseVisualStyleBackColor = true;
+            this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
             // 
             // buttonCancel
             // 
-            buttonCancel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            buttonCancel.Location = new Point(352, 523);
-            buttonCancel.Name = "buttonCancel";
-            buttonCancel.Size = new Size(75, 23);
-            buttonCancel.TabIndex = 39;
-            buttonCancel.Text = "Cancel";
-            buttonCancel.UseVisualStyleBackColor = true;
-            buttonCancel.Click += buttonCancel_Click;
+            this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonCancel.Location = new System.Drawing.Point(352, 524);
+            this.buttonCancel.Name = "buttonCancel";
+            this.buttonCancel.Size = new System.Drawing.Size(75, 23);
+            this.buttonCancel.TabIndex = 39;
+            this.buttonCancel.Text = "Cancel";
+            this.buttonCancel.UseVisualStyleBackColor = true;
+            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
             // optionCut
             // 
-            optionCut.AutoSize = true;
-            optionCut.Location = new Point(12, 63);
-            optionCut.Name = "optionCut";
-            optionCut.Size = new Size(163, 19);
-            optionCut.TabIndex = 40;
-            optionCut.Text = "Ctrl+X when using hotkey";
-            optionCut.UseVisualStyleBackColor = true;
+            this.optionCut.AutoSize = true;
+            this.optionCut.Location = new System.Drawing.Point(12, 63);
+            this.optionCut.Name = "optionCut";
+            this.optionCut.Size = new System.Drawing.Size(163, 19);
+            this.optionCut.TabIndex = 40;
+            this.optionCut.Text = "Ctrl+X when using hotkey";
+            this.optionCut.UseVisualStyleBackColor = true;
             // 
             // optionType
             // 
-            optionType.AutoSize = true;
-            optionType.Location = new Point(12, 110);
-            optionType.Name = "optionType";
-            optionType.Size = new Size(181, 19);
-            optionType.TabIndex = 41;
-            optionType.Text = "Send keys when using hotkey";
-            optionType.UseVisualStyleBackColor = true;
+            this.optionType.AutoSize = true;
+            this.optionType.Location = new System.Drawing.Point(12, 110);
+            this.optionType.Name = "optionType";
+            this.optionType.Size = new System.Drawing.Size(181, 19);
+            this.optionType.TabIndex = 41;
+            this.optionType.Text = "Send keys when using hotkey";
+            this.optionType.UseVisualStyleBackColor = true;
             // 
             // optionPaste
             // 
-            optionPaste.AutoSize = true;
-            optionPaste.Location = new Point(12, 88);
-            optionPaste.Name = "optionPaste";
-            optionPaste.Size = new Size(163, 19);
-            optionPaste.TabIndex = 42;
-            optionPaste.Text = "Ctrl+V when using hotkey";
-            optionPaste.UseVisualStyleBackColor = true;
+            this.optionPaste.AutoSize = true;
+            this.optionPaste.Location = new System.Drawing.Point(12, 88);
+            this.optionPaste.Name = "optionPaste";
+            this.optionPaste.Size = new System.Drawing.Size(163, 19);
+            this.optionPaste.TabIndex = 42;
+            this.optionPaste.Text = "Ctrl+V when using hotkey";
+            this.optionPaste.UseVisualStyleBackColor = true;
             // 
             // optionUpdateClipboard
             // 
-            optionUpdateClipboard.AutoSize = true;
-            optionUpdateClipboard.Location = new Point(12, 135);
-            optionUpdateClipboard.Name = "optionUpdateClipboard";
-            optionUpdateClipboard.Size = new Size(237, 19);
-            optionUpdateClipboard.TabIndex = 44;
-            optionUpdateClipboard.Text = "Update clipboard when using Send Keys";
-            optionUpdateClipboard.UseVisualStyleBackColor = true;
+            this.optionUpdateClipboard.AutoSize = true;
+            this.optionUpdateClipboard.Location = new System.Drawing.Point(12, 135);
+            this.optionUpdateClipboard.Name = "optionUpdateClipboard";
+            this.optionUpdateClipboard.Size = new System.Drawing.Size(237, 19);
+            this.optionUpdateClipboard.TabIndex = 44;
+            this.optionUpdateClipboard.Text = "Update clipboard when using Send Keys";
+            this.optionUpdateClipboard.UseVisualStyleBackColor = true;
             // 
             // label9
             // 
-            label9.AutoSize = true;
-            label9.Font = new Font("Segoe UI", 9F, FontStyle.Italic, GraphicsUnit.Point);
-            label9.Location = new Point(25, 205);
-            label9.Name = "label9";
-            label9.Size = new Size(279, 15);
-            label9.TabIndex = 51;
-            label9.Text = "Tap 1-3 times for Date/Time while holding Modifiers";
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
+            this.label9.Location = new System.Drawing.Point(25, 205);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(279, 15);
+            this.label9.TabIndex = 51;
+            this.label9.Text = "Tap 1-3 times for Date/Time while holding Modifiers";
             // 
             // HotkeyGrid
             // 
-            HotkeyGrid.AllowUserToAddRows = false;
-            HotkeyGrid.AllowUserToDeleteRows = false;
-            HotkeyGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            HotkeyGrid.BackgroundColor = SystemColors.Window;
-            HotkeyGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            HotkeyGrid.Columns.AddRange(new DataGridViewColumn[] { Function, Key, Ctrl, Alt, Shift, Win });
-            HotkeyGrid.Location = new Point(12, 223);
-            HotkeyGrid.Name = "HotkeyGrid";
-            HotkeyGrid.RowTemplate.Height = 25;
-            HotkeyGrid.Size = new Size(494, 294);
-            HotkeyGrid.TabIndex = 52;
+            this.HotkeyGrid.AllowUserToAddRows = false;
+            this.HotkeyGrid.AllowUserToDeleteRows = false;
+            this.HotkeyGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.HotkeyGrid.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.HotkeyGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.HotkeyGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Function,
+            this.Key,
+            this.Ctrl,
+            this.Alt,
+            this.Shift,
+            this.Win});
+            this.HotkeyGrid.Location = new System.Drawing.Point(12, 223);
+            this.HotkeyGrid.Name = "HotkeyGrid";
+            this.HotkeyGrid.RowTemplate.Height = 25;
+            this.HotkeyGrid.Size = new System.Drawing.Size(494, 295);
+            this.HotkeyGrid.TabIndex = 52;
             // 
             // Function
             // 
-            Function.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Function.HeaderText = "Function";
-            Function.Name = "Function";
-            Function.ReadOnly = true;
+            this.Function.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Function.HeaderText = "Function";
+            this.Function.Name = "Function";
+            this.Function.ReadOnly = true;
             // 
             // Key
             // 
-            Key.HeaderText = "Key";
-            Key.Name = "Key";
+            this.Key.HeaderText = "Key";
+            this.Key.Name = "Key";
             // 
             // Ctrl
             // 
-            Ctrl.HeaderText = "Ctrl";
-            Ctrl.Name = "Ctrl";
-            Ctrl.Width = 50;
+            this.Ctrl.HeaderText = "Ctrl";
+            this.Ctrl.Name = "Ctrl";
+            this.Ctrl.Width = 50;
             // 
             // Alt
             // 
-            Alt.HeaderText = "Alt";
-            Alt.Name = "Alt";
-            Alt.Width = 50;
+            this.Alt.HeaderText = "Alt";
+            this.Alt.Name = "Alt";
+            this.Alt.Width = 50;
             // 
             // Shift
             // 
-            Shift.HeaderText = "Shift";
-            Shift.Name = "Shift";
-            Shift.Width = 50;
+            this.Shift.HeaderText = "Shift";
+            this.Shift.Name = "Shift";
+            this.Shift.Width = 50;
             // 
             // Win
             // 
-            Win.HeaderText = "Win";
-            Win.Name = "Win";
-            Win.Width = 50;
+            this.Win.HeaderText = "Win";
+            this.Win.Name = "Win";
+            this.Win.Width = 50;
+            // 
+            // linkLabel1
+            // 
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Location = new System.Drawing.Point(11, 528);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(49, 15);
+            this.linkLabel1.TabIndex = 53;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "Website";
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkWebsite);
+            // 
+            // linkLabel2
+            // 
+            this.linkLabel2.AutoSize = true;
+            this.linkLabel2.Location = new System.Drawing.Point(66, 528);
+            this.linkLabel2.Name = "linkLabel2";
+            this.linkLabel2.Size = new System.Drawing.Size(100, 15);
+            this.linkLabel2.TabIndex = 54;
+            this.linkLabel2.TabStop = true;
+            this.linkLabel2.Text = "user.config folder";
+            this.linkLabel2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkSettings);
             // 
             // Options
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
-            AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(518, 553);
-            Controls.Add(HotkeyGrid);
-            Controls.Add(label9);
-            Controls.Add(optionUpdateClipboard);
-            Controls.Add(optionPaste);
-            Controls.Add(optionType);
-            Controls.Add(optionCut);
-            Controls.Add(buttonCancel);
-            Controls.Add(buttonSave);
-            Controls.Add(label2);
-            Controls.Add(label1);
-            Controls.Add(textMemorySlotFolder);
-            Controls.Add(optionSaveMemorySlots);
-            Controls.Add(optionResetCounter);
-            Controls.Add(optionRegisterHotkeys);
-            Controls.Add(optionStartToolbar);
-            Controls.Add(optionStartHidden);
-            Name = "Options";
-            Text = "Options";
-            ((System.ComponentModel.ISupportInitialize)HotkeyGrid).EndInit();
-            ResumeLayout(false);
-            PerformLayout();
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(518, 554);
+            this.Controls.Add(this.linkLabel2);
+            this.Controls.Add(this.linkLabel1);
+            this.Controls.Add(this.HotkeyGrid);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.optionUpdateClipboard);
+            this.Controls.Add(this.optionPaste);
+            this.Controls.Add(this.optionType);
+            this.Controls.Add(this.optionCut);
+            this.Controls.Add(this.buttonCancel);
+            this.Controls.Add(this.buttonSave);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.textMemorySlotFolder);
+            this.Controls.Add(this.optionSaveMemorySlots);
+            this.Controls.Add(this.optionResetCounter);
+            this.Controls.Add(this.optionRegisterHotkeys);
+            this.Controls.Add(this.optionStartToolbar);
+            this.Controls.Add(this.optionStartHidden);
+            this.Name = "Options";
+            this.Text = "Options";
+            ((System.ComponentModel.ISupportInitialize)(this.HotkeyGrid)).EndInit();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
 
         #endregion
@@ -341,5 +376,7 @@
         private DataGridViewCheckBoxColumn Alt;
         private DataGridViewCheckBoxColumn Shift;
         private DataGridViewCheckBoxColumn Win;
+        private LinkLabel linkLabel1;
+        private LinkLabel linkLabel2;
     }
 }
