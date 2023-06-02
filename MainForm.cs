@@ -379,6 +379,31 @@ namespace ClipboardTool
                     sendDate();
                 }
             }
+            
+            if (HotkeyList["MemSlot1"] != null)
+            {
+                if (id == HotkeyList["MemSlot1"].ghk.id)
+                {
+                    SetClipBoard(textBox1.Text, settings.sendPaste); //only update if ctrl+v is in use
+                    sendPaste(textBox1.Text);
+                }
+            }
+            if (HotkeyList["MemSlot2"] != null)
+            {
+                if (id == HotkeyList["MemSlot2"].ghk.id)
+                {
+                    SetClipBoard(textBox2.Text, settings.sendPaste);
+                    sendPaste(textBox2.Text);
+                }
+            }
+            if (HotkeyList["MemSlot3"] != null)
+            {
+                if (id == HotkeyList["MemSlot3"].ghk.id)
+                {
+                    SetClipBoard(textBox3.Text, settings.sendPaste);
+                    sendPaste(textBox3.Text);
+                }
+            }
         }
 
         private enum SendDateOption
