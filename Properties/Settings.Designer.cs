@@ -529,7 +529,7 @@ namespace ClipboardTool.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool hkMemSlot1Alt {
             get {
                 return ((bool)(this["hkMemSlot1Alt"]));
@@ -541,7 +541,7 @@ namespace ClipboardTool.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool hkMemSlot1Shift {
             get {
                 return ((bool)(this["hkMemSlot1Shift"]));
@@ -577,7 +577,7 @@ namespace ClipboardTool.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool hkMemSlot2Ctrl {
             get {
                 return ((bool)(this["hkMemSlot2Ctrl"]));
@@ -601,7 +601,7 @@ namespace ClipboardTool.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool hkMemSlot2Shift {
             get {
                 return ((bool)(this["hkMemSlot2Shift"]));
@@ -637,7 +637,7 @@ namespace ClipboardTool.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool hkMemSlot3Ctrl {
             get {
                 return ((bool)(this["hkMemSlot3Ctrl"]));
@@ -661,7 +661,7 @@ namespace ClipboardTool.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool hkMemSlot3Shift {
             get {
                 return ((bool)(this["hkMemSlot3Shift"]));

@@ -129,10 +129,10 @@
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="hkMemSlot1Alt" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
+      <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="hkMemSlot1Shift" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
+      <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="hkMemSlot1Win" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
@@ -141,13 +141,13 @@
       <Value Profile="(Default)">2</Value>
     </Setting>
     <Setting Name="hkMemSlot2Ctrl" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
+      <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="hkMemSlot2Alt" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="hkMemSlot2Shift" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
+      <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="hkMemSlot2Win" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
@@ -156,13 +156,13 @@
       <Value Profile="(Default)">3</Value>
     </Setting>
     <Setting Name="hkMemSlot3Ctrl" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
+      <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="hkMemSlot3Alt" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="hkMemSlot3Shift" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
+      <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="hkMemSlot3Win" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
