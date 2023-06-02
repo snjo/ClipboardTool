@@ -929,7 +929,7 @@ namespace ClipboardTool
             ToggleCapsLock();
         }
 
-        private void actionShowWindow(object sender, EventArgs e)
+        private void actionShowWindow(object sender = null, EventArgs e = null)
         {
             Show();
             this.WindowState = FormWindowState.Normal;

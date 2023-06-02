@@ -298,7 +298,7 @@
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox1.Size = new System.Drawing.Size(280, 34);
+            this.textBox1.Size = new System.Drawing.Size(276, 34);
             this.textBox1.TabIndex = 40;
             // 
             // buttonSave1
@@ -375,42 +375,49 @@
             this.hideToolStripMenuItem.Name = "hideToolStripMenuItem";
             this.hideToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
             this.hideToolStripMenuItem.Text = "Hide";
+            this.hideToolStripMenuItem.Click += new System.EventHandler(this.actionHideFromTaskbar);
             // 
             // showToolStripMenuItem
             // 
             this.showToolStripMenuItem.Name = "showToolStripMenuItem";
             this.showToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
             this.showToolStripMenuItem.Text = "Show";
+            this.showToolStripMenuItem.Click += new System.EventHandler(this.actionShowWindow);
             // 
             // capsLockToolStripMenuItem
             // 
             this.capsLockToolStripMenuItem.Name = "capsLockToolStripMenuItem";
             this.capsLockToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
             this.capsLockToolStripMenuItem.Text = "Caps Lock";
+            this.capsLockToolStripMenuItem.Click += new System.EventHandler(this.actionCapsLock);
             // 
             // uPPERCaseClipboardToolStripMenuItem
             // 
             this.uPPERCaseClipboardToolStripMenuItem.Name = "uPPERCaseClipboardToolStripMenuItem";
             this.uPPERCaseClipboardToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
             this.uPPERCaseClipboardToolStripMenuItem.Text = "UPPER case clipboard";
+            this.uPPERCaseClipboardToolStripMenuItem.Click += new System.EventHandler(this.actionUpperCaseOnce);
             // 
             // lowerCaseClipboardToolStripMenuItem
             // 
             this.lowerCaseClipboardToolStripMenuItem.Name = "lowerCaseClipboardToolStripMenuItem";
             this.lowerCaseClipboardToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
             this.lowerCaseClipboardToolStripMenuItem.Text = "lower case clipboard";
+            this.lowerCaseClipboardToolStripMenuItem.Click += new System.EventHandler(this.actionLowerCaseOnce);
             // 
             // plainTextClipboardToolStripMenuItem
             // 
             this.plainTextClipboardToolStripMenuItem.Name = "plainTextClipboardToolStripMenuItem";
             this.plainTextClipboardToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
             this.plainTextClipboardToolStripMenuItem.Text = "Plain text clipboard";
+            this.plainTextClipboardToolStripMenuItem.Click += new System.EventHandler(this.actionPlainTextOnce);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
             this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.actionExit);
             // 
             // notifyIcon1
             // 
@@ -423,6 +430,7 @@
             this.systrayIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("systrayIcon.Icon")));
             this.systrayIcon.Text = "Clipboard Tool - Caps Lock is ?";
             this.systrayIcon.Visible = true;
+            this.systrayIcon.DoubleClick += new System.EventHandler(this.actionShowWindow);
             // 
             // toolTip
             // 
