@@ -222,6 +222,7 @@
             this.Win});
             this.HotkeyGrid.Location = new System.Drawing.Point(12, 223);
             this.HotkeyGrid.Name = "HotkeyGrid";
+            this.HotkeyGrid.RowHeadersVisible = false;
             this.HotkeyGrid.RowTemplate.Height = 25;
             this.HotkeyGrid.Size = new System.Drawing.Size(494, 295);
             this.HotkeyGrid.TabIndex = 52;
@@ -232,11 +233,13 @@
             this.Function.HeaderText = "Function";
             this.Function.Name = "Function";
             this.Function.ReadOnly = true;
+            this.Function.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // Key
             // 
             this.Key.HeaderText = "Key";
             this.Key.Name = "Key";
+            this.Key.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // Ctrl
             // 
@@ -370,13 +373,13 @@
         private Label label9;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private DataGridView HotkeyGrid;
+        private LinkLabel linkLabel1;
+        private LinkLabel linkLabel2;
         private DataGridViewTextBoxColumn Function;
         private DataGridViewTextBoxColumn Key;
         private DataGridViewCheckBoxColumn Ctrl;
         private DataGridViewCheckBoxColumn Alt;
         private DataGridViewCheckBoxColumn Shift;
         private DataGridViewCheckBoxColumn Win;
-        private LinkLabel linkLabel1;
-        private LinkLabel linkLabel2;
     }
 }

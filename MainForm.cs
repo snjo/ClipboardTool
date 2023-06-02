@@ -98,12 +98,13 @@ namespace ClipboardTool
             iconUpper = notifyIcon1.Icon;
             iconLower = systrayIcon.Icon;
             helpForm.setText(tooltipText);
+            this.Load += Form1_Load;
         }
 
         public void LoadHotkeys()
         {
-            Settings newSettings = new();                        
-            
+            //Settings newSettings = new();
+
             foreach (KeyValuePair<string, Hotkey> kvp in HotkeyList )
             {
                 HotkeyList[kvp.Key] = LoadHotkey(kvp.Key);
@@ -120,47 +121,11 @@ namespace ClipboardTool
             hotkey.Shift = (bool)Settings.Default["hk" + hotkeyName + "Shift"];
             hotkey.Win = (bool)Settings.Default["hk" + hotkeyName + "Win"];
             hotkey.ghk = new Hotkeys.GlobalHotkey(hotkey.Modifiers(), hotkey.key, this);
-            return hotkey;
-        }
 
-        private Hotkey LoadHotkey(string settingHotkey, bool Ctrl, bool Alt, bool Shift, bool Win) //char settingHotkey
-        {            
-            Hotkey hotkey = new Hotkey();
-            hotkey.key = settingHotkey;
-            hotkey.Ctrl = Ctrl;
-            hotkey.Alt = Alt;
-            hotkey.Shift = Shift;
-            hotkey.Win = Win;
-            hotkey.ghk = new Hotkeys.GlobalHotkey(hotkey.Modifiers(), hotkey.key, this);            
-            return hotkey;
-        }
+            //test
+            //writeMessage("key: " + Settings.Default["hk" + hotkeyName + "Key"].ToString());
 
-        private GlobalHotkey LoadHotkey(out Hotkey hotkey, string settingHotkey, bool Ctrl, bool Alt, bool Shift, bool Win) //char settingHotkey
-        {
-            GlobalHotkey? result = null;
-            hotkey = new Hotkey();
-            hotkey.key = settingHotkey;
-            hotkey.Ctrl = Ctrl;
-            hotkey.Alt = Alt;
-            hotkey.Shift = Shift;
-            hotkey.Win = Win;
-            if (hotkey != null)
-            {
-                if (hotkey.key != "") //!=0
-                {
-                    result = new Hotkeys.GlobalHotkey(hotkey.Modifiers(), hotkey.key, this);
-                    hotkey.ghk = result;
-                }
-                else
-                {
-                    //throw new Exception("hotkey is 0");
-                }
-            }
-            else
-            {
-                //throw new Exception("hotkey is null");
-            }
-            return result;
+            return hotkey;
         }
 
         private void updateHotkeyLabels()
@@ -384,24 +349,24 @@ namespace ClipboardTool
             {
                 if (id == HotkeyList["MemSlot1"].ghk.id)
                 {
-                    SetClipBoard(textBox1.Text, settings.sendPaste); //only update if ctrl+v is in use
-                    sendPaste(textBox1.Text);
+                    sendCut();
+                    sendPaste(ProcessTextVariables(textBox1.Text));
                 }
             }
             if (HotkeyList["MemSlot2"] != null)
             {
                 if (id == HotkeyList["MemSlot2"].ghk.id)
                 {
-                    SetClipBoard(textBox2.Text, settings.sendPaste);
-                    sendPaste(textBox2.Text);
+                    sendCut();
+                    sendPaste(ProcessTextVariables(textBox2.Text));
                 }
             }
             if (HotkeyList["MemSlot3"] != null)
             {
                 if (id == HotkeyList["MemSlot3"].ghk.id)
                 {
-                    SetClipBoard(textBox3.Text, settings.sendPaste);
-                    sendPaste(textBox3.Text);
+                    sendCut();
+                    sendPaste(ProcessTextVariables(textBox3.Text));
                 }
             }
         }
@@ -841,13 +806,14 @@ namespace ClipboardTool
 
         public void setClipboardFromTextBox(int num)//(TextBox textBox)
         {
+            //(ProcessTextVariables(textBox1.Text));
             TextBox textBox;
             textBox = SetTextBoxTarget(num);
             if (textBox.Text != null)
             {
                 if (textBox.Text.Length > 0)
                 {
-                    Clipboard.SetText(textBox.Text);
+                    Clipboard.SetText(ProcessTextVariables(textBox.Text));
                 }
                 else
                 {
