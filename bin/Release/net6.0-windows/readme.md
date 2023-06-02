@@ -31,6 +31,9 @@ https://github.com/snjo/ClipboardTool
 -----------------------------------------
 ## Text Files in the program folder
 
+By default the program looks for these files in the local folder. You can direct it to another folder on your PC it the Settings panel.
+If you placed this program in one of the write protected Program Files folders, you should point the text file location elsewhere.
+
 | Text file              | Function                                                                          | Comment	                                                                                   |
 |------------------------|-----------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------|
 | process.txt            | Preset contents of the Proccess text area (The main text box in the application). | You can update the text file by using the Save button next to the textbox (diskette icon)   |

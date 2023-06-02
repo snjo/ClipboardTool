@@ -133,7 +133,7 @@
             // buttonSave
             // 
             buttonSave.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            buttonSave.Location = new Point(433, 471);
+            buttonSave.Location = new Point(433, 523);
             buttonSave.Name = "buttonSave";
             buttonSave.Size = new Size(75, 23);
             buttonSave.TabIndex = 38;
@@ -144,7 +144,7 @@
             // buttonCancel
             // 
             buttonCancel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            buttonCancel.Location = new Point(352, 471);
+            buttonCancel.Location = new Point(352, 523);
             buttonCancel.Name = "buttonCancel";
             buttonCancel.Size = new Size(75, 23);
             buttonCancel.TabIndex = 39;
@@ -213,7 +213,7 @@
             HotkeyGrid.Location = new Point(12, 223);
             HotkeyGrid.Name = "HotkeyGrid";
             HotkeyGrid.RowTemplate.Height = 25;
-            HotkeyGrid.Size = new Size(494, 242);
+            HotkeyGrid.Size = new Size(494, 294);
             HotkeyGrid.TabIndex = 52;
             // 
             // Function
@@ -256,7 +256,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(518, 501);
+            ClientSize = new Size(518, 553);
             Controls.Add(HotkeyGrid);
             Controls.Add(label9);
             Controls.Add(optionUpdateClipboard);
