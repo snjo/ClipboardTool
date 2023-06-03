@@ -21,12 +21,14 @@ namespace ClipboardTool
     public partial class Options : Form
     {
         public MainForm mainForm;
+        /*
         private HotkeyControls UpperInputs = new HotkeyControls();
         private HotkeyControls LowerInputs = new HotkeyControls();
         private HotkeyControls PlainInputs = new HotkeyControls();
         private HotkeyControls CapsInputs = new HotkeyControls();
         private HotkeyControls ProcessInputs = new HotkeyControls();
         private HotkeyControls DateInputs = new HotkeyControls();
+        */
 
         public enum HotkeyList // can be used for row numbers in data grid
         {
@@ -37,6 +39,7 @@ namespace ClipboardTool
             ProcessText,
             Date,
             MemSlot1, MemSlot2, MemSlot3,
+            ResetNumber,
             End
         }
         private Hotkey GetHotkey(HotkeyList hk)

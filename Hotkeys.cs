@@ -26,6 +26,7 @@ namespace Hotkeys
         public Hotkey MemSlot1 = new();
         public Hotkey MemSlot2 = new();
         public Hotkey MemSlot3 = new();
+        public Hotkey ResetNumber = new();
     }
     
 

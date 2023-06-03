@@ -44,6 +44,7 @@ namespace ClipboardTool
             {"MemSlot1", new Hotkey(new GlobalHotkey())},
             {"MemSlot2", new Hotkey(new GlobalHotkey())},
             {"MemSlot3", new Hotkey(new GlobalHotkey())},
+            {"ResetNumber", new Hotkey(new GlobalHotkey())},
         };
         /*private GlobalHotkey? ghkUpperCase; //nullable (?) to avoid warning in MainForm method
         private GlobalHotkey? ghkLowerCase;
@@ -367,6 +368,14 @@ namespace ClipboardTool
                 {
                     sendCut();
                     sendPaste(ProcessTextVariables(textBox3.Text));
+                }
+            }
+
+            if (HotkeyList["ResetNumber"] != null)
+            {
+                if (id == HotkeyList["ResetNumber"].ghk.id)
+                {
+                    numericUpDown1.Value = 1;
                 }
             }
         }

@@ -682,5 +682,65 @@ namespace ClipboardTool.Properties {
                 this["hkMemSlot3Win"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("R")]
+        public string hkResetNumberKey {
+            get {
+                return ((string)(this["hkResetNumberKey"]));
+            }
+            set {
+                this["hkResetNumberKey"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool hkResetNumberCtrl {
+            get {
+                return ((bool)(this["hkResetNumberCtrl"]));
+            }
+            set {
+                this["hkResetNumberCtrl"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool hkResetNumberAlt {
+            get {
+                return ((bool)(this["hkResetNumberAlt"]));
+            }
+            set {
+                this["hkResetNumberAlt"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool hkResetNumberShift {
+            get {
+                return ((bool)(this["hkResetNumberShift"]));
+            }
+            set {
+                this["hkResetNumberShift"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool hkResetNumberWin {
+            get {
+                return ((bool)(this["hkResetNumberWin"]));
+            }
+            set {
+                this["hkResetNumberWin"] = value;
+            }
+        }
     }
 }
