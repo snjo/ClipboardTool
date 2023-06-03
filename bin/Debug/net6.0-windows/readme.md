@@ -42,6 +42,7 @@ If you placed this program in one of the write protected Program Files folders, 
 -----------------------------------------
 ## Hotkeys
 
+The program settings user.config are stored in a folder in %localappdata%\ClipboardTool\
 
 | Function                       | Default hotkey         |
 |--------------------------------|------------------------|
@@ -50,6 +51,7 @@ If you placed this program in one of the write protected Program Files folders, 
 | Convert to plain text          | Ctrl+Shift+T           |
 | Process text using $'s         | Ctrl+Shift+P           |
 | Caps Lock toggle               | Ctrl+Shift+Backspace   |
+| Output Memory Slot 1           | Ctrl+
 | Date/Time                      | Ctrl+Shift+D           |
 
 	Tap the date hotkey 1-3 times while holding the modifier keys:
