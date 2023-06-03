@@ -66,7 +66,7 @@ namespace ClipboardTool
         private bool hotkeysSet = false;
         HelpForm helpForm = new HelpForm();
         string delayedKeystrokes = "";
-            
+
 
         string tooltipText =
             "$d date\n" +
@@ -106,10 +106,10 @@ namespace ClipboardTool
         {
             //Settings newSettings = new();
 
-            foreach (KeyValuePair<string, Hotkey> kvp in HotkeyList )
+            foreach (KeyValuePair<string, Hotkey> kvp in HotkeyList)
             {
                 HotkeyList[kvp.Key] = LoadHotkey(kvp.Key);
-            }            
+            }
         }
 
         private Hotkey LoadHotkey(string hotkeyName) //char settingHotkey
@@ -131,7 +131,7 @@ namespace ClipboardTool
 
         private void updateHotkeyLabels()
         {
-            updateHotkeyLabel(HotkeyList["UpperCase"], labelUpper);            
+            updateHotkeyLabel(HotkeyList["UpperCase"], labelUpper);
             updateHotkeyLabel(HotkeyList["LowerCase"], labelLower);
             updateHotkeyLabel(HotkeyList["PlainText"], labelPlain);
             updateHotkeyLabel(HotkeyList["CapsLock"], labelCaps);
@@ -241,7 +241,7 @@ namespace ClipboardTool
 
             foreach (KeyValuePair<string, Hotkey> ghk in HotkeyList)
             {
-                RegisterHotKey(ghk.Value.ghk);                                
+                RegisterHotKey(ghk.Value.ghk);
             }
 
             if (errorMessages.Length > 0)
@@ -287,7 +287,7 @@ namespace ClipboardTool
 
 
         private void HandleHotkey(int id)
-        {            
+        {
 
             if (HotkeyList["LowerCase"] != null)
             {
@@ -297,7 +297,7 @@ namespace ClipboardTool
                     sendPaste(LowerCaseOnce());
                 }
             }
-            
+
             //if (ghkUpperCase != null)
             if (HotkeyList["UpperCase"] != null)
             {
@@ -345,7 +345,7 @@ namespace ClipboardTool
                     sendDate();
                 }
             }
-            
+
             if (HotkeyList["MemSlot1"] != null)
             {
                 if (id == HotkeyList["MemSlot1"].ghk.id)
@@ -446,7 +446,7 @@ namespace ClipboardTool
         }
 
         private void delayKeystrokes(string keystrokes)
-        {            
+        {
             delayedKeystrokes = keystrokes;
             timerKeystrokes.Start();
         }
@@ -474,7 +474,7 @@ namespace ClipboardTool
                     //keystrokes = keystrokes.Replace("^", "%(94)");  //alt ascii code doesn't work :(
 
                     //SendKeys.SendWait(keystrokes);
-                    
+
                     SendKeys.Send(keystrokes);
 
                     break;
@@ -724,7 +724,7 @@ namespace ClipboardTool
             // debug hotkey output
             if (customText.Contains("$Debug"))
             {
-                
+
                 var path = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal).FilePath;
                 string debug = path;
                 //writeMessage(debug);
@@ -732,7 +732,7 @@ namespace ClipboardTool
                 //customText = debug;
             }
 
-                if (customText.Length < 1)
+            if (customText.Length < 1)
             {
                 return "";
             }
@@ -904,7 +904,7 @@ namespace ClipboardTool
 
         private void showToolTipHide(object sender, EventArgs e)
         {
-            toolTip.SetToolTip(buttonHide, "Hide Window");
+            toolTip.SetToolTip(buttonHide, "Hide Window. Show again using the system tray icon");
         }
 
         private void showTooltipPin(object sender, EventArgs e)
@@ -922,9 +922,9 @@ namespace ClipboardTool
             toolTip.SetToolTip(buttonHelp, "Help: Processing variables");
         }
 
-        private void showTooltipSaveCustom(object sender, EventArgs e)
+        private void showTooltipSaveTextToFile(object sender, EventArgs e)
         {
-            toolTip.SetToolTip(buttonSaveCustom, "Save text. Text will load on start");
+            toolTip.SetToolTip((Control)sender, "Save text. Text will load on start");
         }
 
         private void showToolTipMemSave(object sender, EventArgs e)

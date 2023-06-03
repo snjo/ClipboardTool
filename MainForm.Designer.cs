@@ -28,622 +28,607 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            this.buttonLower = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.labelLower = new System.Windows.Forms.Label();
-            this.labelUpper = new System.Windows.Forms.Label();
-            this.labelPlain = new System.Windows.Forms.Label();
-            this.labelCaps = new System.Windows.Forms.Label();
-            this.checkBoxCapsLock = new System.Windows.Forms.CheckBox();
-            this.buttonOptions = new System.Windows.Forms.Button();
-            this.buttonPin = new System.Windows.Forms.Button();
-            this.buttonHide = new System.Windows.Forms.Button();
-            this.buttonToolbar = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.labelProcess = new System.Windows.Forms.Label();
-            this.buttonProcess = new System.Windows.Forms.Button();
-            this.textCustom = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.buttonSave1 = new System.Windows.Forms.Button();
-            this.buttonLoad1 = new System.Windows.Forms.Button();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.timerStatus = new System.Windows.Forms.Timer(this.components);
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.hideToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.showToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.capsLockToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.uPPERCaseClipboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.lowerCaseClipboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.plainTextClipboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
-            this.systrayIcon = new System.Windows.Forms.NotifyIcon(this.components);
-            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.buttonHelp = new System.Windows.Forms.Button();
-            this.buttonSaveCustom = new System.Windows.Forms.Button();
-            this.timerKeystrokes = new System.Windows.Forms.Timer(this.components);
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.button7 = new System.Windows.Forms.Button();
-            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
-            this.button9 = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
-            this.contextMenuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
-            this.splitContainer1.Panel1.SuspendLayout();
-            this.splitContainer1.Panel2.SuspendLayout();
-            this.splitContainer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
-            this.splitContainer2.Panel1.SuspendLayout();
-            this.splitContainer2.Panel2.SuspendLayout();
-            this.splitContainer2.SuspendLayout();
-            this.SuspendLayout();
+            buttonLower = new Button();
+            button2 = new Button();
+            button3 = new Button();
+            labelLower = new Label();
+            labelUpper = new Label();
+            labelPlain = new Label();
+            labelCaps = new Label();
+            checkBoxCapsLock = new CheckBox();
+            buttonOptions = new Button();
+            buttonPin = new Button();
+            buttonHide = new Button();
+            buttonToolbar = new Button();
+            panel1 = new Panel();
+            panel2 = new Panel();
+            numericUpDown1 = new NumericUpDown();
+            labelProcess = new Label();
+            buttonProcess = new Button();
+            textCustom = new TextBox();
+            label1 = new Label();
+            textBox1 = new TextBox();
+            buttonSave1 = new Button();
+            buttonLoad1 = new Button();
+            textBox2 = new TextBox();
+            textBox3 = new TextBox();
+            timerStatus = new System.Windows.Forms.Timer(components);
+            contextMenuStrip1 = new ContextMenuStrip(components);
+            hideToolStripMenuItem = new ToolStripMenuItem();
+            showToolStripMenuItem = new ToolStripMenuItem();
+            capsLockToolStripMenuItem = new ToolStripMenuItem();
+            uPPERCaseClipboardToolStripMenuItem = new ToolStripMenuItem();
+            lowerCaseClipboardToolStripMenuItem = new ToolStripMenuItem();
+            plainTextClipboardToolStripMenuItem = new ToolStripMenuItem();
+            exitToolStripMenuItem = new ToolStripMenuItem();
+            notifyIcon1 = new NotifyIcon(components);
+            systrayIcon = new NotifyIcon(components);
+            toolTip = new ToolTip(components);
+            buttonHelp = new Button();
+            buttonSaveCustom = new Button();
+            timerKeystrokes = new System.Windows.Forms.Timer(components);
+            splitContainer1 = new SplitContainer();
+            button7 = new Button();
+            splitContainer2 = new SplitContainer();
+            button1 = new Button();
+            button4 = new Button();
+            button5 = new Button();
+            button6 = new Button();
+            button8 = new Button();
+            button9 = new Button();
+            ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
+            contextMenuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
+            splitContainer1.Panel1.SuspendLayout();
+            splitContainer1.Panel2.SuspendLayout();
+            splitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)splitContainer2).BeginInit();
+            splitContainer2.Panel1.SuspendLayout();
+            splitContainer2.Panel2.SuspendLayout();
+            splitContainer2.SuspendLayout();
+            SuspendLayout();
             // 
             // buttonLower
             // 
-            this.buttonLower.Location = new System.Drawing.Point(5, 41);
-            this.buttonLower.Name = "buttonLower";
-            this.buttonLower.Size = new System.Drawing.Size(75, 23);
-            this.buttonLower.TabIndex = 20;
-            this.buttonLower.Text = "lower";
-            this.buttonLower.UseVisualStyleBackColor = true;
-            this.buttonLower.Click += new System.EventHandler(this.actionLowerCaseOnce);
+            buttonLower.Location = new Point(5, 41);
+            buttonLower.Name = "buttonLower";
+            buttonLower.Size = new Size(75, 23);
+            buttonLower.TabIndex = 20;
+            buttonLower.Text = "lower";
+            buttonLower.UseVisualStyleBackColor = true;
+            buttonLower.Click += actionLowerCaseOnce;
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(5, 66);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 21;
-            this.button2.Text = "UPPER";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.actionUpperCaseOnce);
+            button2.Location = new Point(5, 66);
+            button2.Name = "button2";
+            button2.Size = new Size(75, 23);
+            button2.TabIndex = 21;
+            button2.Text = "UPPER";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += actionUpperCaseOnce;
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(5, 91);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 22;
-            this.button3.Text = "Plain";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.actionPlainTextOnce);
+            button3.Location = new Point(5, 91);
+            button3.Name = "button3";
+            button3.Size = new Size(75, 23);
+            button3.TabIndex = 22;
+            button3.Text = "Plain";
+            button3.UseVisualStyleBackColor = true;
+            button3.Click += actionPlainTextOnce;
             // 
             // labelLower
             // 
-            this.labelLower.AutoSize = true;
-            this.labelLower.Location = new System.Drawing.Point(90, 45);
-            this.labelLower.Name = "labelLower";
-            this.labelLower.Size = new System.Drawing.Size(60, 15);
-            this.labelLower.TabIndex = 3;
-            this.labelLower.Text = "no hotkey";
+            labelLower.AutoSize = true;
+            labelLower.Location = new Point(90, 45);
+            labelLower.Name = "labelLower";
+            labelLower.Size = new Size(60, 15);
+            labelLower.TabIndex = 3;
+            labelLower.Text = "no hotkey";
             // 
             // labelUpper
             // 
-            this.labelUpper.AutoSize = true;
-            this.labelUpper.Location = new System.Drawing.Point(90, 70);
-            this.labelUpper.Name = "labelUpper";
-            this.labelUpper.Size = new System.Drawing.Size(60, 15);
-            this.labelUpper.TabIndex = 4;
-            this.labelUpper.Text = "no hotkey";
+            labelUpper.AutoSize = true;
+            labelUpper.Location = new Point(90, 70);
+            labelUpper.Name = "labelUpper";
+            labelUpper.Size = new Size(60, 15);
+            labelUpper.TabIndex = 4;
+            labelUpper.Text = "no hotkey";
             // 
             // labelPlain
             // 
-            this.labelPlain.AutoSize = true;
-            this.labelPlain.Location = new System.Drawing.Point(90, 95);
-            this.labelPlain.Name = "labelPlain";
-            this.labelPlain.Size = new System.Drawing.Size(60, 15);
-            this.labelPlain.TabIndex = 5;
-            this.labelPlain.Text = "no hotkey";
+            labelPlain.AutoSize = true;
+            labelPlain.Location = new Point(90, 95);
+            labelPlain.Name = "labelPlain";
+            labelPlain.Size = new Size(60, 15);
+            labelPlain.TabIndex = 5;
+            labelPlain.Text = "no hotkey";
             // 
             // labelCaps
             // 
-            this.labelCaps.AutoSize = true;
-            this.labelCaps.Location = new System.Drawing.Point(90, 122);
-            this.labelCaps.Name = "labelCaps";
-            this.labelCaps.Size = new System.Drawing.Size(60, 15);
-            this.labelCaps.TabIndex = 6;
-            this.labelCaps.Text = "no hotkey";
+            labelCaps.AutoSize = true;
+            labelCaps.Location = new Point(90, 122);
+            labelCaps.Name = "labelCaps";
+            labelCaps.Size = new Size(60, 15);
+            labelCaps.TabIndex = 6;
+            labelCaps.Text = "no hotkey";
             // 
             // checkBoxCapsLock
             // 
-            this.checkBoxCapsLock.AutoSize = true;
-            this.checkBoxCapsLock.Location = new System.Drawing.Point(8, 121);
-            this.checkBoxCapsLock.Name = "checkBoxCapsLock";
-            this.checkBoxCapsLock.Size = new System.Drawing.Size(80, 19);
-            this.checkBoxCapsLock.TabIndex = 23;
-            this.checkBoxCapsLock.Text = "Caps Lock";
-            this.checkBoxCapsLock.UseVisualStyleBackColor = true;
-            this.checkBoxCapsLock.Click += new System.EventHandler(this.actionCapsLock);
+            checkBoxCapsLock.AutoSize = true;
+            checkBoxCapsLock.Location = new Point(8, 121);
+            checkBoxCapsLock.Name = "checkBoxCapsLock";
+            checkBoxCapsLock.Size = new Size(80, 19);
+            checkBoxCapsLock.TabIndex = 23;
+            checkBoxCapsLock.Text = "Caps Lock";
+            checkBoxCapsLock.UseVisualStyleBackColor = true;
+            checkBoxCapsLock.Click += actionCapsLock;
             // 
             // buttonOptions
             // 
-            this.buttonOptions.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonOptions.Location = new System.Drawing.Point(334, 5);
-            this.buttonOptions.Name = "buttonOptions";
-            this.buttonOptions.Size = new System.Drawing.Size(23, 23);
-            this.buttonOptions.TabIndex = 13;
-            this.buttonOptions.Text = "⚙️";
-            this.buttonOptions.UseVisualStyleBackColor = true;
-            this.buttonOptions.Click += new System.EventHandler(this.actionShowOptions);
+            buttonOptions.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            buttonOptions.Location = new Point(334, 5);
+            buttonOptions.Name = "buttonOptions";
+            buttonOptions.Size = new Size(23, 23);
+            buttonOptions.TabIndex = 13;
+            buttonOptions.Text = "⚙️";
+            buttonOptions.UseVisualStyleBackColor = true;
+            buttonOptions.Click += actionShowOptions;
+            buttonOptions.MouseHover += showTooltipSettings;
             // 
             // buttonPin
             // 
-            this.buttonPin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonPin.Location = new System.Drawing.Point(310, 5);
-            this.buttonPin.Name = "buttonPin";
-            this.buttonPin.Size = new System.Drawing.Size(23, 23);
-            this.buttonPin.TabIndex = 12;
-            this.buttonPin.Text = "📌";
-            this.buttonPin.UseVisualStyleBackColor = true;
-            this.buttonPin.Click += new System.EventHandler(this.actionAlwaysOnTop);
+            buttonPin.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            buttonPin.Location = new Point(310, 5);
+            buttonPin.Name = "buttonPin";
+            buttonPin.Size = new Size(23, 23);
+            buttonPin.TabIndex = 12;
+            buttonPin.Text = "📌";
+            buttonPin.UseVisualStyleBackColor = true;
+            buttonPin.Click += actionAlwaysOnTop;
+            buttonPin.MouseHover += showTooltipPin;
             // 
             // buttonHide
             // 
-            this.buttonHide.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonHide.Location = new System.Drawing.Point(286, 5);
-            this.buttonHide.Name = "buttonHide";
-            this.buttonHide.Size = new System.Drawing.Size(23, 23);
-            this.buttonHide.TabIndex = 11;
-            this.buttonHide.Text = "👻";
-            this.buttonHide.UseVisualStyleBackColor = true;
-            this.buttonHide.Click += new System.EventHandler(this.actionHideFromTaskbar);
+            buttonHide.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            buttonHide.Location = new Point(286, 5);
+            buttonHide.Name = "buttonHide";
+            buttonHide.Size = new Size(23, 23);
+            buttonHide.TabIndex = 11;
+            buttonHide.Text = "👻";
+            buttonHide.UseVisualStyleBackColor = true;
+            buttonHide.Click += actionHideFromTaskbar;
+            buttonHide.MouseHover += showToolTipHide;
             // 
             // buttonToolbar
             // 
-            this.buttonToolbar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonToolbar.Location = new System.Drawing.Point(213, 5);
-            this.buttonToolbar.Name = "buttonToolbar";
-            this.buttonToolbar.Size = new System.Drawing.Size(72, 23);
-            this.buttonToolbar.TabIndex = 10;
-            this.buttonToolbar.Text = "toolbar";
-            this.buttonToolbar.UseVisualStyleBackColor = true;
-            this.buttonToolbar.Click += new System.EventHandler(this.actionShowToolbar);
+            buttonToolbar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            buttonToolbar.Location = new Point(213, 5);
+            buttonToolbar.Name = "buttonToolbar";
+            buttonToolbar.Size = new Size(72, 23);
+            buttonToolbar.TabIndex = 10;
+            buttonToolbar.Text = "toolbar";
+            buttonToolbar.UseVisualStyleBackColor = true;
+            buttonToolbar.Click += actionShowToolbar;
             // 
             // panel1
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Location = new System.Drawing.Point(8, 34);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(351, 1);
-            this.panel1.TabIndex = 12;
+            panel1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            panel1.BorderStyle = BorderStyle.FixedSingle;
+            panel1.Location = new Point(8, 34);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(351, 1);
+            panel1.TabIndex = 12;
             // 
             // panel2
             // 
-            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel2.Location = new System.Drawing.Point(7, 146);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(351, 1);
-            this.panel2.TabIndex = 13;
+            panel2.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            panel2.BorderStyle = BorderStyle.FixedSingle;
+            panel2.Location = new Point(7, 146);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(351, 1);
+            panel2.TabIndex = 13;
             // 
             // numericUpDown1
             // 
-            this.numericUpDown1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.numericUpDown1.Location = new System.Drawing.Point(290, 155);
-            this.numericUpDown1.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(67, 23);
-            this.numericUpDown1.TabIndex = 31;
-            this.numericUpDown1.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
+            numericUpDown1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            numericUpDown1.Location = new Point(290, 155);
+            numericUpDown1.Maximum = new decimal(new int[] { 10000, 0, 0, 0 });
+            numericUpDown1.Name = "numericUpDown1";
+            numericUpDown1.Size = new Size(67, 23);
+            numericUpDown1.TabIndex = 31;
+            numericUpDown1.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
             // labelProcess
             // 
-            this.labelProcess.AutoSize = true;
-            this.labelProcess.Location = new System.Drawing.Point(90, 159);
-            this.labelProcess.Name = "labelProcess";
-            this.labelProcess.Size = new System.Drawing.Size(60, 15);
-            this.labelProcess.TabIndex = 15;
-            this.labelProcess.Text = "no hotkey";
+            labelProcess.AutoSize = true;
+            labelProcess.Location = new Point(90, 159);
+            labelProcess.Name = "labelProcess";
+            labelProcess.Size = new Size(60, 15);
+            labelProcess.TabIndex = 15;
+            labelProcess.Text = "no hotkey";
             // 
             // buttonProcess
             // 
-            this.buttonProcess.Location = new System.Drawing.Point(9, 156);
-            this.buttonProcess.Name = "buttonProcess";
-            this.buttonProcess.Size = new System.Drawing.Size(75, 23);
-            this.buttonProcess.TabIndex = 30;
-            this.buttonProcess.Text = "Process";
-            this.buttonProcess.UseVisualStyleBackColor = true;
-            this.buttonProcess.Click += new System.EventHandler(this.actionProcessText);
+            buttonProcess.Location = new Point(9, 156);
+            buttonProcess.Name = "buttonProcess";
+            buttonProcess.Size = new Size(75, 23);
+            buttonProcess.TabIndex = 30;
+            buttonProcess.Text = "Process";
+            buttonProcess.UseVisualStyleBackColor = true;
+            buttonProcess.Click += actionProcessText;
             // 
             // textCustom
             // 
-            this.textCustom.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textCustom.Location = new System.Drawing.Point(8, 188);
-            this.textCustom.Multiline = true;
-            this.textCustom.Name = "textCustom";
-            this.textCustom.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textCustom.Size = new System.Drawing.Size(318, 92);
-            this.textCustom.TabIndex = 32;
+            textCustom.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            textCustom.Location = new Point(8, 188);
+            textCustom.Multiline = true;
+            textCustom.Name = "textCustom";
+            textCustom.ScrollBars = ScrollBars.Vertical;
+            textCustom.Size = new Size(318, 92);
+            textCustom.TabIndex = 32;
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(7, 291);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(79, 15);
-            this.label1.TabIndex = 18;
-            this.label1.Text = "Memory slots";
+            label1.AutoSize = true;
+            label1.Location = new Point(7, 291);
+            label1.Name = "label1";
+            label1.Size = new Size(79, 15);
+            label1.TabIndex = 18;
+            label1.Text = "Memory slots";
             // 
             // textBox1
             // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.Location = new System.Drawing.Point(0, 3);
-            this.textBox1.MinimumSize = new System.Drawing.Size(0, 23);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox1.Size = new System.Drawing.Size(276, 34);
-            this.textBox1.TabIndex = 40;
+            textBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            textBox1.Location = new Point(0, 3);
+            textBox1.MinimumSize = new Size(0, 23);
+            textBox1.Multiline = true;
+            textBox1.Name = "textBox1";
+            textBox1.ScrollBars = ScrollBars.Vertical;
+            textBox1.Size = new Size(276, 34);
+            textBox1.TabIndex = 40;
             // 
             // buttonSave1
             // 
-            this.buttonSave1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonSave1.Location = new System.Drawing.Point(306, 2);
-            this.buttonSave1.Name = "buttonSave1";
-            this.buttonSave1.Size = new System.Drawing.Size(23, 23);
-            this.buttonSave1.TabIndex = 42;
-            this.buttonSave1.Tag = "1";
-            this.buttonSave1.Text = "▽";
-            this.buttonSave1.UseVisualStyleBackColor = true;
-            this.buttonSave1.Click += new System.EventHandler(this.actionSave);
+            buttonSave1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            buttonSave1.Location = new Point(306, 2);
+            buttonSave1.Name = "buttonSave1";
+            buttonSave1.Size = new Size(23, 23);
+            buttonSave1.TabIndex = 42;
+            buttonSave1.Tag = "1";
+            buttonSave1.Text = "▽";
+            buttonSave1.UseVisualStyleBackColor = true;
+            buttonSave1.Click += actionSave;
+            buttonSave1.MouseHover += showToolTipMemSave;
             // 
             // buttonLoad1
             // 
-            this.buttonLoad1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonLoad1.Location = new System.Drawing.Point(330, 2);
-            this.buttonLoad1.Name = "buttonLoad1";
-            this.buttonLoad1.Size = new System.Drawing.Size(23, 23);
-            this.buttonLoad1.TabIndex = 43;
-            this.buttonLoad1.Tag = "1";
-            this.buttonLoad1.Text = "△";
-            this.buttonLoad1.UseVisualStyleBackColor = true;
-            this.buttonLoad1.Click += new System.EventHandler(this.actionLoad);
+            buttonLoad1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            buttonLoad1.Location = new Point(330, 2);
+            buttonLoad1.Name = "buttonLoad1";
+            buttonLoad1.Size = new Size(23, 23);
+            buttonLoad1.TabIndex = 43;
+            buttonLoad1.Tag = "1";
+            buttonLoad1.Text = "△";
+            buttonLoad1.UseVisualStyleBackColor = true;
+            buttonLoad1.Click += actionLoad;
+            buttonLoad1.MouseHover += showToolTipMemLoad;
             // 
             // textBox2
             // 
-            this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox2.Location = new System.Drawing.Point(0, 3);
-            this.textBox2.MinimumSize = new System.Drawing.Size(0, 23);
-            this.textBox2.Multiline = true;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox2.Size = new System.Drawing.Size(276, 32);
-            this.textBox2.TabIndex = 50;
+            textBox2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            textBox2.Location = new Point(0, 3);
+            textBox2.MinimumSize = new Size(0, 23);
+            textBox2.Multiline = true;
+            textBox2.Name = "textBox2";
+            textBox2.ScrollBars = ScrollBars.Vertical;
+            textBox2.Size = new Size(276, 32);
+            textBox2.TabIndex = 50;
             // 
             // textBox3
             // 
-            this.textBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox3.Location = new System.Drawing.Point(0, 3);
-            this.textBox3.MinimumSize = new System.Drawing.Size(0, 23);
-            this.textBox3.Multiline = true;
-            this.textBox3.Name = "textBox3";
-            this.textBox3.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox3.Size = new System.Drawing.Size(276, 35);
-            this.textBox3.TabIndex = 60;
+            textBox3.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            textBox3.Location = new Point(0, 3);
+            textBox3.MinimumSize = new Size(0, 23);
+            textBox3.Multiline = true;
+            textBox3.Name = "textBox3";
+            textBox3.ScrollBars = ScrollBars.Vertical;
+            textBox3.Size = new Size(276, 35);
+            textBox3.TabIndex = 60;
             // 
             // timerStatus
             // 
-            this.timerStatus.Enabled = true;
-            this.timerStatus.Interval = 500;
-            this.timerStatus.Tick += new System.EventHandler(this.timerStatus_Tick);
+            timerStatus.Enabled = true;
+            timerStatus.Interval = 500;
+            timerStatus.Tick += timerStatus_Tick;
             // 
             // contextMenuStrip1
             // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.hideToolStripMenuItem,
-            this.showToolStripMenuItem,
-            this.capsLockToolStripMenuItem,
-            this.uPPERCaseClipboardToolStripMenuItem,
-            this.lowerCaseClipboardToolStripMenuItem,
-            this.plainTextClipboardToolStripMenuItem,
-            this.exitToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(189, 158);
+            contextMenuStrip1.Items.AddRange(new ToolStripItem[] { hideToolStripMenuItem, showToolStripMenuItem, capsLockToolStripMenuItem, uPPERCaseClipboardToolStripMenuItem, lowerCaseClipboardToolStripMenuItem, plainTextClipboardToolStripMenuItem, exitToolStripMenuItem });
+            contextMenuStrip1.Name = "contextMenuStrip1";
+            contextMenuStrip1.Size = new Size(189, 158);
             // 
             // hideToolStripMenuItem
             // 
-            this.hideToolStripMenuItem.Name = "hideToolStripMenuItem";
-            this.hideToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
-            this.hideToolStripMenuItem.Text = "Hide";
-            this.hideToolStripMenuItem.Click += new System.EventHandler(this.actionHideFromTaskbar);
+            hideToolStripMenuItem.Name = "hideToolStripMenuItem";
+            hideToolStripMenuItem.Size = new Size(188, 22);
+            hideToolStripMenuItem.Text = "Hide";
+            hideToolStripMenuItem.Click += actionHideFromTaskbar;
             // 
             // showToolStripMenuItem
             // 
-            this.showToolStripMenuItem.Name = "showToolStripMenuItem";
-            this.showToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
-            this.showToolStripMenuItem.Text = "Show";
-            this.showToolStripMenuItem.Click += new System.EventHandler(this.actionShowWindow);
+            showToolStripMenuItem.Name = "showToolStripMenuItem";
+            showToolStripMenuItem.Size = new Size(188, 22);
+            showToolStripMenuItem.Text = "Show";
+            showToolStripMenuItem.Click += actionShowWindow;
             // 
             // capsLockToolStripMenuItem
             // 
-            this.capsLockToolStripMenuItem.Name = "capsLockToolStripMenuItem";
-            this.capsLockToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
-            this.capsLockToolStripMenuItem.Text = "Caps Lock";
-            this.capsLockToolStripMenuItem.Click += new System.EventHandler(this.actionCapsLock);
+            capsLockToolStripMenuItem.Name = "capsLockToolStripMenuItem";
+            capsLockToolStripMenuItem.Size = new Size(188, 22);
+            capsLockToolStripMenuItem.Text = "Caps Lock";
+            capsLockToolStripMenuItem.Click += actionCapsLock;
             // 
             // uPPERCaseClipboardToolStripMenuItem
             // 
-            this.uPPERCaseClipboardToolStripMenuItem.Name = "uPPERCaseClipboardToolStripMenuItem";
-            this.uPPERCaseClipboardToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
-            this.uPPERCaseClipboardToolStripMenuItem.Text = "UPPER case clipboard";
-            this.uPPERCaseClipboardToolStripMenuItem.Click += new System.EventHandler(this.actionUpperCaseOnce);
+            uPPERCaseClipboardToolStripMenuItem.Name = "uPPERCaseClipboardToolStripMenuItem";
+            uPPERCaseClipboardToolStripMenuItem.Size = new Size(188, 22);
+            uPPERCaseClipboardToolStripMenuItem.Text = "UPPER case clipboard";
+            uPPERCaseClipboardToolStripMenuItem.Click += actionUpperCaseOnce;
             // 
             // lowerCaseClipboardToolStripMenuItem
             // 
-            this.lowerCaseClipboardToolStripMenuItem.Name = "lowerCaseClipboardToolStripMenuItem";
-            this.lowerCaseClipboardToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
-            this.lowerCaseClipboardToolStripMenuItem.Text = "lower case clipboard";
-            this.lowerCaseClipboardToolStripMenuItem.Click += new System.EventHandler(this.actionLowerCaseOnce);
+            lowerCaseClipboardToolStripMenuItem.Name = "lowerCaseClipboardToolStripMenuItem";
+            lowerCaseClipboardToolStripMenuItem.Size = new Size(188, 22);
+            lowerCaseClipboardToolStripMenuItem.Text = "lower case clipboard";
+            lowerCaseClipboardToolStripMenuItem.Click += actionLowerCaseOnce;
             // 
             // plainTextClipboardToolStripMenuItem
             // 
-            this.plainTextClipboardToolStripMenuItem.Name = "plainTextClipboardToolStripMenuItem";
-            this.plainTextClipboardToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
-            this.plainTextClipboardToolStripMenuItem.Text = "Plain text clipboard";
-            this.plainTextClipboardToolStripMenuItem.Click += new System.EventHandler(this.actionPlainTextOnce);
+            plainTextClipboardToolStripMenuItem.Name = "plainTextClipboardToolStripMenuItem";
+            plainTextClipboardToolStripMenuItem.Size = new Size(188, 22);
+            plainTextClipboardToolStripMenuItem.Text = "Plain text clipboard";
+            plainTextClipboardToolStripMenuItem.Click += actionPlainTextOnce;
             // 
             // exitToolStripMenuItem
             // 
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
-            this.exitToolStripMenuItem.Text = "Exit";
-            this.exitToolStripMenuItem.Click += new System.EventHandler(this.actionExit);
+            exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            exitToolStripMenuItem.Size = new Size(188, 22);
+            exitToolStripMenuItem.Text = "Exit";
+            exitToolStripMenuItem.Click += actionExit;
             // 
             // notifyIcon1
             // 
-            this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
-            this.notifyIcon1.Text = "notifyIcon1";
+            notifyIcon1.Icon = (Icon)resources.GetObject("notifyIcon1.Icon");
+            notifyIcon1.Text = "notifyIcon1";
             // 
             // systrayIcon
             // 
-            this.systrayIcon.ContextMenuStrip = this.contextMenuStrip1;
-            this.systrayIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("systrayIcon.Icon")));
-            this.systrayIcon.Text = "Clipboard Tool - Caps Lock is ?";
-            this.systrayIcon.Visible = true;
-            this.systrayIcon.DoubleClick += new System.EventHandler(this.actionShowWindow);
+            systrayIcon.ContextMenuStrip = contextMenuStrip1;
+            systrayIcon.Icon = (Icon)resources.GetObject("systrayIcon.Icon");
+            systrayIcon.Text = "Clipboard Tool - Caps Lock is ?";
+            systrayIcon.Visible = true;
+            systrayIcon.DoubleClick += actionShowWindow;
             // 
             // toolTip
             // 
-            this.toolTip.AutomaticDelay = 200;
+            toolTip.AutomaticDelay = 200;
             // 
             // buttonHelp
             // 
-            this.buttonHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonHelp.Location = new System.Drawing.Point(327, 188);
-            this.buttonHelp.Name = "buttonHelp";
-            this.buttonHelp.Size = new System.Drawing.Size(30, 23);
-            this.buttonHelp.TabIndex = 33;
-            this.buttonHelp.Text = "?";
-            this.buttonHelp.UseVisualStyleBackColor = true;
-            this.buttonHelp.Click += new System.EventHandler(this.actionShowHelp);
+            buttonHelp.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            buttonHelp.Location = new Point(327, 188);
+            buttonHelp.Name = "buttonHelp";
+            buttonHelp.Size = new Size(30, 23);
+            buttonHelp.TabIndex = 33;
+            buttonHelp.Text = "?";
+            buttonHelp.UseVisualStyleBackColor = true;
+            buttonHelp.Click += actionShowHelp;
+            buttonHelp.MouseHover += showTooltipHelp;
             // 
             // buttonSaveCustom
             // 
-            this.buttonSaveCustom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonSaveCustom.Location = new System.Drawing.Point(327, 217);
-            this.buttonSaveCustom.Name = "buttonSaveCustom";
-            this.buttonSaveCustom.Size = new System.Drawing.Size(30, 23);
-            this.buttonSaveCustom.TabIndex = 34;
-            this.buttonSaveCustom.Text = "💾";
-            this.buttonSaveCustom.UseVisualStyleBackColor = true;
-            this.buttonSaveCustom.Click += new System.EventHandler(this.actionSaveCustomText);
+            buttonSaveCustom.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            buttonSaveCustom.Location = new Point(327, 217);
+            buttonSaveCustom.Name = "buttonSaveCustom";
+            buttonSaveCustom.Size = new Size(30, 23);
+            buttonSaveCustom.TabIndex = 34;
+            buttonSaveCustom.Text = "💾";
+            buttonSaveCustom.UseVisualStyleBackColor = true;
+            buttonSaveCustom.Click += actionSaveCustomText;
+            buttonSaveCustom.MouseHover += showTooltipSaveTextToFile;
             // 
             // timerKeystrokes
             // 
-            this.timerKeystrokes.Tick += new System.EventHandler(this.actionDelayedKeystrokes);
+            timerKeystrokes.Tick += actionDelayedKeystrokes;
             // 
             // splitContainer1
             // 
-            this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.splitContainer1.Location = new System.Drawing.Point(5, 309);
-            this.splitContainer1.Margin = new System.Windows.Forms.Padding(0);
-            this.splitContainer1.Name = "splitContainer1";
-            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            splitContainer1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            splitContainer1.Location = new Point(5, 309);
+            splitContainer1.Margin = new Padding(0);
+            splitContainer1.Name = "splitContainer1";
+            splitContainer1.Orientation = Orientation.Horizontal;
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.button7);
-            this.splitContainer1.Panel1.Controls.Add(this.textBox1);
-            this.splitContainer1.Panel1.Controls.Add(this.buttonSave1);
-            this.splitContainer1.Panel1.Controls.Add(this.buttonLoad1);
+            splitContainer1.Panel1.Controls.Add(button7);
+            splitContainer1.Panel1.Controls.Add(textBox1);
+            splitContainer1.Panel1.Controls.Add(buttonSave1);
+            splitContainer1.Panel1.Controls.Add(buttonLoad1);
             // 
             // splitContainer1.Panel2
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
-            this.splitContainer1.Size = new System.Drawing.Size(354, 124);
-            this.splitContainer1.SplitterDistance = 40;
-            this.splitContainer1.TabIndex = 49;
+            splitContainer1.Panel2.Controls.Add(splitContainer2);
+            splitContainer1.Size = new Size(354, 124);
+            splitContainer1.SplitterDistance = 40;
+            splitContainer1.TabIndex = 49;
             // 
             // button7
             // 
-            this.button7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button7.Location = new System.Drawing.Point(282, 2);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(23, 23);
-            this.button7.TabIndex = 41;
-            this.button7.Tag = "1";
-            this.button7.Text = "💾";
-            this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.actionSaveToFile);
+            button7.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            button7.Location = new Point(282, 2);
+            button7.Name = "button7";
+            button7.Size = new Size(23, 23);
+            button7.TabIndex = 41;
+            button7.Tag = "1";
+            button7.Text = "💾";
+            button7.UseVisualStyleBackColor = true;
+            button7.Click += actionSaveToFile;
+            button7.MouseHover += showTooltipSaveTextToFile;
             // 
             // splitContainer2
             // 
-            this.splitContainer2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.splitContainer2.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer2.Margin = new System.Windows.Forms.Padding(0);
-            this.splitContainer2.Name = "splitContainer2";
-            this.splitContainer2.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            splitContainer2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            splitContainer2.Location = new Point(0, 0);
+            splitContainer2.Margin = new Padding(0);
+            splitContainer2.Name = "splitContainer2";
+            splitContainer2.Orientation = Orientation.Horizontal;
             // 
             // splitContainer2.Panel1
             // 
-            this.splitContainer2.Panel1.Controls.Add(this.button1);
-            this.splitContainer2.Panel1.Controls.Add(this.button4);
-            this.splitContainer2.Panel1.Controls.Add(this.button5);
-            this.splitContainer2.Panel1.Controls.Add(this.textBox2);
+            splitContainer2.Panel1.Controls.Add(button1);
+            splitContainer2.Panel1.Controls.Add(button4);
+            splitContainer2.Panel1.Controls.Add(button5);
+            splitContainer2.Panel1.Controls.Add(textBox2);
             // 
             // splitContainer2.Panel2
             // 
-            this.splitContainer2.Panel2.Controls.Add(this.button6);
-            this.splitContainer2.Panel2.Controls.Add(this.button8);
-            this.splitContainer2.Panel2.Controls.Add(this.button9);
-            this.splitContainer2.Panel2.Controls.Add(this.textBox3);
-            this.splitContainer2.Size = new System.Drawing.Size(352, 80);
-            this.splitContainer2.SplitterDistance = 38;
-            this.splitContainer2.TabIndex = 59;
+            splitContainer2.Panel2.Controls.Add(button6);
+            splitContainer2.Panel2.Controls.Add(button8);
+            splitContainer2.Panel2.Controls.Add(button9);
+            splitContainer2.Panel2.Controls.Add(textBox3);
+            splitContainer2.Size = new Size(352, 80);
+            splitContainer2.SplitterDistance = 38;
+            splitContainer2.TabIndex = 59;
             // 
             // button1
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(281, 3);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(23, 23);
-            this.button1.TabIndex = 51;
-            this.button1.Tag = "2";
-            this.button1.Text = "💾";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.actionSaveToFile);
+            button1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            button1.Location = new Point(281, 3);
+            button1.Name = "button1";
+            button1.Size = new Size(23, 23);
+            button1.TabIndex = 51;
+            button1.Tag = "2";
+            button1.Text = "💾";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += actionSaveToFile;
+            button1.MouseHover += showTooltipSaveTextToFile;
             // 
             // button4
             // 
-            this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button4.Location = new System.Drawing.Point(305, 3);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(23, 23);
-            this.button4.TabIndex = 52;
-            this.button4.Tag = "2";
-            this.button4.Text = "▽";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.actionSave);
+            button4.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            button4.Location = new Point(305, 3);
+            button4.Name = "button4";
+            button4.Size = new Size(23, 23);
+            button4.TabIndex = 52;
+            button4.Tag = "2";
+            button4.Text = "▽";
+            button4.UseVisualStyleBackColor = true;
+            button4.Click += actionSave;
+            button4.MouseHover += showToolTipMemSave;
             // 
             // button5
             // 
-            this.button5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button5.Location = new System.Drawing.Point(329, 3);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(23, 23);
-            this.button5.TabIndex = 53;
-            this.button5.Tag = "2";
-            this.button5.Text = "△";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.actionLoad);
+            button5.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            button5.Location = new Point(329, 3);
+            button5.Name = "button5";
+            button5.Size = new Size(23, 23);
+            button5.TabIndex = 53;
+            button5.Tag = "2";
+            button5.Text = "△";
+            button5.UseVisualStyleBackColor = true;
+            button5.Click += actionLoad;
+            button5.MouseHover += showToolTipMemLoad;
             // 
             // button6
             // 
-            this.button6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button6.Location = new System.Drawing.Point(281, 2);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(23, 23);
-            this.button6.TabIndex = 61;
-            this.button6.Tag = "3";
-            this.button6.Text = "💾";
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.actionSaveToFile);
+            button6.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            button6.Location = new Point(281, 2);
+            button6.Name = "button6";
+            button6.Size = new Size(23, 23);
+            button6.TabIndex = 61;
+            button6.Tag = "3";
+            button6.Text = "💾";
+            button6.UseVisualStyleBackColor = true;
+            button6.Click += actionSaveToFile;
+            button6.MouseHover += showTooltipSaveTextToFile;
             // 
             // button8
             // 
-            this.button8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button8.Location = new System.Drawing.Point(305, 2);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(23, 23);
-            this.button8.TabIndex = 62;
-            this.button8.Tag = "3";
-            this.button8.Text = "▽";
-            this.button8.UseVisualStyleBackColor = true;
-            this.button8.Click += new System.EventHandler(this.actionSave);
+            button8.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            button8.Location = new Point(305, 2);
+            button8.Name = "button8";
+            button8.Size = new Size(23, 23);
+            button8.TabIndex = 62;
+            button8.Tag = "3";
+            button8.Text = "▽";
+            button8.UseVisualStyleBackColor = true;
+            button8.Click += actionSave;
+            button8.MouseHover += showToolTipMemSave;
             // 
             // button9
             // 
-            this.button9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button9.Location = new System.Drawing.Point(329, 2);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(23, 23);
-            this.button9.TabIndex = 63;
-            this.button9.Tag = "3";
-            this.button9.Text = "△";
-            this.button9.UseVisualStyleBackColor = true;
-            this.button9.Click += new System.EventHandler(this.actionLoad);
+            button9.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            button9.Location = new Point(329, 2);
+            button9.Name = "button9";
+            button9.Size = new Size(23, 23);
+            button9.TabIndex = 63;
+            button9.Tag = "3";
+            button9.Text = "△";
+            button9.UseVisualStyleBackColor = true;
+            button9.Click += actionLoad;
+            button9.MouseHover += showToolTipMemLoad;
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(364, 442);
-            this.Controls.Add(this.splitContainer1);
-            this.Controls.Add(this.buttonSaveCustom);
-            this.Controls.Add(this.buttonHelp);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.textCustom);
-            this.Controls.Add(this.buttonProcess);
-            this.Controls.Add(this.labelProcess);
-            this.Controls.Add(this.numericUpDown1);
-            this.Controls.Add(this.panel2);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.buttonToolbar);
-            this.Controls.Add(this.buttonHide);
-            this.Controls.Add(this.buttonPin);
-            this.Controls.Add(this.buttonOptions);
-            this.Controls.Add(this.checkBoxCapsLock);
-            this.Controls.Add(this.labelCaps);
-            this.Controls.Add(this.labelPlain);
-            this.Controls.Add(this.labelUpper);
-            this.Controls.Add(this.labelLower);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.buttonLower);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MinimumSize = new System.Drawing.Size(180, 70);
-            this.Name = "MainForm";
-            this.Text = "Clipboard Tool";
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
-            this.contextMenuStrip1.ResumeLayout(false);
-            this.splitContainer1.Panel1.ResumeLayout(false);
-            this.splitContainer1.Panel1.PerformLayout();
-            this.splitContainer1.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
-            this.splitContainer1.ResumeLayout(false);
-            this.splitContainer2.Panel1.ResumeLayout(false);
-            this.splitContainer2.Panel1.PerformLayout();
-            this.splitContainer2.Panel2.ResumeLayout(false);
-            this.splitContainer2.Panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
-            this.splitContainer2.ResumeLayout(false);
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(364, 442);
+            Controls.Add(splitContainer1);
+            Controls.Add(buttonSaveCustom);
+            Controls.Add(buttonHelp);
+            Controls.Add(label1);
+            Controls.Add(textCustom);
+            Controls.Add(buttonProcess);
+            Controls.Add(labelProcess);
+            Controls.Add(numericUpDown1);
+            Controls.Add(panel2);
+            Controls.Add(panel1);
+            Controls.Add(buttonToolbar);
+            Controls.Add(buttonHide);
+            Controls.Add(buttonPin);
+            Controls.Add(buttonOptions);
+            Controls.Add(checkBoxCapsLock);
+            Controls.Add(labelCaps);
+            Controls.Add(labelPlain);
+            Controls.Add(labelUpper);
+            Controls.Add(labelLower);
+            Controls.Add(button3);
+            Controls.Add(button2);
+            Controls.Add(buttonLower);
+            Icon = (Icon)resources.GetObject("$this.Icon");
+            MinimumSize = new Size(180, 70);
+            Name = "MainForm";
+            Text = "Clipboard Tool";
+            ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
+            contextMenuStrip1.ResumeLayout(false);
+            splitContainer1.Panel1.ResumeLayout(false);
+            splitContainer1.Panel1.PerformLayout();
+            splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
+            splitContainer1.ResumeLayout(false);
+            splitContainer2.Panel1.ResumeLayout(false);
+            splitContainer2.Panel1.PerformLayout();
+            splitContainer2.Panel2.ResumeLayout(false);
+            splitContainer2.Panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)splitContainer2).EndInit();
+            splitContainer2.ResumeLayout(false);
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
