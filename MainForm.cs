@@ -240,7 +240,7 @@ namespace ClipboardTool
 
             foreach (KeyValuePair<string, Hotkey> ghk in HotkeyList)
             {
-                RegisterHotKey(ghk.Value.ghk);
+                RegisterHotKey(ghk.Value.ghk);                                
             }
 
             if (errorMessages.Length > 0)
@@ -253,9 +253,10 @@ namespace ClipboardTool
         {
             if (ghk != null)
             {
+                //writeMessage("hk reg " + ghk.id);
                 if (!ghk.Register())
                 {
-                    //writeMessage("register hotkey failed");
+                    writeMessage("register hotkey failed");
                 }
             }
         }
@@ -285,14 +286,13 @@ namespace ClipboardTool
 
 
         private void HandleHotkey(int id)
-        {
+        {            
 
             if (HotkeyList["LowerCase"] != null)
             {
                 if (id == HotkeyList["LowerCase"].ghk.id)
                 {
                     sendCut();
-
                     sendPaste(LowerCaseOnce());
                 }
             }
@@ -300,11 +300,11 @@ namespace ClipboardTool
             //if (ghkUpperCase != null)
             if (HotkeyList["UpperCase"] != null)
             {
-                //if (id == ghkUpperCase.id)
+
                 if (id == HotkeyList["UpperCase"].ghk.id)
                 {
-                    sendCut();
 
+                    sendCut();
                     sendPaste(UpperCaseOnce());
                 }
             }
@@ -437,7 +437,7 @@ namespace ClipboardTool
         }
 
         private void delayKeystrokes(string keystrokes)
-        {
+        {            
             delayedKeystrokes = keystrokes;
             timerKeystrokes.Start();
         }
@@ -464,6 +464,7 @@ namespace ClipboardTool
                     //keystrokes = Regex.Replace(keystrokes, "[+%~(){}]", "{$0}");
                     //keystrokes = keystrokes.Replace("^", "%(94)");  //alt ascii code doesn't work :(
                     SendKeys.SendWait(keystrokes);
+                    
                     break;
             }
 

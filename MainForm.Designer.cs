@@ -456,7 +456,11 @@
             this.buttonSaveCustom.TabIndex = 34;
             this.buttonSaveCustom.Text = "💾";
             this.buttonSaveCustom.UseVisualStyleBackColor = true;
-            this.buttonSaveCustom.Click += new System.EventHandler(this.actionSaveToFile);
+            this.buttonSaveCustom.Click += new System.EventHandler(this.actionSaveCustomText);
+            // 
+            // timerKeystrokes
+            // 
+            this.timerKeystrokes.Tick += new System.EventHandler(this.actionDelayedKeystrokes);
             // 
             // splitContainer1
             // 
@@ -567,7 +571,7 @@
             this.button6.Tag = "3";
             this.button6.Text = "💾";
             this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.actionSave);
+            this.button6.Click += new System.EventHandler(this.actionSaveToFile);
             // 
             // button8
             // 
