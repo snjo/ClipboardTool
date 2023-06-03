@@ -429,7 +429,7 @@ namespace ClipboardTool
         {
             if (settings.sendCut)
             {
-                SendKeys.SendWait("^x");
+                SendKeys.Send("^x");
             }
         }
 
@@ -456,24 +456,27 @@ namespace ClipboardTool
             switch (keystrokes)
             {
                 case "^v":
-                    SendKeys.SendWait("^v");
+                    SendKeys.Send("^v");
                     break;
                 case "^x":
-                    SendKeys.SendWait("^x");
+                    SendKeys.Send("^x");
                     break;
                 case "^c":
-                    SendKeys.SendWait("^c");
+                    SendKeys.Send("^c");
                     break;
                 case "$SendDate":
-                    SendKeys.SendWait(SendDateText());
+                    SendKeys.Send(SendDateText());
                     sendDateChoice = SendDateOption.NotStarted;
                     break;
                 default:
                     keystrokes = Regex.Replace(keystrokes, "[+^%~(){}]", "{$0}");
                     //keystrokes = Regex.Replace(keystrokes, "[+%~(){}]", "{$0}");
                     //keystrokes = keystrokes.Replace("^", "%(94)");  //alt ascii code doesn't work :(
-                    SendKeys.SendWait(keystrokes);
+
+                    //SendKeys.SendWait(keystrokes);
                     
+                    SendKeys.Send(keystrokes);
+
                     break;
             }
 
