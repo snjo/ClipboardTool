@@ -20,7 +20,7 @@ https://github.com/snjo/ClipboardTool
 | $+        | number, then increment it                                        |
 | $-        | number, then decrement it                                        |
 | $n2, $n3  | use 1-3 digits in number (01, 001)                               |
-| $1 - $3   | contents of the memory slots                                     |
+| $m1 - $m3 | contents of the memory slots                                     |
 | $eq       | Convert \"\" to \", and removes single \"                        |
 | $rep      | Replace text in clipboard. Use mem slot 1 & 2 as from/to strings |
 | $vcm      | Split value in slot 1 with comma, output value[number]           |
@@ -42,6 +42,7 @@ If you placed this program in one of the write protected Program Files folders, 
 -----------------------------------------
 ## Hotkeys
 
+The program settings user.config are stored in a folder in %localappdata%\ClipboardTool\
 
 | Function                       | Default hotkey         |
 |--------------------------------|------------------------|
@@ -50,12 +51,19 @@ If you placed this program in one of the write protected Program Files folders, 
 | Convert to plain text          | Ctrl+Shift+T           |
 | Process text using $'s         | Ctrl+Shift+P           |
 | Caps Lock toggle               | Ctrl+Shift+Backspace   |
+| Memory Slot 1                  | Ctrl+Shift+1           |
+| Memory Slot 2                  | Ctrl+Shift+2           |
+| Memory Slot 3                  | Ctrl+Shift+3           |
+| Reset Number UpDown to 1       | Ctrl+Shift+R           |
 | Date/Time                      | Ctrl+Shift+D           |
 
-	Tap the date hotkey 1-3 times while holding the modifier keys:
-	1: Types out just the date
+Tap the date hotkey 1-3 times while holding the modifier keys:
+
+	1: Types out just the date	
 	2: Types out the Date and Time
 	3: Types out just the Time
+
+Memory Slot hotkeys also does any $ processing in the field, but some functions are not suited for these slots since they rely on values in the mem slots ($rep, $vcm, $list etc.)
 
 -----------------------------------------
 ## Key codes for hotkey options:
