@@ -174,7 +174,16 @@ namespace ClipboardTool
         {
             string file = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal).FilePath;
             string folder = Path.GetDirectoryName(file);
-            Process.Start(new ProcessStartInfo() { FileName = folder, UseShellExecute = true });
+            if (Directory.Exists(folder))
+            {
+                Process.Start(new ProcessStartInfo() { FileName = folder, UseShellExecute = true });
+            }
+            else
+            {
+                MessageBox.Show("No settings folder exists yet. Save the settings and try again." + Environment.NewLine +
+                    "(A new settings file/folder is created if the application has changed or moved)");
+            }
+            
         }
 
         private void buttonSelectFolder_Click(object sender, EventArgs e)
