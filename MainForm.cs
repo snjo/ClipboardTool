@@ -217,16 +217,38 @@ namespace ClipboardTool
             string folder = settings.MemorySlotFolder;
             if (folder.Length > 0)
             {
-                if (Directory.Exists(folder))
+                string fullpath = Environment.ExpandEnvironmentVariables(folder);
+                if (Directory.Exists(fullpath))
                 {
                     if (folder.Substring(folder.Length - 1, 1) != "\\")
                         folder += "\\";
-                    File.WriteAllText(folder + filename, text);
+                    WriteToFile(folder + filename, text);
+                }
+                else
+                {
+                    writeMessage("Couldn't save file " + filename + " to folder " + folder + Environment.NewLine +
+                    "The folder does not exist." + Environment.NewLine +
+                    "You can set the save location in Settings, '.txt file folder'");
                 }
             }
             else
             {
-                File.WriteAllText(filename, text);
+                WriteToFile(filename, text);
+            }
+        }
+
+        private void WriteToFile(string filename, string text)
+        {
+            try
+            {
+                string fullpath = Environment.ExpandEnvironmentVariables(filename);
+                File.WriteAllText(fullpath, text);
+            }
+            catch
+            {
+                writeMessage("Couldn't save file " + filename + " to folder." + Environment.NewLine +
+                    "Ensure that the folder is not write protected." + Environment.NewLine +
+                    "You can set the save location in Settings, '.txt file folder'");
             }
         }
 
@@ -256,8 +278,8 @@ namespace ClipboardTool
             {
                 //writeMessage("hk reg " + ghk.id);
                 if (!ghk.Register())
-                {
-                    writeMessage("register hotkey failed");
+                {                   
+                    //writeMessage("register hotkey failed");
                 }
             }
         }
@@ -814,7 +836,7 @@ namespace ClipboardTool
 
         private void saveMemSlotToFile(int num)
         {
-            saveTextToFile(".\\mem" + num + ".txt", SetTextBoxTarget(num).Text);
+            saveTextToFile("mem" + num + ".txt", SetTextBoxTarget(num).Text);
         }
 
         public void setClipboardFromTextBox(int num)//(TextBox textBox)

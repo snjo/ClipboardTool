@@ -167,14 +167,33 @@ namespace ClipboardTool
         private void linkWebsite(object sender, LinkLabelLinkClickedEventArgs e)
         {
             string url = "https://github.com/snjo/ClipboardTool";
-            Process.Start(new ProcessStartInfo() { FileName = url, UseShellExecute = true });            
+            Process.Start(new ProcessStartInfo() { FileName = url, UseShellExecute = true });
         }
 
         private void LinkSettings(object sender, LinkLabelLinkClickedEventArgs e)
         {
             string file = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal).FilePath;
-            string folder = Path.GetDirectoryName(file);            
-            Process.Start(new ProcessStartInfo() { FileName = folder, UseShellExecute = true });            
+            string folder = Path.GetDirectoryName(file);
+            if (Directory.Exists(folder))
+            {
+                Process.Start(new ProcessStartInfo() { FileName = folder, UseShellExecute = true });
+            }
+            else
+            {
+                MessageBox.Show("No settings folder exists yet. Save the settings and try again." + Environment.NewLine +
+                    "(A new settings file/folder is created if the application has changed or moved)");
+            }
+            
+        }
+
+        private void buttonSelectFolder_Click(object sender, EventArgs e)
+        {
+            DialogResult dialog = folderBrowserDialog1.ShowDialog();
+            if (dialog == DialogResult.OK)
+            {
+                textMemorySlotFolder.Text = folderBrowserDialog1.SelectedPath;
+            }
+            
         }
     }
 }
