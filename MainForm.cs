@@ -279,7 +279,7 @@ namespace ClipboardTool
             {
                 //writeMessage("hk reg " + ghk.id);
                 if (!ghk.Register())
-                {                   
+                {
                     //writeMessage("register hotkey failed");
                 }
             }
@@ -618,7 +618,7 @@ namespace ClipboardTool
                 {
                     systrayIcon.Icon = iconLower;
                 }
-                systrayIcon.Text = "Case Converter - Caps Lock is " + CapsLockStatusText;
+                systrayIcon.Text = "Clipboard Tool - Caps Lock is " + CapsLockStatusText;
             }
         }
 
