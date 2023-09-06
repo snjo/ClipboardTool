@@ -84,7 +84,6 @@ namespace ClipboardTool
             "$vsc Split value in slot 1 with semicolon, output value[number]\n" +
             "$vsp Split value in slot 1 with space, output value[number]\n" +
             "$list Split lines in main textbox (skips line 1), output value[number]\n" +
-            "$prompt Popup prompt to fill in a value\n" + // testing if the control can revert back to the active application -----------------
             "\n" +
             "Tap the date hotkey 1-3 times while holding the modifier keys:\n" +
             "1: Just the date\n" +
@@ -436,8 +435,6 @@ namespace ClipboardTool
 
         private void sendPaste(string output)
         {
-            if (output == string.Empty) return;
-
             if (settings.sendPaste)
             {
                 delayKeystrokes("^v");
@@ -458,8 +455,6 @@ namespace ClipboardTool
         {
             switch (keystrokes)
             {
-                case "":
-                    break;
                 case "^v":
                     SendKeys.Send("^v");
                     break;
@@ -724,21 +719,6 @@ namespace ClipboardTool
 
                 if (numericUpDown1.Value < numericUpDown1.Maximum)
                     numericUpDown1.Value++;
-            }
-
-            //"$prompt Popup prompt to fill in a value\n" + // testing if the control can revert back to the active application
-            if (customText.Contains("$prompt"))
-            {
-                TextPrompt prompt = new TextPrompt();
-                if (prompt.ShowDialog() == DialogResult.OK)
-                {
-                    customText = customText.Replace("$prompt", prompt.TextResult);
-                }
-                else
-                {
-                    return string.Empty; // stop the text output if the calling function respects a string.Empty as an abort
-                }
-                prompt.Dispose();
             }
 
             // debug hotkey output
