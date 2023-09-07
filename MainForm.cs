@@ -866,7 +866,9 @@ namespace ClipboardTool
             {
                 if (textBox.Text.Length > 0)
                 {
-                    Clipboard.SetText(ProcessTextVariables(textBox.Text));
+                    string newClipText = ProcessTextVariables(textBox.Text);
+                    if (newClipText.Length > 0)
+                        Clipboard.SetText(newClipText);
                 }
                 else
                 {
