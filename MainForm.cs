@@ -25,9 +25,9 @@ namespace ClipboardTool
 {
     public partial class MainForm : Form
     {
-#pragma warning disable CS8602 // Dereference of a possibly null reference.
-#pragma warning disable CS8604 // Possible null reference argument.
-#pragma warning disable CS8601 // Possible null reference assignment.
+//#pragma warning disable CS8602 // Dereference of a possibly null reference.
+//#pragma warning disable CS8604 // Possible null reference argument.
+//#pragma warning disable CS8601 // Possible null reference assignment.
 
 
         [DllImport("user32.dll")]
@@ -121,12 +121,14 @@ namespace ClipboardTool
         private Hotkey LoadHotkey(string hotkeyName) //char settingHotkey
         {
             //Settings.Default["hk" + hotkeyName + "Key"]
-            Hotkey hotkey = new Hotkey();
-            hotkey.key = Settings.Default["hk" + hotkeyName + "Key"].ToString();
-            hotkey.Ctrl = (bool)Settings.Default["hk" + hotkeyName + "Ctrl"];
-            hotkey.Alt = (bool)Settings.Default["hk" + hotkeyName + "Alt"];
-            hotkey.Shift = (bool)Settings.Default["hk" + hotkeyName + "Shift"];
-            hotkey.Win = (bool)Settings.Default["hk" + hotkeyName + "Win"];
+            Hotkey hotkey = new Hotkey
+            {
+                key = Settings.Default["hk" + hotkeyName + "Key"].ToString()+"", //+"" to stop warning for ToString null return
+                Ctrl = (bool)Settings.Default["hk" + hotkeyName + "Ctrl"],
+                Alt = (bool)Settings.Default["hk" + hotkeyName + "Alt"],
+                Shift = (bool)Settings.Default["hk" + hotkeyName + "Shift"],
+                Win = (bool)Settings.Default["hk" + hotkeyName + "Win"]
+            };
             hotkey.ghk = new Hotkeys.GlobalHotkey(hotkey.Modifiers(), hotkey.key, this);
 
             //test
@@ -845,22 +847,34 @@ namespace ClipboardTool
         public void actionSave(object sender, EventArgs e)
         {
             var button = (System.Windows.Forms.Button)sender;
-            int num = int.Parse(button.Tag.ToString());
-            setTextBoxFromClipboard(num);
+            string? tag = button.Tag.ToString();
+            if (tag != null)
+            {
+                int num = int.Parse(tag);
+                setTextBoxFromClipboard(num);
+            }
         }
 
         public void actionLoad(object sender, EventArgs e)
         {
             var button = (System.Windows.Forms.Button)sender;
-            int num = int.Parse(button.Tag.ToString());
-            setClipboardFromTextBox(num);
+            string? tag = button.Tag.ToString();
+            if (tag != null)
+            {
+                int num = int.Parse(tag);
+                setClipboardFromTextBox(num);
+            }
         }
 
         private void actionSaveToFile(object sender, EventArgs e)
         {
             var button = (System.Windows.Forms.Button)sender;
-            int num = int.Parse(button.Tag.ToString());
-            saveMemSlotToFile(num);
+            string? tag = button.Tag.ToString();
+            if (tag != null)
+            {
+                int num = int.Parse(tag);
+                saveMemSlotToFile(num);
+            }
         }
         #endregion
     }
