@@ -496,13 +496,7 @@ namespace ClipboardTool
                     break;
                 default:
                     keystrokes = Regex.Replace(keystrokes, "[+^%~(){}]", "{$0}");
-                    //keystrokes = Regex.Replace(keystrokes, "[+%~(){}]", "{$0}");
-                    //keystrokes = keystrokes.Replace("^", "%(94)");  //alt ascii code doesn't work :(
-
-                    //SendKeys.SendWait(keystrokes);
-
                     SendKeys.Send(keystrokes);
-
                     break;
             }
 
@@ -633,48 +627,6 @@ namespace ClipboardTool
             ToggleCapsLock();
         }
 
-
-
-
-
-        public string SeparatorList(string customText, int slot = 1)
-        {
-            char separator = ',';
-            string command = "$v";
-            if (customText.Contains("$vcm")) // semicolon separator
-            {
-                separator = ',';
-                command = "$vcm";
-            }
-            else if (customText.Contains("$vsc")) // semicolon separator
-            {
-                separator = ';';
-                command = "$vsc";
-            }
-            else if (customText.Contains("$vsp")) // semicolon separator
-            {
-                separator = ' ';
-                command = "$vsp";
-            }
-
-
-            string[] values = MemorySlot(slot).Text.Split(separator);
-            if (values.Length > 0 && numericUpDown1.Value <= values.Length && numericUpDown1.Value >= 1)
-            {
-                customText = customText.Replace(command, values[(int)numericUpDown1.Value - 1]);
-                //customText = values[(int)numericUpDown1.Value];
-            }
-            else
-            {
-                customText = customText.Replace(command, String.Empty);
-            }
-            if (numericUpDown1.Value < numericUpDown1.Maximum)
-                numericUpDown1.Value++;
-            return customText;
-        }
-
-
-
         public void setTextBoxFromClipboard(int num)
         {
             TextBox textBox;
@@ -756,34 +708,7 @@ namespace ClipboardTool
             }   
         }
 
-        private void actionAlwaysOnTop(object sender, EventArgs e)
-        {
-            alwaysOnTop = !alwaysOnTop;
-            if (alwaysOnTop)
-            {
-                TopMost = true;
-            }
-            else
-            {
-                TopMost = false;
-            }
-        }
-
-        private void actionShowHelp(object sender, EventArgs e)
-        {
-            if (helpForm == null || helpForm.IsDisposed)
-            {
-                helpForm = new HelpForm();
-            }
-
-            helpForm.setText(tooltipText);
-            helpForm.Show();
-        }
-
-        private void actionSaveCustomText(object sender, EventArgs e)
-        {
-            saveTextToFile("process.txt", textCustom.Text);
-        }
+        #region Tooltips -----------------------------------------------------
 
         private void showToolTipHide(object sender, EventArgs e)
         {
@@ -818,6 +743,37 @@ namespace ClipboardTool
         private void showToolTipMemLoad(object sender, EventArgs e)
         {
             toolTip.SetToolTip((Control)sender, "Update clipboard contents with this slot's text");
+        }
+        #endregion
+
+        #region Button event actions -----------------------------------------
+        private void actionAlwaysOnTop(object sender, EventArgs e)
+        {
+            alwaysOnTop = !alwaysOnTop;
+            if (alwaysOnTop)
+            {
+                TopMost = true;
+            }
+            else
+            {
+                TopMost = false;
+            }
+        }
+
+        private void actionShowHelp(object sender, EventArgs e)
+        {
+            if (helpForm == null || helpForm.IsDisposed)
+            {
+                helpForm = new HelpForm();
+            }
+
+            helpForm.setText(tooltipText);
+            helpForm.Show();
+        }
+
+        private void actionSaveCustomText(object sender, EventArgs e)
+        {
+            saveTextToFile("process.txt", textCustom.Text);
         }
 
         private void actionCapsLock(object sender, EventArgs e)
@@ -902,5 +858,6 @@ namespace ClipboardTool
             int num = int.Parse(button.Tag.ToString());
             saveMemSlotToFile(num);
         }
+        #endregion
     }
 }
