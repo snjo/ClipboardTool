@@ -74,6 +74,7 @@
             Controls.Add(textBox1);
             Name = "TextPrompt";
             Text = "Text Prompt";
+            Load += TextPrompt_Load;
             ResumeLayout(false);
             PerformLayout();
         }

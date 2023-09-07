@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -12,11 +13,19 @@ namespace ClipboardTool
 {
     public partial class TextPrompt : Form
     {
+        [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+        public static extern bool SetForegroundWindow(IntPtr hWnd);
+
         public string TextResult = string.Empty;
         public TextPrompt()
         {
             InitializeComponent();
-            BringToFront();
+        }
+
+        private void TextPrompt_Load(object sender, EventArgs e)
+        {
+            SetForegroundWindow(Handle);
+            this.ActiveControl = textBox1;
         }
 
         private void buttonOK_Click(object sender, EventArgs e)
@@ -44,5 +53,7 @@ namespace ClipboardTool
                 DialogResult = DialogResult.Cancel;
             }
         }
+
+
     }
 }
