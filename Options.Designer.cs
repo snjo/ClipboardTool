@@ -347,7 +347,7 @@
         private TextBox textMemorySlotFolder;
         private Label label1;
         private Label label2;
-        private Label label3;
+        /*private Label label3;
         private TextBox textHotkeyUpper;
         private CheckBox checkUpperCtrl;
         private CheckBox checkUpperAlt;
@@ -376,7 +376,7 @@
         private CheckBox checkProcessAlt;
         private CheckBox checkProcessCtrl;
         private TextBox textHotkeyProcess;
-        private Label label7;
+        private Label label7;*/
         private Button buttonSave;
         private Button buttonCancel;
         private CheckBox optionCut;

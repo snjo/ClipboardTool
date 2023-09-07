@@ -115,7 +115,7 @@ namespace ClipboardTool
 
         private void updateTooltip(System.Windows.Forms.Button button, int num)
         {
-            toolTip1.SetToolTip(button, "Left Click to load to clipboard\nRight Click to save clipboard to this slot\n\n" + mainform.getMemorySlot(num));
+            toolTip1.SetToolTip(button, "Left Click to load to clipboard\nRight Click to save clipboard to this slot\n\n" + mainform.MemorySlotText(num));
         }
 
         private void updateTooltip1(object sender, EventArgs e)

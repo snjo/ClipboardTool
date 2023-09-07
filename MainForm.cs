@@ -31,6 +31,7 @@ namespace ClipboardTool
 
         Settings settings = Properties.Settings.Default;
         string clipBoardText = String.Empty;
+        ProcessText process;
 
         public Dictionary<string, Hotkey> HotkeyList = new Dictionary<string, Hotkey>
         {
@@ -96,7 +97,7 @@ namespace ClipboardTool
             InitializeComponent();
             Current = this;
             timerStatus.Start();
-
+            process = new ProcessText(this);
             iconUpper = notifyIcon1.Icon;
             iconLower = systrayIcon.Icon;
             helpForm.setText(tooltipText);
@@ -357,7 +358,7 @@ namespace ClipboardTool
                 {
                     sendCut();
 
-                    sendPaste(ProcessTextVariables(textCustom.Text));
+                    sendPaste(process.ProcessTextVariables(textCustom.Text));
                 }
             }
 
@@ -374,7 +375,7 @@ namespace ClipboardTool
                 if (id == HotkeyList["MemSlot1"].ghk.id)
                 {
                     sendCut();
-                    sendPaste(ProcessTextVariables(textBox1.Text));
+                    sendPaste(process.ProcessTextVariables(textBox1.Text));
                 }
             }
             if (HotkeyList["MemSlot2"] != null)
@@ -382,7 +383,7 @@ namespace ClipboardTool
                 if (id == HotkeyList["MemSlot2"].ghk.id)
                 {
                     sendCut();
-                    sendPaste(ProcessTextVariables(textBox2.Text));
+                    sendPaste(process.ProcessTextVariables(textBox2.Text));
                 }
             }
             if (HotkeyList["MemSlot3"] != null)
@@ -390,7 +391,7 @@ namespace ClipboardTool
                 if (id == HotkeyList["MemSlot3"].ghk.id)
                 {
                     sendCut();
-                    sendPaste(ProcessTextVariables(textBox3.Text));
+                    sendPaste(process.ProcessTextVariables(textBox3.Text));
                 }
             }
 
@@ -551,7 +552,7 @@ namespace ClipboardTool
             else return string.Empty;
         }
 
-        private void SetClipBoard(string clipBoardText, bool forceClipboardUpdate = false)
+        public void SetClipBoard(string clipBoardText, bool forceClipboardUpdate = false)
         {
             if (!settings.updateClipboard && settings.sendType && !forceClipboardUpdate) return;
             if (clipBoardText.Length > 0)
@@ -634,156 +635,9 @@ namespace ClipboardTool
 
 
 
-        private string ProcessTextVariables(string customText, bool forceClipboardUpdate = false)
-        {
-            if (customText == null) return String.Empty;
 
-            int padNumber = 1;
-            string clip = Clipboard.GetText();
 
-            // get mem slot data first, so you can run other processing on it
-            customText = customText.Replace("$m1", textBox1.Text);
-            customText = customText.Replace("$m2", textBox2.Text);
-            customText = customText.Replace("$m3", textBox3.Text);
-
-            // replace text in clipboard string. place first to allow for other processing on the result text. Uses mem slots 1 & 2
-            if (customText.Contains("$rep"))
-            {
-                customText = customText.Replace("$rep", String.Empty);
-                clip = clip.Replace(memorySlot(1).Text, memorySlot(2).Text);
-                //customText += "|" + memorySlot(1).Text + "|" + memorySlot(2).Text + "|";
-            }
-
-            // date and time
-            customText = customText.Replace("$d", DateTime.Now.ToShortDateString());
-            customText = customText.Replace("$t", DateTime.Now.ToShortTimeString());
-
-            // clipboard, case conversion
-            customText = customText.Replace("$cp", clip);
-            customText = customText.Replace("$cl", clip.ToLower());
-            customText = customText.Replace("$cu", clip.ToUpper());
-
-            // pad number with leading zeroes
-            if (customText.Contains("$n"))
-            {
-                if (customText.Contains("$n2"))
-                {
-                    customText = customText.Replace("$n2", "");
-                    padNumber = 2;
-                }
-                if (customText.Contains("$n3"))
-                {
-                    customText = customText.Replace("$n3", "");
-                    padNumber = 3;
-                }
-            }
-
-            // output counter number
-            customText = customText.Replace("$i", numericUpDown1.Value.ToString().PadLeft(padNumber, '0'));
-
-            // output counter number, then increment it
-            if (customText.Contains("$+"))
-            {
-                customText = customText.Replace("$+", numericUpDown1.Value.ToString().PadLeft(padNumber, '0'));
-                if (numericUpDown1.Value < numericUpDown1.Maximum)
-                    numericUpDown1.Value++;
-            }
-
-            // output counter number, then decrement it
-            if (customText.Contains("$-"))
-            {
-                customText = customText.Replace("$-", numericUpDown1.Value.ToString().PadLeft(padNumber, '0'));
-                if (numericUpDown1.Value > numericUpDown1.Minimum)
-                    numericUpDown1.Value--;
-            }
-
-            // Excel double quote fix
-            if (customText.Contains("$eq"))
-            {
-                customText = customText.Replace("$eq", "");
-                customText = customText.Replace("\"\"", "£Q");
-                customText = customText.Replace("\"", "");
-                customText = customText.Replace("£Q", "\"");
-            }
-
-            // split text in mem slot 1, output lines by counter number
-            if (customText.Contains("$v"))
-            {
-                customText = SeparatorList(customText);
-            }
-
-            // split lines in main textbox, output lines by counter number
-            if (customText.Contains("$list"))
-            {
-                string[] values = customText.Split(Environment.NewLine, StringSplitOptions.None);
-
-                if (numericUpDown1.Value < 1) numericUpDown1.Value = 1; // skip the first line with the $list
-
-                int num = (int)numericUpDown1.Value;
-                if (num >= values.Length)
-                {
-                    return String.Empty;
-                }
-
-                string currentline = values[num];
-
-                if (values.Length > 0)
-                {
-                    if (currentline.Contains("$list")) //skip this line
-                    {
-                        //MessageBox.Show("Error using $list. Recursive lists is not allowed");
-                        numericUpDown1.Value++;
-                        return String.Empty;
-                    }
-                    customText = ProcessTextVariables(currentline, false);
-                }
-                else
-                {
-                    customText = String.Empty;
-                }
-
-                if (numericUpDown1.Value < numericUpDown1.Maximum)
-                    numericUpDown1.Value++;
-            }
-
-            //"$prompt Popup prompt to fill in a value\n" + // testing if the control can revert back to the active application
-            if (customText.Contains("$prompt"))
-            {
-                TextPrompt prompt = new TextPrompt();
-                if (prompt.ShowDialog() == DialogResult.OK)
-                {
-                    customText = customText.Replace("$prompt", prompt.TextResult);
-                }
-                else
-                {
-                    return string.Empty; // stop the text output if the calling function respects a string.Empty as an abort
-                }
-                prompt.Dispose();
-            }
-
-            // debug hotkey output
-            if (customText.Contains("$Debug"))
-            {
-
-                var path = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal).FilePath;
-                string debug = path;
-                //writeMessage(debug);
-                customText = customText.Replace("$Debug", debug);
-                //customText = debug;
-            }
-
-            if (customText.Length < 1)
-            {
-                return "";
-            }
-            else
-            {
-                SetClipBoard(customText, forceClipboardUpdate);
-                return customText;
-            }
-        }
-
-        private string SeparatorList(string customText, int slot = 1)
+        public string SeparatorList(string customText, int slot = 1)
         {
             char separator = ',';
             string command = "$v";
@@ -804,7 +658,7 @@ namespace ClipboardTool
             }
 
 
-            string[] values = memorySlot(slot).Text.Split(separator);
+            string[] values = MemorySlot(slot).Text.Split(separator);
             if (values.Length > 0 && numericUpDown1.Value <= values.Length && numericUpDown1.Value >= 1)
             {
                 customText = customText.Replace(command, values[(int)numericUpDown1.Value - 1]);
@@ -819,21 +673,12 @@ namespace ClipboardTool
             return customText;
         }
 
-        private TextBox memorySlot(int num)
-        {
-            if (num == 1)
-                return textBox1;
-            if (num == 2)
-                return textBox2;
-            if (num == 3)
-                return textBox3;
-            return textBox1;
-        }
+
 
         public void setTextBoxFromClipboard(int num)
         {
             TextBox textBox;
-            textBox = SetTextBoxTarget(num);
+            textBox = MemorySlot(num);
             if (Clipboard.ContainsText())
             {
                 string newText = Clipboard.GetText();
@@ -854,19 +699,19 @@ namespace ClipboardTool
 
         private void saveMemSlotToFile(int num)
         {
-            saveTextToFile("mem" + num + ".txt", SetTextBoxTarget(num).Text);
+            saveTextToFile("mem" + num + ".txt", MemorySlot(num).Text);
         }
 
         public void setClipboardFromTextBox(int num)//(TextBox textBox)
         {
             //(ProcessTextVariables(textBox1.Text));
             TextBox textBox;
-            textBox = SetTextBoxTarget(num);
+            textBox = MemorySlot(num);
             if (textBox.Text != null)
             {
                 if (textBox.Text.Length > 0)
                 {
-                    string newClipText = ProcessTextVariables(textBox.Text);
+                    string newClipText = process.ProcessTextVariables(textBox.Text);
                     if (newClipText.Length > 0)
                         Clipboard.SetText(newClipText);
                 }
@@ -878,41 +723,37 @@ namespace ClipboardTool
 
         }
 
-        private TextBox SetTextBoxTarget(int num)
+        public TextBox MemorySlot(int num)
         {
-            TextBox textBox;
-            switch (num)
-            {
-                case 1:
-                    {
-                        textBox = textBox1;
-                        break;
-                    }
-                case 2:
-                    {
-                        textBox = textBox2;
-                        break;
-                    }
-                case 3:
-                    {
-                        textBox = textBox3;
-                        break;
-                    }
-                default:
-                    {
-                        textBox = textBox1;
-                        break;
-                    }
-            }
-
-            return textBox;
+            if (num == 1)
+                return textBox1;
+            if (num == 2)
+                return textBox2;
+            if (num == 3)
+                return textBox3;
+            return textBox1;
         }
 
-        public string getMemorySlot(int num)
+        public string MemorySlotText(int num)
         {
-            TextBox textBox;
-            textBox = SetTextBoxTarget(num);
-            return textBox.Text;
+            return MemorySlot(num).Text;
+        }
+
+        public int NumberSpinner
+        {
+            get
+            {
+                return (int)numericUpDown1.Value;
+            }
+            set
+            {
+                decimal newValue = numericUpDown1.Value + value;
+                if (newValue <= numericUpDown1.Maximum &&
+                    newValue >= numericUpDown1.Minimum)
+                {
+                    numericUpDown1.Value = value;
+                }
+            }   
         }
 
         private void actionAlwaysOnTop(object sender, EventArgs e)
@@ -984,7 +825,7 @@ namespace ClipboardTool
             ToggleCapsLock();
         }
 
-        private void actionShowWindow(object sender = null, EventArgs e = null)
+        private void actionShowWindow(object sender, EventArgs e)
         {
             Show();
             this.WindowState = FormWindowState.Normal;
@@ -1032,7 +873,7 @@ namespace ClipboardTool
 
         public void actionProcessText(object sender, EventArgs e)
         {
-            ProcessTextVariables(textCustom.Text, true);
+            process.ProcessTextVariables(textCustom.Text, true);
         }
 
         private void actionShowOptions(object sender, EventArgs e)
@@ -1041,14 +882,14 @@ namespace ClipboardTool
             options.ShowDialog();
         }
 
-        public void actionSave(object sender = null, EventArgs e = null)
+        public void actionSave(object sender, EventArgs e)
         {
             var button = (System.Windows.Forms.Button)sender;
             int num = int.Parse(button.Tag.ToString());
             setTextBoxFromClipboard(num);
         }
 
-        public void actionLoad(object sender = null, EventArgs e = null)
+        public void actionLoad(object sender, EventArgs e)
         {
             var button = (System.Windows.Forms.Button)sender;
             int num = int.Parse(button.Tag.ToString());
