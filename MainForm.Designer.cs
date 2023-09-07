@@ -170,7 +170,7 @@
             // buttonOptions
             // 
             buttonOptions.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            buttonOptions.Location = new Point(334, 5);
+            buttonOptions.Location = new Point(330, 5);
             buttonOptions.Name = "buttonOptions";
             buttonOptions.Size = new Size(23, 23);
             buttonOptions.TabIndex = 13;
@@ -182,7 +182,7 @@
             // buttonPin
             // 
             buttonPin.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            buttonPin.Location = new Point(310, 5);
+            buttonPin.Location = new Point(306, 5);
             buttonPin.Name = "buttonPin";
             buttonPin.Size = new Size(23, 23);
             buttonPin.TabIndex = 12;
@@ -194,7 +194,7 @@
             // buttonHide
             // 
             buttonHide.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            buttonHide.Location = new Point(286, 5);
+            buttonHide.Location = new Point(282, 5);
             buttonHide.Name = "buttonHide";
             buttonHide.Size = new Size(23, 23);
             buttonHide.TabIndex = 11;
@@ -206,7 +206,7 @@
             // buttonToolbar
             // 
             buttonToolbar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            buttonToolbar.Location = new Point(213, 5);
+            buttonToolbar.Location = new Point(209, 5);
             buttonToolbar.Name = "buttonToolbar";
             buttonToolbar.Size = new Size(72, 23);
             buttonToolbar.TabIndex = 10;
@@ -220,7 +220,7 @@
             panel1.BorderStyle = BorderStyle.FixedSingle;
             panel1.Location = new Point(8, 34);
             panel1.Name = "panel1";
-            panel1.Size = new Size(351, 1);
+            panel1.Size = new Size(347, 1);
             panel1.TabIndex = 12;
             // 
             // panel2
@@ -229,13 +229,13 @@
             panel2.BorderStyle = BorderStyle.FixedSingle;
             panel2.Location = new Point(7, 146);
             panel2.Name = "panel2";
-            panel2.Size = new Size(351, 1);
+            panel2.Size = new Size(347, 1);
             panel2.TabIndex = 13;
             // 
             // numericUpDown1
             // 
             numericUpDown1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            numericUpDown1.Location = new Point(290, 155);
+            numericUpDown1.Location = new Point(286, 155);
             numericUpDown1.Maximum = new decimal(new int[] { 10000, 0, 0, 0 });
             numericUpDown1.Name = "numericUpDown1";
             numericUpDown1.Size = new Size(67, 23);
@@ -268,7 +268,7 @@
             textCustom.Multiline = true;
             textCustom.Name = "textCustom";
             textCustom.ScrollBars = ScrollBars.Vertical;
-            textCustom.Size = new Size(318, 92);
+            textCustom.Size = new Size(314, 92);
             textCustom.TabIndex = 32;
             // 
             // label1
@@ -288,13 +288,13 @@
             textBox1.Multiline = true;
             textBox1.Name = "textBox1";
             textBox1.ScrollBars = ScrollBars.Vertical;
-            textBox1.Size = new Size(276, 34);
+            textBox1.Size = new Size(272, 38);
             textBox1.TabIndex = 40;
             // 
             // buttonSave1
             // 
             buttonSave1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            buttonSave1.Location = new Point(306, 2);
+            buttonSave1.Location = new Point(302, 2);
             buttonSave1.Name = "buttonSave1";
             buttonSave1.Size = new Size(23, 23);
             buttonSave1.TabIndex = 42;
@@ -307,7 +307,7 @@
             // buttonLoad1
             // 
             buttonLoad1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            buttonLoad1.Location = new Point(330, 2);
+            buttonLoad1.Location = new Point(326, 2);
             buttonLoad1.Name = "buttonLoad1";
             buttonLoad1.Size = new Size(23, 23);
             buttonLoad1.TabIndex = 43;
@@ -325,7 +325,7 @@
             textBox2.Multiline = true;
             textBox2.Name = "textBox2";
             textBox2.ScrollBars = ScrollBars.Vertical;
-            textBox2.Size = new Size(276, 32);
+            textBox2.Size = new Size(272, 36);
             textBox2.TabIndex = 50;
             // 
             // textBox3
@@ -336,7 +336,7 @@
             textBox3.Multiline = true;
             textBox3.Name = "textBox3";
             textBox3.ScrollBars = ScrollBars.Vertical;
-            textBox3.Size = new Size(276, 35);
+            textBox3.Size = new Size(272, 40);
             textBox3.TabIndex = 60;
             // 
             // timerStatus
@@ -420,7 +420,7 @@
             // buttonHelp
             // 
             buttonHelp.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            buttonHelp.Location = new Point(327, 188);
+            buttonHelp.Location = new Point(323, 188);
             buttonHelp.Name = "buttonHelp";
             buttonHelp.Size = new Size(30, 23);
             buttonHelp.TabIndex = 33;
@@ -432,7 +432,7 @@
             // buttonSaveCustom
             // 
             buttonSaveCustom.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            buttonSaveCustom.Location = new Point(327, 217);
+            buttonSaveCustom.Location = new Point(323, 217);
             buttonSaveCustom.Name = "buttonSaveCustom";
             buttonSaveCustom.Size = new Size(30, 23);
             buttonSaveCustom.TabIndex = 34;
@@ -463,14 +463,14 @@
             // splitContainer1.Panel2
             // 
             splitContainer1.Panel2.Controls.Add(splitContainer2);
-            splitContainer1.Size = new Size(354, 124);
-            splitContainer1.SplitterDistance = 40;
+            splitContainer1.Size = new Size(350, 137);
+            splitContainer1.SplitterDistance = 44;
             splitContainer1.TabIndex = 49;
             // 
             // button7
             // 
             button7.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            button7.Location = new Point(282, 2);
+            button7.Location = new Point(278, 2);
             button7.Name = "button7";
             button7.Size = new Size(23, 23);
             button7.TabIndex = 41;
@@ -501,14 +501,14 @@
             splitContainer2.Panel2.Controls.Add(button8);
             splitContainer2.Panel2.Controls.Add(button9);
             splitContainer2.Panel2.Controls.Add(textBox3);
-            splitContainer2.Size = new Size(352, 80);
-            splitContainer2.SplitterDistance = 38;
+            splitContainer2.Size = new Size(348, 89);
+            splitContainer2.SplitterDistance = 42;
             splitContainer2.TabIndex = 59;
             // 
             // button1
             // 
             button1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            button1.Location = new Point(281, 3);
+            button1.Location = new Point(277, 3);
             button1.Name = "button1";
             button1.Size = new Size(23, 23);
             button1.TabIndex = 51;
@@ -521,7 +521,7 @@
             // button4
             // 
             button4.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            button4.Location = new Point(305, 3);
+            button4.Location = new Point(301, 3);
             button4.Name = "button4";
             button4.Size = new Size(23, 23);
             button4.TabIndex = 52;
@@ -534,7 +534,7 @@
             // button5
             // 
             button5.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            button5.Location = new Point(329, 3);
+            button5.Location = new Point(325, 3);
             button5.Name = "button5";
             button5.Size = new Size(23, 23);
             button5.TabIndex = 53;
@@ -547,7 +547,7 @@
             // button6
             // 
             button6.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            button6.Location = new Point(281, 2);
+            button6.Location = new Point(277, 2);
             button6.Name = "button6";
             button6.Size = new Size(23, 23);
             button6.TabIndex = 61;
@@ -560,7 +560,7 @@
             // button8
             // 
             button8.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            button8.Location = new Point(305, 2);
+            button8.Location = new Point(301, 2);
             button8.Name = "button8";
             button8.Size = new Size(23, 23);
             button8.TabIndex = 62;
@@ -573,7 +573,7 @@
             // button9
             // 
             button9.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            button9.Location = new Point(329, 2);
+            button9.Location = new Point(325, 2);
             button9.Name = "button9";
             button9.Size = new Size(23, 23);
             button9.TabIndex = 63;
@@ -587,7 +587,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(364, 442);
+            ClientSize = new Size(360, 455);
             Controls.Add(splitContainer1);
             Controls.Add(buttonSaveCustom);
             Controls.Add(buttonHelp);
