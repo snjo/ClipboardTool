@@ -25,6 +25,10 @@ namespace ClipboardTool
 {
     public partial class MainForm : Form
     {
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
+#pragma warning disable CS8604 // Possible null reference argument.
+#pragma warning disable CS8601 // Possible null reference assignment.
+
 
         [DllImport("user32.dll")]
         static extern void keybd_event(byte bVk, byte bScan, uint dwFlags, UIntPtr dwExtraInfo);
@@ -312,9 +316,9 @@ namespace ClipboardTool
 
         private void HandleHotkey(int id)
         {
-
             if (HotkeyList["LowerCase"] != null)
             {
+
                 if (id == HotkeyList["LowerCase"].ghk.id)
                 {
                     sendCut();
@@ -820,7 +824,7 @@ namespace ClipboardTool
 
         private void actionShowToolbar(object sender, EventArgs e)
         {
-            Toolbar toolbar = new Toolbar();
+            Toolbar toolbar = new Toolbar(this);
 
             toolbar.mainform = this;
             toolbar.Show();

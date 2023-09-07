@@ -19,9 +19,12 @@ namespace ClipboardTool
         private bool borderLess = false;
         private bool alwaysOnTop = true;
 
-        public Toolbar()
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
+        public Toolbar(MainForm parent)
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         {
             InitializeComponent();
+            mainform = parent;
             FormBorderStyle = FormBorderStyle.FixedToolWindow;
             string tooltipText = "...";
             toolTip1.SetToolTip(button1, tooltipText);
@@ -290,7 +293,9 @@ namespace ClipboardTool
             Controls.Add(button1);
             Controls.Add(buttonhide);
             Controls.Add(buttonPin);
+#pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
             Icon = (Icon)resources.GetObject("$this.Icon");
+#pragma warning restore CS8600 // Converting null literal or possible null value to non-nullable type.
             Name = "Toolbar";
             Text = "Toolbar";
             TopMost = true;

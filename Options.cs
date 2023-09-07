@@ -21,14 +21,6 @@ namespace ClipboardTool
     public partial class Options : Form
     {
         public MainForm mainForm;
-        /*
-        private HotkeyControls UpperInputs = new HotkeyControls();
-        private HotkeyControls LowerInputs = new HotkeyControls();
-        private HotkeyControls PlainInputs = new HotkeyControls();
-        private HotkeyControls CapsInputs = new HotkeyControls();
-        private HotkeyControls ProcessInputs = new HotkeyControls();
-        private HotkeyControls DateInputs = new HotkeyControls();
-        */
 
         public enum HotkeyList // can be used for row numbers in data grid
         {
@@ -114,7 +106,16 @@ namespace ClipboardTool
         {
             if (hotkey == null)
                 hotkey = new Hotkeys.Hotkey();
-            string settingKey = settingRow[1].Value.ToString();
+
+            string settingKey = string.Empty;
+            DataGridViewCell cell = settingRow[1];
+            if (cell != null)
+            {
+                if (cell.Value != null)
+                    settingKey = (string)cell.Value;
+                if (settingKey == null) settingKey = string.Empty;
+            }
+            //string settingKey = settingRow[1].Value.ToString();
             if (settingKey.Length > 0)
                 hotkey.key = settingKey; //.ToCharArray()[0];
             else
@@ -173,7 +174,8 @@ namespace ClipboardTool
         private void LinkSettings(object sender, LinkLabelLinkClickedEventArgs e)
         {
             string file = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal).FilePath;
-            string folder = Path.GetDirectoryName(file);
+            string? folder = Path.GetDirectoryName(file);
+            if (folder == null) return;
             if (Directory.Exists(folder))
             {
                 Process.Start(new ProcessStartInfo() { FileName = folder, UseShellExecute = true });
