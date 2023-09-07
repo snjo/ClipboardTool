@@ -27,6 +27,7 @@ https://github.com/snjo/ClipboardTool
 | $vsc      | Split value in slot 1 with semicolon, output value[number]       |
 | $vsp      | Split value in slot 1 with space, output value[number]           |
 | $list     | Split lines in main textbox (skips line 1), output value[number] |
+| $prompt   | Opens a popup box to insert a text value                         |
 
 -----------------------------------------
 ## Text Files in the program folder

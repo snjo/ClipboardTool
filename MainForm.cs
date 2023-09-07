@@ -69,22 +69,22 @@ namespace ClipboardTool
 
 
         string tooltipText =
-            "$d date\n" +
-            "$t time\n" +
-            "$cp clipboard contents\n" +
-            "$cl / $cu clipboard in lower/upper case\n" +
-            "$i number\n" +
-            "$+ number, then increment it\n" +
-            "$- number, then decrement it\n" +
-            "$n2, $n3 use 1-3 digits in number (01, 001)\n" +
-            "$m1-$m3 contents of the memory slots\n" +
-            "$eq Convert \"\" to \", and removes single \"\n" +
-            "$rep Replace text in clipboard. Use mem slot 1 & 2 as from/to strings.\n" +
-            "$vcm Split value in slot 1 with comma, output value[number]\n" +
-            "$vsc Split value in slot 1 with semicolon, output value[number]\n" +
-            "$vsp Split value in slot 1 with space, output value[number]\n" +
-            "$list Split lines in main textbox (skips line 1), output value[number]\n" +
-            "$prompt Popup prompt to fill in a value\n" +
+            "$d      Date\n" +
+            "$t      Time\n" +
+            "$cp     Clipboard contents\n" +
+            "$cl/$cu Clipboard in lower/upper case\n" +
+            "$i      Number\n" +
+            "$+      Number, then increment it\n" +
+            "$-      Number, then decrement it\n" +
+            "$n2/$n3 Use 1-3 digits in number (01, 001)\n" +
+            "$m1-$m3 Contents of the memory slots\n" +
+            "$eq     Convert \"\" to \", and removes single \"\n" +
+            "$rep    Replace text in clipboard. Use mem slot 1 & 2 as from/to strings.\n" +
+            "$vcm    Split value in slot 1 with comma, output value[number]\n" +
+            "$vsc    Split value in slot 1 with semicolon, output value[number]\n" +
+            "$vsp    Split value in slot 1 with space, output value[number]\n" +
+            "$list   Split lines in main textbox (skips line 1), output value[number]\n" +
+            "$prompt Opens a popup box to insert a text value\n" +
             "\n" +
             "Tap the date hotkey 1-3 times while holding the modifier keys:\n" +
             "1: Just the date\n" +
