@@ -165,7 +165,6 @@ namespace ClipboardTool
                     if (fullpath.Substring(fullpath.Length - 1, 1) != "\\")
                         fullpath += "\\";
                 }
-                MessageBox.Show("folder: " + fullpath);
             }
             if (File.Exists(fullpath + filename))
             {
