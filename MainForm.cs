@@ -157,16 +157,21 @@ namespace ClipboardTool
         private string loadTextFromFile(string filename)
         {
             string folder = settings.MemorySlotFolder;
-            if (folder.Length > 0)
+            string fullpath = Environment.ExpandEnvironmentVariables(folder);
+            if (fullpath.Length > 0)
             {
-                if (folder.Substring(folder.Length - 1, 1) != "\\")
-                    folder += "\\";
+                if (Directory.Exists(fullpath))
+                {
+                    if (fullpath.Substring(fullpath.Length - 1, 1) != "\\")
+                        fullpath += "\\";
+                }
+                MessageBox.Show("folder: " + fullpath);
             }
-            if (File.Exists(folder + filename))
+            if (File.Exists(fullpath + filename))
             {
-                return File.ReadAllText(folder + filename);
+                return File.ReadAllText(fullpath + filename);
             }
-            return "";
+            return string.Empty;
         }
 
         public void saveTextToFile(string filename, string text)
