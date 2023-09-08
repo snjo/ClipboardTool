@@ -15,9 +15,6 @@ using System.Windows.Forms;
 
 namespace ClipboardTool
 {
-
-
-
     public partial class Options : Form
     {
         public MainForm mainForm;
@@ -33,20 +30,6 @@ namespace ClipboardTool
             MemSlot1, MemSlot2, MemSlot3,
             ResetNumber,
             End
-        }
-        private Hotkey GetHotkey(HotkeyList hk)
-        {
-            if (hk == HotkeyList.UpperCase) return mainForm.hotkeys.UpperCase;
-            if (hk == HotkeyList.LowerCase) return mainForm.hotkeys.LowerCase;
-            if (hk == HotkeyList.PlainText) return mainForm.hotkeys.PlainText;
-            if (hk == HotkeyList.CapsLock) return mainForm.hotkeys.CapsLock;
-            if (hk == HotkeyList.ProcessText) return mainForm.hotkeys.ProcessText;
-            if (hk == HotkeyList.Date) return mainForm.hotkeys.Date;
-            if (hk == HotkeyList.MemSlot1) return mainForm.hotkeys.MemSlot1;
-            if (hk == HotkeyList.MemSlot2) return mainForm.hotkeys.MemSlot2;
-            if (hk == HotkeyList.MemSlot3) return mainForm.hotkeys.MemSlot3;
-
-            throw new ArgumentOutOfRangeException("Add new hotkeys to GetHotkey function: " + nameof(hk));
         }
 
         public Options(MainForm formParent)
@@ -97,8 +80,6 @@ namespace ClipboardTool
         private void buttonSave_Click(object sender, EventArgs e)
         {
             saveSettings();
-            //mainForm.ReleaseHotkeys();
-            //mainForm.RegisterHotKeys();
             Close();
         }
 

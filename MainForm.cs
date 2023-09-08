@@ -67,10 +67,11 @@ namespace ClipboardTool
         private bool capLockStateSet = false;
         private bool alwaysOnTop = false;
         public Form Current;
-        public HotkeyList hotkeys = new HotkeyList();
+        //public HotkeyList hotkeys = new HotkeyList();
         private bool hotkeysSet = false;
         HelpForm helpForm = new HelpForm();
         string delayedKeystrokes = "";
+
 
 
         string tooltipText =
@@ -106,8 +107,17 @@ namespace ClipboardTool
             iconLower = systrayIcon.Icon;
             helpForm.setText(tooltipText);
             this.Load += Form1_Load;
+
+            //new hotkey stuff
+            HotkeyList = HotkeyTools.LoadHotkeys(HotkeyList, this);
+            if (settings.RegisterHotkeys) // optional
+            {
+                HotkeyTools.RegisterHotkeys(HotkeyList);
+            }
+            //----------------
         }
 
+        /*
         public void LoadHotkeys()
         {
             //Settings newSettings = new();
@@ -135,7 +145,7 @@ namespace ClipboardTool
             //writeMessage("key: " + Settings.Default["hk" + hotkeyName + "Key"].ToString());
 
             return hotkey;
-        }
+        }*/
 
         private void updateHotkeyLabels()
         {
@@ -178,8 +188,8 @@ namespace ClipboardTool
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            LoadHotkeys();
-            RegisterHotKeys();
+            //LoadHotkeys();
+            //RegisterHotKeys();
 
             if (settings.StartHidden)
             {
@@ -294,9 +304,11 @@ namespace ClipboardTool
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            ReleaseHotkeys();
+            HotkeyTools.ReleaseHotkeys(HotkeyList);
+            //ReleaseHotkeys();
         }
 
+        /*
         public void ReleaseHotkeys()
         {
             if (!hotkeysSet) return;
@@ -313,7 +325,7 @@ namespace ClipboardTool
             {
                 ghk.Unregister();
             }
-        }
+        }*/
 
 
         private void HandleHotkey(int id)
