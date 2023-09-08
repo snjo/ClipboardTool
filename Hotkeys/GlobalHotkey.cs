@@ -14,7 +14,7 @@ namespace Hotkeys
         public int key;
         private IntPtr hWnd;
         public int id;
-        public Hotkey? hotkey;
+        public Hotkey hotkey;
         public bool registered;
         private bool validKey;
 

@@ -12,13 +12,13 @@ namespace Hotkeys
         public bool Alt;
         public bool Shift;
         public bool Win;
-        public GlobalHotkey? ghk;
+        public GlobalHotkey ghk;
         public bool hotkeysSet;
-        Settings settings;
         //public bool registered; // TODO
 
         public Hotkey()
         {
+            ghk = new GlobalHotkey();
         }
 
         public Hotkey(GlobalHotkey globalHK)

@@ -22,7 +22,7 @@ namespace Hotkeys
         {
             Hotkey hotkey = new Hotkey();
             
-            hotkey.key = Settings.Default["hk" + hotkeyName + "Key"].ToString();
+            hotkey.key = Settings.Default["hk" + hotkeyName + "Key"].ToString()+""; //fix null return from ToString by adding ""
             hotkey.Ctrl = (bool)Settings.Default["hk" + hotkeyName + "Ctrl"];
             hotkey.Alt = (bool)Settings.Default["hk" + hotkeyName + "Alt"];
             hotkey.Shift = (bool)Settings.Default["hk" + hotkeyName + "Shift"];

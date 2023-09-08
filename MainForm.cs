@@ -68,7 +68,7 @@ namespace ClipboardTool
         private bool alwaysOnTop = false;
         public Form Current;
         //public HotkeyList hotkeys = new HotkeyList();
-        private bool hotkeysSet = false;
+        //private bool hotkeysSet = false;
         HelpForm helpForm = new HelpForm();
         string delayedKeystrokes = "";
 
@@ -274,7 +274,7 @@ namespace ClipboardTool
         {
             if (!settings.RegisterHotkeys) return;
 
-            hotkeysSet = true;
+            //hotkeysSet = true;
 
             string errorMessages = "";
             //trying to register hotkey
