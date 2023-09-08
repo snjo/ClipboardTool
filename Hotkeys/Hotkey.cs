@@ -26,11 +26,6 @@ namespace Hotkeys
             Shift = shift;
             ghk = new GlobalHotkey(Modifiers(), key, parent, this);
         }
-        /*public Hotkey(GlobalHotkey globalHK)
-        {
-            ghk = globalHK;
-            //ghk.hotkey = this;
-        }*/
 
         public int Modifiers() // bool Ctrl, bool Alt, bool Shift, bool Win)
         {

@@ -9,17 +9,10 @@ namespace Hotkeys
 
         public static Dictionary<string, Hotkey> LoadHotkeys(Dictionary<string, Hotkey> hotkeyList, List<string> hotkeyNames, Form parent)
         {
-            //foreach (KeyValuePair<string, Hotkey> kvp in hotkeyList)
-            //{
-            //    hotkeyList[kvp.Key] = LoadHotkey(kvp.Key, parent);
-            //}
-
             foreach (string name in hotkeyNames)
             {
                 hotkeyList.Add(name, LoadHotkey(name, parent));
             }
-
-            //MessageBox.Show("hotKeyList " + hotkeyList.Count);
             return hotkeyList;
         }
 
@@ -31,15 +24,6 @@ namespace Hotkeys
             bool Shift = (bool)Settings.Default["hk" + hotkeyName + "Shift"];
             bool Win = (bool)Settings.Default["hk" + hotkeyName + "Win"];
             Hotkey hotkey = new Hotkey(key, Ctrl, Alt, Shift, Win, parent);
-
-            //hotkey.Key = Settings.Default["hk" + hotkeyName + "Key"].ToString() + ""; //fix null return from ToString by adding ""
-            //hotkey.Ctrl = (bool)Settings.Default["hk" + hotkeyName + "Ctrl"];
-            //hotkey.Alt = (bool)Settings.Default["hk" + hotkeyName + "Alt"];
-            //hotkey.Shift = (bool)Settings.Default["hk" + hotkeyName + "Shift"];
-            //hotkey.Win = (bool)Settings.Default["hk" + hotkeyName + "Win"];
-            //hotkey.ghk = new GlobalHotkey(hotkey.Modifiers(), hotkey.Key, parent, hotkey);
-
-            //MessageBox.Show("LoadHotkey: " + hotkeyName + " / " + hotkey.Win);
             return hotkey;
         }
 

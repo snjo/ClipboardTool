@@ -20,21 +20,10 @@ namespace ClipboardTool
         string clipBoardText = String.Empty;
         ProcessText process;
 
-        // For each hotkey below, add entries in Settings, hk???Key, hk???Ctrl, hk???Alt, hk???Shift, hk???Win
-        public Dictionary<string, Hotkey> HotkeyList = new Dictionary<string, Hotkey>();
-        //{
-        //    {"UpperCase", default},
-        //    {"LowerCase", new Hotkey()},
-        //    {"PlainText", new Hotkey()},
-        //    {"CapsLock", new Hotkey()},
-        //    {"ProcessText", new Hotkey()},
-        //    {"Date", new Hotkey()},
-        //    {"MemSlot1", new Hotkey()},
-        //    {"MemSlot2", new Hotkey()},
-        //    {"MemSlot3", new Hotkey()},
-        //    {"ResetNumber", new Hotkey()},
-        //};
 
+        public Dictionary<string, Hotkey> HotkeyList = new Dictionary<string, Hotkey>();
+
+        // For each hotkey below, add entries in Settings, hk???Key, hk???Ctrl, hk???Alt, hk???Shift, hk???Win
         public List<string> HotkeyNames = new List<string>
         {
             "UpperCase",
@@ -92,7 +81,6 @@ namespace ClipboardTool
             iconUpper = notifyIcon1.Icon;
             iconLower = systrayIcon.Icon;
             helpForm.setText(tooltipText);
-            //this.Load += Form1_Load;
 
             HotkeyList = HotkeyTools.LoadHotkeys(HotkeyList, HotkeyNames, this);
             if (settings.RegisterHotkeys) // optional

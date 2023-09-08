@@ -47,11 +47,6 @@ namespace Hotkeys
             Hotkey = hotkey;
         }
 
-        /*public GlobalHotkey()
-        {
-            validKey = false;
-        }*/
-
         public override int GetHashCode()
         {
             return modifier ^ key ^ hWnd.ToInt32();
