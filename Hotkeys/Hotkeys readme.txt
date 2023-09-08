@@ -11,25 +11,28 @@ hkMyHotkeyWin		bool	User	false
 
 Settings settings = Settings.Default;
 
-public Dictionary<string, Hotkey> hotkeyList = new Dictionary<string, Hotkey>
+// For each hotkey below, add entries in Settings, hk???Key, hk???Ctrl, hk???Alt, hk???Shift, hk???Win
+public List<string> HotkeyNames = new List<string>
 {
-        {"MyHotkey", new Hotkey(new GlobalHotkey())},
+        "MyHotkey1",
+        "MyHotkey2",
 };
+public Dictionary<string, Hotkey> HotkeyList = new Dictionary<string, Hotkey>();
 
 public MainForm()
 {
         InitializeComponent();
 
-        hotkeyList = HotkeyTools.LoadHotkeys(hotkeyList,this);
+        HotkeyList = HotkeyTools.LoadHotkeys(HotkeyList, HotkeyNames, this);
         if (settings.RegisterHotkeys) // optional
         {
-                HotkeyTools.RegisterHotkeys(hotkeyList);
+        HotkeyTools.RegisterHotkeys(HotkeyList);
         }
 }
 
 private void Form1_FormClosing(object sender, FormClosingEventArgs e)
 {
-        HotkeyTools.ReleaseHotkeys(hotkeyList);
+        HotkeyTools.ReleaseHotkeys(HotkeyList);
 }
 
 protected override void WndProc(ref Message m)
@@ -50,7 +53,7 @@ private void HandleHotkey(int id)
 
         if (hotkeyList["MyHotkey"] != null)
         {
-                if (id == hotkeyList["MyHotkey"].ghk.id)
+                if (id == HotkeyList["MyHotkey"].ghk.id)
                 {
                         //Do something
                 }

@@ -1,10 +1,4 @@
-﻿// add using for the active project's Properties here
-// ex: using MyApp.Properties;
-
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
-using System.Globalization;
-
-namespace Hotkeys
+﻿namespace Hotkeys
 {
     [Serializable]
     public class Hotkey

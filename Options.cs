@@ -8,24 +8,10 @@ namespace ClipboardTool
     {
         public MainForm mainForm;
 
-        public enum HotkeyList // can be used for row numbers in data grid
-        {
-            UpperCase,
-            LowerCase,
-            PlainText,
-            CapsLock,
-            ProcessText,
-            Date,
-            MemSlot1, MemSlot2, MemSlot3,
-            ResetNumber,
-            End
-        }
-
         public Options(MainForm formParent)
         {
             InitializeComponent();
             mainForm = formParent;
-            //setupInputs();
 
             optionStartHidden.Checked = Properties.Settings.Default.StartHidden;
             optionStartToolbar.Checked = Properties.Settings.Default.StartToolbar;
@@ -45,17 +31,19 @@ namespace ClipboardTool
         private void fillGrid()
         {
             HotkeyGrid.Rows.Clear();
-            HotkeyGrid.Rows.Add((int)HotkeyList.End);
+            HotkeyGrid.Rows.Add(mainForm.HotkeyList.Count);
 
             int i = 0;
             foreach (KeyValuePair<string, Hotkey> kvp in mainForm.HotkeyList)
             {
-                HotkeyGrid.Rows[i].Cells[0].Value = kvp.Key;
-                HotkeyGrid.Rows[i].Cells[1].Value = kvp.Value.Key;
-                HotkeyGrid.Rows[i].Cells[2].Value = kvp.Value.Ctrl;
-                HotkeyGrid.Rows[i].Cells[3].Value = kvp.Value.Alt;
-                HotkeyGrid.Rows[i].Cells[4].Value = kvp.Value.Shift;
-                HotkeyGrid.Rows[i].Cells[5].Value = kvp.Value.Win;
+                string keyName = kvp.Key;
+                Hotkey hotkey = kvp.Value;
+                HotkeyGrid.Rows[i].Cells[0].Value = keyName;
+                HotkeyGrid.Rows[i].Cells[1].Value = hotkey.Key;
+                HotkeyGrid.Rows[i].Cells[2].Value = hotkey.Ctrl;
+                HotkeyGrid.Rows[i].Cells[3].Value = hotkey.Alt;
+                HotkeyGrid.Rows[i].Cells[4].Value = hotkey.Shift;
+                HotkeyGrid.Rows[i].Cells[5].Value = hotkey.Win;
                 i++;
             }
         }
@@ -72,11 +60,8 @@ namespace ClipboardTool
             Close();
         }
 
-        private Hotkey sendHotkeyToMain(Hotkey hotkey, DataGridViewCellCollection settingRow)
+        private Hotkey GetHotkeyFromGrid(Hotkey hotkey, DataGridViewCellCollection settingRow)
         {
-            //if (hotkey == null)
-            //    hotkey = new Hotkey();
-
             string settingKey = string.Empty;
             DataGridViewCell cell = settingRow[1];
             if (cell != null)
@@ -87,9 +72,9 @@ namespace ClipboardTool
             }
 
             if (settingKey.Length > 0)
-                hotkey.Key = settingKey; //.ToCharArray()[0];
+                hotkey.Key = settingKey;
             else
-                hotkey.Key = new string("");//new char();
+                hotkey.Key = new string("");
 
             hotkey.Ctrl = Convert.ToBoolean(settingRow[2].Value);
             hotkey.Alt = Convert.ToBoolean(settingRow[3].Value);
@@ -116,18 +101,19 @@ namespace ClipboardTool
             int i = 0;
             foreach (KeyValuePair<string, Hotkey> kvp in mainForm.HotkeyList)
             {
+                string keyName = kvp.Key;
                 if (HotkeyGrid.Rows[i].Cells[1].Value == null)
                 {
                     HotkeyGrid.Rows[i].Cells[1].Value = "";
                 }
-                Properties.Settings.Default["hk" + kvp.Key + "Key"] = HotkeyGrid.Rows[i].Cells[1].Value.ToString();
+                Properties.Settings.Default["hk" + keyName + "Key"] = HotkeyGrid.Rows[i].Cells[1].Value.ToString();
 
-                Properties.Settings.Default["hk" + kvp.Key + "Ctrl"] = Convert.ToBoolean(HotkeyGrid.Rows[i].Cells[2].Value);
-                Properties.Settings.Default["hk" + kvp.Key + "Alt"] = Convert.ToBoolean(HotkeyGrid.Rows[i].Cells[3].Value);
-                Properties.Settings.Default["hk" + kvp.Key + "Shift"] = Convert.ToBoolean(HotkeyGrid.Rows[i].Cells[4].Value);
-                Properties.Settings.Default["hk" + kvp.Key + "Win"] = Convert.ToBoolean(HotkeyGrid.Rows[i].Cells[5].Value);
+                Properties.Settings.Default["hk" + keyName + "Ctrl"] = Convert.ToBoolean(HotkeyGrid.Rows[i].Cells[2].Value);
+                Properties.Settings.Default["hk" + keyName + "Alt"] = Convert.ToBoolean(HotkeyGrid.Rows[i].Cells[3].Value);
+                Properties.Settings.Default["hk" + keyName + "Shift"] = Convert.ToBoolean(HotkeyGrid.Rows[i].Cells[4].Value);
+                Properties.Settings.Default["hk" + keyName + "Win"] = Convert.ToBoolean(HotkeyGrid.Rows[i].Cells[5].Value);
 
-                mainForm.HotkeyList[kvp.Key] = sendHotkeyToMain(mainForm.HotkeyList[kvp.Key], HotkeyGrid.Rows[i].Cells);
+                mainForm.HotkeyList[keyName] = GetHotkeyFromGrid(mainForm.HotkeyList[keyName], HotkeyGrid.Rows[i].Cells);
 
                 i++;
             }
