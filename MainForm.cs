@@ -20,6 +20,7 @@ namespace ClipboardTool
         string clipBoardText = String.Empty;
         ProcessText process;
 
+        // For each hotkey below, add entries in Settings, hk???Key, hk???Ctrl, hk???Alt, hk???Shift, hk???Win
         public Dictionary<string, Hotkey> HotkeyList = new Dictionary<string, Hotkey>
         {
             {"UpperCase", new Hotkey(new GlobalHotkey())},
@@ -223,7 +224,6 @@ namespace ClipboardTool
                 }
             }
 
-            //if (ghkUpperCase != null)
             if (HotkeyList["UpperCase"] != null)
             {
 

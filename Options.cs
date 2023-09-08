@@ -85,7 +85,7 @@ namespace ClipboardTool
                     settingKey = (string)cell.Value;
                 if (settingKey == null) settingKey = string.Empty;
             }
-            //string settingKey = settingRow[1].Value.ToString();
+
             if (settingKey.Length > 0)
                 hotkey.key = settingKey; //.ToCharArray()[0];
             else
