@@ -21,18 +21,32 @@ namespace ClipboardTool
         ProcessText process;
 
         // For each hotkey below, add entries in Settings, hk???Key, hk???Ctrl, hk???Alt, hk???Shift, hk???Win
-        public Dictionary<string, Hotkey> HotkeyList = new Dictionary<string, Hotkey>
+        public Dictionary<string, Hotkey> HotkeyList = new Dictionary<string, Hotkey>();
+        //{
+        //    {"UpperCase", default},
+        //    {"LowerCase", new Hotkey()},
+        //    {"PlainText", new Hotkey()},
+        //    {"CapsLock", new Hotkey()},
+        //    {"ProcessText", new Hotkey()},
+        //    {"Date", new Hotkey()},
+        //    {"MemSlot1", new Hotkey()},
+        //    {"MemSlot2", new Hotkey()},
+        //    {"MemSlot3", new Hotkey()},
+        //    {"ResetNumber", new Hotkey()},
+        //};
+
+        public List<string> HotkeyNames = new List<string>
         {
-            {"UpperCase", new Hotkey(new GlobalHotkey())},
-            {"LowerCase", new Hotkey(new GlobalHotkey())},
-            {"PlainText", new Hotkey(new GlobalHotkey())},
-            {"CapsLock", new Hotkey(new GlobalHotkey())},
-            {"ProcessText", new Hotkey(new GlobalHotkey())},
-            {"Date", new Hotkey(new GlobalHotkey())},
-            {"MemSlot1", new Hotkey(new GlobalHotkey())},
-            {"MemSlot2", new Hotkey(new GlobalHotkey())},
-            {"MemSlot3", new Hotkey(new GlobalHotkey())},
-            {"ResetNumber", new Hotkey(new GlobalHotkey())},
+            "UpperCase",
+            "LowerCase",
+            "PlainText",
+            "CapsLock",
+            "ProcessText",
+            "Date",
+            "MemSlot1",
+            "MemSlot2",
+            "MemSlot3",
+            "ResetNumber",
         };
 
         private Icon iconUpper;
@@ -80,7 +94,7 @@ namespace ClipboardTool
             helpForm.setText(tooltipText);
             //this.Load += Form1_Load;
 
-            HotkeyList = HotkeyTools.LoadHotkeys(HotkeyList, this);
+            HotkeyList = HotkeyTools.LoadHotkeys(HotkeyList, HotkeyNames, this);
             if (settings.RegisterHotkeys) // optional
             {
                 HotkeyTools.RegisterHotkeys(HotkeyList);
@@ -109,13 +123,13 @@ namespace ClipboardTool
                     }
                 }
 
-                if (hotkey.key == "")
+                if (hotkey.Key == "")
                 {
-                    label.Text = "No hotkey" + hotkey.key;
+                    label.Text = "No hotkey" + hotkey.Key;
                 }
                 else
                 {
-                    label.Text = "Invalid hotkey: " + hotkey.key;
+                    label.Text = "Invalid hotkey: " + hotkey.Key;
                 }
 
             }

@@ -7,11 +7,16 @@ namespace Hotkeys
     public class HotkeyTools
     {
 
-        public static Dictionary<string, Hotkey> LoadHotkeys(Dictionary<string, Hotkey> hotkeyList, Form parent)
+        public static Dictionary<string, Hotkey> LoadHotkeys(Dictionary<string, Hotkey> hotkeyList, List<string> hotkeyNames, Form parent)
         {
-            foreach (KeyValuePair<string, Hotkey> kvp in hotkeyList)
+            //foreach (KeyValuePair<string, Hotkey> kvp in hotkeyList)
+            //{
+            //    hotkeyList[kvp.Key] = LoadHotkey(kvp.Key, parent);
+            //}
+
+            foreach (string name in hotkeyNames)
             {
-                hotkeyList[kvp.Key] = LoadHotkey(kvp.Key, parent);
+                hotkeyList.Add(name, LoadHotkey(name, parent));
             }
 
             //MessageBox.Show("hotKeyList " + hotkeyList.Count);
@@ -20,14 +25,19 @@ namespace Hotkeys
 
         public static Hotkey LoadHotkey(string hotkeyName, Form parent) //char settingHotkey
         {
-            Hotkey hotkey = new Hotkey();
+            string key = Settings.Default["hk" + hotkeyName + "Key"].ToString() + "";
+            bool Ctrl = (bool)Settings.Default["hk" + hotkeyName + "Ctrl"];
+            bool Alt = (bool)Settings.Default["hk" + hotkeyName + "Alt"];
+            bool Shift = (bool)Settings.Default["hk" + hotkeyName + "Shift"];
+            bool Win = (bool)Settings.Default["hk" + hotkeyName + "Win"];
+            Hotkey hotkey = new Hotkey(key, Ctrl, Alt, Shift, Win, parent);
 
-            hotkey.key = Settings.Default["hk" + hotkeyName + "Key"].ToString() + ""; //fix null return from ToString by adding ""
-            hotkey.Ctrl = (bool)Settings.Default["hk" + hotkeyName + "Ctrl"];
-            hotkey.Alt = (bool)Settings.Default["hk" + hotkeyName + "Alt"];
-            hotkey.Shift = (bool)Settings.Default["hk" + hotkeyName + "Shift"];
-            hotkey.Win = (bool)Settings.Default["hk" + hotkeyName + "Win"];
-            hotkey.ghk = new GlobalHotkey(hotkey.Modifiers(), hotkey.key, parent);
+            //hotkey.Key = Settings.Default["hk" + hotkeyName + "Key"].ToString() + ""; //fix null return from ToString by adding ""
+            //hotkey.Ctrl = (bool)Settings.Default["hk" + hotkeyName + "Ctrl"];
+            //hotkey.Alt = (bool)Settings.Default["hk" + hotkeyName + "Alt"];
+            //hotkey.Shift = (bool)Settings.Default["hk" + hotkeyName + "Shift"];
+            //hotkey.Win = (bool)Settings.Default["hk" + hotkeyName + "Win"];
+            //hotkey.ghk = new GlobalHotkey(hotkey.Modifiers(), hotkey.Key, parent, hotkey);
 
             //MessageBox.Show("LoadHotkey: " + hotkeyName + " / " + hotkey.Win);
             return hotkey;
@@ -49,8 +59,8 @@ namespace Hotkeys
             {
                 if (ghk != null)
                 {
-                    if (warning && ghk.hotkey == null) MessageBox.Show("Could not register hotkey " + ghk.key + ", ghk.hotkey is null");
-                    else if (warning) MessageBox.Show("Could not register hotkey " + ghk.key + "ghk.hotkey.Win is " + ghk.hotkey.Win);
+                    if (warning && ghk.Hotkey == null) MessageBox.Show("Could not register hotkey " + ghk.key + ", ghk.hotkey is null");
+                    else if (warning) MessageBox.Show("Could not register hotkey " + ghk.key + "ghk.hotkey.Win is " + ghk.Hotkey.Win);
                 }
                 else
                 {
@@ -70,7 +80,7 @@ namespace Hotkeys
             string warningKeys = "";
             foreach (KeyValuePair<string, Hotkey> ghk in hotkeyList)
             {
-                if (ghk.Value.key == string.Empty)
+                if (ghk.Value.Key == string.Empty)
                 {
                     //MessageBox.Show("Skipping hotkey");
                 }

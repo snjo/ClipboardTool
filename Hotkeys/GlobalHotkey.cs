@@ -14,7 +14,7 @@ namespace Hotkeys
         public int key;
         private IntPtr hWnd;
         public int id;
-        public Hotkey hotkey;
+        public Hotkey Hotkey;
         public bool registered;
         private bool validKey;
 
@@ -37,19 +37,20 @@ namespace Hotkeys
             return new Keys();
         }
 
-        public GlobalHotkey(int modifier, string keystring, Form form)
+        public GlobalHotkey(int modifier, string keystring, Form form, Hotkey hotkey)
         {
             this.modifier = modifier;
             Keys key = stringToKey(keystring);  // assigns validKey
             this.key = (int)key;
             this.hWnd = form.Handle;
             id = this.GetHashCode();
+            Hotkey = hotkey;
         }
 
-        public GlobalHotkey()
+        /*public GlobalHotkey()
         {
             validKey = false;
-        }
+        }*/
 
         public override int GetHashCode()
         {

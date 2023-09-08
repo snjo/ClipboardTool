@@ -51,7 +51,7 @@ namespace ClipboardTool
             foreach (KeyValuePair<string, Hotkey> kvp in mainForm.HotkeyList)
             {
                 HotkeyGrid.Rows[i].Cells[0].Value = kvp.Key;
-                HotkeyGrid.Rows[i].Cells[1].Value = kvp.Value.key;
+                HotkeyGrid.Rows[i].Cells[1].Value = kvp.Value.Key;
                 HotkeyGrid.Rows[i].Cells[2].Value = kvp.Value.Ctrl;
                 HotkeyGrid.Rows[i].Cells[3].Value = kvp.Value.Alt;
                 HotkeyGrid.Rows[i].Cells[4].Value = kvp.Value.Shift;
@@ -74,8 +74,8 @@ namespace ClipboardTool
 
         private Hotkey sendHotkeyToMain(Hotkey hotkey, DataGridViewCellCollection settingRow)
         {
-            if (hotkey == null)
-                hotkey = new Hotkeys.Hotkey();
+            //if (hotkey == null)
+            //    hotkey = new Hotkey();
 
             string settingKey = string.Empty;
             DataGridViewCell cell = settingRow[1];
@@ -87,9 +87,9 @@ namespace ClipboardTool
             }
 
             if (settingKey.Length > 0)
-                hotkey.key = settingKey; //.ToCharArray()[0];
+                hotkey.Key = settingKey; //.ToCharArray()[0];
             else
-                hotkey.key = new string("");//new char();
+                hotkey.Key = new string("");//new char();
 
             hotkey.Ctrl = Convert.ToBoolean(settingRow[2].Value);
             hotkey.Alt = Convert.ToBoolean(settingRow[3].Value);

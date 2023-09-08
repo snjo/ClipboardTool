@@ -1,12 +1,15 @@
 ﻿// add using for the active project's Properties here
 // ex: using MyApp.Properties;
 
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
+using System.Globalization;
+
 namespace Hotkeys
 {
     [Serializable]
     public class Hotkey
     {
-        public string key = String.Empty;
+        public string Key = String.Empty;
         public bool Ctrl;
         public bool Alt;
         public bool Shift;
@@ -15,15 +18,19 @@ namespace Hotkeys
         public bool hotkeysSet;
         //public bool registered; // TODO
 
-        public Hotkey()
+        public Hotkey(string key, bool ctrl, bool alt, bool shift, bool win, Form parent)
         {
-            ghk = new GlobalHotkey();
+            Key = key;
+            Ctrl = ctrl;
+            Alt = alt;
+            Shift = shift;
+            ghk = new GlobalHotkey(Modifiers(), key, parent, this);
         }
-
-        public Hotkey(GlobalHotkey globalHK)
+        /*public Hotkey(GlobalHotkey globalHK)
         {
             ghk = globalHK;
-        }
+            //ghk.hotkey = this;
+        }*/
 
         public int Modifiers() // bool Ctrl, bool Alt, bool Shift, bool Win)
         {
@@ -39,13 +46,13 @@ namespace Hotkeys
         public string Text()
         {
             string result = "";
-            if (key != "") // != 0   if key is char 
+            if (Key != "") // != 0   if key is char 
             {
                 if (Ctrl) result += "Ctrl+";
                 if (Alt) result += "Alt+";
                 if (Shift) result += "Shift+";
                 if (Win) result += "Win+";
-                result += key;
+                result += Key;
             }
             else
             {
