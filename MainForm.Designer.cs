@@ -614,6 +614,8 @@
             MinimumSize = new Size(180, 70);
             Name = "MainForm";
             Text = "Clipboard Tool";
+            FormClosing += Form1_FormClosing;
+            Load += Form1_Load;
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
             contextMenuStrip1.ResumeLayout(false);
             splitContainer1.Panel1.ResumeLayout(false);

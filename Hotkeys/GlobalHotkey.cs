@@ -26,17 +26,17 @@ namespace Hotkeys
                 {
                     char ch = keystring[0];
                     validKey = true;
-                    return (Keys)ch;                    
+                    return (Keys)ch;
                 }
                 else
-                {                    
+                {
                     validKey = Enum.TryParse(keystring, out Keys key);
                     return (Keys)key;
                 }
             }
             return new Keys();
         }
-      
+
         public GlobalHotkey(int modifier, string keystring, Form form)
         {
             this.modifier = modifier;
@@ -82,7 +82,7 @@ namespace Hotkeys
         {
             registered = false;
             return UnregisterHotKey(hWnd, id);
-        }       
+        }
 
     }
 }

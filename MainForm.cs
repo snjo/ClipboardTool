@@ -1,33 +1,16 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Configuration;
-using System.Data;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Media;
-using System.Net.Security;
-using System.Resources;
-using System.Runtime.InteropServices;
-using System.Runtime.Intrinsics.X86;
-using System.Security.AccessControl;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using ClipboardTool.Properties;
 using Hotkeys;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Runtime.InteropServices;
+using System.Text.RegularExpressions;
 using TextBox = System.Windows.Forms.TextBox;
 
 namespace ClipboardTool
 {
     public partial class MainForm : Form
     {
-//#pragma warning disable CS8602 // Dereference of a possibly null reference.
-//#pragma warning disable CS8604 // Possible null reference argument.
-//#pragma warning disable CS8601 // Possible null reference assignment.
+        //#pragma warning disable CS8602 // Dereference of a possibly null reference.
+        //#pragma warning disable CS8604 // Possible null reference argument.
+        //#pragma warning disable CS8601 // Possible null reference assignment.
 
 
         [DllImport("user32.dll")]
@@ -39,7 +22,6 @@ namespace ClipboardTool
 
         public Dictionary<string, Hotkey> HotkeyList = new Dictionary<string, Hotkey>
         {
-            //{"UpperCase", new GlobalHotkey(new Hotkey())},
             {"UpperCase", new Hotkey(new GlobalHotkey())},
             {"LowerCase", new Hotkey(new GlobalHotkey())},
             {"PlainText", new Hotkey(new GlobalHotkey())},
@@ -51,15 +33,6 @@ namespace ClipboardTool
             {"MemSlot3", new Hotkey(new GlobalHotkey())},
             {"ResetNumber", new Hotkey(new GlobalHotkey())},
         };
-        /*private GlobalHotkey? ghkUpperCase; //nullable (?) to avoid warning in MainForm method
-        private GlobalHotkey? ghkLowerCase;
-        private GlobalHotkey? ghkCapsLock;
-        private GlobalHotkey? ghkPlainText;
-        private GlobalHotkey? ghkProcessText;
-        private GlobalHotkey? ghkDate;
-        private GlobalHotkey? ghkMemSlot1;
-        private GlobalHotkey? ghkMemSlot2;
-        private GlobalHotkey? ghkMemSlot3;*/
 
         private Icon iconUpper;
         private Icon iconLower;
@@ -67,8 +40,6 @@ namespace ClipboardTool
         private bool capLockStateSet = false;
         private bool alwaysOnTop = false;
         public Form Current;
-        //public HotkeyList hotkeys = new HotkeyList();
-        //private bool hotkeysSet = false;
         HelpForm helpForm = new HelpForm();
         string delayedKeystrokes = "";
 
@@ -106,46 +77,14 @@ namespace ClipboardTool
             iconUpper = notifyIcon1.Icon;
             iconLower = systrayIcon.Icon;
             helpForm.setText(tooltipText);
-            this.Load += Form1_Load;
+            //this.Load += Form1_Load;
 
-            //new hotkey stuff
             HotkeyList = HotkeyTools.LoadHotkeys(HotkeyList, this);
             if (settings.RegisterHotkeys) // optional
             {
                 HotkeyTools.RegisterHotkeys(HotkeyList);
             }
-            //----------------
         }
-
-        /*
-        public void LoadHotkeys()
-        {
-            //Settings newSettings = new();
-
-            foreach (KeyValuePair<string, Hotkey> kvp in HotkeyList)
-            {
-                HotkeyList[kvp.Key] = LoadHotkey(kvp.Key);
-            }
-        }
-
-        private Hotkey LoadHotkey(string hotkeyName) //char settingHotkey
-        {
-            //Settings.Default["hk" + hotkeyName + "Key"]
-            Hotkey hotkey = new Hotkey
-            {
-                key = Settings.Default["hk" + hotkeyName + "Key"].ToString()+"", //+"" to stop warning for ToString null return
-                Ctrl = (bool)Settings.Default["hk" + hotkeyName + "Ctrl"],
-                Alt = (bool)Settings.Default["hk" + hotkeyName + "Alt"],
-                Shift = (bool)Settings.Default["hk" + hotkeyName + "Shift"],
-                Win = (bool)Settings.Default["hk" + hotkeyName + "Win"]
-            };
-            hotkey.ghk = new Hotkeys.GlobalHotkey(hotkey.Modifiers(), hotkey.key, this);
-
-            //test
-            //writeMessage("key: " + Settings.Default["hk" + hotkeyName + "Key"].ToString());
-
-            return hotkey;
-        }*/
 
         private void updateHotkeyLabels()
         {
@@ -188,9 +127,6 @@ namespace ClipboardTool
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            //LoadHotkeys();
-            //RegisterHotKeys();
-
             if (settings.StartHidden)
             {
                 WindowState = FormWindowState.Minimized;
@@ -270,63 +206,10 @@ namespace ClipboardTool
             }
         }
 
-        public void RegisterHotKeys()
-        {
-            if (!settings.RegisterHotkeys) return;
-
-            //hotkeysSet = true;
-
-            string errorMessages = "";
-            //trying to register hotkey
-
-            foreach (KeyValuePair<string, Hotkey> ghk in HotkeyList)
-            {
-                RegisterHotKey(ghk.Value.ghk);
-            }
-
-            if (errorMessages.Length > 0)
-            {
-                writeMessage(errorMessages);
-            }
-        }
-
-        private void RegisterHotKey(GlobalHotkey ghk)
-        {
-            if (ghk != null)
-            {
-                //writeMessage("hk reg " + ghk.id);
-                if (!ghk.Register())
-                {
-                    //writeMessage("register hotkey failed");
-                }
-            }
-        }
-
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             HotkeyTools.ReleaseHotkeys(HotkeyList);
-            //ReleaseHotkeys();
         }
-
-        /*
-        public void ReleaseHotkeys()
-        {
-            if (!hotkeysSet) return;
-
-            foreach (KeyValuePair<string, Hotkey> ghk in HotkeyList)
-            {
-                ReleaseHotkey(ghk.Value.ghk);
-            }
-        }
-
-        private void ReleaseHotkey(GlobalHotkey ghk)
-        {
-            if (ghk != null)
-            {
-                ghk.Unregister();
-            }
-        }*/
-
 
         private void HandleHotkey(int id)
         {
@@ -723,7 +606,7 @@ namespace ClipboardTool
                 {
                     numericUpDown1.Value = value;
                 }
-            }   
+            }
         }
 
         #region Tooltips -----------------------------------------------------

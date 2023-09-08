@@ -1,17 +1,6 @@
 ﻿using Hotkeys;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Configuration;
-using System.Data;
 using System.Diagnostics;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Security.Policy;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace ClipboardTool
 {
@@ -166,7 +155,7 @@ namespace ClipboardTool
                 MessageBox.Show("No settings folder exists yet. Save the settings and try again." + Environment.NewLine +
                     "(A new settings file/folder is created if the application has changed or moved)");
             }
-            
+
         }
 
         private void buttonSelectFolder_Click(object sender, EventArgs e)
@@ -176,7 +165,7 @@ namespace ClipboardTool
             {
                 textMemorySlotFolder.Text = folderBrowserDialog1.SelectedPath;
             }
-            
+
         }
     }
 }

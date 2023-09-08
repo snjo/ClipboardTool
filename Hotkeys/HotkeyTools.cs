@@ -11,7 +11,7 @@ namespace Hotkeys
         {
             foreach (KeyValuePair<string, Hotkey> kvp in hotkeyList)
             {
-                hotkeyList[kvp.Key] = LoadHotkey(kvp.Key, parent);                
+                hotkeyList[kvp.Key] = LoadHotkey(kvp.Key, parent);
             }
 
             //MessageBox.Show("hotKeyList " + hotkeyList.Count);
@@ -21,8 +21,8 @@ namespace Hotkeys
         public static Hotkey LoadHotkey(string hotkeyName, Form parent) //char settingHotkey
         {
             Hotkey hotkey = new Hotkey();
-            
-            hotkey.key = Settings.Default["hk" + hotkeyName + "Key"].ToString()+""; //fix null return from ToString by adding ""
+
+            hotkey.key = Settings.Default["hk" + hotkeyName + "Key"].ToString() + ""; //fix null return from ToString by adding ""
             hotkey.Ctrl = (bool)Settings.Default["hk" + hotkeyName + "Ctrl"];
             hotkey.Alt = (bool)Settings.Default["hk" + hotkeyName + "Alt"];
             hotkey.Shift = (bool)Settings.Default["hk" + hotkeyName + "Shift"];
@@ -38,7 +38,7 @@ namespace Hotkeys
         /// </summary>
         /// <param name="ghk">A GlobalHotkey</param>
         /// <param name="warning">Displays a MessageBox warning if the key fails to register</param>
-        public static bool RegisterHotKey(GlobalHotkey ghk, bool warning=true)
+        public static bool RegisterHotKey(GlobalHotkey ghk, bool warning = true)
         {
             if (ghk == null) return false;
             if (ghk.Register())
@@ -69,7 +69,7 @@ namespace Hotkeys
         {
             string warningKeys = "";
             foreach (KeyValuePair<string, Hotkey> ghk in hotkeyList)
-            { 
+            {
                 if (ghk.Value.key == string.Empty)
                 {
                     //MessageBox.Show("Skipping hotkey");
