@@ -10,7 +10,8 @@ namespace ClipboardTool
         private int textColumnIndex = 2;
         private int buttonColumnIndex = 3;
         MainForm mainForm;
-        List<KeyValuePair<string, string>> historyEntries = new List<KeyValuePair<string, string>>();
+        string colorTag = "//Color:";
+        List<KeyValuePair<string, string[]>> historyEntries = new List<KeyValuePair<string, string[]>>();
 
         public ClipboardHistory(MainForm mainForm)
         {
@@ -52,7 +53,8 @@ namespace ClipboardTool
                     if (File.Exists(file))
                     {
                         Debug.WriteLine("Loading file: " + file);
-                        historyEntries.Add(new KeyValuePair<string, string>(file, File.ReadAllText(file)));
+                        string[] entryText = File.ReadAllLines(file);
+                        historyEntries.Add(new KeyValuePair<string, string[]>(file, entryText));
                     }
                     else
                     {
@@ -64,10 +66,53 @@ namespace ClipboardTool
             {
                 MessageBox.Show("Could not locate or create folder for history text: " + historyFolder);
             }
-            foreach (KeyValuePair<string, string> entry in historyEntries)
+            gridHistory.Rows.Clear();
+            int countRows = 0;
+            foreach (KeyValuePair<string, string[]> entry in historyEntries)
             {
-                gridHistory.Rows.Add(true, Path.GetFileNameWithoutExtension(entry.Key), entry.Value);
+                Color c = Color.White;
+                int tagCount = 0;
+                if (entry.Value[0].Length > 0)
+                {
+                    if (entry.Value[0].Contains(colorTag))
+                    {
+                        c = ParseColor(entry.Value[0].Substring(colorTag.Length));
+                        
+                        tagCount++;
+                    }
+                }
+                string textWithoutTags = string.Empty;
+                for (int i = tagCount; i < entry.Value.Length; i++)
+                { 
+                    textWithoutTags += entry.Value[i];
+                    if (i < entry.Value.Length-1)
+                        textWithoutTags += Environment.NewLine;
+                }
+                gridHistory.Rows.Add(true, Path.GetFileNameWithoutExtension(entry.Key), textWithoutTags);
+                SetEntryColor(countRows, c);
+                countRows++;
             }
+        }
+        
+        private void SetEntryColor(int rowIndex, Color color)
+        {
+            DataGridViewRow row = gridHistory.Rows[rowIndex];
+            if (row != null)
+            {
+                if (row.Cells[1] != null)
+                    row.Cells[1].Style.BackColor = color;
+            }
+        }
+
+        private Color ParseColor(string text)
+        {
+            string[] rgbText = text.Split(',');
+            int[] rgbValues = new int[3] { 255, 255, 255 };
+            rgbValues[0] = int.Parse(rgbText[0]);
+            rgbValues[1] = int.Parse(rgbText[1]);
+            rgbValues[2] = int.Parse(rgbText[2]);
+            Color color = Color.FromArgb(rgbValues[0], rgbValues[1], rgbValues[2]);
+            return color;
         }
 
         private bool SaveEntry(string? filename, string? text)
