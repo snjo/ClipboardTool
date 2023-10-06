@@ -18,7 +18,7 @@ namespace ClipboardTool
 
         Settings settings = Properties.Settings.Default;
         string clipBoardText = String.Empty;
-        ProcessText process;
+        public ProcessText process;
 
 
         public Dictionary<string, Hotkey> HotkeyList = new Dictionary<string, Hotkey>();
@@ -778,5 +778,17 @@ namespace ClipboardTool
             }
         }
         #endregion
+
+        ClipboardHistory clipboardHistory;
+        private void buttonHistory_Click(object sender, EventArgs e)
+        {
+            if (clipboardHistory == null)
+                clipboardHistory = new ClipboardHistory(this);
+            if (clipboardHistory.IsDisposed)
+                clipboardHistory = new ClipboardHistory(this);
+            
+            clipboardHistory.Show();
+            clipboardHistory.BringToFront();
+        }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace ClipboardTool
 {
-    internal class ProcessText
+    public class ProcessText
     {
         MainForm mainForm;
         public ProcessText(MainForm parent)

@@ -78,6 +78,7 @@
             button6 = new Button();
             button8 = new Button();
             button9 = new Button();
+            buttonHistory = new Button();
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
             contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
@@ -583,11 +584,22 @@
             button9.Click += actionLoad;
             button9.MouseHover += showToolTipMemLoad;
             // 
+            // buttonHistory
+            // 
+            buttonHistory.Location = new Point(147, 5);
+            buttonHistory.Name = "buttonHistory";
+            buttonHistory.Size = new Size(60, 23);
+            buttonHistory.TabIndex = 50;
+            buttonHistory.Text = "history";
+            buttonHistory.UseVisualStyleBackColor = true;
+            buttonHistory.Click += buttonHistory_Click;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(360, 455);
+            Controls.Add(buttonHistory);
             Controls.Add(splitContainer1);
             Controls.Add(buttonSaveCustom);
             Controls.Add(buttonHelp);
@@ -682,5 +694,6 @@
         private Button button6;
         private Button button8;
         private Button button9;
+        private Button buttonHistory;
     }
 }
