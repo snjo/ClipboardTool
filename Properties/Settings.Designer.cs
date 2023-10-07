@@ -742,5 +742,65 @@ namespace ClipboardTool.Properties {
                 this["hkResetNumberWin"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("H")]
+        public string hkHistoryKey {
+            get {
+                return ((string)(this["hkHistoryKey"]));
+            }
+            set {
+                this["hkHistoryKey"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool hkHistoryCtrl {
+            get {
+                return ((bool)(this["hkHistoryCtrl"]));
+            }
+            set {
+                this["hkHistoryCtrl"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool hkHistoryAlt {
+            get {
+                return ((bool)(this["hkHistoryAlt"]));
+            }
+            set {
+                this["hkHistoryAlt"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool hkHistoryShift {
+            get {
+                return ((bool)(this["hkHistoryShift"]));
+            }
+            set {
+                this["hkHistoryShift"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool hkHistoryWin {
+            get {
+                return ((bool)(this["hkHistoryWin"]));
+            }
+            set {
+                this["hkHistoryWin"] = value;
+            }
+        }
     }
 }

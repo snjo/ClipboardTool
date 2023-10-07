@@ -3,7 +3,7 @@ using System.Diagnostics;
 
 namespace ClipboardTool
 {
-    public partial class ClipboardHistory : Form
+    public partial class TextHistory : Form
     {
         private int checkboxColumnIndex = 0;
         private int titleColumnIndex = 1;
@@ -13,7 +13,7 @@ namespace ClipboardTool
         string colorTag = "//Color:";
         List<KeyValuePair<string, string[]>> historyEntries = new List<KeyValuePair<string, string[]>>();
 
-        public ClipboardHistory(MainForm mainForm)
+        public TextHistory(MainForm mainForm)
         {
             InitializeComponent();
             this.mainForm = mainForm;
@@ -24,7 +24,7 @@ namespace ClipboardTool
         {
             get
             {
-                return Path.Join(Settings.Default.MemorySlotFolder, "History");
+                return Path.Join(Environment.ExpandEnvironmentVariables(Settings.Default.MemorySlotFolder), "History");
             }
         }
 
@@ -77,15 +77,15 @@ namespace ClipboardTool
                     if (entry.Value[0].Contains(colorTag))
                     {
                         c = ParseColor(entry.Value[0].Substring(colorTag.Length));
-                        
+
                         tagCount++;
                     }
                 }
                 string textWithoutTags = string.Empty;
                 for (int i = tagCount; i < entry.Value.Length; i++)
-                { 
+                {
                     textWithoutTags += entry.Value[i];
-                    if (i < entry.Value.Length-1)
+                    if (i < entry.Value.Length - 1)
                         textWithoutTags += Environment.NewLine;
                 }
                 gridHistory.Rows.Add(true, Path.GetFileNameWithoutExtension(entry.Key), textWithoutTags);
@@ -93,7 +93,7 @@ namespace ClipboardTool
                 countRows++;
             }
         }
-        
+
         private void SetEntryColor(int rowIndex, Color color)
         {
             DataGridViewRow row = gridHistory.Rows[rowIndex];
@@ -214,7 +214,11 @@ namespace ClipboardTool
                     {
                         string processedText = mainForm.process.ProcessTextVariables(cellText, false);
                         Clipboard.SetData(DataFormats.Text, processedText);
-                        //Clipboard.SetText(cellText);
+                        if (checkBoxMinimize.Checked)
+                        {
+                            this.WindowState = FormWindowState.Minimized;
+                        }
+
                     }
                     else
                     {

@@ -36,6 +36,7 @@ namespace ClipboardTool
             "MemSlot2",
             "MemSlot3",
             "ResetNumber",
+            "History",
         };
 
         private Icon iconUpper;
@@ -308,6 +309,11 @@ namespace ClipboardTool
                 {
                     numericUpDown1.Value = 1;
                 }
+            }
+
+            if (HotkeyList["History"] != null)
+            {
+                ShowHistory();
             }
         }
 
@@ -779,16 +785,22 @@ namespace ClipboardTool
         }
         #endregion
 
-        ClipboardHistory clipboardHistory;
+        TextHistory textHistory;
         private void buttonHistory_Click(object sender, EventArgs e)
         {
-            if (clipboardHistory == null)
-                clipboardHistory = new ClipboardHistory(this);
-            if (clipboardHistory.IsDisposed)
-                clipboardHistory = new ClipboardHistory(this);
-            
-            clipboardHistory.Show();
-            clipboardHistory.BringToFront();
+            ShowHistory();
+        }
+
+        public void ShowHistory()
+        {
+            if (textHistory == null)
+                textHistory = new TextHistory(this);
+            if (textHistory.IsDisposed)
+                textHistory = new TextHistory(this);
+
+            textHistory.Show();
+            textHistory.WindowState = FormWindowState.Normal;
+            textHistory.BringToFront();
         }
     }
 }

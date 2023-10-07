@@ -156,5 +156,6 @@
         #endregion
 
         private ToolTip toolTip1;
+        private Button buttonHistory;
     }
 }

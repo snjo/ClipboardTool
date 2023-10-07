@@ -586,6 +586,7 @@
             // 
             // buttonHistory
             // 
+            buttonHistory.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             buttonHistory.Location = new Point(147, 5);
             buttonHistory.Name = "buttonHistory";
             buttonHistory.Size = new Size(60, 23);

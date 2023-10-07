@@ -1,6 +1,6 @@
 ﻿namespace ClipboardTool
 {
-    partial class ClipboardHistory
+    partial class TextHistory
     {
         /// <summary>
         /// Required designer variable.
@@ -29,49 +29,17 @@
         private void InitializeComponent()
         {
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            HistoryEnabled = new CheckBox();
-            NumberOfAutosaves = new NumericUpDown();
-            labelAutosaveNumber = new Label();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TextHistory));
             gridHistory = new DataGridView();
-            buttonAddFromClipboard = new Button();
-            button1 = new Button();
             ColumnPinned = new DataGridViewCheckBoxColumn();
             ColumnTitle = new DataGridViewTextBoxColumn();
             ColumnText = new DataGridViewTextBoxColumn();
             ColumnLoad = new DataGridViewButtonColumn();
-            ((System.ComponentModel.ISupportInitialize)NumberOfAutosaves).BeginInit();
+            buttonAddFromClipboard = new Button();
+            button1 = new Button();
+            checkBoxMinimize = new CheckBox();
             ((System.ComponentModel.ISupportInitialize)gridHistory).BeginInit();
             SuspendLayout();
-            // 
-            // HistoryEnabled
-            // 
-            HistoryEnabled.AutoSize = true;
-            HistoryEnabled.Enabled = false;
-            HistoryEnabled.Location = new Point(4, 4);
-            HistoryEnabled.Name = "HistoryEnabled";
-            HistoryEnabled.Size = new Size(137, 19);
-            HistoryEnabled.TabIndex = 0;
-            HistoryEnabled.Text = "Use clipboard history";
-            HistoryEnabled.UseVisualStyleBackColor = true;
-            // 
-            // NumberOfAutosaves
-            // 
-            NumberOfAutosaves.Enabled = false;
-            NumberOfAutosaves.Location = new Point(168, 3);
-            NumberOfAutosaves.Name = "NumberOfAutosaves";
-            NumberOfAutosaves.Size = new Size(51, 23);
-            NumberOfAutosaves.TabIndex = 1;
-            NumberOfAutosaves.Value = new decimal(new int[] { 5, 0, 0, 0 });
-            // 
-            // labelAutosaveNumber
-            // 
-            labelAutosaveNumber.AutoSize = true;
-            labelAutosaveNumber.Enabled = false;
-            labelAutosaveNumber.Location = new Point(225, 5);
-            labelAutosaveNumber.Name = "labelAutosaveNumber";
-            labelAutosaveNumber.Size = new Size(106, 15);
-            labelAutosaveNumber.TabIndex = 2;
-            labelAutosaveNumber.Text = "Entries to autosave";
             // 
             // gridHistory
             // 
@@ -90,32 +58,9 @@
             gridHistory.MultiSelect = false;
             gridHistory.Name = "gridHistory";
             gridHistory.RowTemplate.Height = 50;
-            gridHistory.Size = new Size(519, 582);
+            gridHistory.Size = new Size(518, 582);
             gridHistory.TabIndex = 3;
             gridHistory.CellClick += gridHistory_CellClick;
-            // 
-            // buttonAddFromClipboard
-            // 
-            buttonAddFromClipboard.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            buttonAddFromClipboard.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            buttonAddFromClipboard.Location = new Point(478, 4);
-            buttonAddFromClipboard.Name = "buttonAddFromClipboard";
-            buttonAddFromClipboard.Size = new Size(45, 23);
-            buttonAddFromClipboard.TabIndex = 4;
-            buttonAddFromClipboard.Text = "Add";
-            buttonAddFromClipboard.UseVisualStyleBackColor = true;
-            buttonAddFromClipboard.Click += buttonAddFromClipboard_Click;
-            // 
-            // button1
-            // 
-            button1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            button1.Location = new Point(444, 4);
-            button1.Name = "button1";
-            button1.Size = new Size(28, 23);
-            button1.TabIndex = 5;
-            button1.Text = "📌";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += actionAlwaysOnTop;
             // 
             // ColumnPinned
             // 
@@ -144,30 +89,57 @@
             ColumnLoad.UseColumnTextForButtonValue = true;
             ColumnLoad.Width = 50;
             // 
-            // ClipboardHistory
+            // buttonAddFromClipboard
+            // 
+            buttonAddFromClipboard.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            buttonAddFromClipboard.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            buttonAddFromClipboard.Location = new Point(477, 4);
+            buttonAddFromClipboard.Name = "buttonAddFromClipboard";
+            buttonAddFromClipboard.Size = new Size(45, 23);
+            buttonAddFromClipboard.TabIndex = 4;
+            buttonAddFromClipboard.Text = "Add";
+            buttonAddFromClipboard.UseVisualStyleBackColor = true;
+            buttonAddFromClipboard.Click += buttonAddFromClipboard_Click;
+            // 
+            // button1
+            // 
+            button1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            button1.Location = new Point(443, 4);
+            button1.Name = "button1";
+            button1.Size = new Size(28, 23);
+            button1.TabIndex = 5;
+            button1.Text = "📌";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += actionAlwaysOnTop;
+            // 
+            // checkBoxMinimize
+            // 
+            checkBoxMinimize.AutoSize = true;
+            checkBoxMinimize.Location = new Point(4, 7);
+            checkBoxMinimize.Name = "checkBoxMinimize";
+            checkBoxMinimize.Size = new Size(180, 19);
+            checkBoxMinimize.TabIndex = 6;
+            checkBoxMinimize.Text = "Minimize when clicking Load";
+            checkBoxMinimize.UseVisualStyleBackColor = true;
+            // 
+            // TextHistory
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(526, 618);
+            ClientSize = new Size(525, 618);
+            Controls.Add(checkBoxMinimize);
             Controls.Add(button1);
             Controls.Add(buttonAddFromClipboard);
             Controls.Add(gridHistory);
-            Controls.Add(labelAutosaveNumber);
-            Controls.Add(NumberOfAutosaves);
-            Controls.Add(HistoryEnabled);
-            Name = "ClipboardHistory";
+            Icon = (Icon)resources.GetObject("$this.Icon");
+            Name = "TextHistory";
             Text = "ClipboardHistory";
-            ((System.ComponentModel.ISupportInitialize)NumberOfAutosaves).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridHistory).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-
-        private CheckBox HistoryEnabled;
-        private NumericUpDown NumberOfAutosaves;
-        private Label labelAutosaveNumber;
         private DataGridView gridHistory;
         private Button buttonAddFromClipboard;
         private Button button1;
@@ -175,5 +147,6 @@
         private DataGridViewTextBoxColumn ColumnTitle;
         private DataGridViewTextBoxColumn ColumnText;
         private DataGridViewButtonColumn ColumnLoad;
+        private CheckBox checkBoxMinimize;
     }
 }

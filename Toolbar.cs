@@ -105,7 +105,7 @@ namespace ClipboardTool
             }
         }
 
-        private void updateTooltip(System.Windows.Forms.Button button, int num)
+        private void updateTooltip(Button button, int num)
         {
             toolTip1.SetToolTip(button, "Left Click to load to clipboard\nRight Click to save clipboard to this slot\n\n" + mainform.MemorySlotText(num));
         }
@@ -145,35 +145,41 @@ namespace ClipboardTool
             toolTip1.SetToolTip(buttonProcess, "Updates clipboard using values from the main window Process text box");
         }
 
-        private System.Windows.Forms.Button buttonPin;
-        private System.Windows.Forms.Button buttonhide;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button buttonProcess;
-        private System.Windows.Forms.Button buttonPlain;
-        private System.Windows.Forms.Button buttonUpper;
-        private System.Windows.Forms.Button buttonLower;
+        private void updateTooltipHistory(object sender, EventArgs e)
+        {
+            toolTip1.SetToolTip(buttonHistory, "Show the History panel");
+        }
+
+        private Button buttonPin;
+        private Button buttonhide;
+        private Button button1;
+        private Button button2;
+        private Button button3;
+        private Button buttonProcess;
+        private Button buttonPlain;
+        private Button buttonUpper;
+        private Button buttonLower;
 
         private void InitializeComponent()
         {
             components = new Container();
             ComponentResourceManager resources = new ComponentResourceManager(typeof(Toolbar));
-            buttonPin = new System.Windows.Forms.Button();
-            buttonhide = new System.Windows.Forms.Button();
-            button1 = new System.Windows.Forms.Button();
-            button2 = new System.Windows.Forms.Button();
-            button3 = new System.Windows.Forms.Button();
-            buttonProcess = new System.Windows.Forms.Button();
-            buttonPlain = new System.Windows.Forms.Button();
-            buttonUpper = new System.Windows.Forms.Button();
-            buttonLower = new System.Windows.Forms.Button();
-            toolTip1 = new System.Windows.Forms.ToolTip(components);
+            buttonPin = new Button();
+            buttonhide = new Button();
+            button1 = new Button();
+            button2 = new Button();
+            button3 = new Button();
+            buttonProcess = new Button();
+            buttonPlain = new Button();
+            buttonUpper = new Button();
+            buttonLower = new Button();
+            toolTip1 = new ToolTip(components);
+            buttonHistory = new Button();
             SuspendLayout();
             // 
             // buttonPin
             // 
-            buttonPin.Location = new Point(185, 1);
+            buttonPin.Location = new Point(211, 1);
             buttonPin.Name = "buttonPin";
             buttonPin.Size = new Size(23, 23);
             buttonPin.TabIndex = 10;
@@ -183,7 +189,7 @@ namespace ClipboardTool
             // 
             // buttonhide
             // 
-            buttonhide.Location = new Point(163, 1);
+            buttonhide.Location = new Point(189, 1);
             buttonhide.Name = "buttonhide";
             buttonhide.Size = new Size(23, 23);
             buttonhide.TabIndex = 11;
@@ -268,11 +274,23 @@ namespace ClipboardTool
             buttonLower.Click += actionLower;
             buttonLower.MouseHover += updateTooltipLower;
             // 
+            // buttonHistory
+            // 
+            buttonHistory.Location = new Point(163, 1);
+            buttonHistory.Name = "buttonHistory";
+            buttonHistory.Size = new Size(23, 23);
+            buttonHistory.TabIndex = 19;
+            buttonHistory.Text = "H";
+            buttonHistory.UseVisualStyleBackColor = true;
+            buttonHistory.Click += buttonHistory_Click;
+            buttonHistory.MouseHover += updateTooltipHistory;
+            // 
             // Toolbar
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(209, 25);
+            ClientSize = new Size(235, 25);
+            Controls.Add(buttonHistory);
             Controls.Add(buttonLower);
             Controls.Add(buttonUpper);
             Controls.Add(buttonPlain);
@@ -282,15 +300,17 @@ namespace ClipboardTool
             Controls.Add(button1);
             Controls.Add(buttonhide);
             Controls.Add(buttonPin);
-#pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
             Icon = (Icon)resources.GetObject("$this.Icon");
-#pragma warning restore CS8600 // Converting null literal or possible null value to non-nullable type.
             Name = "Toolbar";
             Text = "Toolbar";
             TopMost = true;
             ResumeLayout(false);
         }
 
+        private void buttonHistory_Click(object sender, EventArgs e)
+        {
+            mainform.ShowHistory();
+        }
     }
 
 
