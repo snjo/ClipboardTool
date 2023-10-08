@@ -90,6 +90,9 @@ namespace ClipboardTool
             }
         }
 
+        [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+        public static extern bool SetForegroundWindow(IntPtr hWnd);
+
         private void updateHotkeyLabels()
         {
             updateHotkeyLabel(HotkeyList["UpperCase"], labelUpper);
@@ -221,100 +224,79 @@ namespace ClipboardTool
 
         private void HandleHotkey(int id)
         {
-            if (HotkeyList["LowerCase"] != null)
+            if (CheckHotkey("LowerCase", id))
             {
-
-                if (id == HotkeyList["LowerCase"].ghk.id)
-                {
-                    sendCut();
-                    sendPaste(LowerCaseOnce());
-                }
+                sendCut();
+                sendPaste(LowerCaseOnce());
             }
 
-            if (HotkeyList["UpperCase"] != null)
+            if (CheckHotkey("UpperCase", id))
             {
-
-                if (id == HotkeyList["UpperCase"].ghk.id)
-                {
-
-                    sendCut();
-                    sendPaste(UpperCaseOnce());
-                }
+                sendCut();
+                sendPaste(UpperCaseOnce()); 
             }
 
-            if (HotkeyList["CapsLock"] != null)
+            if (CheckHotkey("CapsLock", id))
             {
-                if (id == HotkeyList["CapsLock"].ghk.id)
-                {
-                    ToggleCapsLock();
-                }
+                ToggleCapsLock();
             }
 
-            if (HotkeyList["PlainText"] != null)
+            if (CheckHotkey("PlainText", id))
             {
-                if (id == HotkeyList["PlainText"].ghk.id)
-                {
-                    sendCut();
-
-                    sendPaste(PlainTextOnce());
-                }
+                sendCut();
+                sendPaste(PlainTextOnce());  
             }
 
-            if (HotkeyList["ProcessText"] != null)
+            if (CheckHotkey("ProcessText", id))
             {
-                if (id == HotkeyList["ProcessText"].ghk.id)
-                {
-                    sendCut();
-
-                    sendPaste(process.ProcessTextVariables(textCustom.Text));
-                }
+                sendCut();
+                sendPaste(process.ProcessTextVariables(textCustom.Text));
             }
 
-            if (HotkeyList["Date"] != null)
+            if (CheckHotkey("Date", id))
             {
-                if (id == HotkeyList["Date"].ghk.id)
-                {
-                    sendDate();
-                }
+                sendDate();
             }
 
-            if (HotkeyList["MemSlot1"] != null)
+            if (CheckHotkey("MemSlot1", id))
             {
-                if (id == HotkeyList["MemSlot1"].ghk.id)
-                {
-                    sendCut();
-                    sendPaste(process.ProcessTextVariables(textBox1.Text));
-                }
+                sendCut();
+                sendPaste(process.ProcessTextVariables(textBox1.Text));
             }
-            if (HotkeyList["MemSlot2"] != null)
+            
+            if (CheckHotkey("MemSlot2", id))
             {
-                if (id == HotkeyList["MemSlot2"].ghk.id)
-                {
-                    sendCut();
-                    sendPaste(process.ProcessTextVariables(textBox2.Text));
-                }
+                sendCut();
+                sendPaste(process.ProcessTextVariables(textBox2.Text));
             }
-            if (HotkeyList["MemSlot3"] != null)
+            
+            if (CheckHotkey("MemSlot3", id))
             {
-                if (id == HotkeyList["MemSlot3"].ghk.id)
-                {
-                    sendCut();
-                    sendPaste(process.ProcessTextVariables(textBox3.Text));
-                }
+                sendCut();
+                sendPaste(process.ProcessTextVariables(textBox3.Text));
             }
 
-            if (HotkeyList["ResetNumber"] != null)
+            if (CheckHotkey("ResetNumber", id))
             {
-                if (id == HotkeyList["ResetNumber"].ghk.id)
-                {
-                    numericUpDown1.Value = 1;
-                }
+                numericUpDown1.Value = 1;
             }
 
-            if (HotkeyList["History"] != null)
+            if (CheckHotkey("History", id))
             {
                 ShowHistory();
             }
+        }
+
+        private bool CheckHotkey(string hotkeyName, int id)
+        {
+            if (HotkeyList[hotkeyName] != null)
+            {
+                if (id == HotkeyList[hotkeyName].ghk.id)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         private enum SendDateOption
@@ -801,6 +783,7 @@ namespace ClipboardTool
             textHistory.Show();
             textHistory.WindowState = FormWindowState.Normal;
             textHistory.BringToFront();
+            SetForegroundWindow(textHistory.Handle);
         }
     }
 }
