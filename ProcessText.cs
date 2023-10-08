@@ -115,7 +115,7 @@ namespace ClipboardTool
 
         private string PromptForText(string customText)
         {
-            TextPrompt prompt = new TextPrompt();
+            TextPrompt prompt = new TextPrompt("Input text", "Text processing is requesting an input value." + Environment.NewLine + "($prompt function)");
             if (prompt.ShowDialog() == DialogResult.OK)
             {
                 customText = customText.Replace("$prompt", prompt.TextResult);

@@ -38,6 +38,8 @@
             buttonAddFromClipboard = new Button();
             button1 = new Button();
             checkBoxMinimize = new CheckBox();
+            colorDialog1 = new ColorDialog();
+            buttonColor = new Button();
             ((System.ComponentModel.ISupportInitialize)gridHistory).BeginInit();
             SuspendLayout();
             // 
@@ -61,6 +63,7 @@
             gridHistory.Size = new Size(518, 582);
             gridHistory.TabIndex = 3;
             gridHistory.CellClick += gridHistory_CellClick;
+            gridHistory.CellEndEdit += gridHistory_CellEndEdit;
             // 
             // ColumnPinned
             // 
@@ -122,11 +125,22 @@
             checkBoxMinimize.Text = "Minimize when clicking Load";
             checkBoxMinimize.UseVisualStyleBackColor = true;
             // 
+            // buttonColor
+            // 
+            buttonColor.Location = new Point(190, 4);
+            buttonColor.Name = "buttonColor";
+            buttonColor.Size = new Size(75, 23);
+            buttonColor.TabIndex = 7;
+            buttonColor.Text = "Color";
+            buttonColor.UseVisualStyleBackColor = true;
+            buttonColor.Click += buttonColor_Click;
+            // 
             // TextHistory
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(525, 618);
+            Controls.Add(buttonColor);
             Controls.Add(checkBoxMinimize);
             Controls.Add(button1);
             Controls.Add(buttonAddFromClipboard);
@@ -148,5 +162,7 @@
         private DataGridViewTextBoxColumn ColumnText;
         private DataGridViewButtonColumn ColumnLoad;
         private CheckBox checkBoxMinimize;
+        private ColorDialog colorDialog1;
+        private Button buttonColor;
     }
 }

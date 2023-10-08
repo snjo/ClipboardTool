@@ -8,9 +8,18 @@ namespace ClipboardTool
         public static extern bool SetForegroundWindow(IntPtr hWnd);
 
         public string TextResult = string.Empty;
-        public TextPrompt()
+        public Color ColorPicked = Color.White;
+
+        public TextPrompt(string title = "Input text", string info = "", bool showColorPicker = false)
         {
             InitializeComponent();
+            Text = title;
+            labelInfo.Text = info;
+            if (!showColorPicker)
+            {
+                buttonColorPicker.Enabled = false;
+                buttonColorPicker.Visible = false;
+            }
         }
 
         private void TextPrompt_Load(object sender, EventArgs e)
@@ -45,6 +54,20 @@ namespace ClipboardTool
             }
         }
 
+        private void buttonColor_Click(object sender, EventArgs e)
+        {
+            ColorPicker();
+        }
 
+        private void ColorPicker()
+        {
+            DialogResult result = colorDialog1.ShowDialog();
+
+            if (result == DialogResult.OK)
+            {
+                ColorPicked = colorDialog1.Color;
+                textBox1.BackColor = ColorPicked;
+            }
+        }
     }
 }

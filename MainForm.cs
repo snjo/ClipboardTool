@@ -15,6 +15,8 @@ namespace ClipboardTool
 
         [DllImport("user32.dll")]
         static extern void keybd_event(byte bVk, byte bScan, uint dwFlags, UIntPtr dwExtraInfo);
+        [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+        public static extern bool SetForegroundWindow(IntPtr hWnd);
 
         Settings settings = Properties.Settings.Default;
         string clipBoardText = String.Empty;
@@ -89,9 +91,6 @@ namespace ClipboardTool
                 HotkeyTools.RegisterHotkeys(HotkeyList);
             }
         }
-
-        [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        public static extern bool SetForegroundWindow(IntPtr hWnd);
 
         private void updateHotkeyLabels()
         {

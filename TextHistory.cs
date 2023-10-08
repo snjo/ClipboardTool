@@ -100,8 +100,25 @@ namespace ClipboardTool
             if (row != null)
             {
                 if (row.Cells[1] != null)
-                    row.Cells[1].Style.BackColor = color;
+                {
+                    row.Cells[titleColumnIndex].Style.BackColor = color;
+                    row.Cells[textColumnIndex].Style.BackColor = MixColor(color, Color.White, 0.5f);
+                }
             }
+            //SaveEntry()
+        }
+
+        public static Color MixColor(Color color1, Color color2, float mix = 0.5f)
+        {
+            int R = (int)Lerp(color1.R, color2.R, mix);
+            int G = (int)Lerp(color1.G, color2.G, mix);
+            int B = (int)Lerp(color1.B, color2.B, mix);
+            return Color.FromArgb(R, G, B);
+        }
+
+        public static float Lerp(float firstFloat, float secondFloat, float by)
+        {
+            return firstFloat * (1 - by) + secondFloat * by;
         }
 
         private Color ParseColor(string text)
@@ -115,14 +132,24 @@ namespace ClipboardTool
             return color;
         }
 
-        private bool SaveEntry(string? filename, string? text)
+        private bool SaveEntry(string? filename, string? text, Color? color)
         {
             if (filename == null || text == null) return false;
+            if (filename.Length == 0) return false;
             string path = Path.Join(historyFolder, filename + ".txt");
             try
             {
                 if (CheckOrCreateHistoryFolder())
                 {
+                    if (color != null)
+                    {
+                        int[] colorRGB = { color.Value.R, color.Value.G, color.Value.B };
+                        string colorInfo = "//Color:" + colorRGB[0] + "," + colorRGB[1] + "," + colorRGB[2];
+
+                        text = colorInfo + Environment.NewLine + text;
+                    }
+
+
                     File.WriteAllText(path, text);
                     Debug.WriteLine("Saved entry to: " + path);
                     return true;
@@ -138,6 +165,26 @@ namespace ClipboardTool
                 Debug.WriteLine("Exception: Failed to save entry to: " + path);
                 return false;
             }
+        }
+
+        private bool SaveEntry(int row)
+        {
+            bool result = false;
+            if (gridHistory.Rows.Count > row)
+            {
+                if (gridHistory.Rows[row] == null) return false;
+                if (gridHistory.Rows[row].Cells[titleColumnIndex] == null) return false;
+                if (gridHistory.Rows[row].Cells[textColumnIndex] == null) return false;
+                Debug.WriteLine("saving row" + row + ", title/text" + titleColumnIndex + "/" + textColumnIndex);
+
+                string filename = gridHistory.Rows[row].Cells[titleColumnIndex].Value.ToString() + "";
+                string text = gridHistory.Rows[row].Cells[textColumnIndex].Value.ToString() + "";
+                Debug.WriteLine("   f: " + filename);
+                Debug.WriteLine("   t: " + text);
+                Color color = gridHistory.Rows[row].Cells[titleColumnIndex].Style.BackColor;
+                result = SaveEntry(filename, text, color);
+            }
+            return result;
         }
 
         private void DeleteEntry(string? filename)
@@ -178,17 +225,19 @@ namespace ClipboardTool
             if (Clipboard.ContainsText())
             {
                 string title = string.Empty;
-                TextPrompt textPrompt = new TextPrompt();
+                TextPrompt textPrompt = new TextPrompt("Set entry title", "Set title and click OK to pin entry." + Environment.NewLine + "Cancel adds entry but does not pin.", true);
                 DialogResult = textPrompt.ShowDialog();
                 if (DialogResult == DialogResult.OK)
                 {
                     title = textPrompt.TextResult;
+                    Color color = textPrompt.ColorPicked;
                     string clipboardtext = Clipboard.GetText();
                     if (clipboardtext.Length > 0)
                     {
-                        SaveEntry(textPrompt.TextResult, clipboardtext);
+                        SaveEntry(textPrompt.TextResult, clipboardtext, color);
                     }
-                    gridHistory.Rows.Add(true, title, clipboardtext);
+                    int row = gridHistory.Rows.Add(true, title, clipboardtext);
+                    SetEntryColor(row, color);
                 }
                 else
                 {
@@ -278,7 +327,7 @@ namespace ClipboardTool
                             title = cells[titleColumnIndex].Value.ToString() + "";
                         }
                         string text = cells[textColumnIndex].Value.ToString() + "";
-                        pinned = SaveEntry(title, text);
+                        pinned = SaveEntry(title, text, cells[titleColumnIndex].Style.BackColor);
                     }
                     else
                     {
@@ -305,6 +354,31 @@ namespace ClipboardTool
             {
                 TopMost = false;
             }
+        }
+
+        private void buttonColor_Click(object sender, EventArgs e)
+        {
+            ColorPicker();
+        }
+
+        private void ColorPicker()
+        {
+            if (gridHistory.SelectedCells.Count <= 0) return;
+
+            DialogResult result = colorDialog1.ShowDialog();
+
+            if (result == DialogResult.OK)
+            {
+                Color newColor = colorDialog1.Color;
+                int row = gridHistory.SelectedCells[0].RowIndex;
+                SetEntryColor(row, newColor);
+                SaveEntry(row);
+            }
+        }
+
+        private void gridHistory_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            SaveEntry(e.RowIndex);
         }
     }
 }

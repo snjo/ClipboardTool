@@ -31,12 +31,15 @@
             textBox1 = new TextBox();
             buttonOK = new Button();
             buttonCancel = new Button();
+            labelInfo = new Label();
+            colorDialog1 = new ColorDialog();
+            buttonColorPicker = new Button();
             SuspendLayout();
             // 
             // textBox1
             // 
             textBox1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            textBox1.Location = new Point(12, 12);
+            textBox1.Location = new Point(12, 43);
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(309, 23);
             textBox1.TabIndex = 0;
@@ -45,7 +48,7 @@
             // buttonOK
             // 
             buttonOK.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            buttonOK.Location = new Point(246, 41);
+            buttonOK.Location = new Point(246, 71);
             buttonOK.Name = "buttonOK";
             buttonOK.Size = new Size(75, 23);
             buttonOK.TabIndex = 1;
@@ -56,7 +59,7 @@
             // buttonCancel
             // 
             buttonCancel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            buttonCancel.Location = new Point(165, 41);
+            buttonCancel.Location = new Point(165, 71);
             buttonCancel.Name = "buttonCancel";
             buttonCancel.Size = new Size(75, 23);
             buttonCancel.TabIndex = 2;
@@ -64,11 +67,32 @@
             buttonCancel.UseVisualStyleBackColor = true;
             buttonCancel.Click += buttonCancel_Click;
             // 
+            // labelInfo
+            // 
+            labelInfo.AutoSize = true;
+            labelInfo.Location = new Point(12, 6);
+            labelInfo.Name = "labelInfo";
+            labelInfo.Size = new Size(38, 15);
+            labelInfo.TabIndex = 3;
+            labelInfo.Text = "label1";
+            // 
+            // buttonColorPicker
+            // 
+            buttonColorPicker.Location = new Point(12, 72);
+            buttonColorPicker.Name = "buttonColorPicker";
+            buttonColorPicker.Size = new Size(57, 23);
+            buttonColorPicker.TabIndex = 4;
+            buttonColorPicker.Text = "Color";
+            buttonColorPicker.UseVisualStyleBackColor = true;
+            buttonColorPicker.Click += buttonColor_Click;
+            // 
             // TextPrompt
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(333, 73);
+            ClientSize = new Size(333, 99);
+            Controls.Add(buttonColorPicker);
+            Controls.Add(labelInfo);
             Controls.Add(buttonCancel);
             Controls.Add(buttonOK);
             Controls.Add(textBox1);
@@ -84,5 +108,8 @@
         private TextBox textBox1;
         private Button buttonOK;
         private Button buttonCancel;
+        private Label labelInfo;
+        private ColorDialog colorDialog1;
+        private Button buttonColorPicker;
     }
 }
