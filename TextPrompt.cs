@@ -90,13 +90,13 @@ namespace ClipboardTool
             buttonOK.Enabled = !illegalFound;
             if (illegalFound)
             {
-                toolTipIllegal.Show("You can't include these characters: " + ArrayToString(IllegalCharacters), textBox1);
                 toolTipIllegal.ShowAlways = true;
+                toolTipIllegal.Show("You can't include these characters: " + ArrayToString(IllegalCharacters), textBox1);
             }
             else
             {
+                toolTipIllegal.ShowAlways = true;
                 toolTipIllegal.Hide(textBox1);
-                toolTipIllegal.ShowAlways = false;
             }
         }
 
