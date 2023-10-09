@@ -1,0 +1,76 @@
+﻿https://learn.microsoft.com/en-us/dotnet/standard/assembly/create-public-private-key-pair
+
+Create a key pair
+To create a key pair, at a command prompt, type the following command:
+
+sn –k <file name>
+
+In this command, file name is the name of the output file containing the key pair.
+
+The following example creates a key pair called sgKey.snk.
+
+Windows Command Prompt
+
+Copy
+sn -k sgKey.snk
+If you intend to delay sign an assembly and you control the whole key pair (which is unlikely outside
+test scenarios), you can use the following commands to generate a key pair and then extract the public
+key from it into a separate file. First, create the key pair:
+
+Windows Command Prompt
+
+Copy
+sn -k keypair.snk
+Next, extract the public key from the key pair and copy it to a separate file:
+
+Windows Command Prompt
+
+Copy
+sn -p keypair.snk public.snk
+Once you create the key pair, you must put the file where the strong name signing tools can find it.
+
+When signing an assembly with a strong name, the Assembly Linker (Al.exe) looks for the key file
+relative to the current directory and to the output directory. When using command-line compilers,
+you can simply copy the key to the current directory containing your code modules.
+
+---------------
+https://stackoverflow.com/questions/10474852/any-security-issues-adding-a-strong-name-key-to-source-control-for-an-open-sourc
+Given a Strong Name Key (snk file). Is there any security issues adding this file to source control
+for an open source project?
+
+The simple answer is yes and no -- it depends on the purpose for which you are strong-name signing
+your assemblies in the first place.
+
+The MSDN page on Strong-Name Signing summarises the two purposes fairly well.
+
+Strong-naming gives an application or component a unique identity that other software can use to
+refer explicitly to it. For example, strong-naming enables application authors and administrators
+to specify a precise servicing version to be used for a shared component. This enables different
+applications to specify different versions without affecting other applications. In addition, you
+can use the strong name of a component as security evidence to establish a trust relationship
+between two components.
+
+Any publicly-distributed library (DLL) should be strong-name signed, as long as it is intended to
+be consumed by the end-user. (i.e. Unless it is an implementation detail or such.)
+
+The primary purpose of signing that I have seen tends to be for more technical reasons, including
+unique identification (namespaces can sometimes inadvertently clash) and making an assembly
+available for the GAC. In such cases, making the key file publicly available has no security
+implications, because none were intended in the first place. No guarantees of trust/origin are
+provided, but unique identification is still valid. The MSDN page mainly discusses this scenario;
+the times when you should and should not sign an assembly; and the surrounding details.
+
+If however, you are signing an assembly for the sake of authentication -- specifically, to provide
+a guarantee to the consumer that the assembly comes from the claimed source -- then an exoteric
+(publically-distributed) key utterly invalidates this trust model. That is, anyone can go modify
+your project code arbitrarily, and rebuild and resign your assemblies correctly, essentially
+faking your identity. The MSDN page does not address this usage well unfortunately (probably
+because it needs to be considered more widely as part of a security strategy), but it is important
+nonetheless.
+
+Finally, be aware that there are two types of key certificate files that the CLR/.NET uses to sign
+assemblies. The first is an SNK, as you mention; this is non-password-protected. The second is PFX,
+which is really just a password-protected version of an SNK key file. As long as this password is
+sufficiently secure, there is hence no security problem in distributing a secured PFX with your
+open-source software. Visual Studio (and the command-line key generation utility) are of course
+capable of creating both.

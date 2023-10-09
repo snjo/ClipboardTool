@@ -1,5 +1,6 @@
 using ClipboardTool.Properties;
 using Hotkeys;
+using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using TextBox = System.Windows.Forms.TextBox;
@@ -78,6 +79,7 @@ namespace ClipboardTool
         public MainForm()
         {
             InitializeComponent();
+            UpgradeSettings();
             Current = this;
             timerStatus.Start();
             process = new ProcessText(this);
@@ -92,6 +94,21 @@ namespace ClipboardTool
             }
         }
 
+        private void UpgradeSettings()
+        {
+            if (Settings.Default.UpgradeSettings)
+            {
+                Debug.WriteLine("Upgrading settings");
+                //MessageBox.Show("Upgrading settings");
+                Settings.Default.Upgrade();
+                Settings.Default.UpgradeSettings = false;
+            }
+            else
+            {
+                //MessageBox.Show("Not upgrading settings");
+                Debug.WriteLine("Not upgrading settings");
+            }
+        }
         private void updateHotkeyLabels()
         {
             updateHotkeyLabel(HotkeyList["UpperCase"], labelUpper);
