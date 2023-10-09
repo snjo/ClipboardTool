@@ -28,12 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             textBox1 = new TextBox();
             buttonOK = new Button();
             buttonCancel = new Button();
             labelInfo = new Label();
             colorDialog1 = new ColorDialog();
             buttonColorPicker = new Button();
+            toolTipIllegal = new ToolTip(components);
             SuspendLayout();
             // 
             // textBox1
@@ -43,6 +45,7 @@
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(309, 23);
             textBox1.TabIndex = 0;
+            textBox1.TextChanged += textBox1_TextChanged;
             textBox1.KeyPress += textBox1_KeyPress;
             // 
             // buttonOK
@@ -86,6 +89,10 @@
             buttonColorPicker.UseVisualStyleBackColor = true;
             buttonColorPicker.Click += buttonColor_Click;
             // 
+            // toolTipIllegal
+            // 
+            toolTipIllegal.ToolTipTitle = "Illegal Characters";
+            // 
             // TextPrompt
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -111,5 +118,6 @@
         private Label labelInfo;
         private ColorDialog colorDialog1;
         private Button buttonColorPicker;
+        private ToolTip toolTipIllegal;
     }
 }

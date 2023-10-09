@@ -31,15 +31,15 @@
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TextHistory));
             gridHistory = new DataGridView();
-            ColumnPinned = new DataGridViewCheckBoxColumn();
-            ColumnTitle = new DataGridViewTextBoxColumn();
-            ColumnText = new DataGridViewTextBoxColumn();
-            ColumnLoad = new DataGridViewButtonColumn();
             buttonAddFromClipboard = new Button();
             button1 = new Button();
             checkBoxMinimize = new CheckBox();
             colorDialog1 = new ColorDialog();
             buttonColor = new Button();
+            ColumnPinned = new DataGridViewCheckBoxColumn();
+            ColumnTitle = new DataGridViewTextBoxColumn();
+            ColumnText = new DataGridViewTextBoxColumn();
+            ColumnCopy = new DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)gridHistory).BeginInit();
             SuspendLayout();
             // 
@@ -47,7 +47,7 @@
             // 
             gridHistory.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             gridHistory.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            gridHistory.Columns.AddRange(new DataGridViewColumn[] { ColumnPinned, ColumnTitle, ColumnText, ColumnLoad });
+            gridHistory.Columns.AddRange(new DataGridViewColumn[] { ColumnPinned, ColumnTitle, ColumnText, ColumnCopy });
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = SystemColors.Window;
             dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
@@ -64,33 +64,6 @@
             gridHistory.TabIndex = 3;
             gridHistory.CellClick += gridHistory_CellClick;
             gridHistory.CellEndEdit += gridHistory_CellEndEdit;
-            // 
-            // ColumnPinned
-            // 
-            ColumnPinned.HeaderText = "📌";
-            ColumnPinned.Name = "ColumnPinned";
-            ColumnPinned.ReadOnly = true;
-            ColumnPinned.Width = 30;
-            // 
-            // ColumnTitle
-            // 
-            ColumnTitle.HeaderText = "Title";
-            ColumnTitle.Name = "ColumnTitle";
-            ColumnTitle.ReadOnly = true;
-            // 
-            // ColumnText
-            // 
-            ColumnText.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            ColumnText.HeaderText = "Text";
-            ColumnText.Name = "ColumnText";
-            // 
-            // ColumnLoad
-            // 
-            ColumnLoad.HeaderText = "Load";
-            ColumnLoad.Name = "ColumnLoad";
-            ColumnLoad.Text = ">";
-            ColumnLoad.UseColumnTextForButtonValue = true;
-            ColumnLoad.Width = 50;
             // 
             // buttonAddFromClipboard
             // 
@@ -135,6 +108,33 @@
             buttonColor.UseVisualStyleBackColor = true;
             buttonColor.Click += buttonColor_Click;
             // 
+            // ColumnPinned
+            // 
+            ColumnPinned.HeaderText = "📌";
+            ColumnPinned.Name = "ColumnPinned";
+            ColumnPinned.ReadOnly = true;
+            ColumnPinned.Width = 30;
+            // 
+            // ColumnTitle
+            // 
+            ColumnTitle.HeaderText = "Title";
+            ColumnTitle.Name = "ColumnTitle";
+            ColumnTitle.ReadOnly = true;
+            // 
+            // ColumnText
+            // 
+            ColumnText.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            ColumnText.HeaderText = "Text";
+            ColumnText.Name = "ColumnText";
+            // 
+            // ColumnCopy
+            // 
+            ColumnCopy.HeaderText = "Copy";
+            ColumnCopy.Name = "ColumnCopy";
+            ColumnCopy.Text = ">";
+            ColumnCopy.UseColumnTextForButtonValue = true;
+            ColumnCopy.Width = 50;
+            // 
             // TextHistory
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -157,12 +157,12 @@
         private DataGridView gridHistory;
         private Button buttonAddFromClipboard;
         private Button button1;
-        private DataGridViewCheckBoxColumn ColumnPinned;
-        private DataGridViewTextBoxColumn ColumnTitle;
-        private DataGridViewTextBoxColumn ColumnText;
-        private DataGridViewButtonColumn ColumnLoad;
         private CheckBox checkBoxMinimize;
         private ColorDialog colorDialog1;
         private Button buttonColor;
+        private DataGridViewCheckBoxColumn ColumnPinned;
+        private DataGridViewTextBoxColumn ColumnTitle;
+        private DataGridViewTextBoxColumn ColumnText;
+        private DataGridViewButtonColumn ColumnCopy;
     }
 }

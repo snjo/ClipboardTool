@@ -1,4 +1,5 @@
-﻿using System.Runtime.InteropServices;
+﻿using System.Linq;
+using System.Runtime.InteropServices;
 
 namespace ClipboardTool
 {
@@ -6,20 +7,21 @@ namespace ClipboardTool
     {
         [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
         public static extern bool SetForegroundWindow(IntPtr hWnd);
+        public static string[] IllegalFileCharacters = { "\\", "/", ":", "*", "?", "<", ">", "|" };
 
         public string TextResult = string.Empty;
         public Color ColorPicked = Color.White;
+        string[]? IllegalCharacters = null;
 
-        public TextPrompt(string title = "Input text", string info = "", bool showColorPicker = false)
+        public TextPrompt(string title = "Input text", string info = "", bool showColorPicker = false, string[]? illegalCharacters = null)
         {
             InitializeComponent();
             Text = title;
             labelInfo.Text = info;
-            if (!showColorPicker)
-            {
-                buttonColorPicker.Enabled = false;
-                buttonColorPicker.Visible = false;
-            }
+
+            buttonColorPicker.Visible = showColorPicker;
+
+            IllegalCharacters = illegalCharacters;
         }
 
         private void TextPrompt_Load(object sender, EventArgs e)
@@ -44,8 +46,11 @@ namespace ClipboardTool
         {
             if (e.KeyChar == (char)Keys.Enter)
             {
-                TextResult = textBox1.Text;
-                DialogResult = DialogResult.OK;
+                if (buttonOK.Enabled)
+                {
+                    TextResult = textBox1.Text;
+                    DialogResult = DialogResult.OK;
+                }
             }
             if (e.KeyChar == (char)Keys.Escape)
             {
@@ -68,6 +73,42 @@ namespace ClipboardTool
                 ColorPicked = colorDialog1.Color;
                 textBox1.BackColor = ColorPicked;
             }
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            if (IllegalCharacters == null) return;
+            string text = textBox1.Text;
+            bool illegalFound = false;
+            foreach (string illegal in IllegalCharacters)
+            {
+                if (text.Contains(illegal))
+                {
+                    illegalFound = true;
+                }
+            }
+            buttonOK.Enabled = !illegalFound;
+            if (illegalFound)
+            {
+                toolTipIllegal.Show("You can't include these characters: " + ArrayToString(IllegalCharacters), textBox1);
+                toolTipIllegal.ShowAlways = true;
+            }
+            else
+            {
+                toolTipIllegal.Hide(textBox1);
+                toolTipIllegal.ShowAlways = false;
+            }
+        }
+
+        private string ArrayToString(string[] textArray, string separator = " ")
+        {
+            string result = string.Empty;
+            for (int i = 0; i < textArray.Length; i++)
+            {
+                result += textArray[i];
+                if (i < textArray.Length - 1) result += separator;
+            }
+            return result;
         }
     }
 }

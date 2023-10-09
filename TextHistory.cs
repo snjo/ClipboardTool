@@ -243,18 +243,19 @@ namespace ClipboardTool
             if (Clipboard.ContainsText())
             {
                 string title = string.Empty;
-                TextPrompt textPrompt = new TextPrompt("Set entry title", "Set title and click OK to pin entry." + Environment.NewLine + "Cancel adds entry but does not pin.", true);
+                TextPrompt textPrompt = new TextPrompt("Set entry title", "Set title and click OK to pin entry." + Environment.NewLine + "Cancel adds entry but does not pin.", true, TextPrompt.IllegalFileCharacters);
                 DialogResult = textPrompt.ShowDialog();
                 if (DialogResult == DialogResult.OK)
                 {
                     title = textPrompt.TextResult;
                     Color color = textPrompt.ColorPicked;
                     string clipboardtext = Clipboard.GetText();
+                    bool saveSuccessful = false;
                     if (clipboardtext.Length > 0)
                     {
-                        SaveEntry(textPrompt.TextResult, clipboardtext, color);
+                        saveSuccessful = SaveEntry(textPrompt.TextResult, clipboardtext, color);
                     }
-                    int row = gridHistory.Rows.Add(true, title, clipboardtext);
+                    int row = gridHistory.Rows.Add(saveSuccessful, title, clipboardtext);
                     SetEntryColor(row, color);
                 }
                 else
