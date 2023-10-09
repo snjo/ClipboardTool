@@ -24,13 +24,14 @@ namespace ClipboardTool
         {
             get
             {
-                return Path.Join(Environment.ExpandEnvironmentVariables(Settings.Default.MemorySlotFolder), "History");
+                return Environment.ExpandEnvironmentVariables(Settings.Default.HistoryFolder);
+                //return Path.Join(Environment.ExpandEnvironmentVariables(Settings.Default.MemorySlotFolder), "History");
             }
         }
 
-        private bool CheckOrCreateHistoryFolder()
+        private bool CheckOrCreateHistoryFolder(bool createIfMissing)
         {
-            if (!Directory.Exists(historyFolder))
+            if (!Directory.Exists(historyFolder) && createIfMissing)
             {
                 try
                 {
@@ -44,9 +45,25 @@ namespace ClipboardTool
             return Directory.Exists(historyFolder);
         }
 
+        private void PromptCreateHistoryFolder()
+        {
+            if (!CheckOrCreateHistoryFolder(false))
+            {
+                DialogResult createFolder = MessageBox.Show("Couldn't find History folder." + Environment.NewLine +
+                    "Do you want to create " + historyFolder + "?" + Environment.NewLine +
+                    "(You can set a different folder name in Options)"
+                    , "Create History folder?"
+                    , MessageBoxButtons.YesNo);
+
+                if (createFolder == DialogResult.Yes)
+                    CheckOrCreateHistoryFolder(true);
+            }
+        }
+
         private void LoadHistoryFiles()
         {
-            if (CheckOrCreateHistoryFolder())
+            PromptCreateHistoryFolder();
+            if (CheckOrCreateHistoryFolder(false))
             {
                 foreach (string file in Directory.GetFiles(historyFolder))
                 {
@@ -64,7 +81,7 @@ namespace ClipboardTool
             }
             else
             {
-                MessageBox.Show("Could not locate or create folder for history text: " + historyFolder);
+                Debug.WriteLine("Could not locate or create folder for history text: " + historyFolder + Environment.NewLine + "Set the folder in Options");
             }
             gridHistory.Rows.Clear();
             int countRows = 0;
@@ -137,9 +154,10 @@ namespace ClipboardTool
             if (filename == null || text == null) return false;
             if (filename.Length == 0) return false;
             string path = Path.Join(historyFolder, filename + ".txt");
+            PromptCreateHistoryFolder();
             try
             {
-                if (CheckOrCreateHistoryFolder())
+                if (CheckOrCreateHistoryFolder(false))
                 {
                     if (color != null)
                     {

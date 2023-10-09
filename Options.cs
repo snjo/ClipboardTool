@@ -18,6 +18,7 @@ namespace ClipboardTool
             optionRegisterHotkeys.Checked = Properties.Settings.Default.RegisterHotkeys;
             optionSaveMemorySlots.Checked = Properties.Settings.Default.SaveMemorySlots;
             textMemorySlotFolder.Text = Properties.Settings.Default.MemorySlotFolder;
+            textBoxHistory.Text = Properties.Settings.Default.HistoryFolder;
             optionResetCounter.Checked = Properties.Settings.Default.ResetCounterWhenSet;
             optionCut.Checked = Properties.Settings.Default.sendCut;
             optionType.Checked = Properties.Settings.Default.sendType;
@@ -91,6 +92,7 @@ namespace ClipboardTool
             Properties.Settings.Default.RegisterHotkeys = optionRegisterHotkeys.Checked;
             Properties.Settings.Default.SaveMemorySlots = optionSaveMemorySlots.Checked;
             Properties.Settings.Default.MemorySlotFolder = textMemorySlotFolder.Text;
+            Properties.Settings.Default.HistoryFolder = textBoxHistory.Text;
             Properties.Settings.Default.ResetCounterWhenSet = optionResetCounter.Checked;
             Properties.Settings.Default.sendCut = optionCut.Checked;
             Properties.Settings.Default.sendType = optionType.Checked;
@@ -152,6 +154,15 @@ namespace ClipboardTool
                 textMemorySlotFolder.Text = folderBrowserDialog1.SelectedPath;
             }
 
+        }
+
+        private void buttonSelectHistoryFolder_Click(object sender, EventArgs e)
+        {
+            DialogResult dialog = folderBrowserDialog1.ShowDialog();
+            if (dialog == DialogResult.OK)
+            {
+                textBoxHistory.Text = folderBrowserDialog1.SelectedPath;
+            }
         }
     }
 }

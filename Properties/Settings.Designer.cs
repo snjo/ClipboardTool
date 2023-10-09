@@ -802,5 +802,17 @@ namespace ClipboardTool.Properties {
                 this["hkHistoryWin"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("%userprofile%\\ClipboardTool History")]
+        public string HistoryFolder {
+            get {
+                return ((string)(this["HistoryFolder"]));
+            }
+            set {
+                this["HistoryFolder"] = value;
+            }
+        }
     }
 }

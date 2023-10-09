@@ -42,7 +42,6 @@
             optionType = new CheckBox();
             optionPaste = new CheckBox();
             optionUpdateClipboard = new CheckBox();
-            label9 = new Label();
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             HotkeyGrid = new DataGridView();
             Function = new DataGridViewTextBoxColumn();
@@ -54,8 +53,11 @@
             linkLabel1 = new LinkLabel();
             linkLabel2 = new LinkLabel();
             label10 = new Label();
-            buttonSelectFolder = new Button();
+            buttonSelectSlotFolder = new Button();
             folderBrowserDialog1 = new FolderBrowserDialog();
+            buttonSelectHistoryFolder = new Button();
+            textBoxHistory = new TextBox();
+            label3 = new Label();
             ((System.ComponentModel.ISupportInitialize)HotkeyGrid).BeginInit();
             SuspendLayout();
             // 
@@ -111,7 +113,7 @@
             // 
             // textMemorySlotFolder
             // 
-            textMemorySlotFolder.Location = new Point(261, 104);
+            textMemorySlotFolder.Location = new Point(261, 87);
             textMemorySlotFolder.Name = "textMemorySlotFolder";
             textMemorySlotFolder.Size = new Size(181, 23);
             textMemorySlotFolder.TabIndex = 5;
@@ -119,7 +121,7 @@
             // label1
             // 
             label1.Font = new Font("Segoe UI", 9F, FontStyle.Italic, GraphicsUnit.Point);
-            label1.Location = new Point(261, 130);
+            label1.Location = new Point(261, 113);
             label1.Name = "label1";
             label1.Size = new Size(232, 30);
             label1.TabIndex = 6;
@@ -131,9 +133,9 @@
             label2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             label2.Location = new Point(12, 190);
             label2.Name = "label2";
-            label2.Size = new Size(257, 15);
+            label2.Size = new Size(230, 15);
             label2.TabIndex = 7;
-            label2.Text = "Restart the program to register new hotkeys";
+            label2.Text = "Restart the program to register hotkeys";
             // 
             // buttonSave
             // 
@@ -197,16 +199,6 @@
             optionUpdateClipboard.Text = "Update clipboard when using Send Keys";
             optionUpdateClipboard.UseVisualStyleBackColor = true;
             // 
-            // label9
-            // 
-            label9.AutoSize = true;
-            label9.Font = new Font("Segoe UI", 9F, FontStyle.Italic, GraphicsUnit.Point);
-            label9.Location = new Point(25, 205);
-            label9.Name = "label9";
-            label9.Size = new Size(279, 15);
-            label9.TabIndex = 51;
-            label9.Text = "Tap 1-3 times for Date/Time while holding Modifiers";
-            // 
             // HotkeyGrid
             // 
             HotkeyGrid.AllowUserToAddRows = false;
@@ -215,11 +207,11 @@
             HotkeyGrid.BackgroundColor = SystemColors.Window;
             HotkeyGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             HotkeyGrid.Columns.AddRange(new DataGridViewColumn[] { Function, Key, Ctrl, Alt, Shift, Win });
-            HotkeyGrid.Location = new Point(12, 223);
+            HotkeyGrid.Location = new Point(12, 241);
             HotkeyGrid.Name = "HotkeyGrid";
             HotkeyGrid.RowHeadersVisible = false;
             HotkeyGrid.RowTemplate.Height = 25;
-            HotkeyGrid.Size = new Size(494, 295);
+            HotkeyGrid.Size = new Size(494, 277);
             HotkeyGrid.TabIndex = 52;
             // 
             // Function
@@ -285,37 +277,65 @@
             // label10
             // 
             label10.AutoSize = true;
-            label10.Location = new Point(261, 86);
+            label10.Location = new Point(261, 69);
             label10.Name = "label10";
-            label10.Size = new Size(77, 15);
+            label10.Size = new Size(100, 15);
             label10.TabIndex = 55;
-            label10.Text = ".txt file folder";
+            label10.Text = "Slot .txt file folder";
             // 
-            // buttonSelectFolder
+            // buttonSelectSlotFolder
             // 
-            buttonSelectFolder.Location = new Point(448, 104);
-            buttonSelectFolder.Name = "buttonSelectFolder";
-            buttonSelectFolder.Size = new Size(58, 23);
-            buttonSelectFolder.TabIndex = 56;
-            buttonSelectFolder.Text = "Select";
-            buttonSelectFolder.UseVisualStyleBackColor = true;
-            buttonSelectFolder.Click += buttonSelectFolder_Click;
+            buttonSelectSlotFolder.Location = new Point(448, 87);
+            buttonSelectSlotFolder.Name = "buttonSelectSlotFolder";
+            buttonSelectSlotFolder.Size = new Size(58, 23);
+            buttonSelectSlotFolder.TabIndex = 56;
+            buttonSelectSlotFolder.Text = "Select";
+            buttonSelectSlotFolder.UseVisualStyleBackColor = true;
+            buttonSelectSlotFolder.Click += buttonSelectFolder_Click;
             // 
             // folderBrowserDialog1
             // 
             folderBrowserDialog1.RootFolder = Environment.SpecialFolder.MyDocuments;
+            // 
+            // buttonSelectHistoryFolder
+            // 
+            buttonSelectHistoryFolder.Location = new Point(448, 172);
+            buttonSelectHistoryFolder.Name = "buttonSelectHistoryFolder";
+            buttonSelectHistoryFolder.Size = new Size(58, 23);
+            buttonSelectHistoryFolder.TabIndex = 58;
+            buttonSelectHistoryFolder.Text = "Select";
+            buttonSelectHistoryFolder.UseVisualStyleBackColor = true;
+            buttonSelectHistoryFolder.Click += buttonSelectHistoryFolder_Click;
+            // 
+            // textBoxHistory
+            // 
+            textBoxHistory.Location = new Point(261, 172);
+            textBoxHistory.Name = "textBoxHistory";
+            textBoxHistory.Size = new Size(181, 23);
+            textBoxHistory.TabIndex = 57;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(261, 154);
+            label3.Name = "label3";
+            label3.Size = new Size(79, 15);
+            label3.TabIndex = 59;
+            label3.Text = "History folder";
             // 
             // Options
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(518, 554);
-            Controls.Add(buttonSelectFolder);
+            Controls.Add(label3);
+            Controls.Add(buttonSelectHistoryFolder);
+            Controls.Add(textBoxHistory);
+            Controls.Add(buttonSelectSlotFolder);
             Controls.Add(label10);
             Controls.Add(linkLabel2);
             Controls.Add(linkLabel1);
             Controls.Add(HotkeyGrid);
-            Controls.Add(label9);
             Controls.Add(optionUpdateClipboard);
             Controls.Add(optionPaste);
             Controls.Add(optionType);
@@ -353,7 +373,6 @@
         private CheckBox optionType;
         private CheckBox optionPaste;
         private CheckBox optionUpdateClipboard;
-        private Label label9;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private DataGridView HotkeyGrid;
         private LinkLabel linkLabel1;
@@ -365,7 +384,10 @@
         private DataGridViewCheckBoxColumn Shift;
         private DataGridViewCheckBoxColumn Win;
         private Label label10;
-        private Button buttonSelectFolder;
+        private Button buttonSelectSlotFolder;
         private FolderBrowserDialog folderBrowserDialog1;
+        private Button buttonSelectHistoryFolder;
+        private TextBox textBoxHistory;
+        private Label label3;
     }
 }
