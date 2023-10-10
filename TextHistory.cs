@@ -269,10 +269,16 @@ namespace ClipboardTool
 
         private void gridHistory_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            Debug.WriteLine("Clicked on row " + e.RowIndex);
+            if (e.RowIndex == -1)
+            {
+                return;
+            }
             // Load text to clipboard
             if (e.ColumnIndex == buttonColumnIndex)
             {
                 string? cellText = "";
+                
                 if (gridHistory.Rows[e.RowIndex].Cells[textColumnIndex].Value != null)
                 {
                     cellText = gridHistory.Rows[e.RowIndex].Cells[textColumnIndex].Value.ToString();
