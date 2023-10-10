@@ -57,6 +57,7 @@ The program settings user.config are stored in a folder in %localappdata%\Clipbo
 | Memory Slot 3                  | Ctrl+Shift+3           |
 | Reset Number UpDown to 1       | Ctrl+Shift+R           |
 | Date/Time                      | Ctrl+Shift+D           |
+| History/Saved Text Window      | Ctrl+Shift+H           |
 
 Tap the date hotkey 1-3 times while holding the modifier keys:
 
@@ -65,6 +66,25 @@ Tap the date hotkey 1-3 times while holding the modifier keys:
 	3: Types out just the Time
 
 Memory Slot hotkeys also does any $ processing in the field, but some functions are not suited for these slots since they rely on values in the mem slots ($rep, $vcm, $list etc.)
+
+-----------------------------------------
+## History Window
+
+The History window allows you to save text and quickly load them into the clipboard. Any $ variables in the text will be processed if you use the [>] Copy button.
+
+Set the folder for these text files in Options, or allow the program to create the folder for you when opening History the first time.
+
+The Minimize on Copy checkbox default setting can be saved in Options.
+
+If you pin an entry, the file will be saved. Unpinning the entry will delete the file. Any entries that are not pinned (saved) will be lost if you close the History window.
+
+When adding a new entry from clipboard using the Add button, or pinning a manually created entry, you must specify a title. This title will be used as the file name (.txt will be added automatically)
+If you have selected a color, the text file will begin with a color tag on the first line.
+
+#### Quick Tip
+Set the History hotkey to a convenient key like F2 (without modifiers), and set the "Minimize after copy" on in options.
+
+Then while working in an application, you can press the hotkey, copy the text, and paste into your application.
 
 -----------------------------------------
 ## Key codes for hotkey options:
