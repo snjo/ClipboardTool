@@ -31,15 +31,15 @@
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TextHistory));
             gridHistory = new DataGridView();
+            ColumnPinned = new DataGridViewCheckBoxColumn();
+            ColumnTitle = new DataGridViewTextBoxColumn();
+            ColumnText = new DataGridViewTextBoxColumn();
+            ColumnCopy = new DataGridViewButtonColumn();
             buttonAddFromClipboard = new Button();
             button1 = new Button();
             checkBoxMinimize = new CheckBox();
             colorDialog1 = new ColorDialog();
             buttonColor = new Button();
-            ColumnPinned = new DataGridViewCheckBoxColumn();
-            ColumnTitle = new DataGridViewTextBoxColumn();
-            ColumnText = new DataGridViewTextBoxColumn();
-            ColumnCopy = new DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)gridHistory).BeginInit();
             SuspendLayout();
             // 
@@ -64,6 +64,33 @@
             gridHistory.TabIndex = 3;
             gridHistory.CellClick += gridHistory_CellClick;
             gridHistory.CellEndEdit += gridHistory_CellEndEdit;
+            // 
+            // ColumnPinned
+            // 
+            ColumnPinned.HeaderText = "📌";
+            ColumnPinned.Name = "ColumnPinned";
+            ColumnPinned.ReadOnly = true;
+            ColumnPinned.Width = 30;
+            // 
+            // ColumnTitle
+            // 
+            ColumnTitle.HeaderText = "Title";
+            ColumnTitle.Name = "ColumnTitle";
+            ColumnTitle.ReadOnly = true;
+            // 
+            // ColumnText
+            // 
+            ColumnText.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            ColumnText.HeaderText = "Text";
+            ColumnText.Name = "ColumnText";
+            // 
+            // ColumnCopy
+            // 
+            ColumnCopy.HeaderText = "Copy";
+            ColumnCopy.Name = "ColumnCopy";
+            ColumnCopy.Text = ">";
+            ColumnCopy.UseColumnTextForButtonValue = true;
+            ColumnCopy.Width = 50;
             // 
             // buttonAddFromClipboard
             // 
@@ -93,9 +120,9 @@
             checkBoxMinimize.AutoSize = true;
             checkBoxMinimize.Location = new Point(4, 7);
             checkBoxMinimize.Name = "checkBoxMinimize";
-            checkBoxMinimize.Size = new Size(180, 19);
+            checkBoxMinimize.Size = new Size(182, 19);
             checkBoxMinimize.TabIndex = 6;
-            checkBoxMinimize.Text = "Minimize when clicking Load";
+            checkBoxMinimize.Text = "Minimize when clicking Copy";
             checkBoxMinimize.UseVisualStyleBackColor = true;
             // 
             // buttonColor
@@ -107,33 +134,6 @@
             buttonColor.Text = "Color";
             buttonColor.UseVisualStyleBackColor = true;
             buttonColor.Click += buttonColor_Click;
-            // 
-            // ColumnPinned
-            // 
-            ColumnPinned.HeaderText = "📌";
-            ColumnPinned.Name = "ColumnPinned";
-            ColumnPinned.ReadOnly = true;
-            ColumnPinned.Width = 30;
-            // 
-            // ColumnTitle
-            // 
-            ColumnTitle.HeaderText = "Title";
-            ColumnTitle.Name = "ColumnTitle";
-            ColumnTitle.ReadOnly = true;
-            // 
-            // ColumnText
-            // 
-            ColumnText.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            ColumnText.HeaderText = "Text";
-            ColumnText.Name = "ColumnText";
-            // 
-            // ColumnCopy
-            // 
-            ColumnCopy.HeaderText = "Copy";
-            ColumnCopy.Name = "ColumnCopy";
-            ColumnCopy.Text = ">";
-            ColumnCopy.UseColumnTextForButtonValue = true;
-            ColumnCopy.Width = 50;
             // 
             // TextHistory
             // 
