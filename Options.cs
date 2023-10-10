@@ -27,6 +27,8 @@ namespace ClipboardTool
             checkBoxHistoryMinimize.Checked = Properties.Settings.Default.HistoryMinimizeAfterCopy;
 
             fillGrid();
+
+            labelVersion.Text = Application.ProductVersion;
         }
 
         private void fillGrid()

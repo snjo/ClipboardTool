@@ -1,9 +1,12 @@
 using ClipboardTool.Properties;
 using Hotkeys;
 using System.Diagnostics;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using TextBox = System.Windows.Forms.TextBox;
+
+[assembly: AssemblyVersion("1.3.*")]
 
 namespace ClipboardTool
 {

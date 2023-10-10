@@ -59,6 +59,7 @@
             textBoxHistory = new TextBox();
             label3 = new Label();
             checkBoxHistoryMinimize = new CheckBox();
+            labelVersion = new Label();
             ((System.ComponentModel.ISupportInitialize)HotkeyGrid).BeginInit();
             SuspendLayout();
             // 
@@ -334,11 +335,21 @@
             checkBoxHistoryMinimize.Text = "Minimize History after Copy";
             checkBoxHistoryMinimize.UseVisualStyleBackColor = true;
             // 
+            // labelVersion
+            // 
+            labelVersion.AutoSize = true;
+            labelVersion.Location = new Point(172, 528);
+            labelVersion.Name = "labelVersion";
+            labelVersion.Size = new Size(45, 15);
+            labelVersion.TabIndex = 61;
+            labelVersion.Text = "version";
+            // 
             // Options
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(518, 554);
+            Controls.Add(labelVersion);
             Controls.Add(checkBoxHistoryMinimize);
             Controls.Add(label3);
             Controls.Add(buttonSelectHistoryFolder);
@@ -402,5 +413,6 @@
         private TextBox textBoxHistory;
         private Label label3;
         private CheckBox checkBoxHistoryMinimize;
+        private Label labelVersion;
     }
 }
