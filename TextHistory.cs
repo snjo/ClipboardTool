@@ -18,6 +18,7 @@ namespace ClipboardTool
             InitializeComponent();
             this.mainForm = mainForm;
             LoadHistoryFiles();
+            checkBoxMinimize.Checked = Settings.Default.HistoryMinimizeAfterCopy;
         }
 
         private string historyFolder

@@ -24,7 +24,7 @@ namespace ClipboardTool
             optionType.Checked = Properties.Settings.Default.sendType;
             optionPaste.Checked = Properties.Settings.Default.sendPaste;
             optionUpdateClipboard.Checked = Properties.Settings.Default.updateClipboard;
-
+            checkBoxHistoryMinimize.Checked = Properties.Settings.Default.HistoryMinimizeAfterCopy;
 
             fillGrid();
         }
@@ -98,6 +98,7 @@ namespace ClipboardTool
             Properties.Settings.Default.sendType = optionType.Checked;
             Properties.Settings.Default.sendPaste = optionPaste.Checked;
             Properties.Settings.Default.updateClipboard = optionUpdateClipboard.Checked;
+            Properties.Settings.Default.HistoryMinimizeAfterCopy = checkBoxHistoryMinimize.Checked;
 
 
             int i = 0;

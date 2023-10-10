@@ -19,7 +19,7 @@ namespace ClipboardTool
         [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
         public static extern bool SetForegroundWindow(IntPtr hWnd);
 
-        Settings settings = Properties.Settings.Default;
+        Settings settings = Settings.Default;
         string clipBoardText = String.Empty;
         public ProcessText process;
 
@@ -547,12 +547,12 @@ namespace ClipboardTool
                 string newText = Clipboard.GetText();
                 textBox.Text = newText;
 
-                if (Properties.Settings.Default.SaveMemorySlots)
+                if (Settings.Default.SaveMemorySlots)
                 {
                     saveMemSlotToFile(num);
                 }
 
-                if (Properties.Settings.Default.ResetCounterWhenSet)
+                if (Settings.Default.ResetCounterWhenSet)
                 {
                     numericUpDown1.Value = 1;
                 }

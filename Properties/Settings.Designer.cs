@@ -826,5 +826,17 @@ namespace ClipboardTool.Properties {
                 this["UpgradeSettings"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool HistoryMinimizeAfterCopy {
+            get {
+                return ((bool)(this["HistoryMinimizeAfterCopy"]));
+            }
+            set {
+                this["HistoryMinimizeAfterCopy"] = value;
+            }
+        }
     }
 }
