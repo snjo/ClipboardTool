@@ -2,6 +2,7 @@
 using System.Configuration;
 using System.Diagnostics;
 using System.Drawing;
+using System.Windows.Forms;
 
 namespace ClipboardTool
 {
@@ -13,6 +14,7 @@ namespace ClipboardTool
         private int buttonColumnIndex = 3;
         MainForm mainForm;
         string colorTag = "//Color:";
+        string colorFileName = @"Colors\colors.txt";
         List<KeyValuePair<string, string[]>> historyEntries = new List<KeyValuePair<string, string[]>>();
 
         public TextHistory(MainForm mainForm)
@@ -219,6 +221,8 @@ namespace ClipboardTool
             {
                 if (gridHistory.Rows[row] == null) return false;
                 if (gridHistory.Rows[row].Cells[titleColumnIndex] == null) return false;
+                if (gridHistory.Rows[row].Cells[titleColumnIndex].Value == null) return false;
+                if ((gridHistory.Rows[row].Cells[titleColumnIndex].Value.ToString()+"").Length == 0) return false;
                 if (gridHistory.Rows[row].Cells[textColumnIndex] == null) return false;
                 Debug.WriteLine("saving row" + row + ", title/text" + titleColumnIndex + "/" + textColumnIndex);
 
@@ -416,7 +420,14 @@ namespace ClipboardTool
         {
             if (gridHistory.SelectedCells.Count <= 0) return;
 
-            //colorDialog1.CustomColors = new Int32[] { unchecked((Int32)0xFFAAFFFF), unchecked((Int32)0xFFBBFF00) };
+            
+            
+            colorDialog1.Dispose();
+            colorDialog1 = new ColorDialog();
+            //colorDialog1.CustomColors = new int[] { unchecked((Int32)0xAAFFFF), unchecked((Int32)0xBBFF00) };
+            int[]? colors = GetSavedColors();
+            if (colors != null)
+                colorDialog1.CustomColors = GetSavedColors();
 
             DialogResult result = colorDialog1.ShowDialog();
 
@@ -426,6 +437,69 @@ namespace ClipboardTool
                 int row = gridHistory.SelectedCells[0].RowIndex;
                 SetEntryColor(row, newColor);
                 SaveEntry(row);
+
+                if (ArraysAreIdentical(colorDialog1.CustomColors, colors))
+                {
+                    Debug.WriteLine("Custom colors have not changed");
+                }
+                else
+                {
+                    Debug.WriteLine("Custom colors have changed, saving to file");
+                    SaveColors();
+                }
+            }
+        }
+
+        private int[]? GetSavedColors()
+        {
+            List<int> colorList = new List<int>();
+            string colorFilePath = Path.Join(historyFolder, colorFileName);
+            if (File.Exists(colorFilePath))
+            {
+                string[] lines = File.ReadAllLines(colorFilePath);
+                foreach (string line in lines)
+                {
+                    if (colorList.Count < 16)
+                        colorList.Add(int.Parse(line));
+                }
+            }
+            else
+            {
+                Debug.WriteLine("Could not load color file: " + colorFilePath);
+            }
+            return colorList.ToArray();
+        }
+
+        private bool ArraysAreIdentical(int[] array1, int[] array2)
+        {
+            Debug.WriteLine("array step 1");
+            if (array1 == null && array2 == null) return true;
+            Debug.WriteLine("array step 2");
+            if (array1 == null || array2 == null) return false;
+            Debug.WriteLine("array step 3");
+            if (array1.Length != array2.Length) return false;
+            Debug.WriteLine("array step 4");
+            for (int i = 0; i < array1.Length; i++)
+            {
+                Debug.WriteLine("array step 5");
+                if (array1[i] != array2[i]) return false;
+            }
+            Debug.WriteLine("array step 6");
+            return true;
+        }
+
+        private void SaveColors()
+        {
+            List<string> customColors = new List<string>();
+            foreach (int c in colorDialog1.CustomColors)
+            {
+                customColors.Add(c.ToString());
+            }
+
+            if (CheckOrCreateHistoryFolder(false))
+            {
+                string colorFilePath = Path.Join(historyFolder, colorFileName);
+                File.WriteAllLines(colorFilePath, customColors);
             }
         }
 

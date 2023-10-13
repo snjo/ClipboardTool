@@ -62,8 +62,8 @@ The program settings user.config are stored in a folder in %localappdata%\Clipbo
 Tap the date hotkey 1-3 times while holding the modifier keys:
 
 	1: Types out just the date	
-	2: Types out the Date and Time
-	3: Types out just the Time
+	2: Types out just the Time
+	3: Types out the Date and Time
 
 Memory Slot hotkeys also does any $ processing in the field, but some functions are not suited for these slots since they rely on values in the mem slots ($rep, $vcm, $list etc.)
 
