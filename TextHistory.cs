@@ -472,19 +472,13 @@ namespace ClipboardTool
 
         private bool ArraysAreIdentical(int[] array1, int[] array2)
         {
-            Debug.WriteLine("array step 1");
             if (array1 == null && array2 == null) return true;
-            Debug.WriteLine("array step 2");
             if (array1 == null || array2 == null) return false;
-            Debug.WriteLine("array step 3");
-            if (array1.Length != array2.Length) return false;
-            Debug.WriteLine("array step 4");
+            if (array1.Length != array2.Length) return false;   
             for (int i = 0; i < array1.Length; i++)
             {
-                Debug.WriteLine("array step 5");
                 if (array1[i] != array2[i]) return false;
             }
-            Debug.WriteLine("array step 6");
             return true;
         }
 
