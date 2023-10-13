@@ -40,6 +40,7 @@
             checkBoxMinimize = new CheckBox();
             colorDialog1 = new ColorDialog();
             buttonColor = new Button();
+            linkLabelHistoryFolder = new LinkLabel();
             ((System.ComponentModel.ISupportInitialize)gridHistory).BeginInit();
             SuspendLayout();
             // 
@@ -60,7 +61,7 @@
             gridHistory.MultiSelect = false;
             gridHistory.Name = "gridHistory";
             gridHistory.RowTemplate.Height = 50;
-            gridHistory.Size = new Size(518, 582);
+            gridHistory.Size = new Size(518, 487);
             gridHistory.TabIndex = 3;
             gridHistory.CellClick += gridHistory_CellClick;
             gridHistory.CellEndEdit += gridHistory_CellEndEdit;
@@ -107,7 +108,7 @@
             // button1
             // 
             button1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            button1.Location = new Point(443, 4);
+            button1.Location = new Point(362, 3);
             button1.Name = "button1";
             button1.Size = new Size(28, 23);
             button1.TabIndex = 5;
@@ -117,8 +118,9 @@
             // 
             // checkBoxMinimize
             // 
+            checkBoxMinimize.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             checkBoxMinimize.AutoSize = true;
-            checkBoxMinimize.Location = new Point(4, 7);
+            checkBoxMinimize.Location = new Point(340, 523);
             checkBoxMinimize.Name = "checkBoxMinimize";
             checkBoxMinimize.Size = new Size(182, 19);
             checkBoxMinimize.TabIndex = 6;
@@ -127,7 +129,8 @@
             // 
             // buttonColor
             // 
-            buttonColor.Location = new Point(190, 4);
+            buttonColor.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            buttonColor.Location = new Point(396, 3);
             buttonColor.Name = "buttonColor";
             buttonColor.Size = new Size(75, 23);
             buttonColor.TabIndex = 7;
@@ -135,11 +138,24 @@
             buttonColor.UseVisualStyleBackColor = true;
             buttonColor.Click += buttonColor_Click;
             // 
+            // linkLabelHistoryFolder
+            // 
+            linkLabelHistoryFolder.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            linkLabelHistoryFolder.AutoSize = true;
+            linkLabelHistoryFolder.Location = new Point(4, 524);
+            linkLabelHistoryFolder.Name = "linkLabelHistoryFolder";
+            linkLabelHistoryFolder.Size = new Size(81, 15);
+            linkLabelHistoryFolder.TabIndex = 8;
+            linkLabelHistoryFolder.TabStop = true;
+            linkLabelHistoryFolder.Text = "History Folder";
+            linkLabelHistoryFolder.LinkClicked += OpenHistoryFolder;
+            // 
             // TextHistory
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(525, 618);
+            ClientSize = new Size(525, 545);
+            Controls.Add(linkLabelHistoryFolder);
             Controls.Add(buttonColor);
             Controls.Add(checkBoxMinimize);
             Controls.Add(button1);
@@ -147,7 +163,7 @@
             Controls.Add(gridHistory);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "TextHistory";
-            Text = "ClipboardHistory";
+            Text = "History";
             ((System.ComponentModel.ISupportInitialize)gridHistory).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -164,5 +180,6 @@
         private DataGridViewTextBoxColumn ColumnTitle;
         private DataGridViewTextBoxColumn ColumnText;
         private DataGridViewButtonColumn ColumnCopy;
+        private LinkLabel linkLabelHistoryFolder;
     }
 }

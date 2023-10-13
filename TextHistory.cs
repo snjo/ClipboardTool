@@ -1,5 +1,7 @@
 ﻿using ClipboardTool.Properties;
+using System.Configuration;
 using System.Diagnostics;
+using System.Drawing;
 
 namespace ClipboardTool
 {
@@ -120,10 +122,34 @@ namespace ClipboardTool
                 if (row.Cells[1] != null)
                 {
                     row.Cells[titleColumnIndex].Style.BackColor = color;
-                    row.Cells[textColumnIndex].Style.BackColor = MixColor(color, Color.White, 0.5f);
+                    Color mixColor = MixColor(color, Color.White, 0.5f);
+                    row.Cells[textColumnIndex].Style.BackColor = mixColor;
+
+                    row.Cells[titleColumnIndex].Style.ForeColor = TextColorFromBackColor(color, 0.6f);
+                    row.Cells[textColumnIndex].Style.ForeColor = TextColorFromBackColor(mixColor, 0.6f);
                 }
             }
-            //SaveEntry()
+        }
+
+        private Color TextColorFromBackColor(Color backColor, float threshold)
+        {
+            Color result = Color.Black;
+            if (ColorValue(backColor) < threshold)
+                result = Color.White;
+            return result;
+        }
+
+        private float ColorValue(Color color)
+        {
+            // returns a value of 0-1f based on the total brightness of the input color
+            //https://stackoverflow.com/questions/596216/formula-to-determine-perceived-brightness-of-rgb-color
+            //https://en.wikipedia.org/wiki/Relative_luminance
+            //perceived value (0.2126 * R + 0.7152 * G + 0.0722 * B)
+            float pR = 0.2126f;
+            float pG = 0.7152f;
+            float pB = 0.0722f;
+            float result = ((color.R*pR) + (color.G*pG) + (color.B*pB)) / 256f;
+            return result;
         }
 
         public static Color MixColor(Color color1, Color color2, float mix = 0.5f)
@@ -390,6 +416,8 @@ namespace ClipboardTool
         {
             if (gridHistory.SelectedCells.Count <= 0) return;
 
+            //colorDialog1.CustomColors = new Int32[] { unchecked((Int32)0xFFAAFFFF), unchecked((Int32)0xFFBBFF00) };
+
             DialogResult result = colorDialog1.ShowDialog();
 
             if (result == DialogResult.OK)
@@ -404,6 +432,14 @@ namespace ClipboardTool
         private void gridHistory_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             SaveEntry(e.RowIndex);
+        }
+
+        private void OpenHistoryFolder(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            if (CheckOrCreateHistoryFolder(false))
+            {
+                Process.Start(new ProcessStartInfo() { FileName = historyFolder, UseShellExecute = true });
+            }
         }
     }
 }

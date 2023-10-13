@@ -322,8 +322,8 @@ namespace ClipboardTool
         {
             NotStarted,
             JustDate,
-            DateAndTime,
             JustTime,
+            DateAndTime,
             END
         }
         private SendDateOption sendDateChoice = SendDateOption.NotStarted;
