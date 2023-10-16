@@ -838,5 +838,17 @@ namespace ClipboardTool.Properties {
                 this["HistoryMinimizeAfterCopy"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool TrayIconCapslockStatus {
+            get {
+                return ((bool)(this["TrayIconCapslockStatus"]));
+            }
+            set {
+                this["TrayIconCapslockStatus"] = value;
+            }
+        }
     }
 }

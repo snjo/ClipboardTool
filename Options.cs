@@ -25,6 +25,7 @@ namespace ClipboardTool
             optionPaste.Checked = Properties.Settings.Default.sendPaste;
             optionUpdateClipboard.Checked = Properties.Settings.Default.updateClipboard;
             checkBoxHistoryMinimize.Checked = Properties.Settings.Default.HistoryMinimizeAfterCopy;
+            checkBoxTrayCapslock.Checked = Properties.Settings.Default.TrayIconCapslockStatus;
 
             fillGrid();
 
@@ -101,6 +102,7 @@ namespace ClipboardTool
             Properties.Settings.Default.sendPaste = optionPaste.Checked;
             Properties.Settings.Default.updateClipboard = optionUpdateClipboard.Checked;
             Properties.Settings.Default.HistoryMinimizeAfterCopy = checkBoxHistoryMinimize.Checked;
+            Properties.Settings.Default.TrayIconCapslockStatus = checkBoxTrayCapslock.Checked;
 
 
             int i = 0;
@@ -124,6 +126,7 @@ namespace ClipboardTool
             }
 
             Properties.Settings.Default.Save();
+            mainForm.UpdateCapsLock(true); // updates the tray icon to a/A or normal icon
         }
 
         private void linkWebsite(object sender, LinkLabelLinkClickedEventArgs e)

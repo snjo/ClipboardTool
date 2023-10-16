@@ -60,6 +60,7 @@
             label3 = new Label();
             checkBoxHistoryMinimize = new CheckBox();
             labelVersion = new Label();
+            checkBoxTrayCapslock = new CheckBox();
             ((System.ComponentModel.ISupportInitialize)HotkeyGrid).BeginInit();
             SuspendLayout();
             // 
@@ -86,7 +87,7 @@
             // optionRegisterHotkeys
             // 
             optionRegisterHotkeys.AutoSize = true;
-            optionRegisterHotkeys.Location = new Point(12, 168);
+            optionRegisterHotkeys.Location = new Point(12, 223);
             optionRegisterHotkeys.Name = "optionRegisterHotkeys";
             optionRegisterHotkeys.Size = new Size(112, 19);
             optionRegisterHotkeys.TabIndex = 2;
@@ -133,7 +134,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label2.Location = new Point(12, 190);
+            label2.Location = new Point(12, 245);
             label2.Name = "label2";
             label2.Size = new Size(230, 15);
             label2.TabIndex = 7;
@@ -142,7 +143,7 @@
             // buttonSave
             // 
             buttonSave.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            buttonSave.Location = new Point(433, 524);
+            buttonSave.Location = new Point(433, 554);
             buttonSave.Name = "buttonSave";
             buttonSave.Size = new Size(75, 23);
             buttonSave.TabIndex = 38;
@@ -153,7 +154,7 @@
             // buttonCancel
             // 
             buttonCancel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            buttonCancel.Location = new Point(352, 524);
+            buttonCancel.Location = new Point(352, 554);
             buttonCancel.Name = "buttonCancel";
             buttonCancel.Size = new Size(75, 23);
             buttonCancel.TabIndex = 39;
@@ -209,11 +210,11 @@
             HotkeyGrid.BackgroundColor = SystemColors.Window;
             HotkeyGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             HotkeyGrid.Columns.AddRange(new DataGridViewColumn[] { Function, Key, Ctrl, Alt, Shift, Win });
-            HotkeyGrid.Location = new Point(12, 241);
+            HotkeyGrid.Location = new Point(12, 274);
             HotkeyGrid.Name = "HotkeyGrid";
             HotkeyGrid.RowHeadersVisible = false;
             HotkeyGrid.RowTemplate.Height = 25;
-            HotkeyGrid.Size = new Size(494, 277);
+            HotkeyGrid.Size = new Size(494, 274);
             HotkeyGrid.TabIndex = 52;
             // 
             // Function
@@ -256,8 +257,9 @@
             // 
             // linkLabel1
             // 
+            linkLabel1.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             linkLabel1.AutoSize = true;
-            linkLabel1.Location = new Point(11, 528);
+            linkLabel1.Location = new Point(11, 558);
             linkLabel1.Name = "linkLabel1";
             linkLabel1.Size = new Size(49, 15);
             linkLabel1.TabIndex = 53;
@@ -267,8 +269,9 @@
             // 
             // linkLabel2
             // 
+            linkLabel2.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             linkLabel2.AutoSize = true;
-            linkLabel2.Location = new Point(66, 528);
+            linkLabel2.Location = new Point(66, 558);
             linkLabel2.Name = "linkLabel2";
             linkLabel2.Size = new Size(100, 15);
             linkLabel2.TabIndex = 54;
@@ -337,18 +340,30 @@
             // 
             // labelVersion
             // 
+            labelVersion.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             labelVersion.AutoSize = true;
-            labelVersion.Location = new Point(172, 528);
+            labelVersion.Location = new Point(172, 558);
             labelVersion.Name = "labelVersion";
             labelVersion.Size = new Size(45, 15);
             labelVersion.TabIndex = 61;
             labelVersion.Text = "version";
             // 
+            // checkBoxTrayCapslock
+            // 
+            checkBoxTrayCapslock.AutoSize = true;
+            checkBoxTrayCapslock.Location = new Point(12, 172);
+            checkBoxTrayCapslock.Name = "checkBoxTrayCapslock";
+            checkBoxTrayCapslock.Size = new Size(164, 19);
+            checkBoxTrayCapslock.TabIndex = 62;
+            checkBoxTrayCapslock.Text = "Tray icon Caps Lock status";
+            checkBoxTrayCapslock.UseVisualStyleBackColor = true;
+            // 
             // Options
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(518, 554);
+            ClientSize = new Size(518, 584);
+            Controls.Add(checkBoxTrayCapslock);
             Controls.Add(labelVersion);
             Controls.Add(checkBoxHistoryMinimize);
             Controls.Add(label3);
@@ -414,5 +429,6 @@
         private Label label3;
         private CheckBox checkBoxHistoryMinimize;
         private Label labelVersion;
+        private CheckBox checkBoxTrayCapslock;
     }
 }

@@ -47,6 +47,7 @@ namespace ClipboardTool
 
         private Icon iconUpper;
         private Icon iconLower;
+        private Icon iconNormal;
         private bool oldCapslockState;
         private bool capLockStateSet = false;
         private bool alwaysOnTop = false;
@@ -86,8 +87,9 @@ namespace ClipboardTool
             Current = this;
             timerStatus.Start();
             process = new ProcessText(this);
-            iconUpper = notifyIcon1.Icon;
-            iconLower = systrayIcon.Icon;
+            iconUpper = notifyIconUpper.Icon;
+            iconLower = notifyIconLower.Icon;
+            iconNormal = systrayIcon.Icon;
             helpForm.setText(tooltipText);
 
             HotkeyList = HotkeyTools.LoadHotkeys(HotkeyList, HotkeyNames, this);
@@ -95,6 +97,7 @@ namespace ClipboardTool
             {
                 HotkeyTools.RegisterHotkeys(HotkeyList);
             }
+            UpdateCapsLock(true);
         }
 
         private void UpgradeSettings()
@@ -252,7 +255,7 @@ namespace ClipboardTool
             if (CheckHotkey("UpperCase", id))
             {
                 sendCut();
-                sendPaste(UpperCaseOnce()); 
+                sendPaste(UpperCaseOnce());
             }
 
             if (CheckHotkey("CapsLock", id))
@@ -263,7 +266,7 @@ namespace ClipboardTool
             if (CheckHotkey("PlainText", id))
             {
                 sendCut();
-                sendPaste(PlainTextOnce());  
+                sendPaste(PlainTextOnce());
             }
 
             if (CheckHotkey("ProcessText", id))
@@ -282,13 +285,13 @@ namespace ClipboardTool
                 sendCut();
                 sendPaste(process.ProcessTextVariables(textBox1.Text));
             }
-            
+
             if (CheckHotkey("MemSlot2", id))
             {
                 sendCut();
                 sendPaste(process.ProcessTextVariables(textBox2.Text));
             }
-            
+
             if (CheckHotkey("MemSlot3", id))
             {
                 sendCut();
@@ -508,10 +511,10 @@ namespace ClipboardTool
             }
         }
 
-        private void UpdateCapsLock()
+        public void UpdateCapsLock(bool force)
         {
             bool capsLockStatus = Control.IsKeyLocked(System.Windows.Forms.Keys.CapsLock);
-            if (!capLockStateSet || capsLockStatus != oldCapslockState)
+            if (force || !capLockStateSet || capsLockStatus != oldCapslockState)
             {
                 checkBoxCapsLock.Checked = capsLockStatus;
                 oldCapslockState = capsLockStatus;
@@ -521,19 +524,34 @@ namespace ClipboardTool
                 if (capsLockStatus)
                 {
                     CapsLockStatusText = "on";
-                    systrayIcon.Icon = iconUpper;
+                    UpdateCapsLockIcon(true);
                 }
                 else
                 {
-                    systrayIcon.Icon = iconLower;
+                    UpdateCapsLockIcon(false);
                 }
                 systrayIcon.Text = "Clipboard Tool - Caps Lock is " + CapsLockStatusText;
             }
         }
 
+        public void UpdateCapsLockIcon(bool capsLockOn)
+        {
+            if (settings.TrayIconCapslockStatus)
+            {
+                if (capsLockOn)
+                    systrayIcon.Icon = iconUpper;
+                else
+                    systrayIcon.Icon = iconLower;
+            }
+            else
+            {
+                systrayIcon.Icon = iconNormal;
+            }
+        }
+
         private void timerStatus_Tick(object sender, EventArgs e)
         {
-            UpdateCapsLock();
+            UpdateCapsLock(false);
         }
 
         private void checkBoxCapsLock_Click(object sender, EventArgs e)

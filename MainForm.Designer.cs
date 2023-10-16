@@ -62,8 +62,9 @@
             uPPERCaseClipboardToolStripMenuItem = new ToolStripMenuItem();
             lowerCaseClipboardToolStripMenuItem = new ToolStripMenuItem();
             plainTextClipboardToolStripMenuItem = new ToolStripMenuItem();
+            historyStripMenuItem = new ToolStripMenuItem();
             exitToolStripMenuItem = new ToolStripMenuItem();
-            notifyIcon1 = new NotifyIcon(components);
+            notifyIconUpper = new NotifyIcon(components);
             systrayIcon = new NotifyIcon(components);
             toolTip = new ToolTip(components);
             buttonHelp = new Button();
@@ -79,6 +80,8 @@
             button8 = new Button();
             button9 = new Button();
             buttonHistory = new Button();
+            notifyIcon1 = new NotifyIcon(components);
+            notifyIconLower = new NotifyIcon(components);
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
             contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
@@ -348,9 +351,9 @@
             // 
             // contextMenuStrip1
             // 
-            contextMenuStrip1.Items.AddRange(new ToolStripItem[] { hideToolStripMenuItem, showToolStripMenuItem, capsLockToolStripMenuItem, uPPERCaseClipboardToolStripMenuItem, lowerCaseClipboardToolStripMenuItem, plainTextClipboardToolStripMenuItem, exitToolStripMenuItem });
+            contextMenuStrip1.Items.AddRange(new ToolStripItem[] { hideToolStripMenuItem, showToolStripMenuItem, capsLockToolStripMenuItem, uPPERCaseClipboardToolStripMenuItem, lowerCaseClipboardToolStripMenuItem, plainTextClipboardToolStripMenuItem, historyStripMenuItem, exitToolStripMenuItem });
             contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new Size(189, 158);
+            contextMenuStrip1.Size = new Size(189, 180);
             // 
             // hideToolStripMenuItem
             // 
@@ -394,6 +397,13 @@
             plainTextClipboardToolStripMenuItem.Text = "Plain text clipboard";
             plainTextClipboardToolStripMenuItem.Click += actionPlainTextOnce;
             // 
+            // historyStripMenuItem
+            // 
+            historyStripMenuItem.Name = "historyStripMenuItem";
+            historyStripMenuItem.Size = new Size(188, 22);
+            historyStripMenuItem.Text = "History";
+            historyStripMenuItem.Click += buttonHistory_Click;
+            // 
             // exitToolStripMenuItem
             // 
             exitToolStripMenuItem.Name = "exitToolStripMenuItem";
@@ -401,10 +411,10 @@
             exitToolStripMenuItem.Text = "Exit";
             exitToolStripMenuItem.Click += actionExit;
             // 
-            // notifyIcon1
+            // notifyIconUpper
             // 
-            notifyIcon1.Icon = (Icon)resources.GetObject("notifyIcon1.Icon");
-            notifyIcon1.Text = "notifyIcon1";
+            notifyIconUpper.Icon = (Icon)resources.GetObject("notifyIconUpper.Icon");
+            notifyIconUpper.Text = "notifyIconUpper";
             // 
             // systrayIcon
             // 
@@ -595,6 +605,16 @@
             buttonHistory.UseVisualStyleBackColor = true;
             buttonHistory.Click += buttonHistory_Click;
             // 
+            // notifyIcon1
+            // 
+            notifyIcon1.Icon = (Icon)resources.GetObject("notifyIcon1.Icon");
+            notifyIcon1.Text = "notifyIconUpper";
+            // 
+            // notifyIconLower
+            // 
+            notifyIconLower.Icon = (Icon)resources.GetObject("notifyIconLower.Icon");
+            notifyIconLower.Text = "notifyIconLower";
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -673,7 +693,7 @@
         private TextBox textBox3;
         private System.Windows.Forms.Timer timerStatus;
         private ContextMenuStrip contextMenuStrip1;
-        private NotifyIcon notifyIcon1;
+        private NotifyIcon notifyIconUpper;
         private NotifyIcon systrayIcon;
         private ToolTip toolTip;
         private ToolStripMenuItem hideToolStripMenuItem;
@@ -696,5 +716,8 @@
         private Button button8;
         private Button button9;
         private Button buttonHistory;
+        private ToolStripMenuItem historyStripMenuItem;
+        private NotifyIcon notifyIcon1;
+        private NotifyIcon notifyIconLower;
     }
 }
