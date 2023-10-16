@@ -65,6 +65,7 @@
             gridHistory.TabIndex = 3;
             gridHistory.CellClick += gridHistory_CellClick;
             gridHistory.CellEndEdit += gridHistory_CellEndEdit;
+            gridHistory.MouseDoubleClick += gridHistory_MouseDoubleClick;
             // 
             // ColumnPinned
             // 

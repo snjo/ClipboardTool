@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Diagnostics;
+using System.Linq;
 using System.Runtime.InteropServices;
 
 namespace ClipboardTool
@@ -22,6 +23,25 @@ namespace ClipboardTool
             buttonColorPicker.Visible = showColorPicker;
 
             IllegalCharacters = illegalCharacters;
+        }
+
+        public static string? Prompt()
+        {
+            Debug.WriteLine("New prompt");
+            TextPrompt textPrompt = new TextPrompt();
+            DialogResult result = textPrompt.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                Debug.WriteLine("Prompt result: " + textPrompt.TextResult);
+                return textPrompt.TextResult;
+            }
+            else
+            {
+                Debug.WriteLine("Prompt cancelled");
+                return null;
+            }
+            
+            
         }
 
         private void TextPrompt_Load(object sender, EventArgs e)

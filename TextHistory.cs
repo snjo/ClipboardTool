@@ -15,6 +15,7 @@ namespace ClipboardTool
         MainForm mainForm;
         string colorTag = "//Color:";
         string colorFileName = @"Colors\colors.txt";
+        string entryFileExtension = ".txt";
         List<KeyValuePair<string, string[]>> historyEntries = new List<KeyValuePair<string, string[]>>();
 
         public TextHistory(MainForm mainForm)
@@ -150,7 +151,7 @@ namespace ClipboardTool
             float pR = 0.2126f;
             float pG = 0.7152f;
             float pB = 0.0722f;
-            float result = ((color.R*pR) + (color.G*pG) + (color.B*pB)) / 256f;
+            float result = ((color.R * pR) + (color.G * pG) + (color.B * pB)) / 256f;
             return result;
         }
 
@@ -182,7 +183,7 @@ namespace ClipboardTool
         {
             if (filename == null || text == null) return false;
             if (filename.Length == 0) return false;
-            string path = Path.Join(historyFolder, filename + ".txt");
+            string path = Path.Join(historyFolder, filename + entryFileExtension);
             PromptCreateHistoryFolder();
             try
             {
@@ -222,16 +223,20 @@ namespace ClipboardTool
                 if (gridHistory.Rows[row] == null) return false;
                 if (gridHistory.Rows[row].Cells[titleColumnIndex] == null) return false;
                 if (gridHistory.Rows[row].Cells[titleColumnIndex].Value == null) return false;
-                if ((gridHistory.Rows[row].Cells[titleColumnIndex].Value.ToString()+"").Length == 0) return false;
+                if ((gridHistory.Rows[row].Cells[titleColumnIndex].Value.ToString() + "").Length == 0) return false;
                 if (gridHistory.Rows[row].Cells[textColumnIndex] == null) return false;
                 Debug.WriteLine("saving row" + row + ", title/text" + titleColumnIndex + "/" + textColumnIndex);
 
                 string filename = gridHistory.Rows[row].Cells[titleColumnIndex].Value.ToString() + "";
+                if (gridHistory.Rows[row].Cells[textColumnIndex].Value == null)
+                        gridHistory.Rows[row].Cells[textColumnIndex].Value = string.Empty;
                 string text = gridHistory.Rows[row].Cells[textColumnIndex].Value.ToString() + "";
                 Debug.WriteLine("   f: " + filename);
                 Debug.WriteLine("   t: " + text);
                 Color color = gridHistory.Rows[row].Cells[titleColumnIndex].Style.BackColor;
+                if (color == Color.Empty) color = Color.White;
                 result = SaveEntry(filename, text, color);
+                SetPinnedCheckboxValue(row, result);
             }
             return result;
         }
@@ -247,7 +252,7 @@ namespace ClipboardTool
             {
                 if (Directory.Exists(historyFolder))
                 {
-                    string file = Path.Join(historyFolder, filename + ".txt");
+                    string file = Path.Join(historyFolder, filename + entryFileExtension);
                     if (File.Exists(file))
                     {
                         File.Delete(file);
@@ -341,15 +346,16 @@ namespace ClipboardTool
                     return;
                 }
 
-                DataGridViewCheckBoxCell checkboxCell = gridHistory.Rows[e.RowIndex].Cells[checkboxColumnIndex] as DataGridViewCheckBoxCell;
+                /*DataGridViewCheckBoxCell? checkboxCell = gridHistory.Rows[e.RowIndex].Cells[checkboxColumnIndex] as DataGridViewCheckBoxCell;
                 if (checkboxCell == null)
                 {
                     Debug.WriteLine("Checkbox cell is null");
                     return;
-                }
+                }*/
                 else
                 {
-                    bool oldCheckState = Convert.ToBoolean(checkboxCell.Value);
+                    //bool oldCheckState = Convert.ToBoolean(checkboxCell.Value);
+                    bool oldCheckState = GetPinnedCheckboxValue(e.RowIndex);
                     bool pinned = !oldCheckState;
                     if (pinned)
                     {
@@ -390,11 +396,37 @@ namespace ClipboardTool
                         DataGridViewCellCollection cells = gridHistory.Rows[e.RowIndex].Cells;
                         if (cells[titleColumnIndex].Value != null)
                             DeleteEntry(cells[titleColumnIndex].Value.ToString());
+                        SetPinnedCheckboxValue(e.RowIndex, false);
                     }
-                    checkboxCell.Value = pinned;
+                    //checkboxCell.Value = pinned;
+                    //SetPinnedCheckboxValue(e.RowIndex, pinned);
                 }
 
             }
+        }
+
+        private bool GetPinnedCheckboxValue(int rowIndex)
+        {
+            DataGridViewCheckBoxCell? checkboxCell = gridHistory.Rows[rowIndex].Cells[checkboxColumnIndex] as DataGridViewCheckBoxCell;
+            if (checkboxCell == null) checkboxCell = new DataGridViewCheckBoxCell();
+            return Convert.ToBoolean(checkboxCell.Value);
+        }
+
+        private bool SetPinnedCheckboxValue(int rowIndex, bool newValue)
+        {
+            DataGridViewCheckBoxCell? checkboxCell = gridHistory.Rows[rowIndex].Cells[checkboxColumnIndex] as DataGridViewCheckBoxCell;
+            if (checkboxCell == null) checkboxCell = new DataGridViewCheckBoxCell();
+            checkboxCell.Value = newValue;
+            return Convert.ToBoolean(checkboxCell.Value);
+        }
+
+        private bool TogglePinnedCheckboxValue(int rowIndex)
+        {
+            DataGridViewCheckBoxCell? checkboxCell = gridHistory.Rows[rowIndex].Cells[checkboxColumnIndex] as DataGridViewCheckBoxCell;
+            if (checkboxCell == null) checkboxCell = new DataGridViewCheckBoxCell();
+            if (checkboxCell.Value == null) checkboxCell.Value = false;
+            checkboxCell.Value = !Convert.ToBoolean(checkboxCell.Value);
+            return Convert.ToBoolean(checkboxCell.Value);
         }
 
         private bool alwaysOnTop = false;
@@ -420,8 +452,8 @@ namespace ClipboardTool
         {
             if (gridHistory.SelectedCells.Count <= 0) return;
 
-            
-            
+
+
             colorDialog1.Dispose();
             colorDialog1 = new ColorDialog();
             //colorDialog1.CustomColors = new int[] { unchecked((Int32)0xAAFFFF), unchecked((Int32)0xBBFF00) };
@@ -474,7 +506,7 @@ namespace ClipboardTool
         {
             if (array1 == null && array2 == null) return true;
             if (array1 == null || array2 == null) return false;
-            if (array1.Length != array2.Length) return false;   
+            if (array1.Length != array2.Length) return false;
             for (int i = 0; i < array1.Length; i++)
             {
                 if (array1[i] != array2[i]) return false;
@@ -508,6 +540,78 @@ namespace ClipboardTool
             {
                 Process.Start(new ProcessStartInfo() { FileName = historyFolder, UseShellExecute = true });
             }
+        }
+
+        private void gridHistory_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            Debug.WriteLine("Rename entry?");
+            if (gridHistory.SelectedCells.Count > 0)
+            {
+                DataGridViewCell cell = gridHistory.SelectedCells[0];
+                if (cell.ColumnIndex == titleColumnIndex)
+                {
+                    Debug.WriteLine("Rename entry started");
+                    renameEntry(cell.RowIndex);
+                }
+            }
+        }
+
+        private void renameEntry(int rowIndex)
+        {
+            if (rowIndex > gridHistory.Rows.Count - 1)
+            {
+                Debug.WriteLine("rowIndex error");
+                return;
+            }
+            DataGridViewRow gridRow = gridHistory.Rows[rowIndex];
+            DataGridViewCell cell = gridHistory.Rows[rowIndex].Cells[titleColumnIndex];
+            if (cell == null)
+            {
+                Debug.WriteLine("Cell is null");
+                return;
+            }
+
+            if (cell.Value == null)
+            {
+                Debug.WriteLine("Cell value null, setting empty string");
+                cell.Value = string.Empty;
+            }
+
+            if (cell.Value != null)
+            {
+                string oldTitle = cell.Value.ToString()+"";
+                string? newTitle = TextPrompt.Prompt();
+                if (newTitle != null)
+                {
+                    Debug.WriteLine("Renaming entry to: " + newTitle);
+                    //delete old file
+                    if (oldTitle.Length > 0)
+                    {
+                        string oldEntryPath = Path.Join(historyFolder, oldTitle + entryFileExtension);
+                        if (File.Exists(oldEntryPath))
+                        {
+                            try
+                            {
+                                File.Delete(oldEntryPath);
+                                Debug.WriteLine("Rename: Deleted old entry file " + oldEntryPath);
+                            }
+                            catch
+                            {
+                                Debug.WriteLine("Rename: Can't delete old entry file " + oldEntryPath);
+                            }
+                        }
+                    }
+                    //save new file
+                    cell.Value = newTitle;
+                    
+                    SetPinnedCheckboxValue(rowIndex, (SaveEntry(rowIndex)));
+                }
+                else
+                {
+                    Debug.WriteLine("Rename cancelled");
+                }
+            }
+            //string oldTitle = 
         }
     }
 }
