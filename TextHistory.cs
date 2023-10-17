@@ -528,7 +528,14 @@ namespace ClipboardTool
                 if (!Directory.Exists(colorFilePath))
                 {
                     Debug.WriteLine("Creating color subfolder");
-                    Directory.CreateDirectory(Path.Join(historyFolder, colorFolder));
+                    try
+                    {
+                        Directory.CreateDirectory(Path.Join(historyFolder, colorFolder));
+                    }
+                    catch
+                    {
+                        Debug.WriteLine("Could not create color directory");
+                    }
                 }
                 try
                 {

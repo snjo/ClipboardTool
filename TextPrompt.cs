@@ -29,15 +29,18 @@ namespace ClipboardTool
         {
             Debug.WriteLine("New prompt");
             TextPrompt textPrompt = new TextPrompt();
-            DialogResult result = textPrompt.ShowDialog();
-            if (result == DialogResult.OK)
+            DialogResult dialogResult = textPrompt.ShowDialog();
+            if (dialogResult == DialogResult.OK)
             {
                 Debug.WriteLine("Prompt result: " + textPrompt.TextResult);
-                return textPrompt.TextResult;
+                string textResult = textPrompt.TextResult;
+                textPrompt.Dispose();
+                return textResult;
             }
             else
             {
                 Debug.WriteLine("Prompt cancelled");
+                textPrompt.Dispose();
                 return null;
             }
             
