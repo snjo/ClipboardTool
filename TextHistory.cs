@@ -14,7 +14,8 @@ namespace ClipboardTool
         private int buttonColumnIndex = 3;
         MainForm mainForm;
         string colorTag = "//Color:";
-        string colorFileName = @"Colors\colors.txt";
+        string colorFolder = "Colors";
+        string colorFileName = "colors.txt";
         string entryFileExtension = ".txt";
         List<KeyValuePair<string, string[]>> historyEntries = new List<KeyValuePair<string, string[]>>();
 
@@ -225,14 +226,12 @@ namespace ClipboardTool
                 if (gridHistory.Rows[row].Cells[titleColumnIndex].Value == null) return false;
                 if ((gridHistory.Rows[row].Cells[titleColumnIndex].Value.ToString() + "").Length == 0) return false;
                 if (gridHistory.Rows[row].Cells[textColumnIndex] == null) return false;
-                Debug.WriteLine("saving row" + row + ", title/text" + titleColumnIndex + "/" + textColumnIndex);
 
                 string filename = gridHistory.Rows[row].Cells[titleColumnIndex].Value.ToString() + "";
                 if (gridHistory.Rows[row].Cells[textColumnIndex].Value == null)
                         gridHistory.Rows[row].Cells[textColumnIndex].Value = string.Empty;
                 string text = gridHistory.Rows[row].Cells[textColumnIndex].Value.ToString() + "";
-                Debug.WriteLine("   f: " + filename);
-                Debug.WriteLine("   t: " + text);
+                Debug.WriteLine("Saving: " + filename);
                 Color color = gridHistory.Rows[row].Cells[titleColumnIndex].Style.BackColor;
                 if (color == Color.Empty) color = Color.White;
                 result = SaveEntry(filename, text, color);
@@ -485,7 +484,8 @@ namespace ClipboardTool
         private int[]? GetSavedColors()
         {
             List<int> colorList = new List<int>();
-            string colorFilePath = Path.Join(historyFolder, colorFileName);
+            string colorFilePath = Path.Join(historyFolder, colorFolder, colorFileName);
+
             if (File.Exists(colorFilePath))
             {
                 string[] lines = File.ReadAllLines(colorFilePath);
@@ -524,8 +524,21 @@ namespace ClipboardTool
 
             if (CheckOrCreateHistoryFolder(false))
             {
-                string colorFilePath = Path.Join(historyFolder, colorFileName);
-                File.WriteAllLines(colorFilePath, customColors);
+                string colorFilePath = Path.Join(historyFolder, colorFolder, colorFileName);
+                if (!Directory.Exists(colorFilePath))
+                {
+                    Debug.WriteLine("Creating color subfolder");
+                    Directory.CreateDirectory(Path.Join(historyFolder, colorFolder));
+                }
+                try
+                {
+                    Debug.WriteLine("Saving color file");
+                    File.WriteAllLines(colorFilePath, customColors);
+                }
+                catch
+                {
+                    Debug.WriteLine("Could not save color file");
+                }
             }
         }
 
