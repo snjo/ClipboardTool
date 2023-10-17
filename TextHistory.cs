@@ -600,7 +600,7 @@ namespace ClipboardTool
             if (cell.Value != null)
             {
                 string oldTitle = cell.Value.ToString()+"";
-                string? newTitle = TextPrompt.Prompt();
+                string? newTitle = TextPrompt.Prompt("Entry title", "Enter the new name of the entry", false, TextPrompt.IllegalFileCharacters);
                 if (newTitle != null)
                 {
                     Debug.WriteLine("Renaming entry to: " + newTitle);
