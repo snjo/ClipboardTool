@@ -784,6 +784,7 @@ namespace ClipboardTool
         {
             Options options = new Options(this);
             options.ShowDialog();
+            options.Dispose();
         }
 
         public void actionSave(object sender, EventArgs e)

@@ -25,23 +25,27 @@ namespace ClipboardTool
             IllegalCharacters = illegalCharacters;
         }
 
-        public static string? Prompt()
+        /// <summary>
+        /// Shows a dialog with a text entry box.
+        /// </summary>
+        /// <returns>String if OK, null if cancelled</returns>
+        public static string? Prompt(string title = "Input text", string info = "", bool showColorPicker = false, string[]? illegalCharacters = null)
         {
-            Debug.WriteLine("New prompt");
-            TextPrompt textPrompt = new TextPrompt();
-            DialogResult result = textPrompt.ShowDialog();
-            if (result == DialogResult.OK)
+            TextPrompt textPrompt = new TextPrompt(title, info, showColorPicker, illegalCharacters);
+            DialogResult dialogResult = textPrompt.ShowDialog();
+            if (dialogResult == DialogResult.OK)
             {
                 Debug.WriteLine("Prompt result: " + textPrompt.TextResult);
-                return textPrompt.TextResult;
+                string textResult = textPrompt.TextResult;
+                textPrompt.Dispose();
+                return textResult;
             }
             else
             {
-                Debug.WriteLine("Prompt cancelled");
+                Debug.WriteLine("Prompt cancelled, returning null");
+                textPrompt.Dispose();
                 return null;
             }
-            
-            
         }
 
         private void TextPrompt_Load(object sender, EventArgs e)
