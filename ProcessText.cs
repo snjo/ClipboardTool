@@ -1,4 +1,8 @@
 ﻿using System.Configuration;
+using System.Diagnostics;
+using System.Runtime.InteropServices;
+using System.Text;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace ClipboardTool
 {
@@ -13,6 +17,8 @@ namespace ClipboardTool
         public string ProcessTextVariables(string customText, bool forceClipboardUpdate = false)
         {
             if (customText == null) return String.Empty;
+            string plainText = String.Empty;
+            string? richText = String.Empty;
 
             int padNumber = 1;
             string clip = Clipboard.GetText();
@@ -94,14 +100,126 @@ namespace ClipboardTool
                 customText = customText.Replace("$Debug", debug);
             }
 
-            if (customText.Length < 1)
+            if (customText.Contains("$RTF"))
+            {
+                customText = customText.Replace("$RTF", "");
+                (richText, plainText) = ConvertToRichText(customText);
+                Debug.WriteLine("RTF returned: " + plainText.Length + ", " + richText.Length);
+                //dataFormat = TextDataFormat.Rtf;
+                //return customText;
+            }
+            else
+            {
+                plainText = customText;
+                richText = null;
+            }
+
+            if (plainText.Length < 1)
             {
                 return "";
             }
             else
             {
-                mainForm.SetClipBoard(customText, forceClipboardUpdate);
+                mainForm.SetClipBoard(plainText, richText, forceClipboardUpdate);
                 return customText;
+            }
+        }
+
+        public (string, string) ConvertToRichText(string plainText)
+        {
+            //https://www.biblioscape.com/rtf15_spec.htm
+            RichTextBox rtfBox = new RichTextBox();
+            StringBuilder builder = new StringBuilder();
+            string plainTextResult = "";
+            string richTextResult = "";
+            string tagStart = "£<";
+            string tagEnd = ">";
+            plainText = plainText.Replace(Environment.NewLine, @"\par ");
+            string[] segments = plainText.Split(tagStart);
+            if (segments.Length > 0)
+            {
+                foreach (string segment in segments)
+                {
+                    Debug.WriteLine("segment: " + segment);
+                    string[] tagAndText = segment.Split(tagEnd, 2);
+                    if (tagAndText.Length > 1)
+                    {
+                        Debug.WriteLine("segment tag: " + tagAndText[0]);
+                        Debug.WriteLine("segment text: " + tagAndText[1]);
+                        switch (tagAndText[0])
+                        {
+                            case "b": // bold
+                                //rtfBox.SelectionFont = new Font(rtfBox.Font, FontStyle.Bold);
+                                SetRTFTag(builder, tagAndText[1], @"\b ", @"\b0 ");
+                                break;
+                            case "i": // italic
+                                //rtfBox.SelectionFont = new Font(rtfBox.Font, FontStyle.Bold);
+                                SetRTFTag(builder, tagAndText[1], @"\i ", @"\i0 ");
+                                break;
+                            case "strike": // strikethrough
+                                SetRTFTag(builder, tagAndText[1], @"\strike ", @"\strike0 ");
+                                break;
+                            case "ul": // underline
+                                SetRTFTag(builder, tagAndText[1], @"\ul ", @"\ul0 ");
+                                break;
+                            case "ulw": // underlined words, but spaces are not
+                                SetRTFTag(builder, tagAndText[1], @"\ulw ", @"\ulw0 ");
+                                break;
+                            case "plain": // plain (remove formatting)
+                                SetRTFTag(builder, tagAndText[1], @"\plain ", @"");
+                                break;
+                            case "fontsr":
+                                if (OperatingSystem.IsWindows())
+                                    rtfBox.Font = new Font(FontFamily.GenericSerif, 11f);
+                                break;
+                            case "fontss":
+                                if (OperatingSystem.IsWindows())
+                                    rtfBox.Font = new Font(FontFamily.GenericSansSerif, 11f);
+                                break;
+                            case "fontms":
+                                if (OperatingSystem.IsWindows())
+                                    rtfBox.Font = new Font(FontFamily.GenericMonospace, 11f);
+                                break;
+                            default: // error, or empy/unspecified tag: regular text
+                                if (tagAndText[0].Length > 0) // unknown RTF code, pass it on
+                                {
+                                    Debug.WriteLine("Unknown RTF code, pass it on : " + tagAndText[0]);
+                                    SetRTFTag(builder, tagAndText[1], @"\" + tagAndText[0] + " ", @"");
+                                }
+                                else builder.Append(tagAndText[1]);
+                                break;
+                        }
+                    }
+                    else
+                    {
+                        Debug.WriteLine("no tag end in segment");
+                        if (segment.Length > 0)
+                            builder.Append(segments[0]);
+                    }
+
+                    richTextResult = @"{\rtf1\ansi " + builder.ToString() + @" }";
+                    rtfBox.Rtf = richTextResult;
+                    //rtfBox.Rtf = @"{\rtf1\ansi " + builder.ToString() + @" }";
+
+                }
+            }
+            else
+            {
+                Debug.WriteLine("no segments");
+            }
+            
+            plainTextResult = rtfBox.Text;
+            rtfBox.Dispose();
+            return (richTextResult, plainTextResult);
+        }
+
+        private static void SetRTFTag(StringBuilder builder, string text, string start, string end)
+        {
+            if (text.Length > 0)
+            {
+                builder.Append(start);
+                builder.Append(text);
+                builder.Append(end);
             }
         }
 

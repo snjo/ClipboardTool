@@ -321,8 +321,9 @@ namespace ClipboardTool
                 {
                     if (cellText.Length > 0)
                     {
-                        string processedText = mainForm.process.ProcessTextVariables(cellText, false);
-                        Clipboard.SetData(DataFormats.Text, processedText);
+                        //string processedText = mainForm.process.ProcessTextVariables(cellText, false);
+                        //Clipboard.SetData(DataFormats.Text, processedText);
+                        mainForm.process.ProcessTextVariables(cellText, true);
                         if (checkBoxMinimize.Checked)
                         {
                             this.WindowState = FormWindowState.Minimized;
@@ -502,7 +503,7 @@ namespace ClipboardTool
             return colorList.ToArray();
         }
 
-        private bool ArraysAreIdentical(int[] array1, int[] array2)
+        private bool ArraysAreIdentical(int[]? array1, int[]? array2)
         {
             if (array1 == null && array2 == null) return true;
             if (array1 == null || array2 == null) return false;

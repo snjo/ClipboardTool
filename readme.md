@@ -28,6 +28,7 @@ https://github.com/snjo/ClipboardTool
 | $vsp      | Split value in slot 1 with space, output value[number]           |
 | $list     | Split lines in main textbox (skips line 1), output value[number] |
 | $prompt   | Opens a popup box to insert a text value                         |
+| $RTF      | Output Rich text. See details below                              |
 
 -----------------------------------------
 ## Text Files in the program folder
@@ -85,6 +86,34 @@ If you have selected a color, the text file will begin with a color tag on the f
 Set the History hotkey to a convenient key like F2 (without modifiers), and set the "Minimize after copy" on in options.
 
 Then while working in an application, you can press the hotkey, copy the text, and paste into your application.
+
+-----------------------------------------
+
+## Rich Text (RTF) output
+
+If you add the $RFT command, the text will be output to the clipboard in Rich Text format, allowing for text styles, colors and font families.
+
+Outputting this correctly requires using the clipboard. Set Options to use Ctrl+V instead of Send Keys.
+
+Text can be marked up using either RTF codes such as "\b " and more advanced codes, or using a small set of predefined tags.
+These tags will self terminate when reaching the next tag, making them slightly easier to use than normal RTF codes.
+
+| Tag                      | Effect                   |
+|--------------------------|--------------------------|
+| £\<>                     | End previous tag         |
+| £\<b>                    | Bold                     |
+| £\<i>                    | Italic                   |
+| £\<r>                    | Regular text             |
+| £\<plain>                | Plain text               |
+| £\<strike>               | Strikethroug             |
+| £\<ul>                   | Underline                |
+| £\<ulw>                  | Underline just words     |
+| £\<fontsr>               | Font Generic Serif       |
+| £\<fontss>               | Font Generic Sans Serif  |
+| £\<fontms>               | Font Generic Monospace   |
+| £\<fs**>                 | Size in half-points      |
+|                          | Ex: £\<fs18> = 9 point   |
+| £<[RTF code without \\ ]>|                          |
 
 -----------------------------------------
 ## Key codes for hotkey options:

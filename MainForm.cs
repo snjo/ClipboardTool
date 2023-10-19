@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
 using TextBox = System.Windows.Forms.TextBox;
 
 [assembly: AssemblyVersion("1.3.*")]
@@ -25,6 +26,7 @@ namespace ClipboardTool
         Settings settings = Settings.Default;
         string clipBoardText = String.Empty;
         public ProcessText process;
+        TextHistory? textHistory;
 
 
         public Dictionary<string, Hotkey> HotkeyList = new Dictionary<string, Hotkey>();
@@ -54,8 +56,6 @@ namespace ClipboardTool
         public Form Current;
         HelpForm helpForm = new HelpForm();
         string delayedKeystrokes = "";
-
-
 
         string tooltipText =
             "$d      Date\n" +
@@ -435,7 +435,7 @@ namespace ClipboardTool
         private string PlainTextOnce(bool forceClipboardUpdate = false)
         {
             string result = Clipboard.GetText(TextDataFormat.Text);
-            SetClipBoard(result, forceClipboardUpdate);
+            SetClipBoard(result, null, forceClipboardUpdate);
             return result;
             //setClipBoard(clipBoardText);
         }
@@ -445,7 +445,7 @@ namespace ClipboardTool
             if (Clipboard.ContainsText())
             {
                 string result = Clipboard.GetText(TextDataFormat.Text).ToUpper();
-                SetClipBoard(result, forceClipboardUpdate);
+                SetClipBoard(result, null, forceClipboardUpdate);
                 return result;
             }
             else return string.Empty;
@@ -456,19 +456,35 @@ namespace ClipboardTool
             if (Clipboard.ContainsText())
             {
                 string result = Clipboard.GetText(TextDataFormat.Text).ToLower();
-                SetClipBoard(result, forceClipboardUpdate);
+                SetClipBoard(result, null, forceClipboardUpdate);
                 return result;
 
             }
             else return string.Empty;
         }
 
-        public void SetClipBoard(string clipBoardText, bool forceClipboardUpdate = false)
+        public void SetClipBoard(string plainText, string? richText = "", bool forceClipboardUpdate = false)//, TextDataFormat dataFormat = TextDataFormat.Text)
         {
+            Debug.WriteLine("Update clipboard: " + forceClipboardUpdate);
             if (!settings.updateClipboard && settings.sendType && !forceClipboardUpdate) return;
-            if (clipBoardText.Length > 0)
+            if (plainText.Length > 0)
             {
-                Clipboard.SetText(clipBoardText);
+                if (richText == null)
+                {
+                    Debug.WriteLine("clipboard plaint text only " + plainText);
+                    Clipboard.SetText(plainText, TextDataFormat.Text);
+                }
+                else
+                {
+                    Debug.WriteLine("clipboard rich text " + richText);
+                    Clipboard.Clear();
+
+                    DataObject data = new DataObject();
+                    data.SetData(DataFormats.Text, plainText);
+                    data.SetData(DataFormats.Rtf, richText);
+
+                    Clipboard.SetDataObject(data);
+                }
             }
             else
             {
@@ -595,9 +611,9 @@ namespace ClipboardTool
             {
                 if (textBox.Text.Length > 0)
                 {
-                    string newClipText = process.ProcessTextVariables(textBox.Text);
-                    if (newClipText.Length > 0)
-                        Clipboard.SetText(newClipText);
+                    string newClipText = process.ProcessTextVariables(textBox.Text, true);
+                    //if (newClipText.Length > 0)
+                    //    Clipboard.SetText(newClipText);
                 }
                 else
                 {
@@ -804,7 +820,6 @@ namespace ClipboardTool
         }
         #endregion
 
-        TextHistory textHistory;
         private void buttonHistory_Click(object sender, EventArgs e)
         {
             ShowHistory();
