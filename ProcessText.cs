@@ -125,6 +125,8 @@ namespace ClipboardTool
         public (string, string) ConvertToRichText(string plainText)
         {
             //https://www.biblioscape.com/rtf15_spec.htm
+            Debug.WriteLine("Parsing Rich Text");
+
             RichTextBox rtfBox = new RichTextBox();
             StringBuilder builder = new StringBuilder();
             string plainTextResult = "";
@@ -137,6 +139,7 @@ namespace ClipboardTool
             {
                 foreach (string segment in segments)
                 {
+                    Debug.WriteLine("Segment: " + segment);
                     string[] tagAndText = segment.Split(tagEnd, 2);
                     if (tagAndText.Length > 1)
                     {
@@ -164,15 +167,27 @@ namespace ClipboardTool
                                 break;
                             case "fontsr":
                                 if (OperatingSystem.IsWindows())
+                                {
+                                    Debug.WriteLine("Setting font to Serif");
                                     rtfBox.Font = new Font(FontFamily.GenericSerif, 11f);
+                                    builder.Append(tagAndText[1]);
+                                }
                                 break;
                             case "fontss":
                                 if (OperatingSystem.IsWindows())
+                                {
+                                    Debug.WriteLine("Setting font to Sans Serif");
                                     rtfBox.Font = new Font(FontFamily.GenericSansSerif, 11f);
+                                    builder.Append(tagAndText[1]);
+                                }
                                 break;
                             case "fontms":
                                 if (OperatingSystem.IsWindows())
+                                {
+                                    Debug.WriteLine("Setting font to Monospace");
                                     rtfBox.Font = new Font(FontFamily.GenericMonospace, 11f);
+                                    builder.Append(tagAndText[1]);
+                                }
                                 break;
                             default: // error, or empy/unspecified tag: regular text
                                 if (tagAndText[0].Length > 0) // unknown RTF code, pass it on
@@ -190,10 +205,8 @@ namespace ClipboardTool
                             builder.Append(segments[0]);
                     }
 
-                    richTextResult = @"{\rtf1\ansi " + builder.ToString() + @"}"; // removed space in @" }"
-                    rtfBox.Rtf = richTextResult;
-                    //rtfBox.Rtf = @"{\rtf1\ansi " + builder.ToString() + @" }";
-
+                    rtfBox.Rtf = @"{\rtf1\ansi " + builder.ToString() + @"}"; // removed space in @" }";
+                    richTextResult = rtfBox.Rtf;
                 }
             }
             
