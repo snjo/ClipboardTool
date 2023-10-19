@@ -465,24 +465,19 @@ namespace ClipboardTool
 
         public void SetClipBoard(string plainText, string? richText = "", bool forceClipboardUpdate = false)//, TextDataFormat dataFormat = TextDataFormat.Text)
         {
-            Debug.WriteLine("Update clipboard: " + forceClipboardUpdate);
             if (!settings.updateClipboard && settings.sendType && !forceClipboardUpdate) return;
             if (plainText.Length > 0)
             {
                 if (richText == null)
                 {
-                    Debug.WriteLine("clipboard plaint text only " + plainText);
                     Clipboard.SetText(plainText, TextDataFormat.Text);
                 }
                 else
                 {
-                    Debug.WriteLine("clipboard rich text " + richText);
                     Clipboard.Clear();
-
                     DataObject data = new DataObject();
                     data.SetData(DataFormats.Text, plainText);
                     data.SetData(DataFormats.Rtf, richText);
-
                     Clipboard.SetDataObject(data);
                 }
             }

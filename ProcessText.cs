@@ -103,10 +103,7 @@ namespace ClipboardTool
             if (customText.Contains("$RTF"))
             {
                 customText = customText.Replace("$RTF", "");
-                (richText, plainText) = ConvertToRichText(customText);
-                Debug.WriteLine("RTF returned: " + plainText.Length + ", " + richText.Length);
-                //dataFormat = TextDataFormat.Rtf;
-                //return customText;
+                (richText, plainText) = ConvertToRichText(customText);                
             }
             else
             {
@@ -140,12 +137,9 @@ namespace ClipboardTool
             {
                 foreach (string segment in segments)
                 {
-                    Debug.WriteLine("segment: " + segment);
                     string[] tagAndText = segment.Split(tagEnd, 2);
                     if (tagAndText.Length > 1)
                     {
-                        Debug.WriteLine("segment tag: " + tagAndText[0]);
-                        Debug.WriteLine("segment text: " + tagAndText[1]);
                         switch (tagAndText[0])
                         {
                             case "b": // bold
@@ -192,20 +186,15 @@ namespace ClipboardTool
                     }
                     else
                     {
-                        Debug.WriteLine("no tag end in segment");
                         if (segment.Length > 0)
                             builder.Append(segments[0]);
                     }
 
-                    richTextResult = @"{\rtf1\ansi " + builder.ToString() + @" }";
+                    richTextResult = @"{\rtf1\ansi " + builder.ToString() + @"}"; // removed space in @" }"
                     rtfBox.Rtf = richTextResult;
                     //rtfBox.Rtf = @"{\rtf1\ansi " + builder.ToString() + @" }";
 
                 }
-            }
-            else
-            {
-                Debug.WriteLine("no segments");
             }
             
             plainTextResult = rtfBox.Text;
