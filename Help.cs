@@ -20,11 +20,11 @@
         public void setText(string text)
         {
             richTextBox1.Text = "";
-            richTextBox1.SelectionFont = new Font(richTextBox1.Font, FontStyle.Bold);
-
+            if (OperatingSystem.IsWindows())
+                richTextBox1.SelectionFont = new Font(richTextBox1.Font, FontStyle.Bold);
             richTextBox1.AppendText("Text processing commands\n\n");
-
-            richTextBox1.SelectionFont = new Font(richTextBox1.Font, FontStyle.Regular);
+            if (OperatingSystem.IsWindows())
+                richTextBox1.SelectionFont = new Font(richTextBox1.Font, FontStyle.Regular);
 
             richTextBox1.AppendText(text);
 
