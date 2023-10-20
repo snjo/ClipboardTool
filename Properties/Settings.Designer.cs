@@ -850,5 +850,17 @@ namespace ClipboardTool.Properties {
                 this["TrayIconCapslockStatus"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("\\red0\\green80\\blue180;")]
+        public string RTFcolors {
+            get {
+                return ((string)(this["RTFcolors"]));
+            }
+            set {
+                this["RTFcolors"] = value;
+            }
+        }
     }
 }

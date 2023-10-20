@@ -1,8 +1,11 @@
-﻿using System.Configuration;
+﻿using ClipboardTool.Properties;
+using System.Configuration;
 using System.Diagnostics;
+using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Text;
 using static System.Net.Mime.MediaTypeNames;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TrayNotify;
 
 namespace ClipboardTool
 {
@@ -122,6 +125,21 @@ namespace ClipboardTool
             }
         }
 
+        string rtfHeader = @"{\rtf1\ansi ";
+        string colorBlack = @"\red0\green0\blue0;";
+        string colorWhite = @"\red255\green255\blue255;";
+        string colorGray = @"\red180\green180\blue180;";
+        string colorRed = @"\red255\green0\blue0;";
+        string colorGreen = @"\red0\green255\blue0;";
+        string colorBlue = @"\red0\green0\blue255;";
+
+        private string colorTable()
+        {
+            return @"{\colortbl;" + colorBlack + colorWhite + colorGray + colorRed + colorGreen + colorBlue + Settings.Default.RTFcolors + @"}";
+        }
+
+        // example: @"{\f1\cb1\cf2 This is colored text. The background is color 1 and the foreground is color 2.}";
+
         public (string, string) ConvertToRichText(string plainText)
         {
             //https://www.biblioscape.com/rtf15_spec.htm
@@ -182,6 +200,24 @@ namespace ClipboardTool
                             case "plain": // plain (remove formatting)
                                 SetRTFTag(builder, text, @"\plain ", @"");
                                 break;
+                            case "black":
+                                SetRTFTag(builder, text, @"\cf1 ", @"");
+                                break;
+                            case "white":
+                                SetRTFTag(builder, text, @"\cf2 ", @"");
+                                break;
+                            case "gray":
+                                SetRTFTag(builder, text, @"\cf3 ", @"");
+                                break;
+                            case "red":
+                                SetRTFTag(builder, text, @"\cf4 ", @"");
+                                break;
+                            case "green":
+                                SetRTFTag(builder, text, @"\cf5 ", @"");
+                                break;
+                            case "blue":
+                                SetRTFTag(builder, text, @"\cf6 ", @"");
+                                break;
                             case "fontsr":
                                 if (OperatingSystem.IsWindows())
                                 {
@@ -222,8 +258,8 @@ namespace ClipboardTool
                         if (segment.Length > 0)
                             builder.Append(text);
                     }
-
-                    rtfBox.Rtf = @"{\rtf1\ansi " + builder.ToString() + @"}"; // removed space in @" }";
+                    
+                    rtfBox.Rtf = rtfHeader + colorTable() + builder.ToString() + @"}"; // removed space in @" }";
                     richTextResult = rtfBox.Rtf;
                 }
             }

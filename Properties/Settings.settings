@@ -209,5 +209,8 @@
     <Setting Name="TrayIconCapslockStatus" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="RTFcolors" Type="System.String" Scope="User">
+      <Value Profile="(Default)">\red0\green80\blue180;</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

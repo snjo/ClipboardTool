@@ -108,7 +108,7 @@ Any Backslashes ( \ ) in RTF text will be intercepted as an RTF code. Use a doub
 | \<b>                    | Bold                     |
 | \<i>                    | Italic                   |
 | \<plain>                | Plain text               |
-| \<strike>               | Strikethroug             |
+| \<strike>               | Strikethrough            |
 | \<ul>                   | Underline                |
 | \<ulw>                  | Underline just words     |
 | \<fontsr>               | Font Generic Serif       |
@@ -116,6 +116,8 @@ Any Backslashes ( \ ) in RTF text will be intercepted as an RTF code. Use a doub
 | \<fontms>               | Font Generic Monospace   |
 | \<fs**>                 | Size in half-points      |
 |                         | Ex: £\<fs18> = 9 point   |
+| \<cf*>                  | Color, see Colors section|
+| \<red> \<black> etc.    | Predefined colors        |
 | \<[RTF code without]>   | Ex: \<nl> = \\nl         |
 
 When using normal RTF codes with a backslash, you must leave a space at the end of the tag.
@@ -123,6 +125,17 @@ When using normal RTF codes with a backslash, you must leave a space at the end 
 *Example: "hello \\b world\\b0 " is OK, "hello \\bworld\\b0" is not.*
 
 <!-- If you're reading this as plain text, ignore \ before tags. Use <>, not \<> -->
+-----------------------------------------
+### Colored text
+
+Some colors are predefined as tags:
+\<black>, \<white>, \<gray>, \<red>, \<green>, \<blue>
+
+You can add more colors in Options in this format:
+\\red0\\green80\\blue180;\\red255\\green0\\blue180;
+
+You can reference these color values starting with number 7: \<cf7> or \\cf7
+(The first six values are reserved by the predefined colors)
 
 -----------------------------------------
 ## Key codes for hotkey options:

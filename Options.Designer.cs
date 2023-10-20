@@ -61,6 +61,8 @@
             checkBoxHistoryMinimize = new CheckBox();
             labelVersion = new Label();
             checkBoxTrayCapslock = new CheckBox();
+            textBoxRTFcolors = new TextBox();
+            label4 = new Label();
             ((System.ComponentModel.ISupportInitialize)HotkeyGrid).BeginInit();
             SuspendLayout();
             // 
@@ -87,7 +89,7 @@
             // optionRegisterHotkeys
             // 
             optionRegisterHotkeys.AutoSize = true;
-            optionRegisterHotkeys.Location = new Point(12, 223);
+            optionRegisterHotkeys.Location = new Point(12, 229);
             optionRegisterHotkeys.Name = "optionRegisterHotkeys";
             optionRegisterHotkeys.Size = new Size(112, 19);
             optionRegisterHotkeys.TabIndex = 2;
@@ -134,7 +136,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label2.Location = new Point(12, 245);
+            label2.Location = new Point(12, 251);
             label2.Name = "label2";
             label2.Size = new Size(230, 15);
             label2.TabIndex = 7;
@@ -165,7 +167,7 @@
             // optionCut
             // 
             optionCut.AutoSize = true;
-            optionCut.Location = new Point(12, 63);
+            optionCut.Location = new Point(12, 69);
             optionCut.Name = "optionCut";
             optionCut.Size = new Size(163, 19);
             optionCut.TabIndex = 40;
@@ -175,7 +177,7 @@
             // optionType
             // 
             optionType.AutoSize = true;
-            optionType.Location = new Point(12, 110);
+            optionType.Location = new Point(12, 116);
             optionType.Name = "optionType";
             optionType.Size = new Size(181, 19);
             optionType.TabIndex = 41;
@@ -185,7 +187,7 @@
             // optionPaste
             // 
             optionPaste.AutoSize = true;
-            optionPaste.Location = new Point(12, 88);
+            optionPaste.Location = new Point(12, 94);
             optionPaste.Name = "optionPaste";
             optionPaste.Size = new Size(163, 19);
             optionPaste.TabIndex = 42;
@@ -195,7 +197,7 @@
             // optionUpdateClipboard
             // 
             optionUpdateClipboard.AutoSize = true;
-            optionUpdateClipboard.Location = new Point(12, 135);
+            optionUpdateClipboard.Location = new Point(12, 141);
             optionUpdateClipboard.Name = "optionUpdateClipboard";
             optionUpdateClipboard.Size = new Size(237, 19);
             optionUpdateClipboard.TabIndex = 44;
@@ -210,11 +212,11 @@
             HotkeyGrid.BackgroundColor = SystemColors.Window;
             HotkeyGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             HotkeyGrid.Columns.AddRange(new DataGridViewColumn[] { Function, Key, Ctrl, Alt, Shift, Win });
-            HotkeyGrid.Location = new Point(12, 274);
+            HotkeyGrid.Location = new Point(12, 276);
             HotkeyGrid.Name = "HotkeyGrid";
             HotkeyGrid.RowHeadersVisible = false;
             HotkeyGrid.RowTemplate.Height = 25;
-            HotkeyGrid.Size = new Size(494, 274);
+            HotkeyGrid.Size = new Size(494, 272);
             HotkeyGrid.TabIndex = 52;
             // 
             // Function
@@ -351,18 +353,36 @@
             // checkBoxTrayCapslock
             // 
             checkBoxTrayCapslock.AutoSize = true;
-            checkBoxTrayCapslock.Location = new Point(12, 172);
+            checkBoxTrayCapslock.Location = new Point(12, 178);
             checkBoxTrayCapslock.Name = "checkBoxTrayCapslock";
             checkBoxTrayCapslock.Size = new Size(164, 19);
             checkBoxTrayCapslock.TabIndex = 62;
             checkBoxTrayCapslock.Text = "Tray icon Caps Lock status";
             checkBoxTrayCapslock.UseVisualStyleBackColor = true;
             // 
+            // textBoxRTFcolors
+            // 
+            textBoxRTFcolors.Location = new Point(261, 247);
+            textBoxRTFcolors.Name = "textBoxRTFcolors";
+            textBoxRTFcolors.Size = new Size(245, 23);
+            textBoxRTFcolors.TabIndex = 63;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(261, 229);
+            label4.Name = "label4";
+            label4.Size = new Size(60, 15);
+            label4.TabIndex = 64;
+            label4.Text = "RTF colors";
+            // 
             // Options
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(518, 584);
+            Controls.Add(label4);
+            Controls.Add(textBoxRTFcolors);
             Controls.Add(checkBoxTrayCapslock);
             Controls.Add(labelVersion);
             Controls.Add(checkBoxHistoryMinimize);
@@ -430,5 +450,7 @@
         private CheckBox checkBoxHistoryMinimize;
         private Label labelVersion;
         private CheckBox checkBoxTrayCapslock;
+        private TextBox textBoxRTFcolors;
+        private Label label4;
     }
 }

@@ -7,25 +7,27 @@ namespace ClipboardTool
     public partial class Options : Form
     {
         public MainForm mainForm;
+        Properties.Settings settings = Properties.Settings.Default;
 
         public Options(MainForm formParent)
         {
             InitializeComponent();
             mainForm = formParent;
 
-            optionStartHidden.Checked = Properties.Settings.Default.StartHidden;
-            optionStartToolbar.Checked = Properties.Settings.Default.StartToolbar;
-            optionRegisterHotkeys.Checked = Properties.Settings.Default.RegisterHotkeys;
-            optionSaveMemorySlots.Checked = Properties.Settings.Default.SaveMemorySlots;
-            textMemorySlotFolder.Text = Properties.Settings.Default.MemorySlotFolder;
-            textBoxHistory.Text = Properties.Settings.Default.HistoryFolder;
-            optionResetCounter.Checked = Properties.Settings.Default.ResetCounterWhenSet;
-            optionCut.Checked = Properties.Settings.Default.sendCut;
-            optionType.Checked = Properties.Settings.Default.sendType;
-            optionPaste.Checked = Properties.Settings.Default.sendPaste;
-            optionUpdateClipboard.Checked = Properties.Settings.Default.updateClipboard;
-            checkBoxHistoryMinimize.Checked = Properties.Settings.Default.HistoryMinimizeAfterCopy;
-            checkBoxTrayCapslock.Checked = Properties.Settings.Default.TrayIconCapslockStatus;
+            optionStartHidden.Checked = settings.StartHidden;
+            optionStartToolbar.Checked = settings.StartToolbar;
+            optionRegisterHotkeys.Checked = settings.RegisterHotkeys;
+            optionSaveMemorySlots.Checked = settings.SaveMemorySlots;
+            textMemorySlotFolder.Text = settings.MemorySlotFolder;
+            textBoxHistory.Text = settings.HistoryFolder;
+            optionResetCounter.Checked = settings.ResetCounterWhenSet;
+            optionCut.Checked = settings.sendCut;
+            optionType.Checked = settings.sendType;
+            optionPaste.Checked = settings.sendPaste;
+            optionUpdateClipboard.Checked = settings.updateClipboard;
+            checkBoxHistoryMinimize.Checked = settings.HistoryMinimizeAfterCopy;
+            checkBoxTrayCapslock.Checked = settings.TrayIconCapslockStatus;
+            textBoxRTFcolors.Text = settings.RTFcolors;
 
             fillGrid();
 
@@ -90,19 +92,20 @@ namespace ClipboardTool
 
         private void saveSettings()
         {
-            Properties.Settings.Default.StartHidden = optionStartHidden.Checked;
-            Properties.Settings.Default.StartToolbar = optionStartToolbar.Checked;
-            Properties.Settings.Default.RegisterHotkeys = optionRegisterHotkeys.Checked;
-            Properties.Settings.Default.SaveMemorySlots = optionSaveMemorySlots.Checked;
-            Properties.Settings.Default.MemorySlotFolder = textMemorySlotFolder.Text;
-            Properties.Settings.Default.HistoryFolder = textBoxHistory.Text;
-            Properties.Settings.Default.ResetCounterWhenSet = optionResetCounter.Checked;
-            Properties.Settings.Default.sendCut = optionCut.Checked;
-            Properties.Settings.Default.sendType = optionType.Checked;
-            Properties.Settings.Default.sendPaste = optionPaste.Checked;
-            Properties.Settings.Default.updateClipboard = optionUpdateClipboard.Checked;
-            Properties.Settings.Default.HistoryMinimizeAfterCopy = checkBoxHistoryMinimize.Checked;
-            Properties.Settings.Default.TrayIconCapslockStatus = checkBoxTrayCapslock.Checked;
+            settings.StartHidden = optionStartHidden.Checked;
+            settings.StartToolbar = optionStartToolbar.Checked;
+            settings.RegisterHotkeys = optionRegisterHotkeys.Checked;
+            settings.SaveMemorySlots = optionSaveMemorySlots.Checked;
+            settings.MemorySlotFolder = textMemorySlotFolder.Text;
+            settings.HistoryFolder = textBoxHistory.Text;
+            settings.ResetCounterWhenSet = optionResetCounter.Checked;
+            settings.sendCut = optionCut.Checked;
+            settings.sendType = optionType.Checked;
+            settings.sendPaste = optionPaste.Checked;
+            settings.updateClipboard = optionUpdateClipboard.Checked;
+            settings.HistoryMinimizeAfterCopy = checkBoxHistoryMinimize.Checked;
+            settings.TrayIconCapslockStatus = checkBoxTrayCapslock.Checked;
+            settings.RTFcolors = textBoxRTFcolors.Text;
 
 
             int i = 0;
@@ -125,7 +128,7 @@ namespace ClipboardTool
                 i++;
             }
 
-            Properties.Settings.Default.Save();
+            settings.Save();
             mainForm.UpdateCapsLock(true); // updates the tray icon to a/A or normal icon
         }
 
