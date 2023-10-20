@@ -18,13 +18,13 @@ namespace ClipboardTool
         }
 
         /// <summary>
-        /// Processes text with $-commands, outputs both rich and plain text.
+        /// Processes text with $-commands, outputs both plain and rich text.
         /// </summary>
         /// <param name="plainText"></param>
-        /// <returns>richText, plainText</returns>
-        public string ProcessTextVariables(string customText, bool forceClipboardUpdate = false) //(string, string)
+        /// <returns>string PlainText, string RichText</returns>
+        public (string PlainText, string? RichText) ProcessTextVariables(string customText, bool forceClipboardUpdate = false) //(string, string)
         {
-            if (customText == null) return String.Empty;
+            if (customText == null) return (PlainText:string.Empty, RichText:null);
             string plainText = String.Empty;
             string? richText = String.Empty;
 
@@ -111,7 +111,7 @@ namespace ClipboardTool
             if (customText.Contains("$RTF"))
             {
                 customText = customText.Replace("$RTF", "");
-                (richText, plainText) = ConvertToRichText(customText);                
+                (plainText, richText) = ConvertToRichText(customText);
             }
             else
             {
@@ -121,12 +121,12 @@ namespace ClipboardTool
 
             if (plainText.Length < 1)
             {
-                return string.Empty;
+                return (string.Empty, string.Empty);
             }
             else
             {
                 mainForm.SetClipBoard(plainText, richText, forceClipboardUpdate);
-                return plainText;
+                return (PlainText:plainText, RichText:richText);
             }
         }
 
@@ -145,14 +145,13 @@ namespace ClipboardTool
             return @"{\colortbl;" + colorBlack + colorWhite + colorGray + colorRed + colorGreen + colorBlue + Settings.Default.RTFcolors + @"}";
         }
 
-        // example: @"{\f1\cb1\cf2 This is colored text. The background is color 1 and the foreground is color 2.}";
 
         /// <summary>
-        /// Parses tags into Rich Text, outputs both rich and plain text.
+        /// Parses tags into Rich Text, outputs both plain and rich text.
         /// </summary>
         /// <param name="plainText"></param>
-        /// <returns>richText, plainText</returns>
-        public (string, string) ConvertToRichText(string plainText)
+        /// <returns>string PlainText, string RichText</returns>
+        public (string PlainText, string RichText) ConvertToRichText(string plainText)
         {
             //https://www.biblioscape.com/rtf15_spec.htm
             Debug.WriteLine("Parsing Rich Text");
@@ -275,7 +274,7 @@ namespace ClipboardTool
             
             plainTextResult = rtfBox.Text;
             rtfBox.Dispose();
-            return (richTextResult, plainTextResult);
+            return (PlainText:plainTextResult, RichText:richTextResult);
         }
 
         private static void SetRTFTag(StringBuilder builder, string text, string start, string end)
@@ -371,7 +370,7 @@ namespace ClipboardTool
                     mainForm.NumberSpinner++;
                     return String.Empty;
                 }
-                customText = ProcessTextVariables(currentline, false);
+                customText = ProcessTextVariables(currentline, false).PlainText;
             }
             else
             {

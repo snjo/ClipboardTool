@@ -273,7 +273,7 @@ namespace ClipboardTool
             if (CheckHotkey("ProcessText", id))
             {
                 sendCut();
-                sendPaste(process.ProcessTextVariables(textCustom.Text));
+                sendPaste(process.ProcessTextVariables(textCustom.Text).PlainText);
             }
 
             if (CheckHotkey("Date", id))
@@ -284,19 +284,19 @@ namespace ClipboardTool
             if (CheckHotkey("MemSlot1", id))
             {
                 sendCut();
-                sendPaste(process.ProcessTextVariables(textBox1.Text));
+                sendPaste(process.ProcessTextVariables(textBox1.Text).PlainText);
             }
 
             if (CheckHotkey("MemSlot2", id))
             {
                 sendCut();
-                sendPaste(process.ProcessTextVariables(textBox2.Text));
+                sendPaste(process.ProcessTextVariables(textBox2.Text).PlainText);
             }
 
             if (CheckHotkey("MemSlot3", id))
             {
                 sendCut();
-                sendPaste(process.ProcessTextVariables(textBox3.Text));
+                sendPaste(process.ProcessTextVariables(textBox3.Text).PlainText);
             }
 
             if (CheckHotkey("ResetNumber", id))
@@ -607,7 +607,7 @@ namespace ClipboardTool
             {
                 if (textBox.Text.Length > 0)
                 {
-                    string newClipText = process.ProcessTextVariables(textBox.Text, true);
+                    process.ProcessTextVariables(textBox.Text, true);
                     //if (newClipText.Length > 0)
                     //    Clipboard.SetText(newClipText);
                 }
