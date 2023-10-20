@@ -773,6 +773,7 @@ namespace ClipboardTool
 
         public void actionProcessText(object sender, EventArgs e)
         {
+            Debug.WriteLine("Process text");
             process.ProcessTextVariables(textCustom.Text, true);
         }
 

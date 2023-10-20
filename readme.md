@@ -1,3 +1,5 @@
+<!-- This file is formatted with Markdown. While it's readable as plain text, some characters have a backslash \ escape character in front of them, these should be ignored-->
+<!-- For best readability, view it at https://github.com/snjo/ClipboardTool-->
 # Clipboard tool
 *by Andreas Aakvik Gogstad*  
 *2022*
@@ -8,9 +10,9 @@ https://github.com/snjo/ClipboardTool
 ![image](clipboardtool1.png)
 
 -----------------------------------------
-## Variables for text processing:
+## Commands for text processing:
 
-| Variables | Function                                                         |
+| Command   | Function                                                         |
 |-----------|------------------------------------------------------------------|
 | $d        | date                                                             |
 | $t        | time                                                             |
@@ -39,7 +41,7 @@ If you placed this program in one of the write protected Program Files folders, 
 | Text file              | Function                                                                          | Comment	                                                                                   |
 |------------------------|-----------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------|
 | process.txt            | Preset contents of the Proccess text area (The main text box in the application). | You can update the text file by using the Save button next to the textbox (diskette icon)   |
-| mem1.txt-mem3.txt      | Preset contents of the three memory slots at the bottom of the applications.      | Use this for commonly typed phrases, or as part of the variables in the process text field. The text file is only overwritten by the program if configured in the settings |
+| mem1.txt-mem3.txt      | Preset contents of the three memory slots at the bottom of the applications.      | Use this for commonly typed phrases, or as part of the commands in the process text field. The text file is only overwritten by the program if configured in the settings |
 
 -----------------------------------------
 ## Hotkeys
@@ -71,7 +73,7 @@ Memory Slot hotkeys also does any $ processing in the field, but some functions 
 -----------------------------------------
 ## History Window
 
-The History window allows you to save text and quickly load them into the clipboard. Any $ variables in the text will be processed if you use the [>] Copy button.
+The History window allows you to save text and quickly load them into the clipboard. Any $ commands in the text will be processed if you use the [>] Copy button.
 
 Set the folder for these text files in Options, or allow the program to create the folder for you when opening History the first time.
 
@@ -93,7 +95,7 @@ Then while working in an application, you can press the hotkey, copy the text, a
 
 If you add the $RFT command, the text will be output to the clipboard in Rich Text format, allowing for text styles, colors and font families.
 
-Outputting this correctly requires using the clipboard. Set Options to use Ctrl+V instead of Send Keys.
+Outputting this correctly requires using the clipboard. Set Options to use Ctrl+V instead of Send Keys. While using Send Keys option, the output will be in plain text.
 
 Text can be marked up using either RTF codes such as "\b ", "\b0 " and more advanced codes, or using a small set of predefined tags.
 These tags will self terminate when reaching the next tag, making them slightly easier to use than normal RTF codes.
@@ -111,9 +113,12 @@ Any Backslashes ( \ ) in RTF text will be intercepted as an RTF code. Use a doub
 | \<strike>               | Strikethrough            |
 | \<ul>                   | Underline                |
 | \<ulw>                  | Underline just words     |
-| \<fontsr>               | Font Generic Serif       |
-| \<fontss>               | Font Generic Sans Serif  |
-| \<fontms>               | Font Generic Monospace   |
+| \<default>              | Font 0 Default           |
+| \<serif>                | Font 1 Serif             |
+| \<sans>                 | Font 2 Sans Serif        |
+| \<mono>                 | Font 3 Monospace         |
+| \<script>               | Font 4 Script            |
+| \<decor>                | Font 5 Decorative        |
 | \<fs**>                 | Size in half-points      |
 |                         | Ex: £\<fs18> = 9 point   |
 | \<cf*>                  | Color, see Colors section|

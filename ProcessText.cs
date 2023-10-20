@@ -17,7 +17,12 @@ namespace ClipboardTool
             mainForm = parent;
         }
 
-        public string ProcessTextVariables(string customText, bool forceClipboardUpdate = false)
+        /// <summary>
+        /// Processes text with $-commands, outputs both rich and plain text.
+        /// </summary>
+        /// <param name="plainText"></param>
+        /// <returns>richText, plainText</returns>
+        public string ProcessTextVariables(string customText, bool forceClipboardUpdate = false) //(string, string)
         {
             if (customText == null) return String.Empty;
             string plainText = String.Empty;
@@ -116,12 +121,12 @@ namespace ClipboardTool
 
             if (plainText.Length < 1)
             {
-                return "";
+                return string.Empty;
             }
             else
             {
                 mainForm.SetClipBoard(plainText, richText, forceClipboardUpdate);
-                return customText;
+                return plainText;
             }
         }
 
@@ -132,6 +137,8 @@ namespace ClipboardTool
         string colorRed = @"\red255\green0\blue0;";
         string colorGreen = @"\red0\green255\blue0;";
         string colorBlue = @"\red0\green0\blue255;";
+        string fontTable = @"\deff0{\fonttbl{\f0\fnil Default Sans Serif;}{\f1\froman Times New Roman;}{\f2\fswiss Arial;}{\f3\fmodern Courier New;}{\f4\fscript Script MT Bold;}{\f5\fdecor Old English Text MT;}}";
+        // fnil Default Sans Serif should work for Lotus Notes
 
         private string colorTable()
         {
@@ -140,6 +147,11 @@ namespace ClipboardTool
 
         // example: @"{\f1\cb1\cf2 This is colored text. The background is color 1 and the foreground is color 2.}";
 
+        /// <summary>
+        /// Parses tags into Rich Text, outputs both rich and plain text.
+        /// </summary>
+        /// <param name="plainText"></param>
+        /// <returns>richText, plainText</returns>
         public (string, string) ConvertToRichText(string plainText)
         {
             //https://www.biblioscape.com/rtf15_spec.htm
@@ -218,29 +230,26 @@ namespace ClipboardTool
                             case "blue":
                                 SetRTFTag(builder, text, @"\cf6 ", @"");
                                 break;
-                            case "fontsr":
-                                if (OperatingSystem.IsWindows())
-                                {
-                                    //Debug.WriteLine("Setting font to Serif");
-                                    rtfBox.Font = new Font(FontFamily.GenericSerif, 11f);
-                                    builder.Append(text);
-                                }
+                            case "default":
+                                SetRTFTag(builder, text, @"\f0 ", @"");
                                 break;
-                            case "fontss":
-                                if (OperatingSystem.IsWindows())
-                                {
-                                    //Debug.WriteLine("Setting font to Sans Serif");
-                                    rtfBox.Font = new Font(FontFamily.GenericSansSerif, 11f);
-                                    builder.Append(text);
-                                }
+                            case "serif":
+                                SetRTFTag(builder, text, @"\f1 ", @"");
                                 break;
-                            case "fontms":
-                                if (OperatingSystem.IsWindows())
-                                {
-                                    //Debug.WriteLine("Setting font to Monospace");
-                                    rtfBox.Font = new Font(FontFamily.GenericMonospace, 11f);
-                                    builder.Append(text);
-                                }
+                            case "sans":
+                                SetRTFTag(builder, text, @"\f2 ", @"");
+                                break;
+                            case "mono":
+                                SetRTFTag(builder, text, @"\f3 ", @"");
+                                break;
+                            case "script":
+                                SetRTFTag(builder, text, @"\f4 ", @"");
+                                break;
+                            case "decor":
+                                SetRTFTag(builder, text, @"\f5 ", @"");
+                                break;
+                            case "symbol":
+                                SetRTFTag(builder, text, @"\f6 ", @"");
                                 break;
                             default: 
                                 if (tagAndText[0].Length > 0) // unknown RTF code, pass it on
@@ -259,7 +268,7 @@ namespace ClipboardTool
                             builder.Append(text);
                     }
                     
-                    rtfBox.Rtf = rtfHeader + colorTable() + builder.ToString() + @"}"; // removed space in @" }";
+                    rtfBox.Rtf = rtfHeader + fontTable + colorTable() + builder.ToString() + @"}"; // removed space in @" }";
                     richTextResult = rtfBox.Rtf;
                 }
             }
