@@ -74,6 +74,7 @@ namespace ClipboardTool
             "$vsp    Split value in slot 1 with space, output value[number]\n" +
             "$list   Split lines in main textbox (skips line 1), output value[number]\n" +
             "$prompt Opens a popup box to insert a text value\n" +
+            "$RTF    Enabler Rich text codes. Check readme.md\n" +
             "\n" +
             "Tap the date hotkey 1-3 times while holding the modifier keys:\n" +
             "1: Just the date\n" +

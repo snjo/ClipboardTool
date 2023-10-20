@@ -95,25 +95,34 @@ If you add the $RFT command, the text will be output to the clipboard in Rich Te
 
 Outputting this correctly requires using the clipboard. Set Options to use Ctrl+V instead of Send Keys.
 
-Text can be marked up using either RTF codes such as "\b " and more advanced codes, or using a small set of predefined tags.
+Text can be marked up using either RTF codes such as "\b ", "\b0 " and more advanced codes, or using a small set of predefined tags.
 These tags will self terminate when reaching the next tag, making them slightly easier to use than normal RTF codes.
 
-| Tag                      | Effect                   |
-|--------------------------|--------------------------|
-| £\<>                     | End previous tag         |
-| £\<b>                    | Bold                     |
-| £\<i>                    | Italic                   |
-| £\<r>                    | Regular text             |
-| £\<plain>                | Plain text               |
-| £\<strike>               | Strikethroug             |
-| £\<ul>                   | Underline                |
-| £\<ulw>                  | Underline just words     |
-| £\<fontsr>               | Font Generic Serif       |
-| £\<fontss>               | Font Generic Sans Serif  |
-| £\<fontms>               | Font Generic Monospace   |
-| £\<fs**>                 | Size in half-points      |
-|                          | Ex: £\<fs18> = 9 point   |
-| £<[RTF code without \\ ]>|                          |
+Any Backslashes ( \ ) in RTF text will be intercepted as an RTF code. Use a double backslash to represent a backslash that should be output.
+\\\\ = \\ 
+<!-- If you're reading this as plain text: \\ = \ -->
+
+| Tag                     | Effect                   |
+|-------------------------|--------------------------|
+| \<>                     | End previous tag         |
+| \<b>                    | Bold                     |
+| \<i>                    | Italic                   |
+| \<plain>                | Plain text               |
+| \<strike>               | Strikethroug             |
+| \<ul>                   | Underline                |
+| \<ulw>                  | Underline just words     |
+| \<fontsr>               | Font Generic Serif       |
+| \<fontss>               | Font Generic Sans Serif  |
+| \<fontms>               | Font Generic Monospace   |
+| \<fs**>                 | Size in half-points      |
+|                         | Ex: £\<fs18> = 9 point   |
+| \<[RTF code without]>   | Ex: \<nl> = \\nl         |
+
+When using normal RTF codes with a backslash, you must leave a space at the end of the tag.
+
+*Example: "hello \\b world\\b0 " is OK, "hello \\bworld\\b0" is not.*
+
+<!-- If you're reading this as plain text, ignore \ before tags. Use <>, not \<> -->
 
 -----------------------------------------
 ## Key codes for hotkey options:

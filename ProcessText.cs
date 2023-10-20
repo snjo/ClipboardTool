@@ -131,78 +131,96 @@ namespace ClipboardTool
             StringBuilder builder = new StringBuilder();
             string plainTextResult = "";
             string richTextResult = "";
-            string tagStart = "£<";
+            string tagStart = "<";
             string tagEnd = ">";
-            plainText = plainText.Replace(Environment.NewLine, @"\par ");
+            string escapeTag = "\\";
+            string escapeTemp = "¤";
+            
+            plainText = plainText.Replace(escapeTag + tagStart, escapeTemp);
+            plainText = plainText.Replace(Environment.NewLine, @"\par "); // add line breaks that RTF ignores back in
             string[] segments = plainText.Split(tagStart);
             if (segments.Length > 0)
             {
                 foreach (string segment in segments)
                 {
-                    Debug.WriteLine("Segment: " + segment);
-                    string[] tagAndText = segment.Split(tagEnd, 2);
+                    string segmentUnEscaped = segment.Replace(escapeTemp, tagStart);
+                    segmentUnEscaped = segmentUnEscaped.Replace(escapeTag+tagEnd, escapeTemp);
+
+                    string[] tagAndText = segmentUnEscaped.Split(tagEnd, 2);
+                    string? tag = null;
+                    string? text = null;
+                    if (tagAndText.Length == 1)
+                        text = tagAndText[0].Replace(escapeTemp, tagEnd);
                     if (tagAndText.Length > 1)
                     {
-                        switch (tagAndText[0])
+                        tag = tagAndText[0];
+                        text = tagAndText[1].Replace(escapeTemp, tagEnd);
+                    }
+                        
+
+                    if (tag!= null && text != null)
+                    {
+                        switch (tag)
                         {
                             case "b": // bold
                                 //rtfBox.SelectionFont = new Font(rtfBox.Font, FontStyle.Bold);
-                                SetRTFTag(builder, tagAndText[1], @"\b ", @"\b0 ");
+                                SetRTFTag(builder, text, @"\b ", @"\b0 ");
                                 break;
                             case "i": // italic
                                 //rtfBox.SelectionFont = new Font(rtfBox.Font, FontStyle.Bold);
-                                SetRTFTag(builder, tagAndText[1], @"\i ", @"\i0 ");
+                                SetRTFTag(builder, text, @"\i ", @"\i0 ");
                                 break;
                             case "strike": // strikethrough
-                                SetRTFTag(builder, tagAndText[1], @"\strike ", @"\strike0 ");
+                                SetRTFTag(builder, text, @"\strike ", @"\strike0 ");
                                 break;
                             case "ul": // underline
-                                SetRTFTag(builder, tagAndText[1], @"\ul ", @"\ul0 ");
+                                SetRTFTag(builder, text, @"\ul ", @"\ul0 ");
                                 break;
                             case "ulw": // underlined words, but spaces are not
-                                SetRTFTag(builder, tagAndText[1], @"\ulw ", @"\ulw0 ");
+                                SetRTFTag(builder, text, @"\ulw ", @"\ulw0 ");
                                 break;
                             case "plain": // plain (remove formatting)
-                                SetRTFTag(builder, tagAndText[1], @"\plain ", @"");
+                                SetRTFTag(builder, text, @"\plain ", @"");
                                 break;
                             case "fontsr":
                                 if (OperatingSystem.IsWindows())
                                 {
-                                    Debug.WriteLine("Setting font to Serif");
+                                    //Debug.WriteLine("Setting font to Serif");
                                     rtfBox.Font = new Font(FontFamily.GenericSerif, 11f);
-                                    builder.Append(tagAndText[1]);
+                                    builder.Append(text);
                                 }
                                 break;
                             case "fontss":
                                 if (OperatingSystem.IsWindows())
                                 {
-                                    Debug.WriteLine("Setting font to Sans Serif");
+                                    //Debug.WriteLine("Setting font to Sans Serif");
                                     rtfBox.Font = new Font(FontFamily.GenericSansSerif, 11f);
-                                    builder.Append(tagAndText[1]);
+                                    builder.Append(text);
                                 }
                                 break;
                             case "fontms":
                                 if (OperatingSystem.IsWindows())
                                 {
-                                    Debug.WriteLine("Setting font to Monospace");
+                                    //Debug.WriteLine("Setting font to Monospace");
                                     rtfBox.Font = new Font(FontFamily.GenericMonospace, 11f);
-                                    builder.Append(tagAndText[1]);
+                                    builder.Append(text);
                                 }
                                 break;
-                            default: // error, or empy/unspecified tag: regular text
+                            default: 
                                 if (tagAndText[0].Length > 0) // unknown RTF code, pass it on
                                 {
-                                    Debug.WriteLine("Unknown RTF code, pass it on : " + tagAndText[0]);
-                                    SetRTFTag(builder, tagAndText[1], @"\" + tagAndText[0] + " ", @"");
+                                    //Debug.WriteLine("Unknown RTF code, pass it on : " + tagAndText[0]);
+                                    SetRTFTag(builder, text, @"\" + tagAndText[0] + " ", @"");
                                 }
-                                else builder.Append(tagAndText[1]);
+                                else builder.Append(text); // empy tag <>: regular text
                                 break;
                         }
                     }
                     else
                     {
+                        //Debug.WriteLine("no tag in tagAndText, appending unsplit value: " + text);
                         if (segment.Length > 0)
-                            builder.Append(segments[0]);
+                            builder.Append(text);
                     }
 
                     rtfBox.Rtf = @"{\rtf1\ansi " + builder.ToString() + @"}"; // removed space in @" }";
