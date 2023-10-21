@@ -75,6 +75,9 @@
             buttonRTFDefaultColors = new Button();
             label5 = new Label();
             textBoxRTFfonts = new TextBox();
+            label7 = new Label();
+            label8 = new Label();
+            label9 = new Label();
             ((System.ComponentModel.ISupportInitialize)HotkeyGrid).BeginInit();
             tabControl1.SuspendLayout();
             tabPageGeneral.SuspendLayout();
@@ -86,7 +89,7 @@
             // optionStartHidden
             // 
             optionStartHidden.AutoSize = true;
-            optionStartHidden.Location = new Point(6, 6);
+            optionStartHidden.Location = new Point(26, 34);
             optionStartHidden.Name = "optionStartHidden";
             optionStartHidden.Size = new Size(92, 19);
             optionStartHidden.TabIndex = 0;
@@ -96,7 +99,7 @@
             // optionStartToolbar
             // 
             optionStartToolbar.AutoSize = true;
-            optionStartToolbar.Location = new Point(6, 29);
+            optionStartToolbar.Location = new Point(26, 57);
             optionStartToolbar.Name = "optionStartToolbar";
             optionStartToolbar.Size = new Size(118, 19);
             optionStartToolbar.TabIndex = 1;
@@ -116,7 +119,7 @@
             // optionResetCounter
             // 
             optionResetCounter.AutoSize = true;
-            optionResetCounter.Location = new Point(6, 170);
+            optionResetCounter.Location = new Point(21, 257);
             optionResetCounter.Name = "optionResetCounter";
             optionResetCounter.Size = new Size(252, 19);
             optionResetCounter.TabIndex = 3;
@@ -126,7 +129,7 @@
             // optionSaveMemorySlots
             // 
             optionSaveMemorySlots.AutoSize = true;
-            optionSaveMemorySlots.Location = new Point(0, 9);
+            optionSaveMemorySlots.Location = new Point(7, 7);
             optionSaveMemorySlots.Name = "optionSaveMemorySlots";
             optionSaveMemorySlots.Size = new Size(233, 19);
             optionSaveMemorySlots.TabIndex = 4;
@@ -163,7 +166,7 @@
             // buttonSave
             // 
             buttonSave.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            buttonSave.Location = new Point(365, 604);
+            buttonSave.Location = new Point(365, 484);
             buttonSave.Name = "buttonSave";
             buttonSave.Size = new Size(75, 23);
             buttonSave.TabIndex = 38;
@@ -174,7 +177,7 @@
             // buttonCancel
             // 
             buttonCancel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            buttonCancel.Location = new Point(284, 604);
+            buttonCancel.Location = new Point(284, 484);
             buttonCancel.Name = "buttonCancel";
             buttonCancel.Size = new Size(75, 23);
             buttonCancel.TabIndex = 39;
@@ -185,7 +188,7 @@
             // optionCut
             // 
             optionCut.AutoSize = true;
-            optionCut.Location = new Point(6, 62);
+            optionCut.Location = new Point(22, 132);
             optionCut.Name = "optionCut";
             optionCut.Size = new Size(216, 19);
             optionCut.TabIndex = 40;
@@ -195,7 +198,7 @@
             // optionType
             // 
             optionType.AutoSize = true;
-            optionType.Location = new Point(6, 112);
+            optionType.Location = new Point(22, 182);
             optionType.Name = "optionType";
             optionType.Size = new Size(250, 19);
             optionType.TabIndex = 41;
@@ -206,7 +209,7 @@
             // optionPaste
             // 
             optionPaste.AutoSize = true;
-            optionPaste.Location = new Point(6, 87);
+            optionPaste.Location = new Point(22, 157);
             optionPaste.Name = "optionPaste";
             optionPaste.Size = new Size(314, 19);
             optionPaste.TabIndex = 42;
@@ -217,7 +220,7 @@
             // optionUpdateClipboard
             // 
             optionUpdateClipboard.AutoSize = true;
-            optionUpdateClipboard.Location = new Point(6, 137);
+            optionUpdateClipboard.Location = new Point(22, 207);
             optionUpdateClipboard.Name = "optionUpdateClipboard";
             optionUpdateClipboard.Size = new Size(292, 19);
             optionUpdateClipboard.TabIndex = 44;
@@ -236,7 +239,7 @@
             HotkeyGrid.Name = "HotkeyGrid";
             HotkeyGrid.RowHeadersVisible = false;
             HotkeyGrid.RowTemplate.Height = 25;
-            HotkeyGrid.Size = new Size(427, 538);
+            HotkeyGrid.Size = new Size(427, 418);
             HotkeyGrid.TabIndex = 52;
             // 
             // Function
@@ -281,7 +284,7 @@
             // 
             linkLabel1.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             linkLabel1.AutoSize = true;
-            linkLabel1.Location = new Point(11, 608);
+            linkLabel1.Location = new Point(11, 488);
             linkLabel1.Name = "linkLabel1";
             linkLabel1.Size = new Size(49, 15);
             linkLabel1.TabIndex = 53;
@@ -293,7 +296,7 @@
             // 
             linkLabel2.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             linkLabel2.AutoSize = true;
-            linkLabel2.Location = new Point(66, 608);
+            linkLabel2.Location = new Point(66, 488);
             linkLabel2.Name = "linkLabel2";
             linkLabel2.Size = new Size(100, 15);
             linkLabel2.TabIndex = 54;
@@ -356,7 +359,7 @@
             // checkBoxHistoryMinimize
             // 
             checkBoxHistoryMinimize.AutoSize = true;
-            checkBoxHistoryMinimize.Location = new Point(6, 195);
+            checkBoxHistoryMinimize.Location = new Point(21, 282);
             checkBoxHistoryMinimize.Name = "checkBoxHistoryMinimize";
             checkBoxHistoryMinimize.Size = new Size(174, 19);
             checkBoxHistoryMinimize.TabIndex = 60;
@@ -367,7 +370,7 @@
             // 
             labelVersion.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             labelVersion.AutoSize = true;
-            labelVersion.Location = new Point(172, 608);
+            labelVersion.Location = new Point(172, 488);
             labelVersion.Name = "labelVersion";
             labelVersion.Size = new Size(45, 15);
             labelVersion.TabIndex = 61;
@@ -376,7 +379,7 @@
             // checkBoxTrayCapslock
             // 
             checkBoxTrayCapslock.AutoSize = true;
-            checkBoxTrayCapslock.Location = new Point(6, 220);
+            checkBoxTrayCapslock.Location = new Point(26, 82);
             checkBoxTrayCapslock.Name = "checkBoxTrayCapslock";
             checkBoxTrayCapslock.Size = new Size(164, 19);
             checkBoxTrayCapslock.TabIndex = 62;
@@ -408,14 +411,17 @@
             tabControl1.Controls.Add(tabPageHotkeys);
             tabControl1.Controls.Add(tabPageSources);
             tabControl1.Controls.Add(tabPageCustom);
-            tabControl1.Location = new Point(1, 2);
+            tabControl1.Location = new Point(1, 5);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(448, 603);
+            tabControl1.Size = new Size(448, 480);
             tabControl1.TabIndex = 65;
             // 
             // tabPageGeneral
             // 
+            tabPageGeneral.Controls.Add(label9);
+            tabPageGeneral.Controls.Add(label8);
+            tabPageGeneral.Controls.Add(label7);
             tabPageGeneral.Controls.Add(optionStartHidden);
             tabPageGeneral.Controls.Add(optionStartToolbar);
             tabPageGeneral.Controls.Add(checkBoxTrayCapslock);
@@ -428,7 +434,7 @@
             tabPageGeneral.Location = new Point(4, 24);
             tabPageGeneral.Name = "tabPageGeneral";
             tabPageGeneral.Padding = new Padding(3);
-            tabPageGeneral.Size = new Size(440, 575);
+            tabPageGeneral.Size = new Size(440, 452);
             tabPageGeneral.TabIndex = 0;
             tabPageGeneral.Text = "General";
             tabPageGeneral.UseVisualStyleBackColor = true;
@@ -441,7 +447,7 @@
             tabPageHotkeys.Location = new Point(4, 24);
             tabPageHotkeys.Name = "tabPageHotkeys";
             tabPageHotkeys.Padding = new Padding(3);
-            tabPageHotkeys.Size = new Size(440, 575);
+            tabPageHotkeys.Size = new Size(440, 452);
             tabPageHotkeys.TabIndex = 1;
             tabPageHotkeys.Text = "Hotkeys";
             tabPageHotkeys.UseVisualStyleBackColor = true;
@@ -458,7 +464,7 @@
             tabPageSources.Controls.Add(buttonSelectHistoryFolder);
             tabPageSources.Location = new Point(4, 24);
             tabPageSources.Name = "tabPageSources";
-            tabPageSources.Size = new Size(440, 575);
+            tabPageSources.Size = new Size(440, 452);
             tabPageSources.TabIndex = 3;
             tabPageSources.Text = "Text sources";
             tabPageSources.UseVisualStyleBackColor = true;
@@ -476,18 +482,18 @@
             tabPageCustom.Controls.Add(textBoxRTFcolors);
             tabPageCustom.Location = new Point(4, 24);
             tabPageCustom.Name = "tabPageCustom";
-            tabPageCustom.Size = new Size(440, 575);
+            tabPageCustom.Size = new Size(440, 452);
             tabPageCustom.TabIndex = 2;
             tabPageCustom.Text = "Custom values";
             tabPageCustom.UseVisualStyleBackColor = true;
             // 
             // label6
             // 
-            label6.AutoSize = true;
+            label6.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             label6.Font = new Font("Segoe UI", 9F, FontStyle.Italic, GraphicsUnit.Point);
             label6.Location = new Point(3, 263);
             label6.Name = "label6";
-            label6.Size = new Size(569, 15);
+            label6.Size = new Size(432, 51);
             label6.TabIndex = 71;
             label6.Text = "When Color/Font tables are allowed, pasted text will not use the font or color that's already in the document";
             // 
@@ -551,11 +557,41 @@
             textBoxRTFfonts.Size = new Size(430, 85);
             textBoxRTFfonts.TabIndex = 65;
             // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label7.Location = new Point(3, 11);
+            label7.Name = "label7";
+            label7.Size = new Size(88, 15);
+            label7.TabIndex = 63;
+            label7.Text = "Startup and UI";
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label8.Location = new Point(3, 109);
+            label8.Name = "label8";
+            label8.Size = new Size(90, 15);
+            label8.TabIndex = 64;
+            label8.Text = "Copy and paste";
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label9.Location = new Point(0, 234);
+            label9.Name = "label9";
+            label9.Size = new Size(60, 15);
+            label9.TabIndex = 65;
+            label9.Text = "Functions";
+            // 
             // Options
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(450, 634);
+            ClientSize = new Size(450, 514);
             Controls.Add(tabControl1);
             Controls.Add(labelVersion);
             Controls.Add(linkLabel2);
@@ -628,5 +664,8 @@
         private Label label6;
         private CheckBox checkBoxRTFfont;
         private CheckBox checkBoxRTFcolor;
+        private Label label9;
+        private Label label8;
+        private Label label7;
     }
 }
