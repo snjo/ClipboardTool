@@ -1,8 +1,5 @@
 ﻿using ClipboardTool.Properties;
-using System.Configuration;
 using System.Diagnostics;
-using System.Drawing;
-using System.Windows.Forms;
 
 namespace ClipboardTool
 {
@@ -229,7 +226,7 @@ namespace ClipboardTool
 
                 string filename = gridHistory.Rows[row].Cells[titleColumnIndex].Value.ToString() + "";
                 if (gridHistory.Rows[row].Cells[textColumnIndex].Value == null)
-                        gridHistory.Rows[row].Cells[textColumnIndex].Value = string.Empty;
+                    gridHistory.Rows[row].Cells[textColumnIndex].Value = string.Empty;
                 string text = gridHistory.Rows[row].Cells[textColumnIndex].Value.ToString() + "";
                 Debug.WriteLine("Saving: " + filename);
                 Color color = gridHistory.Rows[row].Cells[titleColumnIndex].Style.BackColor;
@@ -600,7 +597,7 @@ namespace ClipboardTool
 
             if (cell.Value != null)
             {
-                string oldTitle = cell.Value.ToString()+"";
+                string oldTitle = cell.Value.ToString() + "";
                 string? newTitle = TextPrompt.Prompt("Entry title", "Enter the new name of the entry", false, TextPrompt.IllegalFileCharacters);
                 if (newTitle != null)
                 {
@@ -624,7 +621,7 @@ namespace ClipboardTool
                     }
                     //save new file
                     cell.Value = newTitle;
-                    
+
                     SetPinnedCheckboxValue(rowIndex, (SaveEntry(rowIndex)));
                 }
                 else

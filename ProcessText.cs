@@ -1,11 +1,7 @@
 ﻿using ClipboardTool.Properties;
 using System.Configuration;
 using System.Diagnostics;
-using System.Drawing;
-using System.Runtime.InteropServices;
 using System.Text;
-using static System.Net.Mime.MediaTypeNames;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.TrayNotify;
 
 namespace ClipboardTool
 {
@@ -24,7 +20,7 @@ namespace ClipboardTool
         /// <returns>string PlainText, string RichText</returns>
         public (string PlainText, string? RichText) ProcessTextVariables(string customText, bool forceClipboardUpdate = false) //(string, string)
         {
-            if (customText == null) return (PlainText:string.Empty, RichText:null);
+            if (customText == null) return (PlainText: string.Empty, RichText: null);
             string plainText = String.Empty;
             string? richText = String.Empty;
 
@@ -126,7 +122,7 @@ namespace ClipboardTool
             else
             {
                 mainForm.SetClipBoard(plainText, richText, forceClipboardUpdate);
-                return (PlainText:plainText, RichText:richText);
+                return (PlainText: plainText, RichText: richText);
             }
         }
 
@@ -157,7 +153,7 @@ namespace ClipboardTool
                 return Settings.Default.RTFfonts;
             }
             else
-            { 
+            {
                 return string.Empty;
             }
         }
@@ -181,7 +177,7 @@ namespace ClipboardTool
             string tagEnd = ">";
             string escapeTag = "\\";
             string escapeTemp = "¤";
-            
+
             plainText = plainText.Replace(escapeTag + tagStart, escapeTemp);
             plainText = plainText.Replace(Environment.NewLine, @"\par "); // add line breaks that RTF ignores back in
             string[] segments = plainText.Split(tagStart);
@@ -190,7 +186,7 @@ namespace ClipboardTool
                 foreach (string segment in segments)
                 {
                     string segmentUnEscaped = segment.Replace(escapeTemp, tagStart);
-                    segmentUnEscaped = segmentUnEscaped.Replace(escapeTag+tagEnd, escapeTemp);
+                    segmentUnEscaped = segmentUnEscaped.Replace(escapeTag + tagEnd, escapeTemp);
 
                     string[] tagAndText = segmentUnEscaped.Split(tagEnd, 2);
                     string? tag = null;
@@ -202,9 +198,9 @@ namespace ClipboardTool
                         tag = tagAndText[0];
                         text = tagAndText[1].Replace(escapeTemp, tagEnd);
                     }
-                        
 
-                    if (tag!= null && text != null)
+
+                    if (tag != null && text != null)
                     {
                         switch (tag)
                         {
@@ -267,7 +263,7 @@ namespace ClipboardTool
                             case "symbol":
                                 SetRTFTag(builder, text, @"\f6 ", @"");
                                 break;
-                            default: 
+                            default:
                                 if (tagAndText[0].Length > 0) // unknown RTF code, pass it on
                                 {
                                     //Debug.WriteLine("Unknown RTF code, pass it on : " + tagAndText[0]);
@@ -288,10 +284,10 @@ namespace ClipboardTool
                     richTextResult = rtfBox.Rtf;
                 }
             }
-            
+
             plainTextResult = rtfBox.Text;
             rtfBox.Dispose();
-            return (PlainText:plainTextResult, RichText:richTextResult);
+            return (PlainText: plainTextResult, RichText: richTextResult);
         }
 
         private static void SetRTFTag(StringBuilder builder, string text, string start, string end)
