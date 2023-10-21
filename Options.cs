@@ -8,6 +8,8 @@ namespace ClipboardTool
     {
         public MainForm mainForm;
         Properties.Settings settings = Properties.Settings.Default;
+        string RTFcolorsDefault = @"\red80\green120\blue200;\red255\green180\blue1800;";
+        string RTFfontsDefault = @"\deff0{\fonttbl{\f0\fnil Default Sans Serif;}{\f1\froman Times New Roman;}{\f2\fswiss Arial;}{\f3\fmodern Courier New;}{\f4\fscript Script MT Bold;}{\f5\fdecor Old English Text MT;}}";
 
         public Options(MainForm formParent)
         {
@@ -28,6 +30,9 @@ namespace ClipboardTool
             checkBoxHistoryMinimize.Checked = settings.HistoryMinimizeAfterCopy;
             checkBoxTrayCapslock.Checked = settings.TrayIconCapslockStatus;
             textBoxRTFcolors.Text = settings.RTFcolors;
+            textBoxRTFfonts.Text = settings.RTFfonts;
+            checkBoxRTFcolor.Checked = settings.RTFallowColorTable;
+            checkBoxRTFfont.Checked = settings.RTFallowFontTable;
 
             fillGrid();
 
@@ -106,6 +111,9 @@ namespace ClipboardTool
             settings.HistoryMinimizeAfterCopy = checkBoxHistoryMinimize.Checked;
             settings.TrayIconCapslockStatus = checkBoxTrayCapslock.Checked;
             settings.RTFcolors = textBoxRTFcolors.Text;
+            settings.RTFfonts = textBoxRTFfonts.Text;
+            settings.RTFallowColorTable = checkBoxRTFcolor.Checked;
+            settings.RTFallowFontTable = checkBoxRTFfont.Checked;
 
 
             int i = 0;
@@ -171,6 +179,32 @@ namespace ClipboardTool
             if (dialog == DialogResult.OK)
             {
                 textBoxHistory.Text = folderBrowserDialog1.SelectedPath;
+            }
+        }
+
+        private void buttonRTFDefaultColors_Click(object sender, EventArgs e)
+        {
+            textBoxRTFcolors.Text = RTFcolorsDefault;
+        }
+
+        private void buttonRTFDefaultFonts_Click(object sender, EventArgs e)
+        {
+            textBoxRTFfonts.Text = RTFfontsDefault;
+        }
+
+        private void optionPaste_CheckedChanged(object sender, EventArgs e)
+        {
+            if (optionPaste.Checked)
+            {
+                optionType.Checked = false;
+            }
+        }
+
+        private void optionType_CheckedChanged(object sender, EventArgs e)
+        {
+            if (optionType.Checked)
+            {
+                optionPaste.Checked = false;
             }
         }
     }

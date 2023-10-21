@@ -853,13 +853,51 @@ namespace ClipboardTool.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("\\red0\\green80\\blue180;")]
+        [global::System.Configuration.DefaultSettingValueAttribute("\\red80\\green120\\blue200;\\red255\\green180\\blue1800;")]
         public string RTFcolors {
             get {
                 return ((string)(this["RTFcolors"]));
             }
             set {
                 this["RTFcolors"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("\\deff0{\\fonttbl{\\f0\\fnil Default Sans Serif;}{\\f1\\froman Times New Roman;}{\\f2\\fs" +
+            "wiss Arial;}{\\f3\\fmodern Courier New;}{\\f4\\fscript Script MT Bold;}{\\f5\\fdecor O" +
+            "ld English Text MT;}}")]
+        public string RTFfonts {
+            get {
+                return ((string)(this["RTFfonts"]));
+            }
+            set {
+                this["RTFfonts"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool RTFallowColorTable {
+            get {
+                return ((bool)(this["RTFallowColorTable"]));
+            }
+            set {
+                this["RTFallowColorTable"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool RTFallowFontTable {
+            get {
+                return ((bool)(this["RTFallowFontTable"]));
+            }
+            set {
+                this["RTFallowFontTable"] = value;
             }
         }
     }

@@ -137,12 +137,29 @@ namespace ClipboardTool
         string colorRed = @"\red255\green0\blue0;";
         string colorGreen = @"\red0\green255\blue0;";
         string colorBlue = @"\red0\green0\blue255;";
-        string fontTable = @"\deff0{\fonttbl{\f0\fnil Default Sans Serif;}{\f1\froman Times New Roman;}{\f2\fswiss Arial;}{\f3\fmodern Courier New;}{\f4\fscript Script MT Bold;}{\f5\fdecor Old English Text MT;}}";
+        //string fontTable = @"\deff0{\fonttbl{\f0\fnil Default Sans Serif;}{\f1\froman Times New Roman;}{\f2\fswiss Arial;}{\f3\fmodern Courier New;}{\f4\fscript Script MT Bold;}{\f5\fdecor Old English Text MT;}}";
+        //string colorTableDefault = @"\red80\green120\blue200;\red255\green180\blue1800;";
         // fnil Default Sans Serif should work for Lotus Notes
 
         private string colorTable()
         {
-            return @"{\colortbl;" + colorBlack + colorWhite + colorGray + colorRed + colorGreen + colorBlue + Settings.Default.RTFcolors + @"}";
+            if (Settings.Default.RTFallowColorTable)
+            {
+                return @"{\colortbl;" + colorBlack + colorWhite + colorGray + colorRed + colorGreen + colorBlue + Settings.Default.RTFcolors + @"}";
+            }
+            else return string.Empty;
+        }
+
+        private string fontTable()
+        {
+            if (Settings.Default.RTFallowFontTable)
+            {
+                return Settings.Default.RTFfonts;
+            }
+            else
+            { 
+                return string.Empty;
+            }
         }
 
 
@@ -266,8 +283,8 @@ namespace ClipboardTool
                         if (segment.Length > 0)
                             builder.Append(text);
                     }
-                    
-                    rtfBox.Rtf = rtfHeader + fontTable + colorTable() + builder.ToString() + @"}"; // removed space in @" }";
+
+                    rtfBox.Rtf = rtfHeader + fontTable() + colorTable() + builder.ToString() + @"}"; // removed space in @" }";
                     richTextResult = rtfBox.Rtf;
                 }
             }
