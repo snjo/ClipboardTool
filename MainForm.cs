@@ -1,6 +1,7 @@
 using ClipboardTool.Properties;
 using Hotkeys;
 using System.Diagnostics;
+using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
@@ -199,32 +200,36 @@ namespace ClipboardTool
             return string.Empty;
         }
 
-        public void saveTextToFile(string filename, string text)
+        public void saveTextToFile(string filename, string text, bool warnIfFailed)
         {
             string folder = settings.MemorySlotFolder;
             if (folder.Length > 0)
             {
-                string fullpath = Environment.ExpandEnvironmentVariables(folder);
-                if (Directory.Exists(fullpath))
+                string folderExpanded = Environment.ExpandEnvironmentVariables(folder);
+                if (Directory.Exists(folderExpanded))
                 {
-                    if (folder.Substring(folder.Length - 1, 1) != "\\")
-                        folder += "\\";
-                    WriteToFile(folder + filename, text);
+                    string path = Path.Combine(folderExpanded, filename);
+                    //if (folder.Substring(folder.Length - 1, 1) != "\\")
+                    //    folder += "\\";
+                    Debug.WriteLine("Trying to save memory slot to: " + path);
+                    WriteToFile(path, text, warnIfFailed);
                 }
                 else
                 {
-                    writeMessage("Couldn't save file " + filename + " to folder " + folder + Environment.NewLine +
-                    "The folder does not exist." + Environment.NewLine +
-                    "You can set the save location in Settings, '.txt file folder'");
+                    Debug.WriteLine("Save failed to folder: " + folderExpanded);
+                    if (warnIfFailed)
+                        writeMessage("Couldn't save file " + filename + " to folder " + folder + Environment.NewLine +
+                        "The folder does not exist." + Environment.NewLine +
+                        "You can set the save location in Settings, '.txt file folder'");
                 }
             }
             else
             {
-                WriteToFile(filename, text);
+                WriteToFile(filename, text, warnIfFailed);
             }
         }
 
-        private void WriteToFile(string filename, string text)
+        private void WriteToFile(string filename, string text, bool warnIfFailed)
         {
             try
             {
@@ -233,7 +238,9 @@ namespace ClipboardTool
             }
             catch
             {
-                writeMessage("Couldn't save file " + filename + " to folder." + Environment.NewLine +
+                Debug.WriteLine("Save failed to file: " + filename);
+                if (warnIfFailed)
+                    writeMessage("Couldn't save file " + filename + " to folder." + Environment.NewLine +
                     "Ensure that the folder is not write protected." + Environment.NewLine +
                     "You can set the save location in Settings, '.txt file folder'");
             }
@@ -242,6 +249,12 @@ namespace ClipboardTool
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             HotkeyTools.ReleaseHotkeys(HotkeyList);
+            if (Settings.Default.SaveMemorySlots)
+            {
+                saveMemSlotToFile(1, warnIfFailed: false);
+                saveMemSlotToFile(2, warnIfFailed: false);
+                saveMemSlotToFile(3, warnIfFailed: false);
+            }
         }
 
         private void HandleHotkey(int id)
@@ -581,7 +594,7 @@ namespace ClipboardTool
 
                 if (Settings.Default.SaveMemorySlots)
                 {
-                    saveMemSlotToFile(num);
+                    saveMemSlotToFile(num, warnIfFailed:true);
                 }
 
                 if (Settings.Default.ResetCounterWhenSet)
@@ -592,9 +605,9 @@ namespace ClipboardTool
             }
         }
 
-        private void saveMemSlotToFile(int num)
+        private void saveMemSlotToFile(int num, bool warnIfFailed)
         {
-            saveTextToFile("mem" + num + ".txt", MemorySlot(num).Text);
+            saveTextToFile("mem" + num + ".txt", MemorySlot(num).Text, warnIfFailed);
         }
 
         public void setClipboardFromTextBox(int num)//(TextBox textBox)
@@ -716,7 +729,7 @@ namespace ClipboardTool
 
         private void actionSaveCustomText(object sender, EventArgs e)
         {
-            saveTextToFile("process.txt", textCustom.Text);
+            saveTextToFile("process.txt", textCustom.Text, warnIfFailed: true);
         }
 
         private void actionCapsLock(object sender, EventArgs e)
@@ -812,7 +825,7 @@ namespace ClipboardTool
             if (tag != null)
             {
                 int num = int.Parse(tag);
-                saveMemSlotToFile(num);
+                saveMemSlotToFile(num, warnIfFailed:true);
             }
         }
         #endregion

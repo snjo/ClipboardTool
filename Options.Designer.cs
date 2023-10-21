@@ -128,9 +128,9 @@
             optionSaveMemorySlots.AutoSize = true;
             optionSaveMemorySlots.Location = new Point(0, 9);
             optionSaveMemorySlots.Name = "optionSaveMemorySlots";
-            optionSaveMemorySlots.Size = new Size(158, 19);
+            optionSaveMemorySlots.Size = new Size(233, 19);
             optionSaveMemorySlots.TabIndex = 4;
-            optionSaveMemorySlots.Text = "Save memory slots to file";
+            optionSaveMemorySlots.Text = "Save memory slots to file automatically";
             optionSaveMemorySlots.UseVisualStyleBackColor = true;
             // 
             // textMemorySlotFolder
