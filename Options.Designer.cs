@@ -138,7 +138,7 @@
             textMemorySlotFolder.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             textMemorySlotFolder.Location = new Point(3, 55);
             textMemorySlotFolder.Name = "textMemorySlotFolder";
-            textMemorySlotFolder.Size = new Size(350, 23);
+            textMemorySlotFolder.Size = new Size(366, 23);
             textMemorySlotFolder.TabIndex = 5;
             // 
             // label1
@@ -163,7 +163,7 @@
             // buttonSave
             // 
             buttonSave.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            buttonSave.Location = new Point(508, 604);
+            buttonSave.Location = new Point(365, 604);
             buttonSave.Name = "buttonSave";
             buttonSave.Size = new Size(75, 23);
             buttonSave.TabIndex = 38;
@@ -174,7 +174,7 @@
             // buttonCancel
             // 
             buttonCancel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            buttonCancel.Location = new Point(427, 604);
+            buttonCancel.Location = new Point(284, 604);
             buttonCancel.Name = "buttonCancel";
             buttonCancel.Size = new Size(75, 23);
             buttonCancel.TabIndex = 39;
@@ -236,7 +236,7 @@
             HotkeyGrid.Name = "HotkeyGrid";
             HotkeyGrid.RowHeadersVisible = false;
             HotkeyGrid.RowTemplate.Height = 25;
-            HotkeyGrid.Size = new Size(418, 418);
+            HotkeyGrid.Size = new Size(427, 538);
             HotkeyGrid.TabIndex = 52;
             // 
             // Function
@@ -313,7 +313,7 @@
             // buttonSelectSlotFolder
             // 
             buttonSelectSlotFolder.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            buttonSelectSlotFolder.Location = new Point(359, 55);
+            buttonSelectSlotFolder.Location = new Point(375, 54);
             buttonSelectSlotFolder.Name = "buttonSelectSlotFolder";
             buttonSelectSlotFolder.Size = new Size(58, 23);
             buttonSelectSlotFolder.TabIndex = 56;
@@ -328,7 +328,7 @@
             // buttonSelectHistoryFolder
             // 
             buttonSelectHistoryFolder.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            buttonSelectHistoryFolder.Location = new Point(361, 139);
+            buttonSelectHistoryFolder.Location = new Point(375, 139);
             buttonSelectHistoryFolder.Name = "buttonSelectHistoryFolder";
             buttonSelectHistoryFolder.Size = new Size(58, 23);
             buttonSelectHistoryFolder.TabIndex = 58;
@@ -341,7 +341,7 @@
             textBoxHistory.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             textBoxHistory.Location = new Point(3, 140);
             textBoxHistory.Name = "textBoxHistory";
-            textBoxHistory.Size = new Size(352, 23);
+            textBoxHistory.Size = new Size(366, 23);
             textBoxHistory.TabIndex = 57;
             // 
             // label3
@@ -389,7 +389,7 @@
             textBoxRTFcolors.Location = new Point(3, 46);
             textBoxRTFcolors.Multiline = true;
             textBoxRTFcolors.Name = "textBoxRTFcolors";
-            textBoxRTFcolors.Size = new Size(573, 69);
+            textBoxRTFcolors.Size = new Size(430, 69);
             textBoxRTFcolors.TabIndex = 63;
             // 
             // label4
@@ -411,7 +411,7 @@
             tabControl1.Location = new Point(1, 2);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(591, 603);
+            tabControl1.Size = new Size(448, 603);
             tabControl1.TabIndex = 65;
             // 
             // tabPageGeneral
@@ -428,7 +428,7 @@
             tabPageGeneral.Location = new Point(4, 24);
             tabPageGeneral.Name = "tabPageGeneral";
             tabPageGeneral.Padding = new Padding(3);
-            tabPageGeneral.Size = new Size(583, 575);
+            tabPageGeneral.Size = new Size(440, 575);
             tabPageGeneral.TabIndex = 0;
             tabPageGeneral.Text = "General";
             tabPageGeneral.UseVisualStyleBackColor = true;
@@ -441,7 +441,7 @@
             tabPageHotkeys.Location = new Point(4, 24);
             tabPageHotkeys.Name = "tabPageHotkeys";
             tabPageHotkeys.Padding = new Padding(3);
-            tabPageHotkeys.Size = new Size(583, 575);
+            tabPageHotkeys.Size = new Size(440, 575);
             tabPageHotkeys.TabIndex = 1;
             tabPageHotkeys.Text = "Hotkeys";
             tabPageHotkeys.UseVisualStyleBackColor = true;
@@ -458,7 +458,7 @@
             tabPageSources.Controls.Add(buttonSelectHistoryFolder);
             tabPageSources.Location = new Point(4, 24);
             tabPageSources.Name = "tabPageSources";
-            tabPageSources.Size = new Size(583, 575);
+            tabPageSources.Size = new Size(440, 575);
             tabPageSources.TabIndex = 3;
             tabPageSources.Text = "Text sources";
             tabPageSources.UseVisualStyleBackColor = true;
@@ -476,7 +476,7 @@
             tabPageCustom.Controls.Add(textBoxRTFcolors);
             tabPageCustom.Location = new Point(4, 24);
             tabPageCustom.Name = "tabPageCustom";
-            tabPageCustom.Size = new Size(583, 575);
+            tabPageCustom.Size = new Size(440, 575);
             tabPageCustom.TabIndex = 2;
             tabPageCustom.Text = "Custom values";
             tabPageCustom.UseVisualStyleBackColor = true;
@@ -514,7 +514,7 @@
             // buttonRTFDefaultFonts
             // 
             buttonRTFDefaultFonts.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            buttonRTFDefaultFonts.Location = new Point(503, 143);
+            buttonRTFDefaultFonts.Location = new Point(360, 143);
             buttonRTFDefaultFonts.Name = "buttonRTFDefaultFonts";
             buttonRTFDefaultFonts.Size = new Size(75, 23);
             buttonRTFDefaultFonts.TabIndex = 68;
@@ -525,7 +525,7 @@
             // buttonRTFDefaultColors
             // 
             buttonRTFDefaultColors.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            buttonRTFDefaultColors.Location = new Point(503, 24);
+            buttonRTFDefaultColors.Location = new Point(360, 24);
             buttonRTFDefaultColors.Name = "buttonRTFDefaultColors";
             buttonRTFDefaultColors.Size = new Size(75, 23);
             buttonRTFDefaultColors.TabIndex = 67;
@@ -548,14 +548,14 @@
             textBoxRTFfonts.Location = new Point(3, 165);
             textBoxRTFfonts.Multiline = true;
             textBoxRTFfonts.Name = "textBoxRTFfonts";
-            textBoxRTFfonts.Size = new Size(573, 85);
+            textBoxRTFfonts.Size = new Size(430, 85);
             textBoxRTFfonts.TabIndex = 65;
             // 
             // Options
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(593, 634);
+            ClientSize = new Size(450, 634);
             Controls.Add(tabControl1);
             Controls.Add(labelVersion);
             Controls.Add(linkLabel2);

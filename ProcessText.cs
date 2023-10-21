@@ -122,6 +122,7 @@ namespace ClipboardTool
             else
             {
                 mainForm.SetClipBoard(plainText, richText, forceClipboardUpdate);
+                Debug.WriteLine("RICH TEXT: -------------" + Environment.NewLine + richText + Environment.NewLine + "-------------");
                 return (PlainText: plainText, RichText: richText);
             }
         }
@@ -280,8 +281,10 @@ namespace ClipboardTool
                             builder.Append(text);
                     }
 
-                    rtfBox.Rtf = rtfHeader + fontTable() + colorTable() + builder.ToString() + @"}"; // removed space in @" }";
-                    richTextResult = rtfBox.Rtf;
+                    //rtfBox.Rtf = rtfHeader + fontTable() + colorTable() + builder.ToString() + @"}"; // removed space in @" }";
+                    //richTextResult = rtfBox.Rtf;
+                    richTextResult = rtfHeader + fontTable() + colorTable() + builder.ToString() + @"}";
+                    rtfBox.Rtf = richTextResult;
                 }
             }
 
