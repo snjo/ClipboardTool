@@ -33,13 +33,13 @@ namespace DebugTools
             return result;
         }
 
-        public static void DebugValues(params object[] o)
-        {
-            foreach (object obj in o)
-            {
-                Debug.WriteLine(obj.ToString());
-            }
-        }
+        //public static void DebugValues(params object[] o)
+        //{
+        //    foreach (object obj in o)
+        //    {
+        //        Debug.WriteLine(obj.ToString());
+        //    }
+        //}
 
         public static void Writeline(params string[] texts)
         {
