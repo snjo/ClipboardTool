@@ -1,4 +1,5 @@
 ﻿using ClipboardTool.Properties;
+using DebugTools;
 using System.Diagnostics;
 
 namespace ClipboardTool
@@ -43,7 +44,7 @@ namespace ClipboardTool
                 }
                 catch
                 {
-                    Debug.WriteLine("Could not create folder for history text: " + historyFolder);
+                    Dbg.WriteWithCaller("Could not create folder for history text: " + historyFolder);
                 }
             }
             return Directory.Exists(historyFolder);
@@ -73,19 +74,19 @@ namespace ClipboardTool
                 {
                     if (File.Exists(file))
                     {
-                        Debug.WriteLine("Loading file: " + file);
+                        Dbg.WriteWithCaller("Loading file: " + file);
                         string[] entryText = File.ReadAllLines(file);
                         historyEntries.Add(new KeyValuePair<string, string[]>(file, entryText));
                     }
                     else
                     {
-                        Debug.WriteLine("Couldn't load file: " + file);
+                        Dbg.WriteWithCaller("Couldn't load file: " + file);
                     }
                 }
             }
             else
             {
-                Debug.WriteLine("Could not locate or create folder for history text: " + historyFolder + Environment.NewLine + "Set the folder in Options");
+                Dbg.WriteWithCaller("Could not locate or create folder for history text: " + historyFolder + Environment.NewLine + "Set the folder in Options");
             }
             gridHistory.Rows.Clear();
             int countRows = 0;
@@ -197,18 +198,18 @@ namespace ClipboardTool
 
 
                     File.WriteAllText(path, text);
-                    Debug.WriteLine("Saved entry to: " + path);
+                    Dbg.WriteWithCaller("Saved entry to: " + path);
                     return true;
                 }
                 else
                 {
-                    Debug.WriteLine("Failed to save entry to: " + path);
+                    Dbg.WriteWithCaller("Failed to save entry to: " + path);
                     return false;
                 }
             }
             catch
             {
-                Debug.WriteLine("Exception: Failed to save entry to: " + path);
+                Dbg.WriteWithCaller("Exception: Failed to save entry to: " + path);
                 return false;
             }
         }
@@ -228,7 +229,7 @@ namespace ClipboardTool
                 if (gridHistory.Rows[row].Cells[textColumnIndex].Value == null)
                     gridHistory.Rows[row].Cells[textColumnIndex].Value = string.Empty;
                 string text = gridHistory.Rows[row].Cells[textColumnIndex].Value.ToString() + "";
-                Debug.WriteLine("Saving: " + filename);
+                Dbg.WriteWithCaller("Saving: " + filename);
                 Color color = gridHistory.Rows[row].Cells[titleColumnIndex].Style.BackColor;
                 if (color == Color.Empty) color = Color.White;
                 result = SaveEntry(filename, text, color);
@@ -241,7 +242,7 @@ namespace ClipboardTool
         {
             if (filename == null)
             {
-                Debug.WriteLine("Can't Delete file, value is null");
+                Dbg.WriteWithCaller("Can't Delete file, value is null");
                 return;
             }
             try
@@ -252,21 +253,21 @@ namespace ClipboardTool
                     if (File.Exists(file))
                     {
                         File.Delete(file);
-                        Debug.WriteLine("Deleting file: " + file);
+                        Dbg.WriteWithCaller("Deleting file: " + file);
                     }
                     else
                     {
-                        Debug.WriteLine("Can't Delete file (not found): " + file);
+                        Dbg.WriteWithCaller("Can't Delete file (not found): " + file);
                     }
                 }
                 else
                 {
-                    Debug.WriteLine("Can't Delete file (not found): " + filename);
+                    Dbg.WriteWithCaller("Can't Delete file (not found): " + filename);
                 }
             }
             catch
             {
-                Debug.WriteLine("Exception: Can't Delete file : " + filename);
+                Dbg.WriteWithCaller("Exception: Can't Delete file : " + filename);
             }
         }
 
@@ -339,7 +340,7 @@ namespace ClipboardTool
             {
                 if (gridHistory.Rows[e.RowIndex] == null)
                 {
-                    Debug.WriteLine("Row is null");
+                    Dbg.WriteWithCaller("Row is null");
                     return;
                 }
 
@@ -389,7 +390,7 @@ namespace ClipboardTool
                     }
                     else
                     {
-                        Debug.WriteLine("Unpinned. Trying to delete corresponding file");
+                        Dbg.WriteWithCaller("Unpinned. Trying to delete corresponding file");
                         DataGridViewCellCollection cells = gridHistory.Rows[e.RowIndex].Cells;
                         if (cells[titleColumnIndex].Value != null)
                             DeleteEntry(cells[titleColumnIndex].Value.ToString());
@@ -469,11 +470,11 @@ namespace ClipboardTool
 
                 if (ArraysAreIdentical(colorDialog1.CustomColors, colors))
                 {
-                    Debug.WriteLine("Custom colors have not changed");
+                    Dbg.WriteWithCaller("Custom colors have not changed");
                 }
                 else
                 {
-                    Debug.WriteLine("Custom colors have changed, saving to file");
+                    Dbg.WriteWithCaller("Custom colors have changed, saving to file");
                     SaveColors();
                 }
             }
@@ -495,7 +496,7 @@ namespace ClipboardTool
             }
             else
             {
-                Debug.WriteLine("Could not load color file: " + colorFilePath);
+                Dbg.WriteWithCaller("Could not load color file: " + colorFilePath);
             }
             return colorList.ToArray();
         }
@@ -525,24 +526,24 @@ namespace ClipboardTool
                 string colorFilePath = Path.Join(historyFolder, colorFolder, colorFileName);
                 if (!Directory.Exists(colorFilePath))
                 {
-                    Debug.WriteLine("Creating color subfolder");
+                    Dbg.WriteWithCaller("Creating color subfolder");
                     try
                     {
                         Directory.CreateDirectory(Path.Join(historyFolder, colorFolder));
                     }
                     catch
                     {
-                        Debug.WriteLine("Could not create color directory");
+                        Dbg.WriteWithCaller("Could not create color directory");
                     }
                 }
                 try
                 {
-                    Debug.WriteLine("Saving color file");
+                    Dbg.WriteWithCaller("Saving color file");
                     File.WriteAllLines(colorFilePath, customColors);
                 }
                 catch
                 {
-                    Debug.WriteLine("Could not save color file");
+                    Dbg.WriteWithCaller("Could not save color file");
                 }
             }
         }
@@ -562,13 +563,13 @@ namespace ClipboardTool
 
         private void gridHistory_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            Debug.WriteLine("Rename entry?");
+            Dbg.WriteWithCaller("Rename entry?");
             if (gridHistory.SelectedCells.Count > 0)
             {
                 DataGridViewCell cell = gridHistory.SelectedCells[0];
                 if (cell.ColumnIndex == titleColumnIndex)
                 {
-                    Debug.WriteLine("Rename entry started");
+                    Dbg.WriteWithCaller("Rename entry started");
                     renameEntry(cell.RowIndex);
                 }
             }
@@ -578,20 +579,20 @@ namespace ClipboardTool
         {
             if (rowIndex > gridHistory.Rows.Count - 1)
             {
-                Debug.WriteLine("rowIndex error");
+                Dbg.WriteWithCaller("rowIndex error");
                 return;
             }
             DataGridViewRow gridRow = gridHistory.Rows[rowIndex];
             DataGridViewCell cell = gridHistory.Rows[rowIndex].Cells[titleColumnIndex];
             if (cell == null)
             {
-                Debug.WriteLine("Cell is null");
+                Dbg.WriteWithCaller("Cell is null");
                 return;
             }
 
             if (cell.Value == null)
             {
-                Debug.WriteLine("Cell value null, setting empty string");
+                Dbg.WriteWithCaller("Cell value null, setting empty string");
                 cell.Value = string.Empty;
             }
 
@@ -601,7 +602,7 @@ namespace ClipboardTool
                 string? newTitle = TextPrompt.Prompt("Entry title", "Enter the new name of the entry", false, TextPrompt.IllegalFileCharacters);
                 if (newTitle != null)
                 {
-                    Debug.WriteLine("Renaming entry to: " + newTitle);
+                    Dbg.WriteWithCaller("Renaming entry to: " + newTitle);
                     //delete old file
                     if (oldTitle.Length > 0)
                     {
@@ -611,11 +612,11 @@ namespace ClipboardTool
                             try
                             {
                                 File.Delete(oldEntryPath);
-                                Debug.WriteLine("Rename: Deleted old entry file " + oldEntryPath);
+                                Dbg.WriteWithCaller("Rename: Deleted old entry file " + oldEntryPath);
                             }
                             catch
                             {
-                                Debug.WriteLine("Rename: Can't delete old entry file " + oldEntryPath);
+                                Dbg.WriteWithCaller("Rename: Can't delete old entry file " + oldEntryPath);
                             }
                         }
                     }
@@ -626,7 +627,7 @@ namespace ClipboardTool
                 }
                 else
                 {
-                    Debug.WriteLine("Rename cancelled");
+                    Dbg.WriteWithCaller("Rename cancelled");
                 }
             }
             //string oldTitle = 

@@ -125,11 +125,11 @@ Any Backslashes ( \ ) in RTF text will be intercepted as an RTF code. Use a doub
 | \<red> \<black> etc.    | Predefined colors        |
 | \<[RTF code without]>   | Ex: \<nl> = \\nl         |
 
-When using normal RTF codes with a backslash, you must leave a space at the end of the tag.
+When using normal RTF codes with a backslash, you must leave a space or other separator at the end of the tag.
 
 *Example: "hello \\b world\\b0 " is OK, "hello \\bworld\\b0" is not.*
-
 <!-- If you're reading this as plain text, ignore \ before tags. Use <>, not \<> -->
+
 -----------------------------------------
 ### Colored text
 
@@ -141,6 +141,13 @@ You can add more colors in Options in this format:
 
 You can reference these color values starting with number 7: \<cf7> or \\cf7
 (The first six values are reserved by the predefined colors)
+
+-----------------------------------------
+### Font table
+
+The font table can be customized in Options. When using values outside the predefined font tags, use RTF commands.
+
+Example: \<f6> or \\f6  to use
 
 -----------------------------------------
 ## Key codes for hotkey options:

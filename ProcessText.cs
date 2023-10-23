@@ -2,6 +2,7 @@
 using System.Configuration;
 using System.Diagnostics;
 using System.Text;
+using DebugTools;
 
 namespace ClipboardTool
 {
@@ -122,7 +123,8 @@ namespace ClipboardTool
             else
             {
                 mainForm.SetClipBoard(plainText, richText, forceClipboardUpdate);
-                Debug.WriteLine("RICH TEXT: -------------" + Environment.NewLine + richText + Environment.NewLine + "-------------");
+                //Dbg.TextAndCaller("RICH TEXT: -------------" + Environment.NewLine + richText + Environment.NewLine + "-------------");
+                Dbg.WriteWithCaller(new string[] {"RICH TEXT: -------------", Environment.NewLine, richText, Environment.NewLine, "-------------" });
                 return (PlainText: plainText, RichText: richText);
             }
         }
@@ -168,7 +170,7 @@ namespace ClipboardTool
         public (string PlainText, string RichText) ConvertToRichText(string plainText)
         {
             //https://www.biblioscape.com/rtf15_spec.htm
-            Debug.WriteLine("Parsing Rich Text");
+            Dbg.WriteWithCaller("Parsing Rich Text");
 
             RichTextBox rtfBox = new RichTextBox();
             StringBuilder builder = new StringBuilder();

@@ -1,4 +1,5 @@
 using ClipboardTool.Properties;
+using DebugTools;
 using Hotkeys;
 using System.Diagnostics;
 using System.Reflection;
@@ -104,7 +105,7 @@ namespace ClipboardTool
         {
             if (Settings.Default.UpgradeSettings)
             {
-                Debug.WriteLine("Upgrading settings");
+                Dbg.WriteWithCaller("Upgrading settings");
                 //MessageBox.Show("Upgrading settings");
                 Settings.Default.Upgrade();
                 Settings.Default.UpgradeSettings = false;
@@ -112,7 +113,7 @@ namespace ClipboardTool
             else
             {
                 //MessageBox.Show("Not upgrading settings");
-                Debug.WriteLine("Not upgrading settings");
+                Dbg.WriteWithCaller("Not upgrading settings");
             }
         }
         private void updateHotkeyLabels()
@@ -772,7 +773,7 @@ namespace ClipboardTool
 
         public void actionProcessText(object sender, EventArgs e)
         {
-            Debug.WriteLine("Process text");
+            Dbg.WriteWithCaller("Process text");
             process.ProcessTextVariables(textCustom.Text, true);
         }
 
