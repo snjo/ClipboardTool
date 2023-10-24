@@ -65,6 +65,9 @@
             label4 = new Label();
             tabControl1 = new TabControl();
             tabPageGeneral = new TabPage();
+            label9 = new Label();
+            label8 = new Label();
+            label7 = new Label();
             tabPageHotkeys = new TabPage();
             tabPageSources = new TabPage();
             tabPageCustom = new TabPage();
@@ -75,9 +78,6 @@
             buttonRTFDefaultColors = new Button();
             label5 = new Label();
             textBoxRTFfonts = new TextBox();
-            label7 = new Label();
-            label8 = new Label();
-            label9 = new Label();
             ((System.ComponentModel.ISupportInitialize)HotkeyGrid).BeginInit();
             tabControl1.SuspendLayout();
             tabPageGeneral.SuspendLayout();
@@ -439,6 +439,36 @@
             tabPageGeneral.Text = "General";
             tabPageGeneral.UseVisualStyleBackColor = true;
             // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label9.Location = new Point(0, 234);
+            label9.Name = "label9";
+            label9.Size = new Size(60, 15);
+            label9.TabIndex = 65;
+            label9.Text = "Functions";
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label8.Location = new Point(3, 109);
+            label8.Name = "label8";
+            label8.Size = new Size(90, 15);
+            label8.TabIndex = 64;
+            label8.Text = "Copy and paste";
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label7.Location = new Point(3, 11);
+            label7.Name = "label7";
+            label7.Size = new Size(88, 15);
+            label7.TabIndex = 63;
+            label7.Text = "Startup and UI";
+            // 
             // tabPageHotkeys
             // 
             tabPageHotkeys.Controls.Add(optionRegisterHotkeys);
@@ -556,36 +586,6 @@
             textBoxRTFfonts.Name = "textBoxRTFfonts";
             textBoxRTFfonts.Size = new Size(430, 85);
             textBoxRTFfonts.TabIndex = 65;
-            // 
-            // label7
-            // 
-            label7.AutoSize = true;
-            label7.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label7.Location = new Point(3, 11);
-            label7.Name = "label7";
-            label7.Size = new Size(88, 15);
-            label7.TabIndex = 63;
-            label7.Text = "Startup and UI";
-            // 
-            // label8
-            // 
-            label8.AutoSize = true;
-            label8.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label8.Location = new Point(3, 109);
-            label8.Name = "label8";
-            label8.Size = new Size(90, 15);
-            label8.TabIndex = 64;
-            label8.Text = "Copy and paste";
-            // 
-            // label9
-            // 
-            label9.AutoSize = true;
-            label9.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label9.Location = new Point(0, 234);
-            label9.Name = "label9";
-            label9.Size = new Size(60, 15);
-            label9.TabIndex = 65;
-            label9.Text = "Functions";
             // 
             // Options
             // 

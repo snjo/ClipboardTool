@@ -7,7 +7,7 @@
 Source code:
 https://github.com/snjo/ClipboardTool
 
-![image](clipboardtool1.png)
+![image](img/clipboardtool1.png)
 
 -----------------------------------------
 ## Commands for text processing:
