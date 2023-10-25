@@ -124,7 +124,7 @@ namespace ClipboardTool
             {
                 mainForm.SetClipBoard(plainText, richText, forceClipboardUpdate);
                 //Dbg.TextAndCaller("RICH TEXT: -------------" + Environment.NewLine + richText + Environment.NewLine + "-------------");
-                Dbg.WriteWithCaller(new string[] {"RICH TEXT: -------------", Environment.NewLine, richText, Environment.NewLine, "-------------" });
+                Dbg.WriteLinesWithCaller(new string[] {"RICH TEXT: -------------", richText, "-------------" });
                 return (PlainText: plainText, RichText: richText);
             }
         }

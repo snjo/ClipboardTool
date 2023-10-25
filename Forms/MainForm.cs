@@ -212,12 +212,12 @@ namespace ClipboardTool
                     string path = Path.Combine(folderExpanded, filename);
                     //if (folder.Substring(folder.Length - 1, 1) != "\\")
                     //    folder += "\\";
-                    Debug.WriteLine("Trying to save memory slot to: " + path);
-                    WriteToFile(path, text, warnIfFailed);
+                    bool writeOK = WriteToFile(path, text, warnIfFailed);
+                    Dbg.WriteWithCaller("Trying to save memory slot to: " + path + "\nSave: " + writeOK);
                 }
                 else
                 {
-                    Debug.WriteLine("Save failed to folder: " + folderExpanded);
+                    Dbg.WriteWithCaller("Save failed to folder: " + folderExpanded);
                     if (warnIfFailed)
                         writeMessage("Couldn't save file " + filename + " to folder " + folder + Environment.NewLine +
                         "The folder does not exist." + Environment.NewLine +
@@ -230,12 +230,13 @@ namespace ClipboardTool
             }
         }
 
-        private void WriteToFile(string filename, string text, bool warnIfFailed)
+        private bool WriteToFile(string filename, string text, bool warnIfFailed)
         {
             try
             {
                 string fullpath = Environment.ExpandEnvironmentVariables(filename);
                 File.WriteAllText(fullpath, text);
+                return true;
             }
             catch
             {
@@ -244,6 +245,7 @@ namespace ClipboardTool
                     writeMessage("Couldn't save file " + filename + " to folder." + Environment.NewLine +
                     "Ensure that the folder is not write protected." + Environment.NewLine +
                     "You can set the save location in Settings, '.txt file folder'");
+                return false;
             }
         }
 

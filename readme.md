@@ -35,8 +35,7 @@ https://github.com/snjo/ClipboardTool
 -----------------------------------------
 ## Text Files in the program folder
 
-By default the program looks for these files in the local folder. You can direct it to another folder on your PC it the Settings panel.
-If you placed this program in one of the write protected Program Files folders, you should point the text file location elsewhere.
+By default the program looks for these files in the user profile folder. You can direct it to another folder on your PC it the Options panel.
 
 | Text file              | Function                                                                          | Comment	                                                                                   |
 |------------------------|-----------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------|

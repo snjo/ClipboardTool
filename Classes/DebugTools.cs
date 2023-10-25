@@ -64,7 +64,23 @@ namespace DebugTools
             string result = Environment.NewLine + callerName + ", line " + sourceLineNumber + " in " + callerFile + sourceLineNumber + Environment.NewLine;
             foreach (object t in texts)
             {
-                result += ":  " + t;
+                if (t != null)
+                    result += ":  " + t;
+                else
+                    result += ":[null]";
+            }
+            Debug.WriteLine(result);
+        }
+
+        public static void WriteLinesWithCaller(string[] texts, [CallerMemberNameAttribute] string callerName = "", [CallerLineNumber] int sourceLineNumber = 0, [CallerFilePath] string callerFile = "")
+        {
+            string result = Environment.NewLine + callerName + ", line " + sourceLineNumber + " in " + callerFile + sourceLineNumber + Environment.NewLine;
+            foreach (object t in texts)
+            {
+                if (t != null)
+                    result += ":  " + t + Environment.NewLine;
+                else
+                    result += ":[null]" + Environment.NewLine;
             }
             Debug.WriteLine(result);
         }
