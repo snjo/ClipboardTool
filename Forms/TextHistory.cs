@@ -320,6 +320,7 @@ namespace ClipboardTool
                     {
                         //string processedText = mainForm.process.ProcessTextVariables(cellText, false);
                         //Clipboard.SetData(DataFormats.Text, processedText);
+                        Dbg.WriteWithCaller("Process text");
                         mainForm.process.ProcessTextVariables(cellText, true);
                         if (checkBoxMinimize.Checked)
                         {
