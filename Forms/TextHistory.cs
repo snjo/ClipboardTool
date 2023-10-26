@@ -632,5 +632,11 @@ namespace ClipboardTool
             }
             //string oldTitle = 
         }
+
+        private void checkBoxMinimize_CheckedChanged(object sender, EventArgs e)
+        {
+            Settings.Default.HistoryMinimizeAfterCopy = checkBoxMinimize.Checked;
+            Settings.Default.Save();
+        }
     }
 }
