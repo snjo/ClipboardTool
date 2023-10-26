@@ -72,7 +72,7 @@ namespace DebugTools
             Debug.WriteLine(result);
         }
 
-        public static void WriteLinesWithCaller(string[] texts, [CallerMemberNameAttribute] string callerName = "", [CallerLineNumber] int sourceLineNumber = 0, [CallerFilePath] string callerFile = "")
+        public static void WriteLinesWithCaller(object[] texts, [CallerMemberNameAttribute] string callerName = "", [CallerLineNumber] int sourceLineNumber = 0, [CallerFilePath] string callerFile = "")
         {
             string result = Environment.NewLine + callerName + ", line " + sourceLineNumber + " in " + callerFile + sourceLineNumber + Environment.NewLine;
             foreach (object t in texts)
@@ -83,6 +83,11 @@ namespace DebugTools
                     result += ":[null]" + Environment.NewLine;
             }
             Debug.WriteLine(result);
+        }
+
+        public static object[] MakeArray(params object[] obj)
+        {
+            return obj;
         }
     }
 }

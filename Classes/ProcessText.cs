@@ -123,8 +123,7 @@ namespace ClipboardTool
             else
             {
                 mainForm.SetClipBoard(plainText, richText, forceClipboardUpdate);
-                //Dbg.TextAndCaller("RICH TEXT: -------------" + Environment.NewLine + richText + Environment.NewLine + "-------------");
-                Dbg.WriteLinesWithCaller(new string[] {"RICH TEXT: -------------", richText, "-------------" });
+                //Dbg.WriteLinesWithCaller(Dbg.MakeArray("RICH TEXT: -------------", richText, "-------------" ));
                 return (PlainText: plainText, RichText: richText);
             }
         }
