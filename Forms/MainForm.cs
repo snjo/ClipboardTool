@@ -3,6 +3,7 @@ using DebugTools;
 using Hotkeys;
 using System.Diagnostics;
 using System.IO;
+using System.Media;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
@@ -486,15 +487,33 @@ namespace ClipboardTool
             {
                 if (richText == null)
                 {
-                    Clipboard.SetText(plainText, TextDataFormat.Text);
+                    try
+                    {
+                        Clipboard.SetText(plainText, TextDataFormat.Text);
+                    }
+                    catch
+                    {
+                        if (OperatingSystem.IsWindows())
+                            SystemSounds.Asterisk.Play();
+                        Debug.WriteLine("Error updating clipboard");
+                    }
                 }
                 else
                 {
-                    Clipboard.Clear();
-                    DataObject data = new DataObject();
-                    data.SetData(DataFormats.Text, plainText);
-                    data.SetData(DataFormats.Rtf, richText);
-                    Clipboard.SetDataObject(data);
+                    try
+                    {
+                        Clipboard.Clear();
+                        DataObject data = new DataObject();
+                        data.SetData(DataFormats.Text, plainText);
+                        data.SetData(DataFormats.Rtf, richText);
+                        Clipboard.SetDataObject(data);
+                    }
+                    catch
+                    {
+                        if (OperatingSystem.IsWindows())
+                            SystemSounds.Asterisk.Play();
+                        Debug.WriteLine("Error updating clipboard");
+                    }
                 }
             }
             else
