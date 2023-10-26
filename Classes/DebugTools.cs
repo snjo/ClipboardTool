@@ -54,14 +54,14 @@ namespace DebugTools
 
         public static void WriteWithCaller(string text, [CallerMemberNameAttribute] string callerName = "", [CallerLineNumber] int sourceLineNumber = 0, [CallerFilePath] string callerFile = "")
         {
-            string result = Environment.NewLine + callerName + ", line " + sourceLineNumber + " in " + callerFile + Environment.NewLine;
+            string result = ">> " + callerName + ", line " + sourceLineNumber + " in " + callerFile + Environment.NewLine;
             result += ":  " + text;
             Debug.WriteLine(result);
         }
 
         public static void WriteWithCaller(string[] texts, [CallerMemberNameAttribute] string callerName = "", [CallerLineNumber] int sourceLineNumber = 0, [CallerFilePath] string callerFile = "")
         {
-            string result = Environment.NewLine + callerName + ", line " + sourceLineNumber + " in " + callerFile + sourceLineNumber + Environment.NewLine;
+            string result = ">> " + callerName + ", line " + sourceLineNumber + " in " + callerFile + sourceLineNumber + Environment.NewLine;
             foreach (object t in texts)
             {
                 if (t != null)
@@ -74,7 +74,7 @@ namespace DebugTools
 
         public static void WriteLinesWithCaller(object[] texts, [CallerMemberNameAttribute] string callerName = "", [CallerLineNumber] int sourceLineNumber = 0, [CallerFilePath] string callerFile = "")
         {
-            string result = Environment.NewLine + callerName + ", line " + sourceLineNumber + " in " + callerFile + sourceLineNumber + Environment.NewLine;
+            string result = ">> " + callerName + ", line " + sourceLineNumber + " in " + callerFile + sourceLineNumber + Environment.NewLine;
             foreach (object t in texts)
             {
                 if (t != null)

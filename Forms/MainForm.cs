@@ -272,7 +272,7 @@ namespace ClipboardTool
                     sendCut();
                     string t = LowerCaseOnce();
                     SetClipBoard(t, null, settings.sendPaste, "Hotkey PlainText");
-                    sendPaste(t);
+                    sendPaste(t, "Hotkey LowerCase");
                 }
             }
 
@@ -284,7 +284,7 @@ namespace ClipboardTool
                     sendCut();
                     string t = UpperCaseOnce();
                     SetClipBoard(t, null, settings.sendPaste, "Hotkey PlainText");
-                    sendPaste(t);
+                    sendPaste(t, "Hotkey UpperCase");
                 }
             }
 
@@ -300,8 +300,8 @@ namespace ClipboardTool
                     hotkeyHeldDown = true;
                     sendCut();
                     string t = PlainTextOnce();
-                    SetClipBoard( t, null, settings.sendPaste, "Hotkey PlainText");
-                    sendPaste(t);
+                    SetClipBoard(t, null, settings.sendPaste, "Hotkey PlainText");
+                    sendPaste(t, "Hotkey PlainText");
                 }
             }
 
@@ -313,7 +313,7 @@ namespace ClipboardTool
                     hotkeyHeldDown = true;
                     sendCut();
                     Dbg.WriteWithCaller("Process text");
-                    sendPaste(process.ProcessTextVariables(textCustom.Text, settings.sendPaste).PlainText, "Hotkey process");
+                    sendPaste(process.ProcessTextVariables(textCustom.Text, settings.sendPaste).PlainText, "Hotkey Process");
                 }
             }
 
@@ -547,6 +547,8 @@ namespace ClipboardTool
                         //if (OperatingSystem.IsWindows())
                         //    SystemSounds.Asterisk.Play();
                         Dbg.WriteWithCaller("Error updating clipboard");
+                        //this was probably caused by another program accessing the clipboard at the same time, or sending requests too rapidly.
+                        //should be fixed after fixing some spammy clipboard updates.
                     }
                     TimeSpan ts = DateTime.Now - clipStart;
                     Dbg.Writeline("clip update time: " + ts.TotalMilliseconds);
