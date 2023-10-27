@@ -12,6 +12,7 @@ namespace DebugTools
             return objectType + separator + objectValue;
         }
 
+        [Conditional("DEBUG")]
         public static void DebugObjects(string title = "", string prefix = "   ", params object[] o)
         {
             if (title.Length > 0) Debug.WriteLine(title);
@@ -21,7 +22,8 @@ namespace DebugTools
             }
         }
 
-        public static string DebugValues(string title = "", string prefixPadding = "   ", params object[] o)
+        [Conditional("DEBUG")]
+        public static void DebugValues(string title = "", string prefixPadding = "   ", params object[] o)
         {
             string result = string.Empty;
             if (title.Length > 0) result += title;
@@ -30,17 +32,9 @@ namespace DebugTools
                 result += Environment.NewLine + prefixPadding + obj.ToString();
             }
             Debug.WriteLine(result);
-            return result;
         }
 
-        //public static void DebugValues(params object[] o)
-        //{
-        //    foreach (object obj in o)
-        //    {
-        //        Debug.WriteLine(obj.ToString());
-        //    }
-        //}
-
+        [Conditional("DEBUG")]
         public static void Writeline(params string[] texts)
         {
             string result = "";
@@ -52,6 +46,7 @@ namespace DebugTools
             Debug.WriteLine(result);
         }
 
+        [Conditional("DEBUG")]
         public static void WriteWithCaller(string text, [CallerMemberNameAttribute] string callerName = "", [CallerLineNumber] int sourceLineNumber = 0, [CallerFilePath] string callerFile = "")
         {
             string result = ">> " + callerName + ", line " + sourceLineNumber + " in " + callerFile + Environment.NewLine;
@@ -59,6 +54,7 @@ namespace DebugTools
             Debug.WriteLine(result);
         }
 
+        [Conditional("DEBUG")]
         public static void WriteWithCaller(string[] texts, [CallerMemberNameAttribute] string callerName = "", [CallerLineNumber] int sourceLineNumber = 0, [CallerFilePath] string callerFile = "")
         {
             string result = ">> " + callerName + ", line " + sourceLineNumber + " in " + callerFile + sourceLineNumber + Environment.NewLine;
@@ -72,6 +68,7 @@ namespace DebugTools
             Debug.WriteLine(result);
         }
 
+        [Conditional("DEBUG")]
         public static void WriteLinesWithCaller(object[] texts, [CallerMemberNameAttribute] string callerName = "", [CallerLineNumber] int sourceLineNumber = 0, [CallerFilePath] string callerFile = "")
         {
             string result = ">> " + callerName + ", line " + sourceLineNumber + " in " + callerFile + sourceLineNumber + Environment.NewLine;

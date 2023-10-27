@@ -535,7 +535,7 @@ namespace ClipboardTool
                 +"\n:  plain: " + plainText.Length + " \n:  Richtext: " + (richText != null ? richText.Length : "null"));
             if ((!settings.updateClipboard && settings.sendType) && !forceClipboardUpdate)
             {
-                Dbg.DebugValues("Skipping Clipboard update", "  ", settings.updateClipboard, settings.sendType, forceClipboardUpdate);
+                Dbg.DebugValues("Skipping Clipboard update", "  ", "settings.updateClipboard: " + settings.updateClipboard, "settings.sendType: " + settings.sendType, "local forceClipboardUpdate: " + forceClipboardUpdate);
                 return;
             }
             if (plainText.Length > 0)
