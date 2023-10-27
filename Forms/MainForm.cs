@@ -531,8 +531,13 @@ namespace ClipboardTool
 
         public void SetClipBoard(string plainText, string? richText = "", bool forceClipboardUpdate = false, string source="unknown")//, TextDataFormat dataFormat = TextDataFormat.Text)
         {
-            Dbg.WriteWithCaller("SetClipboard start, source: " + source + " force:" + forceClipboardUpdate);
-            if ((!settings.updateClipboard && settings.sendType) || !forceClipboardUpdate) return;
+            Dbg.WriteWithCaller("SetClipboard start, source: " + source + " force:" + forceClipboardUpdate
+                +"\n:  plain: " + plainText.Length + " \n:  Richtext: " + (richText != null ? richText.Length : "null"));
+            if ((!settings.updateClipboard && settings.sendType) && !forceClipboardUpdate)
+            {
+                Dbg.DebugValues("Skipping Clipboard update", "  ", settings.updateClipboard, settings.sendType, forceClipboardUpdate);
+                return;
+            }
             if (plainText.Length > 0)
             {
                 if (richText == null)
@@ -541,6 +546,7 @@ namespace ClipboardTool
                     try
                     {
                         Clipboard.SetText(plainText, TextDataFormat.Text);
+                        Dbg.WriteWithCaller("Clipboard updated with plain text only");
                     }
                     catch
                     {
@@ -551,10 +557,11 @@ namespace ClipboardTool
                         //should be fixed after fixing some spammy clipboard updates.
                     }
                     TimeSpan ts = DateTime.Now - clipStart;
-                    Dbg.Writeline("clip update time: " + ts.TotalMilliseconds);
+                    Dbg.Writeline("Clipboard update time: ", ts.TotalMilliseconds.ToString());
                 }
                 else
                 {
+                    DateTime clipStart = DateTime.Now;
                     try
                     {
                         Clipboard.Clear();
@@ -562,6 +569,7 @@ namespace ClipboardTool
                         data.SetData(DataFormats.Text, plainText);
                         data.SetData(DataFormats.Rtf, richText);
                         Clipboard.SetDataObject(data);
+                        Dbg.WriteWithCaller("Clipboard updated with plain and rict text");
                     }
                     catch
                     {
@@ -569,6 +577,8 @@ namespace ClipboardTool
                         //    SystemSounds.Asterisk.Play();
                         Dbg.WriteWithCaller("Error updating clipboard");
                     }
+                    TimeSpan ts = DateTime.Now - clipStart;
+                    Dbg.Writeline("Clipboard update time: ", ts.TotalMilliseconds.ToString());
                 }
             }
             else

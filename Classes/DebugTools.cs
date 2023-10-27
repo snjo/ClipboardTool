@@ -49,7 +49,7 @@ namespace DebugTools
                 result += t;
             }
             
-            Debug.WriteLine("Debug: " + result);
+            Debug.WriteLine(result);
         }
 
         public static void WriteWithCaller(string text, [CallerMemberNameAttribute] string callerName = "", [CallerLineNumber] int sourceLineNumber = 0, [CallerFilePath] string callerFile = "")
