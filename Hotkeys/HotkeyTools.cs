@@ -1,6 +1,7 @@
 ﻿// add using for the active project's Properties here
 // ex: using MyApp.Properties;
 using ClipboardTool.Properties;
+using System.Configuration;
 using System.Diagnostics;
 
 namespace Hotkeys
@@ -23,15 +24,46 @@ namespace Hotkeys
         {
             Hotkey hotkey = new Hotkey();
 
-            hotkey.Key = Settings.Default["hk" + hotkeyName + "Key"].ToString() + "";
-            hotkey.Ctrl = (bool)Settings.Default["hk" + hotkeyName + "Ctrl"];
-            hotkey.Alt = (bool)Settings.Default["hk" + hotkeyName + "Alt"];
-            hotkey.Shift = (bool)Settings.Default["hk" + hotkeyName + "Shift"];
-            hotkey.Win = (bool)Settings.Default["hk" + hotkeyName + "Win"];
+            hotkey.Key = getSettingString("hk" + hotkeyName + "Key", "");
+            hotkey.Ctrl = getSettingBool("hk" + hotkeyName + "Ctrl", false);
+            hotkey.Alt  = getSettingBool("hk" + hotkeyName + "Alt", false);
+            hotkey.Shift= getSettingBool("hk" + hotkeyName + "Shift", false);
+            hotkey.Win  = getSettingBool("hk" + hotkeyName + "Win", false);
             hotkey.ghk = new GlobalHotkey(hotkey.Modifiers(), hotkey.Key, parent, hotkeyName);
 
             //MessageBox.Show("LoadHotkey: " + hotkeyName + " / " + hotkey.Win);
             return hotkey;
+        }
+
+        private static string getSettingString(string key, string fallback)
+        {
+            if (DoesSettingExist(key))
+            {
+                return (string)Settings.Default[key];
+            }
+            else
+            {
+                Debug.WriteLine("Setting " + key + " does not exist");
+                return fallback;
+            }
+        }
+
+        private static bool getSettingBool(string key, bool fallback)
+        {
+            if (DoesSettingExist(key))
+            {
+                return (bool)Settings.Default[key];
+            }
+            else
+            {
+                Debug.WriteLine("Setting " + key + " does not exist");
+                return fallback;
+            }
+        }
+
+        private static bool DoesSettingExist(string settingName)
+        {
+            return Settings.Default.Properties.Cast<SettingsProperty>().Any(prop => prop.Name == settingName);
         }
 
         /// <summary>
@@ -44,7 +76,7 @@ namespace Hotkeys
             if (ghk == null) return false;
             if (ghk.Register())
             {
-                Debug.WriteLine("Registered hotkey named " + ghk.displayName + ", key: " + ghk.key + ", modifiers:" + ghk.modifier);
+                //Debug.WriteLine("Registered hotkey named " + ghk.displayName + ", key: " + ghk.key + ", modifiers:" + ghk.modifier);
                 return true;
             }
             else

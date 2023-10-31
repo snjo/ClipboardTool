@@ -1,4 +1,5 @@
-﻿using Hotkeys;
+﻿using ClipboardTool.Properties;
+using Hotkeys;
 using System.Configuration;
 using System.Diagnostics;
 
@@ -124,12 +125,12 @@ namespace ClipboardTool
                 {
                     HotkeyGrid.Rows[i].Cells[1].Value = "";
                 }
-                Properties.Settings.Default["hk" + keyName + "Key"] = HotkeyGrid.Rows[i].Cells[1].Value.ToString();
 
-                Properties.Settings.Default["hk" + keyName + "Ctrl"] = Convert.ToBoolean(HotkeyGrid.Rows[i].Cells[2].Value);
-                Properties.Settings.Default["hk" + keyName + "Alt"] = Convert.ToBoolean(HotkeyGrid.Rows[i].Cells[3].Value);
-                Properties.Settings.Default["hk" + keyName + "Shift"] = Convert.ToBoolean(HotkeyGrid.Rows[i].Cells[4].Value);
-                Properties.Settings.Default["hk" + keyName + "Win"] = Convert.ToBoolean(HotkeyGrid.Rows[i].Cells[5].Value);
+                SaveSetting("hk" + keyName + "Key", HotkeyGrid.Rows[i].Cells[1].Value.ToString()+"");
+                SaveSetting("hk" + keyName + "Ctrl", Convert.ToBoolean(HotkeyGrid.Rows[i].Cells[2].Value));
+                SaveSetting("hk" + keyName + "Alt", Convert.ToBoolean(HotkeyGrid.Rows[i].Cells[3].Value));
+                SaveSetting("hk" + keyName + "Shift", Convert.ToBoolean(HotkeyGrid.Rows[i].Cells[4].Value));
+                SaveSetting("hk" + keyName + "Win", Convert.ToBoolean(HotkeyGrid.Rows[i].Cells[5].Value));
 
                 mainForm.HotkeyList[keyName] = GetHotkeyFromGrid(mainForm.HotkeyList[keyName], HotkeyGrid.Rows[i].Cells);
 
@@ -140,6 +141,23 @@ namespace ClipboardTool
             mainForm.UpdateCapsLock(true); // updates the tray icon to a/A or normal icon
 
             reloadHotkeys();
+        }
+
+        private static bool DoesSettingExist(string settingName)
+        {
+            return Settings.Default.Properties.Cast<SettingsProperty>().Any(prop => prop.Name == settingName);
+        }
+
+        private void SaveSetting(string settingName, object value)
+        {
+            if (DoesSettingExist(settingName))
+            {
+                Settings.Default[settingName] = value;
+            }
+            else
+            {
+                Debug.WriteLine("Warning. Tried to save setting that is not defined: " + settingName);
+            }
         }
 
         private void reloadHotkeys()
