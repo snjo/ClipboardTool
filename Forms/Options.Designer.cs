@@ -35,7 +35,6 @@
             optionSaveMemorySlots = new CheckBox();
             textMemorySlotFolder = new TextBox();
             label1 = new Label();
-            label2 = new Label();
             buttonSave = new Button();
             buttonCancel = new Button();
             optionCut = new CheckBox();
@@ -152,16 +151,6 @@
             label1.Size = new Size(232, 30);
             label1.TabIndex = 6;
             label1.Text = "Use process.txt, mem1.txt mem2.txt, mem3.txt:";
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label2.Location = new Point(134, 7);
-            label2.Name = "label2";
-            label2.Size = new Size(230, 15);
-            label2.TabIndex = 7;
-            label2.Text = "Restart the program to register hotkeys";
             // 
             // buttonSave
             // 
@@ -472,7 +461,6 @@
             // tabPageHotkeys
             // 
             tabPageHotkeys.Controls.Add(optionRegisterHotkeys);
-            tabPageHotkeys.Controls.Add(label2);
             tabPageHotkeys.Controls.Add(HotkeyGrid);
             tabPageHotkeys.Location = new Point(4, 24);
             tabPageHotkeys.Name = "tabPageHotkeys";
@@ -624,7 +612,6 @@
         private CheckBox optionSaveMemorySlots;
         private TextBox textMemorySlotFolder;
         private Label label1;
-        private Label label2;
         private Button buttonSave;
         private Button buttonCancel;
         private CheckBox optionCut;

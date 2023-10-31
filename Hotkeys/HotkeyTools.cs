@@ -11,6 +11,8 @@ namespace Hotkeys
         {
             foreach (string name in hotkeyNames)
             {
+                if (hotkeyList.ContainsKey(name))
+                    hotkeyList.Remove(name);
                 hotkeyList.Add(name, LoadHotkey(name, parent));
             }
             return hotkeyList;

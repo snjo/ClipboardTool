@@ -138,6 +138,16 @@ namespace ClipboardTool
 
             settings.Save();
             mainForm.UpdateCapsLock(true); // updates the tray icon to a/A or normal icon
+
+            reloadHotkeys();
+        }
+
+        private void reloadHotkeys()
+        {
+            HotkeyTools.ReleaseHotkeys(mainForm.HotkeyList);
+            HotkeyTools.LoadHotkeys(mainForm.HotkeyList, mainForm.HotkeyNames, mainForm);
+            HotkeyTools.RegisterHotkeys(mainForm.HotkeyList);
+            Debug.WriteLine("Released and re-registered hotkeys");
         }
 
         private void linkWebsite(object sender, LinkLabelLinkClickedEventArgs e)
