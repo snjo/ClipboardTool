@@ -1,6 +1,5 @@
 ﻿// add using for the active project's Properties here
 // ex: using MyApp.Properties;
-using ClipboardTool;
 using ClipboardTool.Properties;
 using System.Diagnostics;
 
@@ -19,17 +18,6 @@ namespace Hotkeys
             }
             return hotkeyList;
         }
-
-        //public static Hotkey LoadHotkey(string hotkeyName, Form parent) //char settingHotkey
-        //{
-        //    string key = Settings.Default["hk" + hotkeyName + "Key"].ToString() + "";
-        //    bool Ctrl = (bool)Settings.Default["hk" + hotkeyName + "Ctrl"];
-        //    bool Alt = (bool)Settings.Default["hk" + hotkeyName + "Alt"];
-        //    bool Shift = (bool)Settings.Default["hk" + hotkeyName + "Shift"];
-        //    bool Win = (bool)Settings.Default["hk" + hotkeyName + "Win"];
-        //    Hotkey hotkey = new Hotkey(key, Ctrl, Alt, Shift, Win, parent);
-        //    return hotkey;
-        //}
 
         public static Hotkey LoadHotkey(string hotkeyName, Form parent) //char settingHotkey
         {
@@ -78,14 +66,14 @@ namespace Hotkeys
         /// </summary>
         /// <param name="hotkeyList">A dictionary with hotkey names and Hotkey objects</param>
         /// <param name="warning">Displays a MessageBox warning if the key fails to register.</param>
-        public static void RegisterHotkeys(Dictionary<string, Hotkey> hotkeyList, bool warning = true)
+        public static void RegisterHotkeys(Dictionary<string, Hotkey> hotkeyList)
         {
             string warningKeys = "";
             foreach (KeyValuePair<string, Hotkey> ghk in hotkeyList)
             {
                 if (ghk.Value.Key == string.Empty)
                 {
-                    //MessageBox.Show("Skipping hotkey");
+                    Debug.WriteLine("Skipping hotkey with no Key string set");
                 }
                 else if (!RegisterHotKey(ghk.Value.ghk, false)) //register the key, add a warning to the list if it fails
                 {
@@ -94,7 +82,7 @@ namespace Hotkeys
             }
             if (warningKeys.Length > 0)
             {
-                MessageBox.Show("Could not register hotkeys:\n" + warningKeys);
+                Debug.WriteLine("Could not register hotkeys:\n" + warningKeys);
             }
         }
 

@@ -126,7 +126,6 @@ namespace ClipboardTool
             else
             {
                 mainForm.SetClipBoard(plainText, richText, forceClipboardUpdate, "Process Text");
-                //Dbg.WriteLinesWithCaller(Dbg.MakeArray("RICH TEXT: -------------", richText, "-------------" ));
                 return (PlainText: plainText, RichText: richText);
             }
         }
@@ -271,7 +270,6 @@ namespace ClipboardTool
                             default:
                                 if (tagAndText[0].Length > 0) // unknown RTF code, pass it on
                                 {
-                                    //Debug.WriteLine("Unknown RTF code, pass it on : " + tagAndText[0]);
                                     SetRTFTag(builder, text, @"\" + tagAndText[0] + " ", @"");
                                 }
                                 else builder.Append(text); // empy tag <>: regular text
@@ -280,13 +278,9 @@ namespace ClipboardTool
                     }
                     else
                     {
-                        //Debug.WriteLine("no tag in tagAndText, appending unsplit value: " + text);
                         if (segment.Length > 0)
                             builder.Append(text);
                     }
-
-                    //rtfBox.Rtf = rtfHeader + fontTable() + colorTable() + builder.ToString() + @"}"; // removed space in @" }";
-                    //richTextResult = rtfBox.Rtf;
                     richTextResult = rtfHeader + fontTable() + colorTable() + builder.ToString() + @"}";
                     rtfBox.Rtf = richTextResult;
                 }
@@ -386,7 +380,6 @@ namespace ClipboardTool
             {
                 if (currentline.Contains("$list")) //skip this line
                 {
-                    //MessageBox.Show("Error using $list. Recursive lists is not allowed");
                     mainForm.NumberSpinner++;
                     return String.Empty;
                 }
@@ -427,7 +420,6 @@ namespace ClipboardTool
             if (values.Length > 0 && mainForm.NumberSpinner <= values.Length && mainForm.NumberSpinner >= 1)
             {
                 customText = customText.Replace(command, values[(int)mainForm.NumberSpinner - 1]);
-                //customText = values[(int)numericUpDown1.Value];
             }
             else
             {

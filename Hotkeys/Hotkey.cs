@@ -9,17 +9,6 @@
         public bool Shift;
         public bool Win;
         public GlobalHotkey ghk;
-        public bool hotkeysSet;
-        //public bool registered; // TODO
-
-        //public Hotkey(string key, bool ctrl, bool alt, bool shift, bool win, Form parent)
-        //{
-        //    Key = key;
-        //    Ctrl = ctrl;
-        //    Alt = alt;
-        //    Shift = shift;
-        //    ghk = new GlobalHotkey(Modifiers(), key, parent, this);
-        //}
 
         public Hotkey()
         {

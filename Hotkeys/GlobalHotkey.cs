@@ -1,4 +1,5 @@
-﻿using System.Runtime.InteropServices;
+﻿using System.Diagnostics;
+using System.Runtime.InteropServices;
 
 namespace Hotkeys
 {
@@ -14,7 +15,6 @@ namespace Hotkeys
         public int key;
         private IntPtr hWnd;
         public int id;
-        //public Hotkey? Hotkey;
         public bool registered;
         private bool validKey;
         public string displayName = "Unnamed";
@@ -63,28 +63,28 @@ namespace Hotkeys
             if (validKey == false)
             {
                 registered = false;
-                //MessageBox.Show("Validkey false");
+                Debug.WriteLine("Validkey false: " + key + " / " + modifier);
                 return registered;
             }
             if (id != 0)
             {
                 registered = RegisterHotKey(hWnd, id, modifier, key);
-                //MessageBox.Show("Registered:" + registered.ToString() + " / " + key + " / " + modifier);
+                //Debug.WriteLine("Registered hotkey:" + registered.ToString() + " / " + key + " / " + modifier);
                 return registered;
             }
             else
             {
                 registered = false;
-                //MessageBox.Show("Unknown register error");
+                Debug.WriteLine("Unknown register hotkey error: " + key + " / " + modifier);
                 return registered;
             }
         }
 
         public bool Unregister()
         {
+            Debug.WriteLine("Releasing hotkey: " + key + " / " + modifier);
             registered = false;
             return UnregisterHotKey(hWnd, id);
         }
-
     }
 }

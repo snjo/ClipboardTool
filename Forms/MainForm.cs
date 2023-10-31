@@ -9,17 +9,12 @@ using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using TextBox = System.Windows.Forms.TextBox;
 
-[assembly: AssemblyVersion("1.4.*")]
+[assembly: AssemblyVersion("1.5.*")]
 
 namespace ClipboardTool
 {
     public partial class MainForm : Form
     {
-        //#pragma warning disable CS8602 // Dereference of a possibly null reference.
-        //#pragma warning disable CS8604 // Possible null reference argument.
-        //#pragma warning disable CS8601 // Possible null reference assignment.
-
-
         [DllImport("user32.dll")]
         static extern void keybd_event(byte bVk, byte bScan, uint dwFlags, UIntPtr dwExtraInfo);
         [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
@@ -147,7 +142,7 @@ namespace ClipboardTool
                 }
                 else
                 {
-                    label.Text = "Invalid hotkey: " + hotkey.Key;
+                    label.Text = "Hotkey error: " + hotkey.Text();
                 }
 
             }
@@ -212,8 +207,6 @@ namespace ClipboardTool
                 if (Directory.Exists(folderExpanded))
                 {
                     string path = Path.Combine(folderExpanded, filename);
-                    //if (folder.Substring(folder.Length - 1, 1) != "\\")
-                    //    folder += "\\";
                     bool writeOK = WriteToFile(path, text, warnIfFailed);
                     Dbg.WriteWithCaller("Trying to save memory slot to: " + path + "\nSave: " + writeOK);
                 }
@@ -606,7 +599,6 @@ namespace ClipboardTool
         private void writeMessage(string text)
         {
             MessageBox.Show(text);
-            //label1.Text = text;
         }
 
         protected override void WndProc(ref Message m)
@@ -617,7 +609,6 @@ namespace ClipboardTool
                 Keys key = (Keys)(((int)m.LParam >> 16) & 0xFFFF);                  // The key of the hotkey that was pressed.
                 KeyModifier modifier = (KeyModifier)((int)m.LParam & 0xFFFF);       // The modifier of the hotkey that was pressed.
                 int id = m.WParam.ToInt32();                                        // The id of the hotkey that was pressed.
-                //MessageBox.Show("Hotkey " + id + " has been pressed!");
                 HandleHotkey(id);
             }
         }
@@ -697,9 +688,8 @@ namespace ClipboardTool
             saveTextToFile("mem" + num + ".txt", MemorySlot(num).Text, warnIfFailed);
         }
 
-        public void setClipboardFromTextBox(int num)//(TextBox textBox)
+        public void setClipboardFromTextBox(int num)
         {
-            //(ProcessTextVariables(textBox1.Text));
             TextBox textBox;
             textBox = MemorySlot(num);
             if (textBox.Text != null)
@@ -707,9 +697,7 @@ namespace ClipboardTool
                 if (textBox.Text.Length > 0)
                 {
                     Dbg.WriteWithCaller("Process text");
-                    process.ProcessTextVariables(textBox.Text, true);
-                    //if (newClipText.Length > 0)
-                    //    Clipboard.SetText(newClipText);
+                    process.ProcessTextVariables(textBox.Text, true);                    
                 }
                 else
                 {
