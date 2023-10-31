@@ -60,6 +60,8 @@
             gridHistory.Location = new Point(4, 32);
             gridHistory.MultiSelect = false;
             gridHistory.Name = "gridHistory";
+            gridHistory.RowHeadersVisible = false;
+            gridHistory.RowHeadersWidth = 20;
             gridHistory.RowTemplate.Height = 50;
             gridHistory.Size = new Size(518, 487);
             gridHistory.TabIndex = 3;
@@ -127,6 +129,7 @@
             checkBoxMinimize.TabIndex = 6;
             checkBoxMinimize.Text = "Minimize when clicking Copy";
             checkBoxMinimize.UseVisualStyleBackColor = true;
+            checkBoxMinimize.CheckedChanged += checkBoxMinimize_CheckedChanged;
             // 
             // buttonColor
             // 

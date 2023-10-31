@@ -320,6 +320,7 @@ namespace ClipboardTool
                     {
                         //string processedText = mainForm.process.ProcessTextVariables(cellText, false);
                         //Clipboard.SetData(DataFormats.Text, processedText);
+                        Dbg.WriteWithCaller("Process text");
                         mainForm.process.ProcessTextVariables(cellText, true);
                         if (checkBoxMinimize.Checked)
                         {
@@ -631,6 +632,12 @@ namespace ClipboardTool
                 }
             }
             //string oldTitle = 
+        }
+
+        private void checkBoxMinimize_CheckedChanged(object sender, EventArgs e)
+        {
+            Settings.Default.HistoryMinimizeAfterCopy = checkBoxMinimize.Checked;
+            Settings.Default.Save();
         }
     }
 }

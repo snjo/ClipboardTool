@@ -21,6 +21,7 @@ namespace ClipboardTool
         /// <returns>string PlainText, string RichText</returns>
         public (string PlainText, string? RichText) ProcessTextVariables(string customText, bool forceClipboardUpdate = false) //(string, string)
         {
+            Debug.WriteLine("ProcessTextVariables start, clipboardupdate: " + forceClipboardUpdate);
             if (customText == null) return (PlainText: string.Empty, RichText: null);
             string plainText = String.Empty;
             string? richText = String.Empty;
@@ -116,13 +117,15 @@ namespace ClipboardTool
                 richText = null;
             }
 
+            Debug.WriteLine("ProcessTextVariables send result");
+
             if (plainText.Length < 1)
             {
                 return (string.Empty, string.Empty);
             }
             else
             {
-                mainForm.SetClipBoard(plainText, richText, forceClipboardUpdate);
+                mainForm.SetClipBoard(plainText, richText, forceClipboardUpdate, "Process Text");
                 //Dbg.WriteLinesWithCaller(Dbg.MakeArray("RICH TEXT: -------------", richText, "-------------" ));
                 return (PlainText: plainText, RichText: richText);
             }
@@ -387,6 +390,7 @@ namespace ClipboardTool
                     mainForm.NumberSpinner++;
                     return String.Empty;
                 }
+                Dbg.WriteWithCaller("Process text");
                 customText = ProcessTextVariables(currentline, false).PlainText;
             }
             else

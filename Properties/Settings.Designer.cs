@@ -867,7 +867,7 @@ namespace ClipboardTool.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("\\deff0{\\fonttbl{\\f0\\fnil Default Sans Serif;}{\\f1\\froman Times New Roman;}{\\f2\\fs" +
             "wiss Arial;}{\\f3\\fmodern Courier New;}{\\f4\\fscript Script MT Bold;}{\\f5\\fdecor O" +
-            "ld English Text MT;}}")]
+            "ld English Text MT;}}\\f0 ")]
         public string RTFfonts {
             get {
                 return ((string)(this["RTFfonts"]));

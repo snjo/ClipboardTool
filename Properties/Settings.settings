@@ -213,7 +213,7 @@
       <Value Profile="(Default)">\red80\green120\blue200;\red255\green180\blue1800;</Value>
     </Setting>
     <Setting Name="RTFfonts" Type="System.String" Scope="User">
-      <Value Profile="(Default)">\deff0{\fonttbl{\f0\fnil Default Sans Serif;}{\f1\froman Times New Roman;}{\f2\fswiss Arial;}{\f3\fmodern Courier New;}{\f4\fscript Script MT Bold;}{\f5\fdecor Old English Text MT;}}</Value>
+      <Value Profile="(Default)">\deff0{\fonttbl{\f0\fnil Default Sans Serif;}{\f1\froman Times New Roman;}{\f2\fswiss Arial;}{\f3\fmodern Courier New;}{\f4\fscript Script MT Bold;}{\f5\fdecor Old English Text MT;}}\f0 </Value>
     </Setting>
     <Setting Name="RTFallowColorTable" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>

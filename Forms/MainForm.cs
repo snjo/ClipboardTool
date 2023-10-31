@@ -3,6 +3,7 @@ using DebugTools;
 using Hotkeys;
 using System.Diagnostics;
 using System.IO;
+using System.Media;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
@@ -57,6 +58,7 @@ namespace ClipboardTool
         public Form Current;
         HelpForm helpForm = new HelpForm();
         string delayedKeystrokes = "";
+        public bool hotkeyHeldDown = false;
 
         string tooltipText =
             "$d      Date\n" +
@@ -264,14 +266,26 @@ namespace ClipboardTool
         {
             if (CheckHotkey("LowerCase", id))
             {
-                sendCut();
-                sendPaste(LowerCaseOnce());
+                if (!hotkeyHeldDown)
+                {
+                    hotkeyHeldDown = true;
+                    sendCut();
+                    string t = LowerCaseOnce();
+                    SetClipBoard(t, null, settings.sendPaste, "Hotkey PlainText");
+                    sendPaste(t, "Hotkey LowerCase");
+                }
             }
 
             if (CheckHotkey("UpperCase", id))
             {
-                sendCut();
-                sendPaste(UpperCaseOnce());
+                if (!hotkeyHeldDown)
+                {
+                    hotkeyHeldDown = true;
+                    sendCut();
+                    string t = UpperCaseOnce();
+                    SetClipBoard(t, null, settings.sendPaste, "Hotkey PlainText");
+                    sendPaste(t, "Hotkey UpperCase");
+                }
             }
 
             if (CheckHotkey("CapsLock", id))
@@ -281,14 +295,26 @@ namespace ClipboardTool
 
             if (CheckHotkey("PlainText", id))
             {
-                sendCut();
-                sendPaste(PlainTextOnce());
+                if (!hotkeyHeldDown)
+                {
+                    hotkeyHeldDown = true;
+                    sendCut();
+                    string t = PlainTextOnce();
+                    SetClipBoard(t, null, settings.sendPaste, "Hotkey PlainText");
+                    sendPaste(t, "Hotkey PlainText");
+                }
             }
 
             if (CheckHotkey("ProcessText", id))
             {
-                sendCut();
-                sendPaste(process.ProcessTextVariables(textCustom.Text).PlainText);
+                Debug.WriteLine("Process text pressed");
+                if (!hotkeyHeldDown)
+                {
+                    hotkeyHeldDown = true;
+                    sendCut();
+                    Dbg.WriteWithCaller("Process text");
+                    sendPaste(process.ProcessTextVariables(textCustom.Text, settings.sendPaste).PlainText, "Hotkey Process");
+                }
             }
 
             if (CheckHotkey("Date", id))
@@ -298,20 +324,35 @@ namespace ClipboardTool
 
             if (CheckHotkey("MemSlot1", id))
             {
-                sendCut();
-                sendPaste(process.ProcessTextVariables(textBox1.Text).PlainText);
+                if (!hotkeyHeldDown)
+                {
+                    hotkeyHeldDown = true;
+                    sendCut();
+                    Dbg.WriteWithCaller("Process text");
+                    sendPaste(process.ProcessTextVariables(textBox1.Text, settings.sendPaste).PlainText);
+                }
             }
 
             if (CheckHotkey("MemSlot2", id))
             {
-                sendCut();
-                sendPaste(process.ProcessTextVariables(textBox2.Text).PlainText);
+                if (!hotkeyHeldDown)
+                {
+                    hotkeyHeldDown = true;
+                    sendCut();
+                    Dbg.WriteWithCaller("Process text");
+                    sendPaste(process.ProcessTextVariables(textBox2.Text, settings.sendPaste).PlainText);
+                }
             }
 
             if (CheckHotkey("MemSlot3", id))
             {
-                sendCut();
-                sendPaste(process.ProcessTextVariables(textBox3.Text).PlainText);
+                if (!hotkeyHeldDown)
+                {
+                    hotkeyHeldDown = true;
+                    sendCut();
+                    Dbg.WriteWithCaller("Process text");
+                    sendPaste(process.ProcessTextVariables(textBox3.Text, settings.sendPaste).PlainText);
+                }
             }
 
             if (CheckHotkey("ResetNumber", id))
@@ -390,9 +431,15 @@ namespace ClipboardTool
             }
         }
 
-        private void sendPaste(string output)
+        private void sendPaste(string output, string source = "unknown")
         {
-            if (output == string.Empty) return;
+            Debug.WriteLine("SendPaste start from " + source);
+            //hotkeyHeldDown = true;
+            if (output == string.Empty)
+            {
+                hotkeyHeldDown = false;
+                return;
+            }
 
             if (settings.sendPaste)
             {
@@ -436,6 +483,8 @@ namespace ClipboardTool
             // warning: ^'s will become &'s on non-US keyboards:
             // https://stackoverflow.com/questions/47635218/sending-a-caret-with-system-windows-forms-sendkeys-send-will-send-ampersand
             // use paste method instead of sendkeys if the text includes carets
+
+            hotkeyHeldDown = false;
         }
 
         private void actionDelayedKeystrokes(object sender, EventArgs e)
@@ -446,12 +495,13 @@ namespace ClipboardTool
                 if (delayedKeystrokes != null)
                     sendKeystrokes(delayedKeystrokes);
             }
+            //hotkeyHeldDown = false;
         }
 
         private string PlainTextOnce(bool forceClipboardUpdate = false)
         {
             string result = Clipboard.GetText(TextDataFormat.Text);
-            SetClipBoard(result, null, forceClipboardUpdate);
+            SetClipBoard(result, null, forceClipboardUpdate, "PlainTextOnce");
             return result;
             //setClipBoard(clipBoardText);
         }
@@ -461,7 +511,7 @@ namespace ClipboardTool
             if (Clipboard.ContainsText())
             {
                 string result = Clipboard.GetText(TextDataFormat.Text).ToUpper();
-                SetClipBoard(result, null, forceClipboardUpdate);
+                SetClipBoard(result, null, forceClipboardUpdate, "UpperCaseOnce");
                 return result;
             }
             else return string.Empty;
@@ -472,29 +522,63 @@ namespace ClipboardTool
             if (Clipboard.ContainsText())
             {
                 string result = Clipboard.GetText(TextDataFormat.Text).ToLower();
-                SetClipBoard(result, null, forceClipboardUpdate);
+                SetClipBoard(result, null, forceClipboardUpdate, "LowerCaseOnce");
                 return result;
 
             }
             else return string.Empty;
         }
 
-        public void SetClipBoard(string plainText, string? richText = "", bool forceClipboardUpdate = false)//, TextDataFormat dataFormat = TextDataFormat.Text)
+        public void SetClipBoard(string plainText, string? richText = "", bool forceClipboardUpdate = false, string source="unknown")//, TextDataFormat dataFormat = TextDataFormat.Text)
         {
-            if (!settings.updateClipboard && settings.sendType && !forceClipboardUpdate) return;
+            Dbg.WriteWithCaller("SetClipboard start, source: " + source + " force:" + forceClipboardUpdate
+                +"\n:  plain: " + plainText.Length + " \n:  Richtext: " + (richText != null ? richText.Length : "null"));
+            if ((!settings.updateClipboard && settings.sendType) && !forceClipboardUpdate)
+            {
+                Dbg.DebugValues("Skipping Clipboard update", "  ", "settings.updateClipboard: " + settings.updateClipboard, "settings.sendType: " + settings.sendType, "local forceClipboardUpdate: " + forceClipboardUpdate);
+                return;
+            }
             if (plainText.Length > 0)
             {
                 if (richText == null)
                 {
-                    Clipboard.SetText(plainText, TextDataFormat.Text);
+                    DateTime clipStart = DateTime.Now;
+                    try
+                    {
+                        Clipboard.SetText(plainText, TextDataFormat.Text);
+                        Dbg.WriteWithCaller("Clipboard updated with plain text only");
+                    }
+                    catch
+                    {
+                        //if (OperatingSystem.IsWindows())
+                        //    SystemSounds.Asterisk.Play();
+                        Dbg.WriteWithCaller("Error updating clipboard");
+                        //this was probably caused by another program accessing the clipboard at the same time, or sending requests too rapidly.
+                        //should be fixed after fixing some spammy clipboard updates.
+                    }
+                    TimeSpan ts = DateTime.Now - clipStart;
+                    Dbg.Writeline("Clipboard update time: ", ts.TotalMilliseconds.ToString());
                 }
                 else
                 {
-                    Clipboard.Clear();
-                    DataObject data = new DataObject();
-                    data.SetData(DataFormats.Text, plainText);
-                    data.SetData(DataFormats.Rtf, richText);
-                    Clipboard.SetDataObject(data);
+                    DateTime clipStart = DateTime.Now;
+                    try
+                    {
+                        Clipboard.Clear();
+                        DataObject data = new DataObject();
+                        data.SetData(DataFormats.Text, plainText);
+                        data.SetData(DataFormats.Rtf, richText);
+                        Clipboard.SetDataObject(data);
+                        Dbg.WriteWithCaller("Clipboard updated with plain and rict text");
+                    }
+                    catch
+                    {
+                        //if (OperatingSystem.IsWindows())
+                        //    SystemSounds.Asterisk.Play();
+                        Dbg.WriteWithCaller("Error updating clipboard");
+                    }
+                    TimeSpan ts = DateTime.Now - clipStart;
+                    Dbg.Writeline("Clipboard update time: ", ts.TotalMilliseconds.ToString());
                 }
             }
             else
@@ -622,6 +706,7 @@ namespace ClipboardTool
             {
                 if (textBox.Text.Length > 0)
                 {
+                    Dbg.WriteWithCaller("Process text");
                     process.ProcessTextVariables(textBox.Text, true);
                     //if (newClipText.Length > 0)
                     //    Clipboard.SetText(newClipText);
