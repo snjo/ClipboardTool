@@ -1,6 +1,8 @@
 ﻿// add using for the active project's Properties here
 // ex: using MyApp.Properties;
+using ClipboardTool;
 using ClipboardTool.Properties;
+using System.Diagnostics;
 
 namespace Hotkeys
 {
@@ -18,14 +20,29 @@ namespace Hotkeys
             return hotkeyList;
         }
 
+        //public static Hotkey LoadHotkey(string hotkeyName, Form parent) //char settingHotkey
+        //{
+        //    string key = Settings.Default["hk" + hotkeyName + "Key"].ToString() + "";
+        //    bool Ctrl = (bool)Settings.Default["hk" + hotkeyName + "Ctrl"];
+        //    bool Alt = (bool)Settings.Default["hk" + hotkeyName + "Alt"];
+        //    bool Shift = (bool)Settings.Default["hk" + hotkeyName + "Shift"];
+        //    bool Win = (bool)Settings.Default["hk" + hotkeyName + "Win"];
+        //    Hotkey hotkey = new Hotkey(key, Ctrl, Alt, Shift, Win, parent);
+        //    return hotkey;
+        //}
+
         public static Hotkey LoadHotkey(string hotkeyName, Form parent) //char settingHotkey
         {
-            string key = Settings.Default["hk" + hotkeyName + "Key"].ToString() + "";
-            bool Ctrl = (bool)Settings.Default["hk" + hotkeyName + "Ctrl"];
-            bool Alt = (bool)Settings.Default["hk" + hotkeyName + "Alt"];
-            bool Shift = (bool)Settings.Default["hk" + hotkeyName + "Shift"];
-            bool Win = (bool)Settings.Default["hk" + hotkeyName + "Win"];
-            Hotkey hotkey = new Hotkey(key, Ctrl, Alt, Shift, Win, parent);
+            Hotkey hotkey = new Hotkey();
+
+            hotkey.Key = Settings.Default["hk" + hotkeyName + "Key"].ToString() + "";
+            hotkey.Ctrl = (bool)Settings.Default["hk" + hotkeyName + "Ctrl"];
+            hotkey.Alt = (bool)Settings.Default["hk" + hotkeyName + "Alt"];
+            hotkey.Shift = (bool)Settings.Default["hk" + hotkeyName + "Shift"];
+            hotkey.Win = (bool)Settings.Default["hk" + hotkeyName + "Win"];
+            hotkey.ghk = new GlobalHotkey(hotkey.Modifiers(), hotkey.Key, parent, hotkeyName);
+
+            //MessageBox.Show("LoadHotkey: " + hotkeyName + " / " + hotkey.Win);
             return hotkey;
         }
 
@@ -39,14 +56,14 @@ namespace Hotkeys
             if (ghk == null) return false;
             if (ghk.Register())
             {
+                Debug.WriteLine("Registered hotkey named " + ghk.displayName + ", key: " + ghk.key + ", modifiers:" + ghk.modifier);
                 return true;
             }
             else
             {
                 if (ghk != null)
                 {
-                    if (warning && ghk.Hotkey == null) MessageBox.Show("Could not register hotkey " + ghk.key + ", ghk.hotkey is null");
-                    else if (warning) MessageBox.Show("Could not register hotkey " + ghk.key + "ghk.hotkey.Win is " + ghk.Hotkey.Win);
+                    if (warning) MessageBox.Show("Could not register hotkey named " + ghk.displayName + ", key " + ghk.key);
                 }
                 else
                 {
@@ -95,6 +112,13 @@ namespace Hotkeys
             {
                 ghk.Unregister();
             }
+        }
+
+        public static void UpdateHotkeys(Dictionary<string, Hotkey> hotkeyList, List<string> hotkeyNames, Form parent)
+        {
+            ReleaseHotkeys(hotkeyList);
+            LoadHotkeys(hotkeyList, hotkeyNames, parent);
+            RegisterHotkeys(hotkeyList);
         }
     }
 }

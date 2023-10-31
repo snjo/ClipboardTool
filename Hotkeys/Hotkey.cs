@@ -12,13 +12,18 @@
         public bool hotkeysSet;
         //public bool registered; // TODO
 
-        public Hotkey(string key, bool ctrl, bool alt, bool shift, bool win, Form parent)
+        //public Hotkey(string key, bool ctrl, bool alt, bool shift, bool win, Form parent)
+        //{
+        //    Key = key;
+        //    Ctrl = ctrl;
+        //    Alt = alt;
+        //    Shift = shift;
+        //    ghk = new GlobalHotkey(Modifiers(), key, parent, this);
+        //}
+
+        public Hotkey()
         {
-            Key = key;
-            Ctrl = ctrl;
-            Alt = alt;
-            Shift = shift;
-            ghk = new GlobalHotkey(Modifiers(), key, parent, this);
+            ghk = new GlobalHotkey();
         }
 
         public int Modifiers() // bool Ctrl, bool Alt, bool Shift, bool Win)
@@ -29,7 +34,6 @@
             if (Shift) result += (int)KeyModifier.Shift;
             if (Win) result += (int)KeyModifier.WinKey;
             return result;
-
         }
 
         public string Text()
