@@ -1,10 +1,15 @@
-﻿// Add Application Settings like this, 5 values for each hotkey
+﻿// See https://github.com/snjo/Hotkeys
+
+// Add Application Settings like this, 5 values for each hotkey
 RegisterHotkeys		bool 	User	True
 hkMyHotkeyKey		string	User	PrintScreen
 hkMyHotkeyCtrl		bool	User	false
 hkMyHotkeyAlt		bool	User	false
 hkMyHotkeyShift		bool	User	false
 hkMyHotkeyWin		bool	User	false
+
+// In HotkeyTools.cs, add a using statement to be able to reference Settings.Default, example:
+// using MyApp.Properties;
 
 // Add these methods to your main form, adjust HandleHotkey to taste
 //------------------------------ Catch hotkey presses and do stuff with them
@@ -26,7 +31,8 @@ public MainForm()
         HotkeyList = HotkeyTools.LoadHotkeys(HotkeyList, HotkeyNames, this);
         if (settings.RegisterHotkeys) // optional
         {
-        HotkeyTools.RegisterHotkeys(HotkeyList);
+                HotkeyTools.RegisterHotkeys(HotkeyList);
+                // RegisterHotkeys returns a string[] with any failed hotkey registrations that can be used to output an error message
         }
 }
 
@@ -60,5 +66,6 @@ private void HandleHotkey(int id)
         }
 }
 
-
+// If the user has changed hotkey settings (key binds) at runtime, re-register the hotkeys using:
+// HotkeyTools.UpdateHotkeys(mainForm.HotkeyList, mainForm.HotkeyNames, mainForm);
 
