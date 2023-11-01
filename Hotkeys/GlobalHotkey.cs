@@ -82,7 +82,7 @@ namespace Hotkeys
 
         public bool Unregister()
         {
-            Debug.WriteLine("Releasing hotkey: " + key + " / " + modifier);
+            //Debug.WriteLine("Releasing hotkey: " + key + " / " + modifier);
             registered = false;
             return UnregisterHotKey(hWnd, id);
         }
