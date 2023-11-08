@@ -3,6 +3,7 @@ using System.Configuration;
 using System.Diagnostics;
 using System.Text;
 using DebugTools;
+using System.Data;
 
 namespace ClipboardTool
 {
@@ -98,6 +99,18 @@ namespace ClipboardTool
                 customText = PromptForText(customText);
             }
 
+            if (customText.Contains("$Math"))
+            {
+                bool round = false;
+                customText = customText.Replace("$Math", "");
+                if (customText.Contains("$Round"))
+                {
+                    customText = customText.Replace("$Round", "");
+                    round = true;
+                }
+                customText = solveEquation(customText, round);
+            }
+
             // debug hotkey output
             if (customText.Contains("$Debug"))
             {
@@ -162,6 +175,67 @@ namespace ClipboardTool
             }
         }
 
+        public string solveEquation(string mixedText, bool round)
+        {
+            Dbg.WriteWithCaller("Equation start");
+            string result = "";
+            string tagStart = "[";
+            string tagEnd = "]";
+            string escapeTag = "\\";
+            string escapeTemp = "¤";
+
+            mixedText = mixedText.Replace(escapeTag + tagStart, escapeTemp);
+            string[] segments = mixedText.Split(tagStart);
+            if (segments.Length > 0)
+            {
+                foreach (string segment in segments)
+                {
+                    string segmentUnEscaped = segment.Replace(escapeTemp, tagStart);
+                    segmentUnEscaped = segmentUnEscaped.Replace(escapeTag + tagEnd, escapeTemp);
+                    string[] equationAndText = segmentUnEscaped.Split(tagEnd, 2);
+                    string? equation = null;
+                    string? text = null;
+
+                    if (equationAndText.Length == 1)
+                        text = equationAndText[0].Replace(escapeTemp, tagEnd);
+                    if (equationAndText.Length > 1)
+                    {
+                        equation = equationAndText[0];
+                        text = equationAndText[1].Replace(escapeTemp, tagEnd);
+                    }
+
+                    string answer = "";
+                    bool validEquation = false;
+
+                    if (equation != null)
+                    {
+                        Dbg.WriteWithCaller("Equation: " + equation);
+                        DataTable dt = new DataTable();
+                        try
+                        {
+                            var comp = dt.Compute(equation, "");
+                            if (round)
+                            {
+                                double num = Convert.ToDouble(comp);
+                                Debug.WriteLine("num: " + num);
+                                answer = Math.Round(num).ToString();
+                            }
+                            else
+                            {
+                                answer = comp.ToString() + "";
+                            }
+                            Dbg.WriteWithCaller("Equation result: " + answer);
+                        }
+                        catch
+                        {
+                            Dbg.Writeline("Can't compute equation: " + equation);
+                        }
+                    }
+                    result += answer + text;
+                }
+            }
+            return result;
+        }
 
         /// <summary>
         /// Parses tags into Rich Text, outputs both plain and rich text.

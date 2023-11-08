@@ -12,6 +12,8 @@ https://github.com/snjo/ClipboardTool
 -----------------------------------------
 ## Commands for text processing:
 
+*Commands are case sensitive*
+
 | Command   | Function                                                         |
 |-----------|------------------------------------------------------------------|
 | $d        | date                                                             |
@@ -30,7 +32,10 @@ https://github.com/snjo/ClipboardTool
 | $vsp      | Split value in slot 1 with space, output value[number]           |
 | $list     | Split lines in main textbox (skips line 1), output value[number] |
 | $prompt   | Opens a popup box to insert a text value                         |
+| $Math     | Solves equations enclosed in [] brackets                         |
+| $Round    | Rounds off equation results to integers                          |
 | $RTF      | Output Rich text. See details below                              |
+
 
 -----------------------------------------
 ## Text Files in the program folder
@@ -147,6 +152,29 @@ You can reference these color values starting with number 7: \<cf7> or \\cf7
 The font table can be customized in Options. When using values outside the predefined font tags, use RTF commands.
 
 Example: \<f6> or \\f6  to use
+
+-----------------------------------------
+### Math equations
+
+$Math: Solves equations enclosed in [] brackets.
+$Round: Rounds off equation results to integers.
+
+Example: $Math[2+3]
+Output: 5
+
+Example: $Math$Round[$cp+3]
+Output: if Clipboard is "2", result is 5
+
+
+Example: $Math$Round[$i+3]
+Output: if Number spinner is "2", result is 5
+
+Example: $Math[2+(3/2)]
+Output: 3,5
+
+Example: $Math$Round[2+(3/2)]
+Output: 4
+
 
 -----------------------------------------
 ## Key codes for hotkey options:
