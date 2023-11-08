@@ -165,7 +165,6 @@ Output: 5
 Example: $Math$Round[$cp+3]
 Output: if Clipboard is "2", result is 5
 
-
 Example: $Math$Round[$i+3]
 Output: if Number spinner is "2", result is 5
 
