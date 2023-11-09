@@ -17,10 +17,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="img\cbt.ico" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -41,6 +37,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="img\clipboardtool.svg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
     <None Update="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

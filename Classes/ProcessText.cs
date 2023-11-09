@@ -201,11 +201,11 @@ namespace ClipboardTool
                     if (equationAndText.Length > 1)
                     {
                         equation = equationAndText[0];
+                        equation = equation.Replace(",", "."); // error if using , as decimal separator
                         text = equationAndText[1].Replace(escapeTemp, tagEnd);
                     }
 
                     string answer = "";
-                    bool validEquation = false;
 
                     if (equation != null)
                     {
