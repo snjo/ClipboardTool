@@ -34,6 +34,7 @@ namespace ClipboardTool
             textBoxRTFfonts.Text = settings.RTFfonts;
             checkBoxRTFcolor.Checked = settings.RTFallowColorTable;
             checkBoxRTFfont.Checked = settings.RTFallowFontTable;
+            checkBoxMathWarning.Checked = settings.MathWarning;
 
             fillGrid();
 
@@ -115,6 +116,7 @@ namespace ClipboardTool
             settings.RTFfonts = textBoxRTFfonts.Text;
             settings.RTFallowColorTable = checkBoxRTFcolor.Checked;
             settings.RTFallowFontTable = checkBoxRTFfont.Checked;
+            settings.MathWarning = checkBoxMathWarning.Checked;
 
 
             int i = 0;
@@ -126,7 +128,7 @@ namespace ClipboardTool
                     HotkeyGrid.Rows[i].Cells[1].Value = "";
                 }
 
-                SaveSetting("hk" + keyName + "Key", HotkeyGrid.Rows[i].Cells[1].Value.ToString()+"");
+                SaveSetting("hk" + keyName + "Key", HotkeyGrid.Rows[i].Cells[1].Value.ToString() + "");
                 SaveSetting("hk" + keyName + "Ctrl", Convert.ToBoolean(HotkeyGrid.Rows[i].Cells[2].Value));
                 SaveSetting("hk" + keyName + "Alt", Convert.ToBoolean(HotkeyGrid.Rows[i].Cells[3].Value));
                 SaveSetting("hk" + keyName + "Shift", Convert.ToBoolean(HotkeyGrid.Rows[i].Cells[4].Value));

@@ -228,6 +228,8 @@ namespace ClipboardTool
                         }
                         catch
                         {
+                            if (Settings.Default.MathWarning)
+                                MessageBox.Show("Can't solve equation:" + Environment.NewLine + equation, "$Math error");
                             Dbg.Writeline("Can't compute equation: " + equation);
                         }
                     }

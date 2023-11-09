@@ -16,26 +16,29 @@ https://github.com/snjo/ClipboardTool
 
 | Command   | Function                                                         |
 |-----------|------------------------------------------------------------------|
-| $d        | date                                                             |
-| $t        | time                                                             |
-| $cp       | clipboard contents                                               |
+| $d        | current date                                                     |
+| $t        | current time                                                     |
+| $cp       | clipboard (plain text)                                           |
 | $cl / $cu | clipboard in lower/upper case                                    |
-| $i        | number                                                           |
-| $+        | number, then increment it                                        |
-| $-        | number, then decrement it                                        |
-| $n2, $n3  | use 1-3 digits in number (01, 001)                               |
+| $i        | output the number from the upDown spinner                        |
+| $+        | output number, then increment it                                 |
+| $-        | output number, then decrement it                                 |
+| $n2, $n3  | Flag: pad number with 1-2 zeroes (01, 001).                      |
 | $m1 - $m3 | contents of the memory slots                                     |
-| $eq       | Convert \"\" to \", and removes single \"                        |
+| $eq       | Flag: Convert \"\" to \", and removes single \"                  |
 | $rep      | Replace text in clipboard. Use mem slot 1 & 2 as from/to strings |
 | $vcm      | Split value in slot 1 with comma, output value[number]           |
 | $vsc      | Split value in slot 1 with semicolon, output value[number]       |
 | $vsp      | Split value in slot 1 with space, output value[number]           |
 | $list     | Split lines in main textbox (skips line 1), output value[number] |
 | $prompt   | Opens a popup box to insert a text value                         |
-| $Math     | Solves equations enclosed in [] brackets                         |
-| $Round    | Rounds off equation results to integers                          |
-| $RTF      | Output Rich text. See details below                              |
+| $Math     | Flag: Solves equations enclosed in [] brackets                   |
+| $Round    | Flag: Alters $Math to round off results.                         |
+| $RTF      | Flag: Output Rich text. See details below                        |
 
+#### Flags
+
+Commands marked as Flag do not output text directly, but alters the rest of the text or commands in some way.
 
 -----------------------------------------
 ## Text Files in the program folder
@@ -159,20 +162,22 @@ Example: \<f6> or \\f6  to use
 $Math: Solves equations enclosed in [] brackets.
 $Round: Rounds off equation results to integers.
 
-Example: $Math[2+3]
-Output: 5
+		Example: $Math[2+3]
+		Output: 5
 
-Example: $Math$Round[$cp+3]
-Output: if Clipboard is "2", result is 5
+		Example: $Math[$cp+3]
+		Output: if Clipboard is "2", result is 5
 
-Example: $Math$Round[$i+3]
-Output: if Number spinner is "2", result is 5
+		Example: $Math[$i+3]
+		Output: if Number spinner is "2", result is 5
 
-Example: $Math[2+(3/2)]
-Output: 3,5
+		Example: $Math[2+(3/2)]
+		Output: 3,5
 
-Example: $Math$Round[2+(3/2)]
-Output: 4
+		Example: $Math$Round[2+(3/2)]
+		Output: 4
+
+If there's an error in the equation, an warning popup is shown. This can be disabled in Options
 
 
 -----------------------------------------

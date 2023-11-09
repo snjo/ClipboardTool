@@ -77,6 +77,7 @@
             buttonRTFDefaultColors = new Button();
             label5 = new Label();
             textBoxRTFfonts = new TextBox();
+            checkBoxMathWarning = new CheckBox();
             ((System.ComponentModel.ISupportInitialize)HotkeyGrid).BeginInit();
             tabControl1.SuspendLayout();
             tabPageGeneral.SuspendLayout();
@@ -408,6 +409,7 @@
             // 
             // tabPageGeneral
             // 
+            tabPageGeneral.Controls.Add(checkBoxMathWarning);
             tabPageGeneral.Controls.Add(label9);
             tabPageGeneral.Controls.Add(label8);
             tabPageGeneral.Controls.Add(label7);
@@ -575,6 +577,16 @@
             textBoxRTFfonts.Size = new Size(430, 85);
             textBoxRTFfonts.TabIndex = 65;
             // 
+            // checkBoxMathWarning
+            // 
+            checkBoxMathWarning.AutoSize = true;
+            checkBoxMathWarning.Location = new Point(21, 307);
+            checkBoxMathWarning.Name = "checkBoxMathWarning";
+            checkBoxMathWarning.Size = new Size(222, 19);
+            checkBoxMathWarning.TabIndex = 66;
+            checkBoxMathWarning.Text = "$Math equation error popup warning";
+            checkBoxMathWarning.UseVisualStyleBackColor = true;
+            // 
             // Options
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -654,5 +666,6 @@
         private Label label9;
         private Label label8;
         private Label label7;
+        private CheckBox checkBoxMathWarning;
     }
 }

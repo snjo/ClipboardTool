@@ -900,5 +900,17 @@ namespace ClipboardTool.Properties {
                 this["RTFallowFontTable"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool MathWarning {
+            get {
+                return ((bool)(this["MathWarning"]));
+            }
+            set {
+                this["MathWarning"] = value;
+            }
+        }
     }
 }
