@@ -64,6 +64,7 @@
             label4 = new Label();
             tabControl1 = new TabControl();
             tabPageGeneral = new TabPage();
+            checkBoxMathWarning = new CheckBox();
             label9 = new Label();
             label8 = new Label();
             label7 = new Label();
@@ -77,7 +78,11 @@
             buttonRTFDefaultColors = new Button();
             label5 = new Label();
             textBoxRTFfonts = new TextBox();
-            checkBoxMathWarning = new CheckBox();
+            label2 = new Label();
+            label11 = new Label();
+            textBoxCulture = new TextBox();
+            label12 = new Label();
+            label13 = new Label();
             ((System.ComponentModel.ISupportInitialize)HotkeyGrid).BeginInit();
             tabControl1.SuspendLayout();
             tabPageGeneral.SuspendLayout();
@@ -379,16 +384,16 @@
             // textBoxRTFcolors
             // 
             textBoxRTFcolors.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            textBoxRTFcolors.Location = new Point(3, 46);
+            textBoxRTFcolors.Location = new Point(16, 64);
             textBoxRTFcolors.Multiline = true;
             textBoxRTFcolors.Name = "textBoxRTFcolors";
-            textBoxRTFcolors.Size = new Size(430, 69);
+            textBoxRTFcolors.Size = new Size(417, 69);
             textBoxRTFcolors.TabIndex = 63;
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(3, 28);
+            label4.Location = new Point(16, 46);
             label4.Name = "label4";
             label4.Size = new Size(60, 15);
             label4.TabIndex = 64;
@@ -429,6 +434,16 @@
             tabPageGeneral.TabIndex = 0;
             tabPageGeneral.Text = "General";
             tabPageGeneral.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxMathWarning
+            // 
+            checkBoxMathWarning.AutoSize = true;
+            checkBoxMathWarning.Location = new Point(21, 307);
+            checkBoxMathWarning.Name = "checkBoxMathWarning";
+            checkBoxMathWarning.Size = new Size(222, 19);
+            checkBoxMathWarning.TabIndex = 66;
+            checkBoxMathWarning.Text = "$Math equation error popup warning";
+            checkBoxMathWarning.UseVisualStyleBackColor = true;
             // 
             // label9
             // 
@@ -491,6 +506,11 @@
             // 
             // tabPageCustom
             // 
+            tabPageCustom.Controls.Add(label13);
+            tabPageCustom.Controls.Add(label12);
+            tabPageCustom.Controls.Add(textBoxCulture);
+            tabPageCustom.Controls.Add(label11);
+            tabPageCustom.Controls.Add(label2);
             tabPageCustom.Controls.Add(label6);
             tabPageCustom.Controls.Add(checkBoxRTFfont);
             tabPageCustom.Controls.Add(checkBoxRTFcolor);
@@ -511,16 +531,16 @@
             // 
             label6.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             label6.Font = new Font("Segoe UI", 9F, FontStyle.Italic, GraphicsUnit.Point);
-            label6.Location = new Point(3, 263);
+            label6.Location = new Point(16, 281);
             label6.Name = "label6";
-            label6.Size = new Size(432, 51);
+            label6.Size = new Size(419, 51);
             label6.TabIndex = 71;
             label6.Text = "When Color/Font tables are allowed, pasted text will not use the font or color that's already in the document";
             // 
             // checkBoxRTFfont
             // 
             checkBoxRTFfont.AutoSize = true;
-            checkBoxRTFfont.Location = new Point(6, 125);
+            checkBoxRTFfont.Location = new Point(16, 143);
             checkBoxRTFfont.Name = "checkBoxRTFfont";
             checkBoxRTFfont.Size = new Size(175, 19);
             checkBoxRTFfont.TabIndex = 70;
@@ -530,7 +550,7 @@
             // checkBoxRTFcolor
             // 
             checkBoxRTFcolor.AutoSize = true;
-            checkBoxRTFcolor.Location = new Point(7, 6);
+            checkBoxRTFcolor.Location = new Point(16, 24);
             checkBoxRTFcolor.Name = "checkBoxRTFcolor";
             checkBoxRTFcolor.Size = new Size(180, 19);
             checkBoxRTFcolor.TabIndex = 69;
@@ -562,7 +582,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(3, 147);
+            label5.Location = new Point(16, 165);
             label5.Name = "label5";
             label5.Size = new Size(55, 15);
             label5.TabIndex = 66;
@@ -571,21 +591,57 @@
             // textBoxRTFfonts
             // 
             textBoxRTFfonts.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            textBoxRTFfonts.Location = new Point(3, 165);
+            textBoxRTFfonts.Location = new Point(16, 183);
             textBoxRTFfonts.Multiline = true;
             textBoxRTFfonts.Name = "textBoxRTFfonts";
-            textBoxRTFfonts.Size = new Size(430, 85);
+            textBoxRTFfonts.Size = new Size(417, 85);
             textBoxRTFfonts.TabIndex = 65;
             // 
-            // checkBoxMathWarning
+            // label2
             // 
-            checkBoxMathWarning.AutoSize = true;
-            checkBoxMathWarning.Location = new Point(21, 307);
-            checkBoxMathWarning.Name = "checkBoxMathWarning";
-            checkBoxMathWarning.Size = new Size(222, 19);
-            checkBoxMathWarning.TabIndex = 66;
-            checkBoxMathWarning.Text = "$Math equation error popup warning";
-            checkBoxMathWarning.UseVisualStyleBackColor = true;
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label2.Location = new Point(3, 6);
+            label2.Name = "label2";
+            label2.Size = new Size(59, 15);
+            label2.TabIndex = 72;
+            label2.Text = "Rich Text";
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label11.Location = new Point(3, 323);
+            label11.Name = "label11";
+            label11.Size = new Size(48, 15);
+            label11.TabIndex = 73;
+            label11.Text = "Culture";
+            // 
+            // textBoxCulture
+            // 
+            textBoxCulture.Location = new Point(21, 360);
+            textBoxCulture.Name = "textBoxCulture";
+            textBoxCulture.Size = new Size(145, 23);
+            textBoxCulture.TabIndex = 74;
+            // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Location = new Point(21, 342);
+            label12.Name = "label12";
+            label12.Size = new Size(79, 15);
+            label12.TabIndex = 75;
+            label12.Text = "Culture name";
+            // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.Font = new Font("Segoe UI", 9F, FontStyle.Italic, GraphicsUnit.Point);
+            label13.Location = new Point(21, 386);
+            label13.Name = "label13";
+            label13.Size = new Size(301, 15);
+            label13.TabIndex = 76;
+            label13.Text = "Ex: nb-NO, en-US, en-GB, or blank to use system default";
             // 
             // Options
             // 
@@ -667,5 +723,10 @@
         private Label label8;
         private Label label7;
         private CheckBox checkBoxMathWarning;
+        private Label label12;
+        private TextBox textBoxCulture;
+        private Label label11;
+        private Label label2;
+        private Label label13;
     }
 }

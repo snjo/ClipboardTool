@@ -35,6 +35,7 @@ namespace ClipboardTool
             checkBoxRTFcolor.Checked = settings.RTFallowColorTable;
             checkBoxRTFfont.Checked = settings.RTFallowFontTable;
             checkBoxMathWarning.Checked = settings.MathWarning;
+            textBoxCulture.Text = settings.Culture;
 
             fillGrid();
 
@@ -117,6 +118,7 @@ namespace ClipboardTool
             settings.RTFallowColorTable = checkBoxRTFcolor.Checked;
             settings.RTFallowFontTable = checkBoxRTFfont.Checked;
             settings.MathWarning = checkBoxMathWarning.Checked;
+            settings.Culture = textBoxCulture.Text;
 
 
             int i = 0;
@@ -143,6 +145,7 @@ namespace ClipboardTool
             mainForm.UpdateCapsLock(true); // updates the tray icon to a/A or normal icon
 
             reloadHotkeys();
+            mainForm.UpdateCulture();
         }
 
         private static bool DoesSettingExist(string settingName)

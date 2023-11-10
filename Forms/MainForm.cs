@@ -2,6 +2,7 @@ using ClipboardTool.Properties;
 using DebugTools;
 using Hotkeys;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Media;
 using System.Reflection;
@@ -54,6 +55,7 @@ namespace ClipboardTool
         HelpForm helpForm = new HelpForm();
         string delayedKeystrokes = "";
         public bool hotkeyHeldDown = false;
+        private CultureInfo startingCulture = CultureInfo.CurrentCulture;
 
         string tooltipText =
             "$d      Date\n" +
@@ -85,6 +87,7 @@ namespace ClipboardTool
         {
             InitializeComponent();
             UpgradeSettings();
+            UpdateCulture();
             Current = this;
             timerStatus.Start();
             process = new ProcessText(this);
@@ -92,7 +95,6 @@ namespace ClipboardTool
             iconLower = notifyIconLower.Icon;
             iconNormal = systrayIcon.Icon;
             helpForm.setText(tooltipText);
-
             HotkeyList = HotkeyTools.LoadHotkeys(HotkeyList, HotkeyNames, this);
             if (settings.RegisterHotkeys) // optional
             {
@@ -115,6 +117,30 @@ namespace ClipboardTool
                 //MessageBox.Show("Not upgrading settings");
                 Dbg.WriteWithCaller("Not upgrading settings");
             }
+        }
+
+        public void UpdateCulture()
+        {
+            if (settings.Culture != "")
+            {
+                try
+                {
+                    Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(settings.Culture);
+                }
+                catch
+                {
+                    MessageBox.Show("Can't set Culture to '" + settings.Culture + "'" + Environment.NewLine + "The value has been set to default.");
+                    settings.Culture = "";
+                    settings.Save();
+                }
+            }
+            else
+            {
+                Thread.CurrentThread.CurrentCulture = startingCulture;
+            }
+            Dbg.DebugValues("Updated Culture: ", "  ",
+                "Setting: " + settings.Culture,
+                "Thread: " + Thread.CurrentThread.CurrentCulture);
         }
         private void updateHotkeyLabels()
         {
