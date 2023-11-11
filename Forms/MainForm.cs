@@ -57,32 +57,6 @@ namespace ClipboardTool
         public bool hotkeyHeldDown = false;
         private CultureInfo startingCulture = CultureInfo.CurrentCulture;
 
-        string tooltipText =
-            "$d      Date\n" +
-            "$t      Time\n" +
-            "$cp     Clipboard contents\n" +
-            "$cl/$cu Clipboard in lower/upper case\n" +
-            "$i      Number\n" +
-            "$+      Number, then increment it\n" +
-            "$-      Number, then decrement it\n" +
-            "$n2/$n3 Use 1-3 digits in number (01, 001)\n" +
-            "$m1-$m3 Contents of the memory slots\n" +
-            "$eq     Convert \"\" to \", and removes single \"\n" +
-            "$rep    Replace text in clipboard. Use mem slot 1 & 2 as from/to strings.\n" +
-            "$vcm    Split value in slot 1 with comma, output value[number]\n" +
-            "$vsc    Split value in slot 1 with semicolon, output value[number]\n" +
-            "$vsp    Split value in slot 1 with space, output value[number]\n" +
-            "$list   Split lines in main textbox (skips line 1), output value[number]\n" +
-            "$prompt Opens a popup box to insert a text value\n" +
-            "$Math   Solves equations enclosed in [] brackets\n" +
-            "$Round  Rounds off equation results to integers\n" +
-            "$RTF    Enabler Rich text codes. Check readme.md\n" +
-            "\n" +
-            "Tap the date hotkey 1-3 times while holding the modifier keys:\n" +
-            "1: Just the date\n" +
-            "2: Date and Time\n" +
-            "3: Just the Time\n";
-
         public MainForm()
         {
             InitializeComponent();
@@ -94,7 +68,7 @@ namespace ClipboardTool
             iconUpper = notifyIconUpper.Icon;
             iconLower = notifyIconLower.Icon;
             iconNormal = systrayIcon.Icon;
-            helpForm.setText(tooltipText);
+            helpForm.setText(process.commands.GetListAsText());
             HotkeyList = HotkeyTools.LoadHotkeys(HotkeyList, HotkeyNames, this);
             if (settings.RegisterHotkeys) // optional
             {
@@ -140,7 +114,11 @@ namespace ClipboardTool
             }
             Dbg.DebugValues("Updated Culture: ", "  ",
                 "Setting: " + settings.Culture,
-                "Thread: " + Thread.CurrentThread.CurrentCulture);
+                "Thread: " + Thread.CurrentThread.CurrentCulture,
+                "Number Decimal: " + Thread.CurrentThread.CurrentCulture.NumberFormat.NumberDecimalSeparator,
+                "Number Group: " + Thread.CurrentThread.CurrentCulture.NumberFormat.NumberGroupSeparator,
+                "Date Format Full: " + Thread.CurrentThread.CurrentCulture.DateTimeFormat.FullDateTimePattern,
+                "Date Format Short: " + Thread.CurrentThread.CurrentCulture.DateTimeFormat.ShortDatePattern);
         }
         private void updateHotkeyLabels()
         {
@@ -552,11 +530,11 @@ namespace ClipboardTool
 
         public void SetClipBoard(string plainText, string? richText = "", bool forceClipboardUpdate = false, string source="unknown")//, TextDataFormat dataFormat = TextDataFormat.Text)
         {
-            Dbg.WriteWithCaller("SetClipboard start, source: " + source + " force:" + forceClipboardUpdate
-                +"\n:  plain: " + plainText.Length + " \n:  Richtext: " + (richText != null ? richText.Length : "null"));
+            //Dbg.WriteWithCaller("SetClipboard start, source: " + source + " force:" + forceClipboardUpdate
+            //    +"\n:  plain: " + plainText.Length + " \n:  Richtext: " + (richText != null ? richText.Length : "null"));
             if ((!settings.updateClipboard && settings.sendType) && !forceClipboardUpdate)
             {
-                Dbg.DebugValues("Skipping Clipboard update", "  ", "settings.updateClipboard: " + settings.updateClipboard, "settings.sendType: " + settings.sendType, "local forceClipboardUpdate: " + forceClipboardUpdate);
+                //Dbg.DebugValues("Skipping Clipboard update", "  ", "settings.updateClipboard: " + settings.updateClipboard, "settings.sendType: " + settings.sendType, "local forceClipboardUpdate: " + forceClipboardUpdate);
                 return;
             }
             if (plainText.Length > 0)
@@ -567,7 +545,7 @@ namespace ClipboardTool
                     try
                     {
                         Clipboard.SetText(plainText, TextDataFormat.Text);
-                        Dbg.WriteWithCaller("Clipboard updated with plain text only");
+                        //Dbg.WriteWithCaller("Clipboard updated with plain text only");
                     }
                     catch
                     {
@@ -578,7 +556,7 @@ namespace ClipboardTool
                         //should be fixed after fixing some spammy clipboard updates.
                     }
                     TimeSpan ts = DateTime.Now - clipStart;
-                    Dbg.Writeline("Clipboard update time: ", ts.TotalMilliseconds.ToString());
+                    //Dbg.Writeline("Clipboard update time: ", ts.TotalMilliseconds.ToString());
                 }
                 else
                 {
@@ -590,7 +568,7 @@ namespace ClipboardTool
                         data.SetData(DataFormats.Text, plainText);
                         data.SetData(DataFormats.Rtf, richText);
                         Clipboard.SetDataObject(data);
-                        Dbg.WriteWithCaller("Clipboard updated with plain and rict text");
+                        //Dbg.WriteWithCaller("Clipboard updated with plain and rict text");
                     }
                     catch
                     {
@@ -599,7 +577,7 @@ namespace ClipboardTool
                         Dbg.WriteWithCaller("Error updating clipboard");
                     }
                     TimeSpan ts = DateTime.Now - clipStart;
-                    Dbg.Writeline("Clipboard update time: ", ts.TotalMilliseconds.ToString());
+                    //Dbg.Writeline("Clipboard update time: ", ts.TotalMilliseconds.ToString());
                 }
             }
             else
@@ -724,7 +702,7 @@ namespace ClipboardTool
             {
                 if (textBox.Text.Length > 0)
                 {
-                    Dbg.WriteWithCaller("Process text");
+                    //Dbg.WriteWithCaller("Process text");
                     process.ProcessTextVariables(textBox.Text, true);                    
                 }
                 else
@@ -827,7 +805,7 @@ namespace ClipboardTool
                 helpForm = new HelpForm();
             }
 
-            helpForm.setText(tooltipText);
+            helpForm.setText(process.commands.GetListAsText());
             helpForm.Show();
         }
 

@@ -1,7 +1,10 @@
 ﻿using ClipboardTool.Properties;
+using DebugTools;
 using Hotkeys;
 using System.Configuration;
 using System.Diagnostics;
+using System.Globalization;
+using System.Web;
 
 namespace ClipboardTool
 {
@@ -237,6 +240,55 @@ namespace ClipboardTool
             {
                 optionPaste.Checked = false;
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(getCultureInfo(textBoxCulture.Text), "Culture Info");
+        }
+
+        private string getCultureInfo(string culture)
+        {
+            try
+            {
+                CultureInfo cultureInfo = CultureInfo.GetCultureInfo(culture);
+                char groupSeparator = cultureInfo.NumberFormat.NumberGroupSeparator.ToCharArray()[0];
+                char decimalSeparator = cultureInfo.NumberFormat.NumberDecimalSeparator.ToCharArray()[0];
+                return ConcatToLines("Selected culture: ",
+                    "Number Decimal: " + getCharName(decimalSeparator) + " (" + (int)decimalSeparator + ")",
+                    "Number Group: " + getCharName(groupSeparator) + " (" + (int)groupSeparator + ")",
+                    "Date Format Full: " + cultureInfo.DateTimeFormat.FullDateTimePattern,
+                    "Date Format Short: " + cultureInfo.DateTimeFormat.ShortDatePattern);
+            }
+            catch
+            {
+                return "Error in culture name";
+            }
+        }
+
+        private string ConcatToLines(params string[] strings)
+        {
+            string result = string.Empty;
+            foreach (string s in strings)
+            {
+                result += s + Environment.NewLine;
+            }
+            return result;
+        }
+
+        private string getCharName(char c)
+        {
+            if (c == '.')
+                return "Period";
+            if (c == ',')
+                return "Comma";
+            if (c == ' ')
+                return "Space";
+            if (c == (char)160)
+                return "Non-breaking Space";
+            if (c == (char)8239)
+                return "Narrow Non-breaking Space";
+            return c.ToString();
         }
     }
 }

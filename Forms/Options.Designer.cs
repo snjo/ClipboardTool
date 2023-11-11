@@ -71,6 +71,11 @@
             tabPageHotkeys = new TabPage();
             tabPageSources = new TabPage();
             tabPageCustom = new TabPage();
+            label13 = new Label();
+            label12 = new Label();
+            textBoxCulture = new TextBox();
+            label11 = new Label();
+            label2 = new Label();
             label6 = new Label();
             checkBoxRTFfont = new CheckBox();
             checkBoxRTFcolor = new CheckBox();
@@ -78,11 +83,7 @@
             buttonRTFDefaultColors = new Button();
             label5 = new Label();
             textBoxRTFfonts = new TextBox();
-            label2 = new Label();
-            label11 = new Label();
-            textBoxCulture = new TextBox();
-            label12 = new Label();
-            label13 = new Label();
+            button1 = new Button();
             ((System.ComponentModel.ISupportInitialize)HotkeyGrid).BeginInit();
             tabControl1.SuspendLayout();
             tabPageGeneral.SuspendLayout();
@@ -506,6 +507,7 @@
             // 
             // tabPageCustom
             // 
+            tabPageCustom.Controls.Add(button1);
             tabPageCustom.Controls.Add(label13);
             tabPageCustom.Controls.Add(label12);
             tabPageCustom.Controls.Add(textBoxCulture);
@@ -526,6 +528,52 @@
             tabPageCustom.TabIndex = 2;
             tabPageCustom.Text = "Custom values";
             tabPageCustom.UseVisualStyleBackColor = true;
+            // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.Font = new Font("Segoe UI", 9F, FontStyle.Italic, GraphicsUnit.Point);
+            label13.Location = new Point(21, 386);
+            label13.Name = "label13";
+            label13.Size = new Size(301, 15);
+            label13.TabIndex = 76;
+            label13.Text = "Ex: nb-NO, en-US, en-GB, or blank to use system default";
+            // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Location = new Point(21, 342);
+            label12.Name = "label12";
+            label12.Size = new Size(79, 15);
+            label12.TabIndex = 75;
+            label12.Text = "Culture name";
+            // 
+            // textBoxCulture
+            // 
+            textBoxCulture.Location = new Point(21, 360);
+            textBoxCulture.Name = "textBoxCulture";
+            textBoxCulture.Size = new Size(145, 23);
+            textBoxCulture.TabIndex = 74;
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label11.Location = new Point(3, 323);
+            label11.Name = "label11";
+            label11.Size = new Size(48, 15);
+            label11.TabIndex = 73;
+            label11.Text = "Culture";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label2.Location = new Point(3, 6);
+            label2.Name = "label2";
+            label2.Size = new Size(59, 15);
+            label2.TabIndex = 72;
+            label2.Text = "Rich Text";
             // 
             // label6
             // 
@@ -597,51 +645,15 @@
             textBoxRTFfonts.Size = new Size(417, 85);
             textBoxRTFfonts.TabIndex = 65;
             // 
-            // label2
+            // button1
             // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label2.Location = new Point(3, 6);
-            label2.Name = "label2";
-            label2.Size = new Size(59, 15);
-            label2.TabIndex = 72;
-            label2.Text = "Rich Text";
-            // 
-            // label11
-            // 
-            label11.AutoSize = true;
-            label11.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label11.Location = new Point(3, 323);
-            label11.Name = "label11";
-            label11.Size = new Size(48, 15);
-            label11.TabIndex = 73;
-            label11.Text = "Culture";
-            // 
-            // textBoxCulture
-            // 
-            textBoxCulture.Location = new Point(21, 360);
-            textBoxCulture.Name = "textBoxCulture";
-            textBoxCulture.Size = new Size(145, 23);
-            textBoxCulture.TabIndex = 74;
-            // 
-            // label12
-            // 
-            label12.AutoSize = true;
-            label12.Location = new Point(21, 342);
-            label12.Name = "label12";
-            label12.Size = new Size(79, 15);
-            label12.TabIndex = 75;
-            label12.Text = "Culture name";
-            // 
-            // label13
-            // 
-            label13.AutoSize = true;
-            label13.Font = new Font("Segoe UI", 9F, FontStyle.Italic, GraphicsUnit.Point);
-            label13.Location = new Point(21, 386);
-            label13.Name = "label13";
-            label13.Size = new Size(301, 15);
-            label13.TabIndex = 76;
-            label13.Text = "Ex: nb-NO, en-US, en-GB, or blank to use system default";
+            button1.Location = new Point(172, 360);
+            button1.Name = "button1";
+            button1.Size = new Size(75, 23);
+            button1.TabIndex = 77;
+            button1.Text = "Check";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // Options
             // 
@@ -728,5 +740,6 @@
         private Label label11;
         private Label label2;
         private Label label13;
+        private Button button1;
     }
 }
