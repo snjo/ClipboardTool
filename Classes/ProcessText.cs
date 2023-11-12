@@ -40,8 +40,8 @@ namespace ClipboardTool
 
             // get mem slot data first, so you can run other processing on it
             customText = customText.Replace(commands.MemSlot1.Name, mainForm.MemorySlotText(1));
-            customText = customText.Replace(commands.MemSlot2.Name, mainForm.MemorySlotText(1));
-            customText = customText.Replace(commands.MemSlot3.Name, mainForm.MemorySlotText(1));
+            customText = customText.Replace(commands.MemSlot2.Name, mainForm.MemorySlotText(2));
+            customText = customText.Replace(commands.MemSlot3.Name, mainForm.MemorySlotText(3));
 
             // date and time
             customText = customText.Replace(commands.Date.Name, DateTime.Now.ToShortDateString());
@@ -106,6 +106,10 @@ namespace ClipboardTool
                 }
                 customText = solveEquation(customText, round);
             }
+
+
+            // Remove None-Command, used for separating the end of a tag from text. For edge cases.
+            customText = customText.Replace(commands.None.Name, "");
 
             if (customText.Contains(commands.RTF.Name))
             {
