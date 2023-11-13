@@ -74,11 +74,13 @@ namespace ClipboardTool
                     TextResult = textBox1.Text;
                     DialogResult = DialogResult.OK;
                 }
+                e.Handled = true; // stops ding sound
             }
             if (e.KeyChar == (char)Keys.Escape)
             {
                 TextResult = string.Empty;
                 DialogResult = DialogResult.Cancel;
+                e.Handled = true;
             }
         }
 

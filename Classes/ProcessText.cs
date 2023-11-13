@@ -107,10 +107,11 @@ namespace ClipboardTool
                 customText = solveEquation(customText, round);
             }
 
-
-            // Remove None-Command, used for separating the end of a tag from text. For edge cases.
+            // Remove None-Command, used for separating the end of a tag from text, or splitting up what could be construed as a tag. For edge cases.
             customText = customText.Replace(commands.None.Name, "");
 
+            // Decide if output should be plain text or rich text.
+            // Don't add any more processing to customText after this, it will be ignored.
             if (customText.Contains(commands.RTF.Name))
             {
                 customText = customText.Replace(commands.RTF.Name, "");
@@ -122,7 +123,7 @@ namespace ClipboardTool
                 richText = null;
             }
 
-            Debug.WriteLine("ProcessTextVariables send result");
+            //Debug.WriteLine("ProcessTextVariables send result");
 
             if (plainText.Length < 1)
             {

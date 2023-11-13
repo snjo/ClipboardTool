@@ -182,6 +182,7 @@ namespace ClipboardTool
         {
             if (filename == null || text == null) return false;
             if (filename.Length == 0) return false;
+            if (color == Color.Empty) color = Color.White;
             string path = Path.Join(historyFolder, filename + entryFileExtension);
             PromptCreateHistoryFolder();
             try
@@ -231,7 +232,6 @@ namespace ClipboardTool
                 string text = gridHistory.Rows[row].Cells[textColumnIndex].Value.ToString() + "";
                 Dbg.WriteWithCaller("Saving: " + filename);
                 Color color = gridHistory.Rows[row].Cells[titleColumnIndex].Style.BackColor;
-                if (color == Color.Empty) color = Color.White;
                 result = SaveEntry(filename, text, color);
                 SetPinnedCheckboxValue(row, result);
             }
@@ -344,13 +344,6 @@ namespace ClipboardTool
                     Dbg.WriteWithCaller("Row is null");
                     return;
                 }
-
-                /*DataGridViewCheckBoxCell? checkboxCell = gridHistory.Rows[e.RowIndex].Cells[checkboxColumnIndex] as DataGridViewCheckBoxCell;
-                if (checkboxCell == null)
-                {
-                    Debug.WriteLine("Checkbox cell is null");
-                    return;
-                }*/
                 else
                 {
                     //bool oldCheckState = Convert.ToBoolean(checkboxCell.Value);
@@ -388,6 +381,7 @@ namespace ClipboardTool
                         }
                         string text = cells[textColumnIndex].Value.ToString() + "";
                         pinned = SaveEntry(title, text, cells[titleColumnIndex].Style.BackColor);
+                        SetPinnedCheckboxValue(cells[textColumnIndex].RowIndex, pinned);
                     }
                     else
                     {

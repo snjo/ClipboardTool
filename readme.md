@@ -10,6 +10,53 @@ https://github.com/snjo/ClipboardTool
 ![image](img/clipboardtool1.png)
 
 -----------------------------------------
+## Interface
+
+#### Main window
+
+The buttons in the main application window alter or replace the content of the clipboard. The hotkeys to perform the same operation are also listed, and can be changed in Options.
+
+	History - Opens a window with saved text entries, much like sticky notes.
+	Toolbar - Opens a floating window with a small number of buttons.
+	Ghost - Hides the main window from the task bar. Use the system tray, toolbar or hotkeys to control the program.
+	Pin - Toggles on Always on top mode.
+	Cogwheel - Opens Options
+
+	lower - Converts text in the clipboard to lower case. Formatting is removed.
+	UPPER - Converts text in the clipboard to upper case. Formatting is removed.
+	Plain - Outputs the text in the clipboard. Formatting is removed.
+	Caps Lock - Toggle the Caps Lock (useful if you have reassigned your Caps lock key)
+
+	Process - Outputs the text in the large textbox below to the clipboard, performing any text processing using $ commands.
+	Number spinner - This upDown number is used for various functions in text processing commands, referred to as "number".
+	Large Text box - The text in this box is used by the Process button/hotkey.
+	? - Help, opens a window with all text processing $ commands
+	Save - Saves the contents of the text box to a file. This is automatically loaded when the program starts.
+
+	Memory Slots, all three are identical:
+	Text box - the contents of these boxes are used either as outputs from the 1/2/3 hotkeys, or referenced as variables by other $ commands
+	Save - Saves the contents of the textbox to disk. This is automatically loaded when the program starts.
+	Down arrow - Fills the textbox with the current contents of the clipboard.
+	Up arrow - Outputs the text in the textbox to the clipboard, performing any text processing using $ commands.
+	
+#### History Window
+	
+	Pin - Toggles on Always on top mode.
+	Color - Change the color of the selected text entry
+	Add - Creates a new text entry with the current contents of the clipboard
+	
+	Each entry has the following elements (columns):
+	Pin - Saves the entry to a text file. Removing the pin deletes the file on disk.
+	Title - A title for convenience. Not used in the output. Used for the saved file name.
+	Text - The text that will be output. Text processing is performed on any $ commands.
+	> - Copies the text to the clipboard.
+
+	History folder link - Opens the folder with any saved text entries.
+	Minimize - If checked, the window minimizes after clicking a > button
+
+See the History Window section below for more details
+
+-----------------------------------------
 ## Commands for text processing:
 
 *Commands are case sensitive*
@@ -69,13 +116,17 @@ The program settings user.config are stored in a folder in %localappdata%\Clipbo
 | Date/Time                      | Ctrl+Shift+D           |
 | History/Saved Text Window      | Ctrl+Shift+H           |
 
+Memory Slot hotkeys also does any $ processing in the field, but some functions are not suited for these slots since they rely on values in the mem slots ($rep, $vcm, $list etc.)
+
+#### Date and time hotkey
+
 Tap the date hotkey 1-3 times while holding the modifier keys:
 
 	1: Types out just the date	
 	2: Types out just the Time
 	3: Types out the Date and Time
 
-Memory Slot hotkeys also does any $ processing in the field, but some functions are not suited for these slots since they rely on values in the mem slots ($rep, $vcm, $list etc.)
+The date format is based on your Windows region settings, but can be overridden in the Options / Culture setting.
 
 -----------------------------------------
 ## History Window
@@ -177,7 +228,9 @@ $Round: Rounds off equation results to integers.
 		Example: $Math$Round[2+(3/2)]
 		Output: 4
 
-If there's an error in the equation, an warning popup is shown. This can be disabled in Options
+If there's an error in the equation, an warning popup is shown. This can be disabled in Options.
+
+The datatable used to process the equation only works with US notation, so any commas will be converted to periods. The result will be output with commas or period as decimal separator based on the region/culture setting in Options. By default it uses your Windows region setting.
 
 
 -----------------------------------------
