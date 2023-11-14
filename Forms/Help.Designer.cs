@@ -30,6 +30,7 @@
         {
             button1 = new Button();
             richTextBox1 = new RichTextBox();
+            linkLabel1 = new LinkLabel();
             SuspendLayout();
             // 
             // button1
@@ -54,21 +55,36 @@
             richTextBox1.TabIndex = 2;
             richTextBox1.Text = "";
             // 
+            // linkLabel1
+            // 
+            linkLabel1.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            linkLabel1.AutoSize = true;
+            linkLabel1.Location = new Point(12, 349);
+            linkLabel1.Name = "linkLabel1";
+            linkLabel1.Size = new Size(167, 15);
+            linkLabel1.TabIndex = 3;
+            linkLabel1.TabStop = true;
+            linkLabel1.Text = "Full documentation on Github";
+            linkLabel1.LinkClicked += linkLabel1_LinkClicked;
+            // 
             // HelpForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(697, 380);
+            Controls.Add(linkLabel1);
             Controls.Add(richTextBox1);
             Controls.Add(button1);
             Name = "HelpForm";
             Text = "Help";
             Load += Help_Load;
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
         private Button button1;
         private RichTextBox richTextBox1;
+        private LinkLabel linkLabel1;
     }
 }
