@@ -13,13 +13,13 @@ namespace ClipboardTool
         Properties.Settings settings = Properties.Settings.Default;
         string RTFcolorsDefault = @"\red80\green120\blue200;\red255\green180\blue1800;";
         string RTFfontsDefault = @"\deff0{\fonttbl{\f0\fnil Default Sans Serif;}{\f1\froman Times New Roman;}{\f2\fswiss Arial;}{\f3\fmodern Courier New;}{\f4\fscript Script MT Bold;}{\f5\fdecor Old English Text MT;}}\f0 ";
-        CBT cbt;
+        MainMethods cbt;
 
         public Options(MainForm formParent)
         {
             InitializeComponent();
             mainForm = formParent;
-            cbt = mainForm.cbt;
+            cbt = mainForm.main;
 
             optionStartHidden.Checked = settings.StartHidden;
             optionStartToolbar.Checked = settings.StartToolbar;

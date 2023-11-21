@@ -21,7 +21,7 @@ public partial class MainForm : Form
     Settings settings = Settings.Default;
     string clipBoardText = String.Empty;
     private ProcessText _process;
-    private CBT _cbt;
+    private MainMethods _mainMethods;
     TextHistory? textHistory;
 
     public Dictionary<string, Hotkey> HotkeyList = new Dictionary<string, Hotkey>();
@@ -56,9 +56,9 @@ public partial class MainForm : Form
         InitializeComponent();
         timerStatus.Start();
         _process = new ProcessText(this);
-        _cbt = new CBT(this);
-        cbt.UpgradeSettings();
-        cbt.UpdateCulture();
+        _mainMethods = new MainMethods(this);
+        main.UpgradeSettings();
+        main.UpdateCulture();
         iconUpper = notifyIconUpper.Icon;
         iconLower = notifyIconLower.Icon;
         iconNormal = systrayIcon.Icon;
@@ -77,20 +77,20 @@ public partial class MainForm : Form
         set { _process = value; }
     }
 
-    public CBT cbt
+    public MainMethods main
     {
-        get { return _cbt; }
-        set { _cbt = value; }
+        get { return _mainMethods; }
+        set { _mainMethods = value; }
     }
 
 
     private void updateHotkeyLabels()
     {
-        cbt.updateHotkeyLabel(HotkeyList["UpperCase"], labelUpper);
-        cbt.updateHotkeyLabel(HotkeyList["LowerCase"], labelLower);
-        cbt.updateHotkeyLabel(HotkeyList["PlainText"], labelPlain);
-        cbt.updateHotkeyLabel(HotkeyList["CapsLock"], labelCaps);
-        cbt.updateHotkeyLabel(HotkeyList["ProcessText"], labelProcess);
+        main.updateHotkeyLabel(HotkeyList["UpperCase"], labelUpper);
+        main.updateHotkeyLabel(HotkeyList["LowerCase"], labelLower);
+        main.updateHotkeyLabel(HotkeyList["PlainText"], labelPlain);
+        main.updateHotkeyLabel(HotkeyList["CapsLock"], labelCaps);
+        main.updateHotkeyLabel(HotkeyList["ProcessText"], labelProcess);
     }
 
 
@@ -114,10 +114,10 @@ public partial class MainForm : Form
         updateHotkeyLabels();
 
 
-        textCustom.Text = cbt.loadTextFromFile("process.txt");
-        textBox1.Text = cbt.loadTextFromFile("mem1.txt");
-        textBox2.Text = cbt.loadTextFromFile("mem2.txt");
-        textBox3.Text = cbt.loadTextFromFile("mem3.txt");
+        textCustom.Text = main.loadTextFromFile("process.txt");
+        textBox1.Text = main.loadTextFromFile("mem1.txt");
+        textBox2.Text = main.loadTextFromFile("mem2.txt");
+        textBox3.Text = main.loadTextFromFile("mem3.txt");
     }
 
 
@@ -127,9 +127,9 @@ public partial class MainForm : Form
         HotkeyTools.ReleaseHotkeys(HotkeyList);
         if (Settings.Default.SaveMemorySlots)
         {
-            cbt.saveMemSlotToFile(1, warnIfFailed: false);
-            cbt.saveMemSlotToFile(2, warnIfFailed: false);
-            cbt.saveMemSlotToFile(3, warnIfFailed: false);
+            main.saveMemSlotToFile(1, warnIfFailed: false);
+            main.saveMemSlotToFile(2, warnIfFailed: false);
+            main.saveMemSlotToFile(3, warnIfFailed: false);
         }
     }
 
@@ -159,7 +159,7 @@ public partial class MainForm : Form
             Keys key = (Keys)(((int)m.LParam >> 16) & 0xFFFF);                  // The key of the hotkey that was pressed.
             KeyModifier modifier = (KeyModifier)((int)m.LParam & 0xFFFF);       // The modifier of the hotkey that was pressed.
             int id = m.WParam.ToInt32();                                        // The id of the hotkey that was pressed.
-            cbt.HandleHotkey(id);
+            main.HandleHotkey(id);
         }
     }
 
@@ -245,7 +245,7 @@ public partial class MainForm : Form
     {
         if (ModifierKeys == Keys.None)
         {
-            cbt.DelayKeyStrokes();
+            main.DelayKeyStrokes();
         }
         //hotkeyHeldDown = false;
     }
@@ -332,7 +332,7 @@ public partial class MainForm : Form
 
     private void actionSaveCustomText(object sender, EventArgs e)
     {
-        cbt.saveTextToFile("process.txt", textCustom.Text, warnIfFailed: true);
+        main.saveTextToFile("process.txt", textCustom.Text, warnIfFailed: true);
     }
 
     private void actionCapsLock(object sender, EventArgs e)
@@ -359,12 +359,12 @@ public partial class MainForm : Form
 
     public void actionUpperCaseOnce(object sender, EventArgs e)
     {
-        cbt.UpperCaseOnce(true);
+        main.UpperCaseOnce(true);
     }
 
     public void actionLowerCaseOnce(object sender, EventArgs e)
     {
-        cbt.LowerCaseOnce(true);
+        main.LowerCaseOnce(true);
     }
 
     public void actionHideFromTaskbar(object sender, EventArgs e)
@@ -374,7 +374,7 @@ public partial class MainForm : Form
 
     public void actionPlainTextOnce(object sender, EventArgs e)
     {
-        cbt.PlainTextOnce(true);
+        main.PlainTextOnce(true);
     }
 
     private void actionShowToolbar(object sender, EventArgs e)
@@ -406,7 +406,7 @@ public partial class MainForm : Form
         if (tag != null)
         {
             int num = int.Parse(tag);
-            cbt.setTextBoxFromClipboard(num);
+            main.setTextBoxFromClipboard(num);
         }
     }
 
@@ -417,7 +417,7 @@ public partial class MainForm : Form
         if (tag != null)
         {
             int num = int.Parse(tag);
-            cbt.setClipboardFromTextBox(num);
+            main.setClipboardFromTextBox(num);
         }
     }
 
@@ -428,7 +428,7 @@ public partial class MainForm : Form
         if (tag != null)
         {
             int num = int.Parse(tag);
-            cbt.saveMemSlotToFile(num, warnIfFailed: true);
+            main.saveMemSlotToFile(num, warnIfFailed: true);
         }
     }
     #endregion
