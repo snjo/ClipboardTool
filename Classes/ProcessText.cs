@@ -5,6 +5,7 @@ using System.Text;
 using DebugTools;
 using System.Data;
 using ClipboardTool.Classes;
+using System.Security.Cryptography;
 
 namespace ClipboardTool
 {
@@ -30,6 +31,7 @@ namespace ClipboardTool
             string? richText = String.Empty;
 
             int padNumber = 1;
+            //string clip = Clipboard.GetText(TextDataFormat.UnicodeText);
             string clip = Clipboard.GetText();
 
             // replace text in clipboard string. place first to allow for other processing on the result text. Uses mem slots 1 & 2
@@ -94,6 +96,12 @@ namespace ClipboardTool
                 customText = PromptForText(customText);
             }
 
+            // Convert characters in clipboard string to numbers for debugging text
+            if (customText.Contains(commands.ClipboardCharToInt.Name))
+            {
+                customText = customText.Replace(commands.ClipboardCharToInt.Name, StringToIntSequence(clip));
+            }
+
             // Math
             if (customText.Contains(commands.Math.Name))
             {
@@ -134,6 +142,23 @@ namespace ClipboardTool
                 mainForm.SetClipBoard(plainText, richText, forceClipboardUpdate, "Process Text");
                 return (PlainText: plainText, RichText: richText);
             }
+        }
+
+        private string StringToIntSequence(string clip)
+        {
+            string result = string.Empty;
+            string smiley = string.Concat((char)55357, (char)56842);
+            string smiley2 = "😊";
+            if (clip.Contains(smiley2))
+            {
+                //clip = clip.Replace(smiley, ":)");
+                Debug.WriteLine("Replacing emoji smiley");
+            }
+            foreach (char c in clip)
+            {
+                result += (int)c + " ";
+            }
+            return result;
         }
 
         string rtfHeader = @"{\rtf1\ansi ";
@@ -240,7 +265,7 @@ namespace ClipboardTool
         public (string PlainText, string RichText) ConvertToRichText(string plainText)
         {
             //https://www.biblioscape.com/rtf15_spec.htm
-            Dbg.WriteWithCaller("Parsing Rich Text");
+            Dbg.WriteWithCaller("Parsing Rich Text: ");
 
             RichTextBox rtfBox = new RichTextBox();
             StringBuilder builder = new StringBuilder();
@@ -355,8 +380,11 @@ namespace ClipboardTool
                 }
             }
 
-            plainTextResult = rtfBox.Text;
+            plainTextResult = rtfBox.Text; // destroys unicode like smileys
             rtfBox.Dispose();
+            //Dbg.WriteWithCaller("Original Text: " + plainText);
+            //Debug.WriteLine("Plain text result: " + plainTextResult);
+            //Debug.WriteLine("Rich text result: " + richTextResult);
             return (PlainText: plainTextResult, RichText: richTextResult);
         }
 

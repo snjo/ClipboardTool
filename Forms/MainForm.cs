@@ -1,4 +1,4 @@
-using ClipboardTool.Properties;
+﻿using ClipboardTool.Properties;
 using DebugTools;
 using Hotkeys;
 using System.Diagnostics;
@@ -529,12 +529,9 @@ namespace ClipboardTool
         }
 
         public void SetClipBoard(string plainText, string? richText = "", bool forceClipboardUpdate = false, string source="unknown")//, TextDataFormat dataFormat = TextDataFormat.Text)
-        {
-            //Dbg.WriteWithCaller("SetClipboard start, source: " + source + " force:" + forceClipboardUpdate
-            //    +"\n:  plain: " + plainText.Length + " \n:  Richtext: " + (richText != null ? richText.Length : "null"));
+        {   
             if ((!settings.updateClipboard && settings.sendType) && !forceClipboardUpdate)
             {
-                //Dbg.DebugValues("Skipping Clipboard update", "  ", "settings.updateClipboard: " + settings.updateClipboard, "settings.sendType: " + settings.sendType, "local forceClipboardUpdate: " + forceClipboardUpdate);
                 return;
             }
             if (plainText.Length > 0)
@@ -544,8 +541,8 @@ namespace ClipboardTool
                     DateTime clipStart = DateTime.Now;
                     try
                     {
-                        Clipboard.SetText(plainText, TextDataFormat.Text);
-                        //Dbg.WriteWithCaller("Clipboard updated with plain text only");
+                        //string testEmoji = char.ConvertFromUtf32(128076).ToString();
+                        Clipboard.SetText(plainText, TextDataFormat.UnicodeText);
                     }
                     catch
                     {
@@ -556,19 +553,23 @@ namespace ClipboardTool
                         //should be fixed after fixing some spammy clipboard updates.
                     }
                     TimeSpan ts = DateTime.Now - clipStart;
-                    //Dbg.Writeline("Clipboard update time: ", ts.TotalMilliseconds.ToString());
                 }
                 else
                 {
                     DateTime clipStart = DateTime.Now;
                     try
                     {
+                        // When pasting special unicode characters like smileys, the may be converted to ??
+                        // plaintext loses the unicode because it's copied from textBox.Text, RTF for an unknown reason when using SetData(DataFormats.RTF
                         Clipboard.Clear();
                         DataObject data = new DataObject();
-                        data.SetData(DataFormats.Text, plainText);
+                        data.SetData(DataFormats.UnicodeText, plainText);
                         data.SetData(DataFormats.Rtf, richText);
                         Clipboard.SetDataObject(data);
-                        //Dbg.WriteWithCaller("Clipboard updated with plain and rict text");
+
+                        //test
+                        //Debug.WriteLine("Set to clip from RTF");
+                        //Clipboard.SetText(plainText, TextDataFormat.UnicodeText);
                     }
                     catch
                     {
@@ -577,7 +578,6 @@ namespace ClipboardTool
                         Dbg.WriteWithCaller("Error updating clipboard");
                     }
                     TimeSpan ts = DateTime.Now - clipStart;
-                    //Dbg.Writeline("Clipboard update time: ", ts.TotalMilliseconds.ToString());
                 }
             }
             else

@@ -47,6 +47,7 @@ namespace ClipboardTool.Classes
         public Command Math;
         public Command Round;
         public Command RTF;
+        public Command ClipboardCharToInt;
         public Command None;
 
         public ProcessingCommands()
@@ -75,6 +76,7 @@ namespace ClipboardTool.Classes
             Math =                    new Command (name: "$Math", description: "Flag: Solves equations enclosed in [] brackets", Commands);
             Round =                   new Command (name: "$Round", description: "Flag: Alters $Math to round off results. ", Commands);
             RTF =                     new Command (name: "$RTF", description: "Output Rich Text (.rtf format)", Commands);
+            ClipboardCharToInt =      new Command (name: "$cci", description: "Convert text to character numbers for debugging", Commands);
             None =                    new Command (name: "$X", description: "No processing, but separates a tag from the rest of the text", Commands);
         }
 
