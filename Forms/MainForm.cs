@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using TextBox = System.Windows.Forms.TextBox;
 
-[assembly: AssemblyVersion("1.5.*")]
+[assembly: AssemblyVersion("1.6.*")]
 
 namespace ClipboardTool
 {

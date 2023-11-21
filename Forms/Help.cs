@@ -1,4 +1,6 @@
-﻿namespace ClipboardTool
+﻿using System.Diagnostics;
+
+namespace ClipboardTool
 {
     public partial class HelpForm : Form
     {
@@ -28,6 +30,12 @@
 
             richTextBox1.AppendText(text);
 
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            string url = "https://github.com/snjo/ClipboardTool/blob/master/readme.md";
+            Process.Start(new ProcessStartInfo() { FileName = url, UseShellExecute = true });
         }
     }
 }
