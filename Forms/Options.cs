@@ -1,11 +1,9 @@
 ﻿using ClipboardTool.Classes;
 using ClipboardTool.Properties;
-using DebugTools;
 using Hotkeys;
 using System.Configuration;
 using System.Diagnostics;
 using System.Globalization;
-using System.Web;
 
 namespace ClipboardTool
 {

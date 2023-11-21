@@ -1,18 +1,12 @@
 ﻿using ClipboardTool.Properties;
 using DebugTools;
 using Hotkeys;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace ClipboardTool.Classes;
 
-public class CBT // CBT = clipboardtool
+public class CBT // CBT = clipboardtool, main code that's not directly UI events etc.
 {
     MainForm mainForm;
     Settings settings = Settings.Default;
@@ -24,7 +18,7 @@ public class CBT // CBT = clipboardtool
         process = mainForm.process;
     }
 
-    public static void updateHotkeyLabel(Hotkey hotkey, Label label)
+    public void updateHotkeyLabel(Hotkey hotkey, Label label)
     {
         if (hotkey != null)
         {
@@ -418,7 +412,7 @@ public class CBT // CBT = clipboardtool
         delayKeystrokes("$SendDate");
     }
 
-       private string SendDateText()
+    private string SendDateText()
     {
         string outDate = "init outDate (SendDate error)";
         switch (sendDateChoice)

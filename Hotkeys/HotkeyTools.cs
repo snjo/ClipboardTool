@@ -1,17 +1,14 @@
 ﻿// add using for the active project's Properties here
 // ex: using MyApp.Properties;
 using ClipboardTool.Properties;
-using DebugTools;
-using System;
 using System.Configuration;
 using System.Diagnostics;
-using System.Windows.Forms;
 
 namespace Hotkeys
 {
     public class HotkeyTools
     {
-        
+
 
         public static Dictionary<string, Hotkey> LoadHotkeys(Dictionary<string, Hotkey> hotkeyList, List<string> hotkeyNames, Form parent)
         {
@@ -30,9 +27,9 @@ namespace Hotkeys
 
             hotkey.Key = getSettingString("hk" + hotkeyName + "Key", "");
             hotkey.Ctrl = getSettingBool("hk" + hotkeyName + "Ctrl", false);
-            hotkey.Alt  = getSettingBool("hk" + hotkeyName + "Alt", false);
-            hotkey.Shift= getSettingBool("hk" + hotkeyName + "Shift", false);
-            hotkey.Win  = getSettingBool("hk" + hotkeyName + "Win", false);
+            hotkey.Alt = getSettingBool("hk" + hotkeyName + "Alt", false);
+            hotkey.Shift = getSettingBool("hk" + hotkeyName + "Shift", false);
+            hotkey.Win = getSettingBool("hk" + hotkeyName + "Win", false);
             hotkey.ghk = new GlobalHotkey(hotkey.Modifiers(), hotkey.Key, parent, hotkeyName);
             return hotkey;
         }

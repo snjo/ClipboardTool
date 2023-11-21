@@ -2,13 +2,9 @@
 using ClipboardTool.Properties;
 using DebugTools;
 using Hotkeys;
-using System.Diagnostics;
 using System.Globalization;
-using System.IO;
-using System.Media;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using System.Text.RegularExpressions;
 using TextBox = System.Windows.Forms.TextBox;
 
 [assembly: AssemblyVersion("1.6.*")]
@@ -52,16 +48,12 @@ public partial class MainForm : Form
     private bool oldCapslockState;
     private bool capLockStateSet = false;
     private bool alwaysOnTop = false;
-    //public Form Current;
     HelpForm helpForm = new HelpForm();
-    //string delayedKeystrokes = "";
-    //public bool hotkeyHeldDown = false;
     public CultureInfo startingCulture = CultureInfo.CurrentCulture;
 
     public MainForm()
     {
         InitializeComponent();
-        //Current = this;
         timerStatus.Start();
         _process = new ProcessText(this);
         _cbt = new CBT(this);
@@ -94,11 +86,11 @@ public partial class MainForm : Form
 
     private void updateHotkeyLabels()
     {
-        CBT.updateHotkeyLabel(HotkeyList["UpperCase"], labelUpper);
-        CBT.updateHotkeyLabel(HotkeyList["LowerCase"], labelLower);
-        CBT.updateHotkeyLabel(HotkeyList["PlainText"], labelPlain);
-        CBT.updateHotkeyLabel(HotkeyList["CapsLock"], labelCaps);
-        CBT.updateHotkeyLabel(HotkeyList["ProcessText"], labelProcess);
+        cbt.updateHotkeyLabel(HotkeyList["UpperCase"], labelUpper);
+        cbt.updateHotkeyLabel(HotkeyList["LowerCase"], labelLower);
+        cbt.updateHotkeyLabel(HotkeyList["PlainText"], labelPlain);
+        cbt.updateHotkeyLabel(HotkeyList["CapsLock"], labelCaps);
+        cbt.updateHotkeyLabel(HotkeyList["ProcessText"], labelProcess);
     }
 
 
@@ -436,7 +428,7 @@ public partial class MainForm : Form
         if (tag != null)
         {
             int num = int.Parse(tag);
-            cbt.saveMemSlotToFile(num, warnIfFailed:true);
+            cbt.saveMemSlotToFile(num, warnIfFailed: true);
         }
     }
     #endregion

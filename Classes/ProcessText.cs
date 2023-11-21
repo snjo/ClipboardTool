@@ -1,11 +1,9 @@
-﻿using ClipboardTool.Properties;
-using System.Configuration;
-using System.Diagnostics;
-using System.Text;
+﻿using ClipboardTool.Classes;
+using ClipboardTool.Properties;
 using DebugTools;
 using System.Data;
-using ClipboardTool.Classes;
-using System.Security.Cryptography;
+using System.Diagnostics;
+using System.Text;
 
 namespace ClipboardTool
 {
@@ -84,7 +82,7 @@ namespace ClipboardTool
 
             // split text in mem slot 1, output lines by counter number
             customText = SeparatorList(customText);
-            
+
 
             // split lines in main textbox, output lines by counter number
             if (customText.Contains(commands.List.Name))
@@ -249,7 +247,7 @@ namespace ClipboardTool
                         catch
                         {
                             if (Settings.Default.MathWarning)
-                                MessageBox.Show("Can't solve equation:" + Environment.NewLine + equation, commands.Math.Name+" error");
+                                MessageBox.Show("Can't solve equation:" + Environment.NewLine + equation, commands.Math.Name + " error");
                             Dbg.Writeline("Can't compute equation: " + equation);
                         }
                     }
@@ -402,7 +400,7 @@ namespace ClipboardTool
 
         private string PromptForText(string customText)
         {
-            TextPrompt prompt = new TextPrompt("Input text", "Text processing is requesting an input value." + Environment.NewLine + "("+commands.Prompt.Name+" function)");
+            TextPrompt prompt = new TextPrompt("Input text", "Text processing is requesting an input value." + Environment.NewLine + "(" + commands.Prompt.Name + " function)");
             if (prompt.ShowDialog() == DialogResult.OK)
             {
                 customText = customText.Replace(commands.Prompt.Name, prompt.TextResult);

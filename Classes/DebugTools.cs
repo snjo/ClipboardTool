@@ -42,7 +42,7 @@ namespace DebugTools
             {
                 result += t;
             }
-            
+
             Debug.WriteLine(result);
         }
 
