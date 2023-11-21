@@ -7,7 +7,7 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using TextBox = System.Windows.Forms.TextBox;
 
-[assembly: AssemblyVersion("1.6.*")]
+[assembly: AssemblyVersion("1.7.*")]
 
 namespace ClipboardTool;
 
