@@ -12,10 +12,12 @@ namespace ClipboardTool
     public class ProcessText
     {
         MainForm mainForm;
+        //CBT cbt;
         public ProcessingCommands commands = new ProcessingCommands();
         public ProcessText(MainForm parent)
         {
             mainForm = parent;
+            //cbt = parent.cbt;
         }
 
         /// <summary>
@@ -139,7 +141,7 @@ namespace ClipboardTool
             }
             else
             {
-                mainForm.SetClipBoard(plainText, richText, forceClipboardUpdate, "Process Text");
+                mainForm.cbt.SetClipBoard(plainText, richText, forceClipboardUpdate, "Process Text");
                 return (PlainText: plainText, RichText: richText);
             }
         }

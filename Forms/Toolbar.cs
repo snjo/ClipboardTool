@@ -97,11 +97,11 @@ namespace ClipboardTool
         {
             if (e.Button == MouseButtons.Left)
             {
-                mainform.setClipboardFromTextBox(num);
+                mainform.cbt.setClipboardFromTextBox(num);
             }
             if (e.Button == MouseButtons.Right)
             {
-                mainform.setTextBoxFromClipboard(num);
+                mainform.cbt.setTextBoxFromClipboard(num);
             }
         }
 
