@@ -6,12 +6,12 @@ using System.Text.RegularExpressions;
 
 namespace ClipboardTool.Classes;
 
-public class CBT // CBT = clipboardtool, main code that's not directly UI events etc.
+public class MainMethods
 {
     MainForm mainForm;
     Settings settings = Settings.Default;
     ProcessText process;
-    public CBT(MainForm parent)
+    public MainMethods(MainForm parent)
     {
         mainForm = parent;
         settings = ClipboardTool.Properties.Settings.Default;

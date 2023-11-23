@@ -146,7 +146,7 @@ namespace ClipboardTool
             }
 
             settings.Save();
-            mainForm.UpdateCapsLock(true); // updates the tray icon to a/A or normal icon
+            mainForm.UpdateCapsLock(forceUpdate: true); // updates the tray icon to a/A or normal icon
 
             reloadHotkeys();
             cbt.UpdateCulture();

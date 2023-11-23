@@ -16,10 +16,9 @@ public partial class MainForm : Form
     [DllImport("user32.dll")]
     static extern void keybd_event(byte bVk, byte bScan, uint dwFlags, UIntPtr dwExtraInfo);
     [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-    public static extern bool SetForegroundWindow(IntPtr hWnd);
+    static extern bool SetForegroundWindow(IntPtr hWnd);
 
     Settings settings = Settings.Default;
-    string clipBoardText = String.Empty;
     private ProcessText _process;
     private MainMethods _mainMethods;
     TextHistory? textHistory;
@@ -68,7 +67,7 @@ public partial class MainForm : Form
         {
             HotkeyTools.RegisterHotkeys(HotkeyList);
         }
-        UpdateCapsLock(true);
+        UpdateCapsLock(forceUpdate: true);
     }
 
     public ProcessText process
@@ -163,10 +162,10 @@ public partial class MainForm : Form
         }
     }
 
-    public void UpdateCapsLock(bool force)
+    public void UpdateCapsLock(bool forceUpdate)
     {
         bool capsLockStatus = Control.IsKeyLocked(System.Windows.Forms.Keys.CapsLock);
-        if (force || !capLockStateSet || capsLockStatus != oldCapslockState)
+        if (forceUpdate || !capLockStateSet || capsLockStatus != oldCapslockState)
         {
             checkBoxCapsLock.Checked = capsLockStatus;
             oldCapslockState = capsLockStatus;
@@ -176,17 +175,17 @@ public partial class MainForm : Form
             if (capsLockStatus)
             {
                 CapsLockStatusText = "on";
-                UpdateCapsLockIcon(true);
+                UpdateCapsLockIcon(capsLockOn: true);
             }
             else
             {
-                UpdateCapsLockIcon(false);
+                UpdateCapsLockIcon(capsLockOn: false);
             }
             systrayIcon.Text = "Clipboard Tool - Caps Lock is " + CapsLockStatusText;
         }
     }
 
-    public void UpdateCapsLockIcon(bool capsLockOn)
+    private void UpdateCapsLockIcon(bool capsLockOn)
     {
         if (settings.TrayIconCapslockStatus)
         {
@@ -203,7 +202,7 @@ public partial class MainForm : Form
 
     private void timerStatus_Tick(object sender, EventArgs e)
     {
-        UpdateCapsLock(false);
+        UpdateCapsLock(forceUpdate: false);
     }
 
     private void checkBoxCapsLock_Click(object sender, EventArgs e)
@@ -259,8 +258,7 @@ public partial class MainForm : Form
         set
         {
             decimal newValue = numericUpDown1.Value + value;
-            if (newValue <= numericUpDown1.Maximum &&
-                newValue >= numericUpDown1.Minimum)
+            if (newValue <= numericUpDown1.Maximum && newValue >= numericUpDown1.Minimum)
             {
                 numericUpDown1.Value = value;
             }
@@ -352,19 +350,19 @@ public partial class MainForm : Form
         Application.Exit();
     }
 
-    public void actionCapsLock(object sender, MouseEventArgs e)
-    {
-        ToggleCapsLock();
-    }
+    //public void actionCapsLock(object sender, MouseEventArgs e)
+    //{
+    //    ToggleCapsLock();
+    //}
 
     public void actionUpperCaseOnce(object sender, EventArgs e)
     {
-        main.UpperCaseOnce(true);
+        main.UpperCaseOnce(forceClipboardUpdate: true);
     }
 
     public void actionLowerCaseOnce(object sender, EventArgs e)
     {
-        main.LowerCaseOnce(true);
+        main.LowerCaseOnce(forceClipboardUpdate: true);
     }
 
     public void actionHideFromTaskbar(object sender, EventArgs e)
@@ -374,7 +372,7 @@ public partial class MainForm : Form
 
     public void actionPlainTextOnce(object sender, EventArgs e)
     {
-        main.PlainTextOnce(true);
+        main.PlainTextOnce(forceClipboardUpdate: true);
     }
 
     private void actionShowToolbar(object sender, EventArgs e)
@@ -399,7 +397,7 @@ public partial class MainForm : Form
         options.Dispose();
     }
 
-    public void actionSave(object sender, EventArgs e)
+    private void actionSave(object sender, EventArgs e)
     {
         var button = (System.Windows.Forms.Button)sender;
         string? tag = button.Tag.ToString();
@@ -410,7 +408,7 @@ public partial class MainForm : Form
         }
     }
 
-    public void actionLoad(object sender, EventArgs e)
+    private void actionLoad(object sender, EventArgs e)
     {
         var button = (System.Windows.Forms.Button)sender;
         string? tag = button.Tag.ToString();

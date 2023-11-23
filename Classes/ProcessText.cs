@@ -10,12 +10,10 @@ namespace ClipboardTool
     public class ProcessText
     {
         MainForm mainForm;
-        //CBT cbt;
         public ProcessingCommands commands = new ProcessingCommands();
         public ProcessText(MainForm parent)
         {
             mainForm = parent;
-            //cbt = parent.cbt;
         }
 
         /// <summary>
@@ -147,13 +145,6 @@ namespace ClipboardTool
         private string StringToIntSequence(string clip)
         {
             string result = string.Empty;
-            string smiley = string.Concat((char)55357, (char)56842);
-            string smiley2 = "😊";
-            if (clip.Contains(smiley2))
-            {
-                //clip = clip.Replace(smiley, ":)");
-                Debug.WriteLine("Replacing emoji smiley");
-            }
             foreach (char c in clip)
             {
                 result += (int)c + " ";
@@ -193,7 +184,7 @@ namespace ClipboardTool
             }
         }
 
-        public string solveEquation(string mixedText, bool round)
+        private string solveEquation(string mixedText, bool round)
         {
             string result = "";
             string tagStart = "[";
@@ -262,7 +253,7 @@ namespace ClipboardTool
         /// </summary>
         /// <param name="plainText"></param>
         /// <returns>string PlainText, string RichText</returns>
-        public (string PlainText, string RichText) ConvertToRichText(string plainText)
+        private (string PlainText, string RichText) ConvertToRichText(string plainText)
         {
             //https://www.biblioscape.com/rtf15_spec.htm
             Dbg.WriteWithCaller("Parsing Rich Text: ");
@@ -476,7 +467,7 @@ namespace ClipboardTool
             return customText;
         }
 
-        public string SeparatorList(string customText, int slot = 1)
+        private string SeparatorList(string customText, int slot = 1)
         {
             char separator = ',';
             string command = string.Empty;
