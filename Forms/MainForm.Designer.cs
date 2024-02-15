@@ -402,7 +402,7 @@
             historyStripMenuItem.Name = "historyStripMenuItem";
             historyStripMenuItem.Size = new Size(188, 22);
             historyStripMenuItem.Text = "History";
-            historyStripMenuItem.Click += buttonHistory_Click;
+            historyStripMenuItem.Click += buttonTextLibrary_Click;
             // 
             // exitToolStripMenuItem
             // 
@@ -597,13 +597,13 @@
             // buttonHistory
             // 
             buttonHistory.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            buttonHistory.Location = new Point(147, 5);
+            buttonHistory.Location = new Point(123, 5);
             buttonHistory.Name = "buttonHistory";
-            buttonHistory.Size = new Size(60, 23);
+            buttonHistory.Size = new Size(84, 23);
             buttonHistory.TabIndex = 50;
-            buttonHistory.Text = "history";
+            buttonHistory.Text = "text library";
             buttonHistory.UseVisualStyleBackColor = true;
-            buttonHistory.Click += buttonHistory_Click;
+            buttonHistory.Click += buttonTextLibrary_Click;
             // 
             // notifyIcon1
             // 

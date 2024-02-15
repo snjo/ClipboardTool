@@ -46,7 +46,7 @@ namespace ClipboardTool
             }
         }
 
-        private void actionAlwaysOnTop(object sender, EventArgs e)
+        private void ActionAlwaysOnTop(object sender, EventArgs e)
         {
             alwaysOnTop = !alwaysOnTop;
             if (alwaysOnTop)
@@ -185,7 +185,7 @@ namespace ClipboardTool
             buttonPin.TabIndex = 10;
             buttonPin.Text = "📌";
             buttonPin.UseVisualStyleBackColor = true;
-            buttonPin.Click += actionAlwaysOnTop;
+            buttonPin.Click += ActionAlwaysOnTop;
             // 
             // buttonhide
             // 
@@ -309,7 +309,7 @@ namespace ClipboardTool
 
         private void buttonHistory_Click(object sender, EventArgs e)
         {
-            mainform.ShowHistory();
+            mainform.ShowTextLibrary();
         }
     }
 

@@ -8,9 +8,9 @@ namespace ClipboardTool.Classes;
 
 public class MainMethods
 {
-    MainForm mainForm;
-    Settings settings = Settings.Default;
-    ProcessText process;
+    readonly MainForm mainForm;
+    readonly Settings settings = Settings.Default;
+    readonly ProcessText process;
     public MainMethods(MainForm parent)
     {
         mainForm = parent;
@@ -282,9 +282,9 @@ public class MainMethods
             mainForm.NumberSpinner = 1;
         }
 
-        if (CheckHotkey("History", id))
+        if (CheckHotkey("TextLibrary", id))
         {
-            mainForm.ShowHistory();
+            mainForm.ShowTextLibrary();
         }
     }
 
@@ -406,7 +406,7 @@ public class MainMethods
     {
         if (sendDateChoice < SendDateOption.END - 1)
         {
-            sendDateChoice = sendDateChoice + 1;
+            sendDateChoice++;
         }
 
         delayKeystrokes("$SendDate");
@@ -414,26 +414,14 @@ public class MainMethods
 
     private string SendDateText()
     {
-        string outDate = "init outDate (SendDate error)";
-        switch (sendDateChoice)
+        string outDate = sendDateChoice switch
         {
-            case SendDateOption.NotStarted:
-                outDate = "Use Date/Time hotkey (SendDate error)";
-                break;
-            case SendDateOption.JustDate:
-                outDate = DateTime.Now.ToShortDateString();
-                break;
-            case SendDateOption.DateAndTime:
-                outDate = DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString();
-                break;
-            case SendDateOption.JustTime:
-                outDate = DateTime.Now.ToShortTimeString();
-                break;
-            default:
-                outDate = "Pressed beyond the enum (SendDate error)";
-                break;
-        }
-
+            SendDateOption.NotStarted => "Use Date/Time hotkey (SendDate error)",
+            SendDateOption.JustDate => DateTime.Now.ToShortDateString(),
+            SendDateOption.DateAndTime => DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString(),
+            SendDateOption.JustTime => DateTime.Now.ToShortTimeString(),
+            _ => "Pressed beyond the enum (SendDate error)",
+        };
         return outDate;
     }
 
@@ -450,7 +438,7 @@ public class MainMethods
         {
             if (richText == null)
             {
-                DateTime clipStart = DateTime.Now;
+                //DateTime clipStart = DateTime.Now;
                 try
                 {
                     //string testEmoji = char.ConvertFromUtf32(128076).ToString();
@@ -464,11 +452,11 @@ public class MainMethods
                     //this was probably caused by another program accessing the clipboard at the same time, or sending requests too rapidly.
                     //should be fixed after fixing some spammy clipboard updates.
                 }
-                TimeSpan ts = DateTime.Now - clipStart;
+                //TimeSpan ts = DateTime.Now - clipStart;
             }
             else
             {
-                DateTime clipStart = DateTime.Now;
+                //DateTime clipStart = DateTime.Now;
                 try
                 {
                     // When pasting special unicode characters like smileys, the may be converted to ??
@@ -489,7 +477,7 @@ public class MainMethods
                     //    SystemSounds.Asterisk.Play();
                     Dbg.WriteWithCaller("Error updating clipboard");
                 }
-                TimeSpan ts = DateTime.Now - clipStart;
+                //TimeSpan ts = DateTime.Now - clipStart;
             }
         }
         else

@@ -12,7 +12,7 @@ namespace ClipboardTool.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.6.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.8.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -746,66 +746,66 @@ namespace ClipboardTool.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("H")]
-        public string hkHistoryKey {
+        public string hkTextLibraryKey {
             get {
-                return ((string)(this["hkHistoryKey"]));
+                return ((string)(this["hkTextLibraryKey"]));
             }
             set {
-                this["hkHistoryKey"] = value;
+                this["hkTextLibraryKey"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool hkHistoryCtrl {
+        public bool hkTextLibraryCtrl {
             get {
-                return ((bool)(this["hkHistoryCtrl"]));
+                return ((bool)(this["hkTextLibraryCtrl"]));
             }
             set {
-                this["hkHistoryCtrl"] = value;
+                this["hkTextLibraryCtrl"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool hkHistoryAlt {
+        public bool hkTextLibraryAlt {
             get {
-                return ((bool)(this["hkHistoryAlt"]));
+                return ((bool)(this["hkTextLibraryAlt"]));
             }
             set {
-                this["hkHistoryAlt"] = value;
+                this["hkTextLibraryAlt"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool hkHistoryShift {
+        public bool hkTextLibraryShift {
             get {
-                return ((bool)(this["hkHistoryShift"]));
+                return ((bool)(this["hkTextLibraryShift"]));
             }
             set {
-                this["hkHistoryShift"] = value;
+                this["hkTextLibraryShift"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool hkHistoryWin {
+        public bool hkTextLibraryWin {
             get {
-                return ((bool)(this["hkHistoryWin"]));
+                return ((bool)(this["hkTextLibraryWin"]));
             }
             set {
-                this["hkHistoryWin"] = value;
+                this["hkTextLibraryWin"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("%userprofile%\\ClipboardTool History")]
+        [global::System.Configuration.DefaultSettingValueAttribute("%userprofile%\\ClipboardTool TextLibrary")]
         public string HistoryFolder {
             get {
                 return ((string)(this["HistoryFolder"]));

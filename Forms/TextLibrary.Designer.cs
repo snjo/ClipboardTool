@@ -1,6 +1,6 @@
 ﻿namespace ClipboardTool
 {
-    partial class TextHistory
+    partial class TextLibrary
     {
         /// <summary>
         /// Required designer variable.
@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TextHistory));
-            gridHistory = new DataGridView();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TextLibrary));
+            gridTextLibrary = new DataGridView();
             ColumnPinned = new DataGridViewCheckBoxColumn();
             ColumnTitle = new DataGridViewTextBoxColumn();
             ColumnText = new DataGridViewTextBoxColumn();
@@ -41,14 +41,14 @@
             colorDialog1 = new ColorDialog();
             buttonColor = new Button();
             linkLabelHistoryFolder = new LinkLabel();
-            ((System.ComponentModel.ISupportInitialize)gridHistory).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gridTextLibrary).BeginInit();
             SuspendLayout();
             // 
             // gridHistory
             // 
-            gridHistory.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            gridHistory.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            gridHistory.Columns.AddRange(new DataGridViewColumn[] { ColumnPinned, ColumnTitle, ColumnText, ColumnCopy });
+            gridTextLibrary.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            gridTextLibrary.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            gridTextLibrary.Columns.AddRange(new DataGridViewColumn[] { ColumnPinned, ColumnTitle, ColumnText, ColumnCopy });
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = SystemColors.Window;
             dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
@@ -56,18 +56,18 @@
             dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            gridHistory.DefaultCellStyle = dataGridViewCellStyle1;
-            gridHistory.Location = new Point(4, 32);
-            gridHistory.MultiSelect = false;
-            gridHistory.Name = "gridHistory";
-            gridHistory.RowHeadersVisible = false;
-            gridHistory.RowHeadersWidth = 20;
-            gridHistory.RowTemplate.Height = 50;
-            gridHistory.Size = new Size(518, 487);
-            gridHistory.TabIndex = 3;
-            gridHistory.CellClick += gridHistory_CellClick;
-            gridHistory.CellEndEdit += gridHistory_CellEndEdit;
-            gridHistory.MouseDoubleClick += gridHistory_MouseDoubleClick;
+            gridTextLibrary.DefaultCellStyle = dataGridViewCellStyle1;
+            gridTextLibrary.Location = new Point(4, 32);
+            gridTextLibrary.MultiSelect = false;
+            gridTextLibrary.Name = "gridHistory";
+            gridTextLibrary.RowHeadersVisible = false;
+            gridTextLibrary.RowHeadersWidth = 20;
+            gridTextLibrary.RowTemplate.Height = 50;
+            gridTextLibrary.Size = new Size(518, 487);
+            gridTextLibrary.TabIndex = 3;
+            gridTextLibrary.CellClick += gridTextLibrary_CellClick;
+            gridTextLibrary.CellEndEdit += gridTextLibrary_CellEndEdit;
+            gridTextLibrary.MouseDoubleClick += gridTextLibrary_MouseDoubleClick;
             // 
             // ColumnPinned
             // 
@@ -148,13 +148,13 @@
             linkLabelHistoryFolder.AutoSize = true;
             linkLabelHistoryFolder.Location = new Point(4, 524);
             linkLabelHistoryFolder.Name = "linkLabelHistoryFolder";
-            linkLabelHistoryFolder.Size = new Size(81, 15);
+            linkLabelHistoryFolder.Size = new Size(103, 15);
             linkLabelHistoryFolder.TabIndex = 8;
             linkLabelHistoryFolder.TabStop = true;
-            linkLabelHistoryFolder.Text = "History Folder";
-            linkLabelHistoryFolder.LinkClicked += OpenHistoryFolder;
+            linkLabelHistoryFolder.Text = "Text Library Folder";
+            linkLabelHistoryFolder.LinkClicked += OpenTextLibraryFolder;
             // 
-            // TextHistory
+            // TextLibrary
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -164,17 +164,17 @@
             Controls.Add(checkBoxMinimize);
             Controls.Add(button1);
             Controls.Add(buttonAddFromClipboard);
-            Controls.Add(gridHistory);
+            Controls.Add(gridTextLibrary);
             Icon = (Icon)resources.GetObject("$this.Icon");
-            Name = "TextHistory";
-            Text = "History";
-            ((System.ComponentModel.ISupportInitialize)gridHistory).EndInit();
+            Name = "TextLibrary";
+            Text = "Text Library";
+            ((System.ComponentModel.ISupportInitialize)gridTextLibrary).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-        private DataGridView gridHistory;
+        private DataGridView gridTextLibrary;
         private Button buttonAddFromClipboard;
         private Button button1;
         private CheckBox checkBoxMinimize;

@@ -182,23 +182,23 @@
     <Setting Name="hkResetNumberWin" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="hkHistoryKey" Type="System.String" Scope="User">
+    <Setting Name="hkTextLibraryKey" Type="System.String" Scope="User">
       <Value Profile="(Default)">H</Value>
     </Setting>
-    <Setting Name="hkHistoryCtrl" Type="System.Boolean" Scope="User">
+    <Setting Name="hkTextLibraryCtrl" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="hkHistoryAlt" Type="System.Boolean" Scope="User">
+    <Setting Name="hkTextLibraryAlt" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="hkHistoryShift" Type="System.Boolean" Scope="User">
+    <Setting Name="hkTextLibraryShift" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="hkHistoryWin" Type="System.Boolean" Scope="User">
+    <Setting Name="hkTextLibraryWin" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="HistoryFolder" Type="System.String" Scope="User">
-      <Value Profile="(Default)">%userprofile%\ClipboardTool History</Value>
+      <Value Profile="(Default)">%userprofile%\ClipboardTool TextLibrary</Value>
     </Setting>
     <Setting Name="UpgradeSettings" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>

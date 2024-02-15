@@ -71,6 +71,7 @@
             tabPageHotkeys = new TabPage();
             tabPageSources = new TabPage();
             tabPageCustom = new TabPage();
+            button1 = new Button();
             label13 = new Label();
             label12 = new Label();
             textBoxCulture = new TextBox();
@@ -83,7 +84,6 @@
             buttonRTFDefaultColors = new Button();
             label5 = new Label();
             textBoxRTFfonts = new TextBox();
-            button1 = new Button();
             ((System.ComponentModel.ISupportInitialize)HotkeyGrid).BeginInit();
             tabControl1.SuspendLayout();
             tabPageGeneral.SuspendLayout();
@@ -348,18 +348,18 @@
             label3.AutoSize = true;
             label3.Location = new Point(3, 122);
             label3.Name = "label3";
-            label3.Size = new Size(79, 15);
+            label3.Size = new Size(101, 15);
             label3.TabIndex = 59;
-            label3.Text = "History folder";
+            label3.Text = "Text Library folder";
             // 
             // checkBoxHistoryMinimize
             // 
             checkBoxHistoryMinimize.AutoSize = true;
             checkBoxHistoryMinimize.Location = new Point(21, 282);
             checkBoxHistoryMinimize.Name = "checkBoxHistoryMinimize";
-            checkBoxHistoryMinimize.Size = new Size(174, 19);
+            checkBoxHistoryMinimize.Size = new Size(193, 19);
             checkBoxHistoryMinimize.TabIndex = 60;
-            checkBoxHistoryMinimize.Text = "Minimize History after Copy";
+            checkBoxHistoryMinimize.Text = "Minimize TextLibrary after Copy";
             checkBoxHistoryMinimize.UseVisualStyleBackColor = true;
             // 
             // labelVersion
@@ -529,6 +529,16 @@
             tabPageCustom.Text = "Custom values";
             tabPageCustom.UseVisualStyleBackColor = true;
             // 
+            // button1
+            // 
+            button1.Location = new Point(172, 360);
+            button1.Name = "button1";
+            button1.Size = new Size(75, 23);
+            button1.TabIndex = 77;
+            button1.Text = "Check";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
             // label13
             // 
             label13.AutoSize = true;
@@ -644,16 +654,6 @@
             textBoxRTFfonts.Name = "textBoxRTFfonts";
             textBoxRTFfonts.Size = new Size(417, 85);
             textBoxRTFfonts.TabIndex = 65;
-            // 
-            // button1
-            // 
-            button1.Location = new Point(172, 360);
-            button1.Name = "button1";
-            button1.Size = new Size(75, 23);
-            button1.TabIndex = 77;
-            button1.Text = "Check";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
             // 
             // Options
             // 

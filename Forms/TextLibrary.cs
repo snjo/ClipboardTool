@@ -4,79 +4,78 @@ using System.Diagnostics;
 
 namespace ClipboardTool
 {
-    public partial class TextHistory : Form
+    public partial class TextLibrary : Form
     {
-        private int checkboxColumnIndex = 0;
-        private int titleColumnIndex = 1;
-        private int textColumnIndex = 2;
-        private int buttonColumnIndex = 3;
-        MainForm mainForm;
-        string colorTag = "//Color:";
-        string colorFolder = "Colors";
-        string colorFileName = "colors.txt";
-        string entryFileExtension = ".txt";
-        List<KeyValuePair<string, string[]>> historyEntries = new List<KeyValuePair<string, string[]>>();
+        private readonly int checkboxColumnIndex = 0;
+        private readonly int titleColumnIndex = 1;
+        private readonly int textColumnIndex = 2;
+        private readonly int buttonColumnIndex = 3;
+        readonly MainForm mainForm;
+        readonly string colorTag = "//Color:";
+        readonly string colorFolder = "Colors";
+        readonly string colorFileName = "colors.txt";
+        readonly string entryFileExtension = ".txt";
+        readonly List<KeyValuePair<string, string[]>> TextLibraryEntries = new List<KeyValuePair<string, string[]>>();
 
-        public TextHistory(MainForm mainForm)
+        public TextLibrary(MainForm mainForm)
         {
             InitializeComponent();
             this.mainForm = mainForm;
-            LoadHistoryFiles();
+            LoadTextLibraryFiles();
             checkBoxMinimize.Checked = Settings.Default.HistoryMinimizeAfterCopy;
         }
 
-        private string historyFolder
+        private string TextLibraryFolder
         {
             get
             {
                 return Environment.ExpandEnvironmentVariables(Settings.Default.HistoryFolder);
-                //return Path.Join(Environment.ExpandEnvironmentVariables(Settings.Default.MemorySlotFolder), "History");
             }
         }
 
-        private bool CheckOrCreateHistoryFolder(bool createIfMissing)
+        private bool CheckOrCreateTextLibraryFolder(bool createIfMissing)
         {
-            if (!Directory.Exists(historyFolder) && createIfMissing)
+            if (!Directory.Exists(TextLibraryFolder) && createIfMissing)
             {
                 try
                 {
-                    Directory.CreateDirectory(historyFolder);
+                    Directory.CreateDirectory(TextLibraryFolder);
                 }
                 catch
                 {
-                    Dbg.WriteWithCaller("Could not create folder for history text: " + historyFolder);
+                    Dbg.WriteWithCaller("Could not create folder for TextLibrary text: " + TextLibraryFolder);
                 }
             }
-            return Directory.Exists(historyFolder);
+            return Directory.Exists(TextLibraryFolder);
         }
 
-        private void PromptCreateHistoryFolder()
+        private void PromptCreateTextLibraryFolder()
         {
-            if (!CheckOrCreateHistoryFolder(false))
+            if (!CheckOrCreateTextLibraryFolder(false))
             {
-                DialogResult createFolder = MessageBox.Show("Couldn't find History folder." + Environment.NewLine +
-                    "Do you want to create " + historyFolder + "?" + Environment.NewLine +
+                DialogResult createFolder = MessageBox.Show("Couldn't find Text Library folder." + Environment.NewLine +
+                    "Do you want to create " + TextLibraryFolder + "?" + Environment.NewLine +
                     "(You can set a different folder name in Options)"
-                    , "Create History folder?"
+                    , "Create Text Library folder?"
                     , MessageBoxButtons.YesNo);
 
                 if (createFolder == DialogResult.Yes)
-                    CheckOrCreateHistoryFolder(true);
+                    CheckOrCreateTextLibraryFolder(true);
             }
         }
 
-        private void LoadHistoryFiles()
+        private void LoadTextLibraryFiles()
         {
-            PromptCreateHistoryFolder();
-            if (CheckOrCreateHistoryFolder(false))
+            PromptCreateTextLibraryFolder();
+            if (CheckOrCreateTextLibraryFolder(false))
             {
-                foreach (string file in Directory.GetFiles(historyFolder))
+                foreach (string file in Directory.GetFiles(TextLibraryFolder))
                 {
                     if (File.Exists(file))
                     {
                         Dbg.WriteWithCaller("Loading file: " + file);
                         string[] entryText = File.ReadAllLines(file);
-                        historyEntries.Add(new KeyValuePair<string, string[]>(file, entryText));
+                        TextLibraryEntries.Add(new KeyValuePair<string, string[]>(file, entryText));
                     }
                     else
                     {
@@ -86,11 +85,11 @@ namespace ClipboardTool
             }
             else
             {
-                Dbg.WriteWithCaller("Could not locate or create folder for history text: " + historyFolder + Environment.NewLine + "Set the folder in Options");
+                Dbg.WriteWithCaller("Could not locate or create folder for TextLibrary text: " + TextLibraryFolder + Environment.NewLine + "Set the folder in Options");
             }
-            gridHistory.Rows.Clear();
+            gridTextLibrary.Rows.Clear();
             int countRows = 0;
-            foreach (KeyValuePair<string, string[]> entry in historyEntries)
+            foreach (KeyValuePair<string, string[]> entry in TextLibraryEntries)
             {
                 Color c = Color.White;
                 int tagCount = 0;
@@ -110,7 +109,7 @@ namespace ClipboardTool
                     if (i < entry.Value.Length - 1)
                         textWithoutTags += Environment.NewLine;
                 }
-                gridHistory.Rows.Add(true, Path.GetFileNameWithoutExtension(entry.Key), textWithoutTags);
+                gridTextLibrary.Rows.Add(true, Path.GetFileNameWithoutExtension(entry.Key), textWithoutTags);
                 SetEntryColor(countRows, c);
                 countRows++;
             }
@@ -118,7 +117,7 @@ namespace ClipboardTool
 
         private void SetEntryColor(int rowIndex, Color color)
         {
-            DataGridViewRow row = gridHistory.Rows[rowIndex];
+            DataGridViewRow row = gridTextLibrary.Rows[rowIndex];
             if (row != null)
             {
                 if (row.Cells[1] != null)
@@ -183,11 +182,11 @@ namespace ClipboardTool
             if (filename == null || text == null) return false;
             if (filename.Length == 0) return false;
             if (color == Color.Empty) color = Color.White;
-            string path = Path.Join(historyFolder, filename + entryFileExtension);
-            PromptCreateHistoryFolder();
+            string path = Path.Join(TextLibraryFolder, filename + entryFileExtension);
+            PromptCreateTextLibraryFolder();
             try
             {
-                if (CheckOrCreateHistoryFolder(false))
+                if (CheckOrCreateTextLibraryFolder(false))
                 {
                     if (color != null)
                     {
@@ -218,20 +217,20 @@ namespace ClipboardTool
         private bool SaveEntry(int row)
         {
             bool result = false;
-            if (gridHistory.Rows.Count > row)
+            if (gridTextLibrary.Rows.Count > row)
             {
-                if (gridHistory.Rows[row] == null) return false;
-                if (gridHistory.Rows[row].Cells[titleColumnIndex] == null) return false;
-                if (gridHistory.Rows[row].Cells[titleColumnIndex].Value == null) return false;
-                if ((gridHistory.Rows[row].Cells[titleColumnIndex].Value.ToString() + "").Length == 0) return false;
-                if (gridHistory.Rows[row].Cells[textColumnIndex] == null) return false;
+                if (gridTextLibrary.Rows[row] == null) return false;
+                if (gridTextLibrary.Rows[row].Cells[titleColumnIndex] == null) return false;
+                if (gridTextLibrary.Rows[row].Cells[titleColumnIndex].Value == null) return false;
+                if ((gridTextLibrary.Rows[row].Cells[titleColumnIndex].Value.ToString() + "").Length == 0) return false;
+                if (gridTextLibrary.Rows[row].Cells[textColumnIndex] == null) return false;
 
-                string filename = gridHistory.Rows[row].Cells[titleColumnIndex].Value.ToString() + "";
-                if (gridHistory.Rows[row].Cells[textColumnIndex].Value == null)
-                    gridHistory.Rows[row].Cells[textColumnIndex].Value = string.Empty;
-                string text = gridHistory.Rows[row].Cells[textColumnIndex].Value.ToString() + "";
+                string filename = gridTextLibrary.Rows[row].Cells[titleColumnIndex].Value.ToString() + "";
+                if (gridTextLibrary.Rows[row].Cells[textColumnIndex].Value == null)
+                    gridTextLibrary.Rows[row].Cells[textColumnIndex].Value = string.Empty;
+                string text = gridTextLibrary.Rows[row].Cells[textColumnIndex].Value.ToString() + "";
                 Dbg.WriteWithCaller("Saving: " + filename);
-                Color color = gridHistory.Rows[row].Cells[titleColumnIndex].Style.BackColor;
+                Color color = gridTextLibrary.Rows[row].Cells[titleColumnIndex].Style.BackColor;
                 result = SaveEntry(filename, text, color);
                 SetPinnedCheckboxValue(row, result);
             }
@@ -247,9 +246,9 @@ namespace ClipboardTool
             }
             try
             {
-                if (Directory.Exists(historyFolder))
+                if (Directory.Exists(TextLibraryFolder))
                 {
-                    string file = Path.Join(historyFolder, filename + entryFileExtension);
+                    string file = Path.Join(TextLibraryFolder, filename + entryFileExtension);
                     if (File.Exists(file))
                     {
                         File.Delete(file);
@@ -275,7 +274,7 @@ namespace ClipboardTool
         {
             if (Clipboard.ContainsText())
             {
-                string title = string.Empty;
+                string title;
                 TextPrompt textPrompt = new TextPrompt("Set entry title", "Set title and click OK to pin entry." + Environment.NewLine + "Cancel adds entry but does not pin.", true, TextPrompt.IllegalFileCharacters);
                 DialogResult = textPrompt.ShowDialog();
                 if (DialogResult == DialogResult.OK)
@@ -288,18 +287,18 @@ namespace ClipboardTool
                     {
                         saveSuccessful = SaveEntry(textPrompt.TextResult, clipboardtext, color);
                     }
-                    int row = gridHistory.Rows.Add(saveSuccessful, title, clipboardtext);
+                    int row = gridTextLibrary.Rows.Add(saveSuccessful, title, clipboardtext);
                     SetEntryColor(row, color);
                 }
                 else
                 {
                     string clipboardtext = Clipboard.GetText();
-                    gridHistory.Rows.Add(false, "", clipboardtext);
+                    gridTextLibrary.Rows.Add(false, "", clipboardtext);
                 }
             }
         }
 
-        private void gridHistory_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void gridTextLibrary_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             //Debug.WriteLine("Clicked on row " + e.RowIndex);
             if (e.RowIndex == -1)
@@ -310,9 +309,9 @@ namespace ClipboardTool
             if (e.ColumnIndex == buttonColumnIndex)
             {
                 string? cellText = "";
-                if (gridHistory.Rows[e.RowIndex].Cells[textColumnIndex].Value != null)
+                if (gridTextLibrary.Rows[e.RowIndex].Cells[textColumnIndex].Value != null)
                 {
-                    cellText = gridHistory.Rows[e.RowIndex].Cells[textColumnIndex].Value.ToString();
+                    cellText = gridTextLibrary.Rows[e.RowIndex].Cells[textColumnIndex].Value.ToString();
                 }
                 if (cellText != null)
                 {
@@ -339,7 +338,7 @@ namespace ClipboardTool
             // Pin or unpin (save file)
             if (e.ColumnIndex == checkboxColumnIndex)
             {
-                if (gridHistory.Rows[e.RowIndex] == null)
+                if (gridTextLibrary.Rows[e.RowIndex] == null)
                 {
                     Dbg.WriteWithCaller("Row is null");
                     return;
@@ -351,8 +350,8 @@ namespace ClipboardTool
                     bool pinned = !oldCheckState;
                     if (pinned)
                     {
-                        string title = string.Empty;
-                        DataGridViewCellCollection cells = gridHistory.Rows[e.RowIndex].Cells;
+                        string title;
+                        DataGridViewCellCollection cells = gridTextLibrary.Rows[e.RowIndex].Cells;
 
                         if (cells[textColumnIndex].Value == null) return;
 
@@ -386,7 +385,7 @@ namespace ClipboardTool
                     else
                     {
                         Dbg.WriteWithCaller("Unpinned. Trying to delete corresponding file");
-                        DataGridViewCellCollection cells = gridHistory.Rows[e.RowIndex].Cells;
+                        DataGridViewCellCollection cells = gridTextLibrary.Rows[e.RowIndex].Cells;
                         if (cells[titleColumnIndex].Value != null)
                             DeleteEntry(cells[titleColumnIndex].Value.ToString());
                         SetPinnedCheckboxValue(e.RowIndex, false);
@@ -400,27 +399,27 @@ namespace ClipboardTool
 
         private bool GetPinnedCheckboxValue(int rowIndex)
         {
-            DataGridViewCheckBoxCell? checkboxCell = gridHistory.Rows[rowIndex].Cells[checkboxColumnIndex] as DataGridViewCheckBoxCell;
-            if (checkboxCell == null) checkboxCell = new DataGridViewCheckBoxCell();
+            DataGridViewCheckBoxCell? checkboxCell = gridTextLibrary.Rows[rowIndex].Cells[checkboxColumnIndex] as DataGridViewCheckBoxCell;
+            checkboxCell ??= new DataGridViewCheckBoxCell();
             return Convert.ToBoolean(checkboxCell.Value);
         }
 
         private bool SetPinnedCheckboxValue(int rowIndex, bool newValue)
         {
-            DataGridViewCheckBoxCell? checkboxCell = gridHistory.Rows[rowIndex].Cells[checkboxColumnIndex] as DataGridViewCheckBoxCell;
-            if (checkboxCell == null) checkboxCell = new DataGridViewCheckBoxCell();
+            DataGridViewCheckBoxCell? checkboxCell = gridTextLibrary.Rows[rowIndex].Cells[checkboxColumnIndex] as DataGridViewCheckBoxCell;
+            checkboxCell ??= new DataGridViewCheckBoxCell();
             checkboxCell.Value = newValue;
             return Convert.ToBoolean(checkboxCell.Value);
         }
 
-        private bool TogglePinnedCheckboxValue(int rowIndex)
-        {
-            DataGridViewCheckBoxCell? checkboxCell = gridHistory.Rows[rowIndex].Cells[checkboxColumnIndex] as DataGridViewCheckBoxCell;
-            if (checkboxCell == null) checkboxCell = new DataGridViewCheckBoxCell();
-            if (checkboxCell.Value == null) checkboxCell.Value = false;
-            checkboxCell.Value = !Convert.ToBoolean(checkboxCell.Value);
-            return Convert.ToBoolean(checkboxCell.Value);
-        }
+        //private bool TogglePinnedCheckboxValue(int rowIndex)
+        //{
+        //    DataGridViewCheckBoxCell? checkboxCell = gridTextLibrary.Rows[rowIndex].Cells[checkboxColumnIndex] as DataGridViewCheckBoxCell;
+        //    if (checkboxCell == null) checkboxCell = new DataGridViewCheckBoxCell();
+        //    if (checkboxCell.Value == null) checkboxCell.Value = false;
+        //    checkboxCell.Value = !Convert.ToBoolean(checkboxCell.Value);
+        //    return Convert.ToBoolean(checkboxCell.Value);
+        //}
 
         private bool alwaysOnTop = false;
         private void actionAlwaysOnTop(object sender, EventArgs e)
@@ -443,7 +442,7 @@ namespace ClipboardTool
 
         private void ColorPicker()
         {
-            if (gridHistory.SelectedCells.Count <= 0) return;
+            if (gridTextLibrary.SelectedCells.Count <= 0) return;
 
 
 
@@ -459,7 +458,7 @@ namespace ClipboardTool
             if (result == DialogResult.OK)
             {
                 Color newColor = colorDialog1.Color;
-                int row = gridHistory.SelectedCells[0].RowIndex;
+                int row = gridTextLibrary.SelectedCells[0].RowIndex;
                 SetEntryColor(row, newColor);
                 SaveEntry(row);
 
@@ -478,7 +477,7 @@ namespace ClipboardTool
         private int[]? GetSavedColors()
         {
             List<int> colorList = new List<int>();
-            string colorFilePath = Path.Join(historyFolder, colorFolder, colorFileName);
+            string colorFilePath = Path.Join(TextLibraryFolder, colorFolder, colorFileName);
 
             if (File.Exists(colorFilePath))
             {
@@ -516,15 +515,15 @@ namespace ClipboardTool
                 customColors.Add(c.ToString());
             }
 
-            if (CheckOrCreateHistoryFolder(false))
+            if (CheckOrCreateTextLibraryFolder(false))
             {
-                string colorFilePath = Path.Join(historyFolder, colorFolder, colorFileName);
+                string colorFilePath = Path.Join(TextLibraryFolder, colorFolder, colorFileName);
                 if (!Directory.Exists(colorFilePath))
                 {
                     Dbg.WriteWithCaller("Creating color subfolder");
                     try
                     {
-                        Directory.CreateDirectory(Path.Join(historyFolder, colorFolder));
+                        Directory.CreateDirectory(Path.Join(TextLibraryFolder, colorFolder));
                     }
                     catch
                     {
@@ -543,25 +542,25 @@ namespace ClipboardTool
             }
         }
 
-        private void gridHistory_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        private void gridTextLibrary_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             SaveEntry(e.RowIndex);
         }
 
-        private void OpenHistoryFolder(object sender, LinkLabelLinkClickedEventArgs e)
+        private void OpenTextLibraryFolder(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            if (CheckOrCreateHistoryFolder(false))
+            if (CheckOrCreateTextLibraryFolder(false))
             {
-                Process.Start(new ProcessStartInfo() { FileName = historyFolder, UseShellExecute = true });
+                Process.Start(new ProcessStartInfo() { FileName = TextLibraryFolder, UseShellExecute = true });
             }
         }
 
-        private void gridHistory_MouseDoubleClick(object sender, MouseEventArgs e)
+        private void gridTextLibrary_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             Dbg.WriteWithCaller("Rename entry?");
-            if (gridHistory.SelectedCells.Count > 0)
+            if (gridTextLibrary.SelectedCells.Count > 0)
             {
-                DataGridViewCell cell = gridHistory.SelectedCells[0];
+                DataGridViewCell cell = gridTextLibrary.SelectedCells[0];
                 if (cell.ColumnIndex == titleColumnIndex)
                 {
                     Dbg.WriteWithCaller("Rename entry started");
@@ -572,13 +571,13 @@ namespace ClipboardTool
 
         private void renameEntry(int rowIndex)
         {
-            if (rowIndex > gridHistory.Rows.Count - 1)
+            if (rowIndex > gridTextLibrary.Rows.Count - 1)
             {
                 Dbg.WriteWithCaller("rowIndex error");
                 return;
             }
-            DataGridViewRow gridRow = gridHistory.Rows[rowIndex];
-            DataGridViewCell cell = gridHistory.Rows[rowIndex].Cells[titleColumnIndex];
+            //DataGridViewRow gridRow = gridTextLibrary.Rows[rowIndex];
+            DataGridViewCell cell = gridTextLibrary.Rows[rowIndex].Cells[titleColumnIndex];
             if (cell == null)
             {
                 Dbg.WriteWithCaller("Cell is null");
@@ -601,7 +600,7 @@ namespace ClipboardTool
                     //delete old file
                     if (oldTitle.Length > 0)
                     {
-                        string oldEntryPath = Path.Join(historyFolder, oldTitle + entryFileExtension);
+                        string oldEntryPath = Path.Join(TextLibraryFolder, oldTitle + entryFileExtension);
                         if (File.Exists(oldEntryPath))
                         {
                             try

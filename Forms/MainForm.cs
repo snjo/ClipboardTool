@@ -7,7 +7,7 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using TextBox = System.Windows.Forms.TextBox;
 
-[assembly: AssemblyVersion("1.7.*")]
+[assembly: AssemblyVersion("1.8.*")]
 
 namespace ClipboardTool;
 
@@ -18,10 +18,10 @@ public partial class MainForm : Form
     [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
     static extern bool SetForegroundWindow(IntPtr hWnd);
 
-    Settings settings = Settings.Default;
+    readonly Settings settings = Settings.Default;
     private ProcessText _process;
     private MainMethods _mainMethods;
-    TextHistory? textHistory;
+    TextLibrary? textTextLibrary;
 
     public Dictionary<string, Hotkey> HotkeyList = new Dictionary<string, Hotkey>();
 
@@ -38,12 +38,12 @@ public partial class MainForm : Form
         "MemSlot2",
         "MemSlot3",
         "ResetNumber",
-        "History",
+        "TextLibrary",
     };
 
-    private Icon iconUpper;
-    private Icon iconLower;
-    private Icon iconNormal;
+    private readonly Icon iconUpper;
+    private readonly Icon iconLower;
+    private readonly Icon iconNormal;
     private bool oldCapslockState;
     private bool capLockStateSet = false;
     private bool alwaysOnTop = false;
@@ -155,8 +155,8 @@ public partial class MainForm : Form
         base.WndProc(ref m);
         if (m.Msg == Hotkeys.Constants.WM_HOTKEY_MSG_ID)
         {
-            Keys key = (Keys)(((int)m.LParam >> 16) & 0xFFFF);                  // The key of the hotkey that was pressed.
-            KeyModifier modifier = (KeyModifier)((int)m.LParam & 0xFFFF);       // The modifier of the hotkey that was pressed.
+            //Keys key = (Keys)(((int)m.LParam >> 16) & 0xFFFF);                  // The key of the hotkey that was pressed.
+            //KeyModifier modifier = (KeyModifier)((int)m.LParam & 0xFFFF);       // The modifier of the hotkey that was pressed.
             int id = m.WParam.ToInt32();                                        // The id of the hotkey that was pressed.
             main.HandleHotkey(id);
         }
@@ -377,9 +377,10 @@ public partial class MainForm : Form
 
     private void actionShowToolbar(object sender, EventArgs e)
     {
-        Toolbar toolbar = new Toolbar(this);
-
-        toolbar.mainform = this;
+        Toolbar toolbar = new(this)
+        {
+            mainform = this
+        };
         toolbar.Show();
         //toolbar.Parent = this;
     }
@@ -431,21 +432,20 @@ public partial class MainForm : Form
     }
     #endregion
 
-    private void buttonHistory_Click(object sender, EventArgs e)
+    private void buttonTextLibrary_Click(object sender, EventArgs e)
     {
-        ShowHistory();
+        ShowTextLibrary();
     }
 
-    public void ShowHistory()
+    public void ShowTextLibrary()
     {
-        if (textHistory == null)
-            textHistory = new TextHistory(this);
-        if (textHistory.IsDisposed)
-            textHistory = new TextHistory(this);
+        textTextLibrary ??= new TextLibrary(this);
+        if (textTextLibrary.IsDisposed)
+            textTextLibrary = new TextLibrary(this);
 
-        textHistory.Show();
-        textHistory.WindowState = FormWindowState.Normal;
-        textHistory.BringToFront();
-        SetForegroundWindow(textHistory.Handle);
+        textTextLibrary.Show();
+        textTextLibrary.WindowState = FormWindowState.Normal;
+        textTextLibrary.BringToFront();
+        SetForegroundWindow(textTextLibrary.Handle);
     }
 }

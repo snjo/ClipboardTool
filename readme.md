@@ -16,7 +16,7 @@ https://github.com/snjo/ClipboardTool
 
 The buttons in the main application window alter or replace the content of the clipboard. The hotkeys to perform the same operation are also listed, and can be changed in Options.
 
-	History - Opens a window with saved text entries, much like sticky notes.
+	Text Library - Opens a window with saved text entries, much like sticky notes.
 	Toolbar - Opens a floating window with a small number of buttons.
 	Ghost - Hides the main window from the task bar. Use the system tray, toolbar or hotkeys to control the program.
 	Pin - Toggles on Always on top mode.
@@ -39,7 +39,7 @@ The buttons in the main application window alter or replace the content of the c
 	Down arrow - Fills the textbox with the current contents of the clipboard.
 	Up arrow - Outputs the text in the textbox to the clipboard, performing any text processing using $ commands.
 	
-#### History Window
+#### TextLibrary Window
 	
 	Pin - Toggles on Always on top mode.
 	Color - Change the color of the selected text entry
@@ -51,10 +51,10 @@ The buttons in the main application window alter or replace the content of the c
 	Text - The text that will be output. Text processing is performed on any $ commands.
 	> - Copies the text to the clipboard.
 
-	History folder link - Opens the folder with any saved text entries.
+	Text Library folder link - Opens the folder with any saved text entries.
 	Minimize - If checked, the window minimizes after clicking a > button
 
-See the History Window section below for more details
+See the Text Library Window section below for more details
 
 -----------------------------------------
 ## Commands for text processing:
@@ -105,7 +105,7 @@ The program settings user.config are stored in a folder in %localappdata%\Clipbo
 | Function                       | Default hotkey         |
 |--------------------------------|------------------------|
 | Convert to upper case          | Ctrl+Shift+U           |
-| Convert to lower case          | Ctrl+Shift+D           |
+| Convert to lower case          | Ctrl+Shift+L           |
 | Convert to plain text          | Ctrl+Shift+T           |
 | Process text using $'s         | Ctrl+Shift+P           |
 | Caps Lock toggle               | Ctrl+Shift+Backspace   |
@@ -114,7 +114,7 @@ The program settings user.config are stored in a folder in %localappdata%\Clipbo
 | Memory Slot 3                  | Ctrl+Shift+3           |
 | Reset Number UpDown to 1       | Ctrl+Shift+R           |
 | Date/Time                      | Ctrl+Shift+D           |
-| History/Saved Text Window      | Ctrl+Shift+H           |
+| Text Library Window            | Ctrl+Shift+H           |
 
 Memory Slot hotkeys also does any $ processing in the field, but some functions are not suited for these slots since they rely on values in the mem slots ($rep, $vcm, $list etc.)
 
@@ -129,21 +129,21 @@ Tap the date hotkey 1-3 times while holding the modifier keys:
 The date format is based on your Windows region settings, but can be overridden in the Options / Culture setting.
 
 -----------------------------------------
-## History Window
+## Text Library Window
 
-The History window allows you to save text and quickly load them into the clipboard. Any $ commands in the text will be processed if you use the [>] Copy button.
+The Text Library window allows you to save text and quickly load them into the clipboard. Any $ commands in the text will be processed if you use the [>] Copy button.
 
-Set the folder for these text files in Options, or allow the program to create the folder for you when opening History the first time.
+Set the folder for these text files in Options, or allow the program to create the folder for you when opening Text Library the first time.
 
 The Minimize on Copy checkbox default setting can be saved in Options.
 
-If you pin an entry, the file will be saved. Unpinning the entry will delete the file. Any entries that are not pinned (saved) will be lost if you close the History window.
+If you pin an entry, the file will be saved. Unpinning the entry will delete the file. Any entries that are not pinned (saved) will be lost if you close the Text Library window.
 
 When adding a new entry from clipboard using the Add button, or pinning a manually created entry, you must specify a title. This title will be used as the file name (.txt will be added automatically)
 If you have selected a color, the text file will begin with a color tag on the first line.
 
 #### Quick Tip
-Set the History hotkey to a convenient key like F2 (without modifiers), and set the "Minimize after copy" on in options.
+Set the Text Library hotkey to a convenient key like F2 (without modifiers), and set the "Minimize after copy" on in options.
 
 Then while working in an application, you can press the hotkey, copy the text, and paste into your application.
 

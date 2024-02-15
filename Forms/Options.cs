@@ -10,10 +10,10 @@ namespace ClipboardTool
     public partial class Options : Form
     {
         public MainForm mainForm;
-        Properties.Settings settings = Properties.Settings.Default;
-        string RTFcolorsDefault = @"\red80\green120\blue200;\red255\green180\blue1800;";
-        string RTFfontsDefault = @"\deff0{\fonttbl{\f0\fnil Default Sans Serif;}{\f1\froman Times New Roman;}{\f2\fswiss Arial;}{\f3\fmodern Courier New;}{\f4\fscript Script MT Bold;}{\f5\fdecor Old English Text MT;}}\f0 ";
-        MainMethods cbt;
+        readonly Settings settings = Properties.Settings.Default;
+        readonly string RTFcolorsDefault = @"\red80\green120\blue200;\red255\green180\blue1800;";
+        readonly string RTFfontsDefault = @"\deff0{\fonttbl{\f0\fnil Default Sans Serif;}{\f1\froman Times New Roman;}{\f2\fswiss Arial;}{\f3\fmodern Courier New;}{\f4\fscript Script MT Bold;}{\f5\fdecor Old English Text MT;}}\f0 ";
+        readonly MainMethods cbt;
 
         public Options(MainForm formParent)
         {
@@ -86,7 +86,7 @@ namespace ClipboardTool
             {
                 if (cell.Value != null)
                     settingKey = (string)cell.Value;
-                if (settingKey == null) settingKey = string.Empty;
+                settingKey ??= string.Empty;
             }
 
             if (settingKey.Length > 0)
