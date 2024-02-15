@@ -5,11 +5,13 @@ using Hotkeys;
 using System.Globalization;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Runtime.Versioning;
 using TextBox = System.Windows.Forms.TextBox;
 
 [assembly: AssemblyVersion("1.8.*")]
 
 namespace ClipboardTool;
+[SupportedOSPlatform("windows")]
 
 public partial class MainForm : Form
 {
@@ -23,11 +25,11 @@ public partial class MainForm : Form
     private MainMethods _mainMethods;
     TextLibrary? textTextLibrary;
 
-    public Dictionary<string, Hotkey> HotkeyList = new Dictionary<string, Hotkey>();
+    public Dictionary<string, Hotkey> HotkeyList = [];
 
     // For each hotkey below, add entries in Settings, hk???Key, hk???Ctrl, hk???Alt, hk???Shift, hk???Win
-    public List<string> HotkeyNames = new List<string>
-    {
+    public List<string> HotkeyNames =
+    [
         "UpperCase",
         "LowerCase",
         "PlainText",
@@ -39,15 +41,15 @@ public partial class MainForm : Form
         "MemSlot3",
         "ResetNumber",
         "TextLibrary",
-    };
+    ];
 
-    private readonly Icon iconUpper;
-    private readonly Icon iconLower;
-    private readonly Icon iconNormal;
+    private readonly Icon? iconUpper;
+    private readonly Icon? iconLower;
+    private readonly Icon? iconNormal;
     private bool oldCapslockState;
     private bool capLockStateSet = false;
     private bool alwaysOnTop = false;
-    HelpForm helpForm = new HelpForm();
+    HelpForm helpForm = new ();
     public CultureInfo startingCulture = CultureInfo.CurrentCulture;
 
     public MainForm()
@@ -56,12 +58,12 @@ public partial class MainForm : Form
         timerStatus.Start();
         _process = new ProcessText(this);
         _mainMethods = new MainMethods(this);
-        main.UpgradeSettings();
-        main.UpdateCulture();
-        iconUpper = notifyIconUpper.Icon;
-        iconLower = notifyIconLower.Icon;
-        iconNormal = systrayIcon.Icon;
-        helpForm.setText(process.commands.GetListAsText());
+        Main.UpgradeSettings();
+        Main.UpdateCulture();
+        iconUpper = notifyIconUpper?.Icon;
+        iconLower = notifyIconLower?.Icon;
+        iconNormal = systrayIcon?.Icon;
+        helpForm.setText(Process.commands.GetListAsText());
         HotkeyList = HotkeyTools.LoadHotkeys(HotkeyList, HotkeyNames, this);
         if (settings.RegisterHotkeys) // optional
         {
@@ -70,26 +72,26 @@ public partial class MainForm : Form
         UpdateCapsLock(forceUpdate: true);
     }
 
-    public ProcessText process
+    public ProcessText Process
     {
         get { return _process; }
         set { _process = value; }
     }
 
-    public MainMethods main
+    public MainMethods Main
     {
         get { return _mainMethods; }
         set { _mainMethods = value; }
     }
 
 
-    private void updateHotkeyLabels()
+    private void UpdateHotkeyLabels()
     {
-        main.updateHotkeyLabel(HotkeyList["UpperCase"], labelUpper);
-        main.updateHotkeyLabel(HotkeyList["LowerCase"], labelLower);
-        main.updateHotkeyLabel(HotkeyList["PlainText"], labelPlain);
-        main.updateHotkeyLabel(HotkeyList["CapsLock"], labelCaps);
-        main.updateHotkeyLabel(HotkeyList["ProcessText"], labelProcess);
+        MainMethods.UpdateHotkeyLabel(HotkeyList["UpperCase"], labelUpper);
+        MainMethods.UpdateHotkeyLabel(HotkeyList["LowerCase"], labelLower);
+        MainMethods.UpdateHotkeyLabel(HotkeyList["PlainText"], labelPlain);
+        MainMethods.UpdateHotkeyLabel(HotkeyList["CapsLock"], labelCaps);
+        MainMethods.UpdateHotkeyLabel(HotkeyList["ProcessText"], labelProcess);
     }
 
 
@@ -107,16 +109,16 @@ public partial class MainForm : Form
 
         if (settings.StartToolbar)
         {
-            actionShowToolbar(sender, e);
+            ActionShowToolbar(sender, e);
         }
 
-        updateHotkeyLabels();
+        UpdateHotkeyLabels();
 
 
-        textCustom.Text = main.loadTextFromFile("process.txt");
-        textBox1.Text = main.loadTextFromFile("mem1.txt");
-        textBox2.Text = main.loadTextFromFile("mem2.txt");
-        textBox3.Text = main.loadTextFromFile("mem3.txt");
+        textCustom.Text = Main.LoadTextFromFile("process.txt");
+        textBox1.Text = Main.LoadTextFromFile("mem1.txt");
+        textBox2.Text = Main.LoadTextFromFile("mem2.txt");
+        textBox3.Text = Main.LoadTextFromFile("mem3.txt");
     }
 
 
@@ -126,15 +128,15 @@ public partial class MainForm : Form
         HotkeyTools.ReleaseHotkeys(HotkeyList);
         if (Settings.Default.SaveMemorySlots)
         {
-            main.saveMemSlotToFile(1, warnIfFailed: false);
-            main.saveMemSlotToFile(2, warnIfFailed: false);
-            main.saveMemSlotToFile(3, warnIfFailed: false);
+            Main.SaveMemSlotToFile(1, warnIfFailed: false);
+            Main.SaveMemSlotToFile(2, warnIfFailed: false);
+            Main.SaveMemSlotToFile(3, warnIfFailed: false);
         }
     }
 
 
 
-    public void ToggleCapsLock()
+    public static void ToggleCapsLock()
     {
         const int KEYEVENTF_EXTENDEDKEY = 0x1;
         const int KEYEVENTF_KEYUP = 0x2;
@@ -158,7 +160,7 @@ public partial class MainForm : Form
             //Keys key = (Keys)(((int)m.LParam >> 16) & 0xFFFF);                  // The key of the hotkey that was pressed.
             //KeyModifier modifier = (KeyModifier)((int)m.LParam & 0xFFFF);       // The modifier of the hotkey that was pressed.
             int id = m.WParam.ToInt32();                                        // The id of the hotkey that was pressed.
-            main.HandleHotkey(id);
+            Main.HandleHotkey(id);
         }
     }
 
@@ -200,12 +202,12 @@ public partial class MainForm : Form
         }
     }
 
-    private void timerStatus_Tick(object sender, EventArgs e)
+    private void TimerStatus_Tick(object sender, EventArgs e)
     {
         UpdateCapsLock(forceUpdate: false);
     }
 
-    private void checkBoxCapsLock_Click(object sender, EventArgs e)
+    private void CheckBoxCapsLock_Click(object sender, EventArgs e)
     {
         ToggleCapsLock();
     }
@@ -240,11 +242,11 @@ public partial class MainForm : Form
         return MemorySlot(num).Text;
     }
 
-    private void actionDelayedKeystrokes(object sender, EventArgs e)
+    private void ActionDelayedKeystrokes(object sender, EventArgs e)
     {
         if (ModifierKeys == Keys.None)
         {
-            main.DelayKeyStrokes();
+            Main.DelayKeyStrokes();
         }
         //hotkeyHeldDown = false;
     }
@@ -267,44 +269,44 @@ public partial class MainForm : Form
 
     #region Tooltips -----------------------------------------------------
 
-    private void showToolTipHide(object sender, EventArgs e)
+    private void ShowToolTipHide(object sender, EventArgs e)
     {
         toolTip.SetToolTip(buttonHide, "Hide Window. Show again using the system tray icon");
     }
 
-    private void showTooltipPin(object sender, EventArgs e)
+    private void ShowTooltipPin(object sender, EventArgs e)
     {
         toolTip.SetToolTip(buttonPin, "Pin program (Always on top)");
     }
 
-    private void showTooltipSettings(object sender, EventArgs e)
+    private void ShowTooltipSettings(object sender, EventArgs e)
     {
         toolTip.SetToolTip(buttonOptions, "Settings");
     }
 
-    private void showTooltipHelp(object sender, EventArgs e)
+    private void ShowTooltipHelp(object sender, EventArgs e)
     {
         toolTip.SetToolTip(buttonHelp, "Help: Processing variables");
     }
 
-    private void showTooltipSaveTextToFile(object sender, EventArgs e)
+    private void ShowTooltipSaveTextToFile(object sender, EventArgs e)
     {
         toolTip.SetToolTip((Control)sender, "Save text. Text will load on start");
     }
 
-    private void showToolTipMemSave(object sender, EventArgs e)
+    private void ShowToolTipMemSave(object sender, EventArgs e)
     {
         toolTip.SetToolTip((Control)sender, "Use clipboard text in this slot");
     }
 
-    private void showToolTipMemLoad(object sender, EventArgs e)
+    private void ShowToolTipMemLoad(object sender, EventArgs e)
     {
         toolTip.SetToolTip((Control)sender, "Update clipboard contents with this slot's text");
     }
     #endregion
 
     #region Button event actions -----------------------------------------
-    private void actionAlwaysOnTop(object sender, EventArgs e)
+    private void ActionAlwaysOnTop(object sender, EventArgs e)
     {
         alwaysOnTop = !alwaysOnTop;
         if (alwaysOnTop)
@@ -317,35 +319,35 @@ public partial class MainForm : Form
         }
     }
 
-    private void actionShowHelp(object sender, EventArgs e)
+    private void ActionShowHelp(object sender, EventArgs e)
     {
         if (helpForm == null || helpForm.IsDisposed)
         {
             helpForm = new HelpForm();
         }
 
-        helpForm.setText(process.commands.GetListAsText());
+        helpForm.setText(Process.commands.GetListAsText());
         helpForm.Show();
     }
 
-    private void actionSaveCustomText(object sender, EventArgs e)
+    private void ActionSaveCustomText(object sender, EventArgs e)
     {
-        main.saveTextToFile("process.txt", textCustom.Text, warnIfFailed: true);
+        Main.SaveTextToFile("process.txt", textCustom.Text, warnIfFailed: true);
     }
 
-    private void actionCapsLock(object sender, EventArgs e)
+    private void ActionCapsLock(object sender, EventArgs e)
     {
         ToggleCapsLock();
     }
 
-    private void actionShowWindow(object sender, EventArgs e)
+    private void ActionShowWindow(object sender, EventArgs e)
     {
         Show();
         this.WindowState = FormWindowState.Normal;
         Show();
     }
 
-    private void actionExit(object sender, EventArgs e)
+    private void ActionExit(object sender, EventArgs e)
     {
         Application.Exit();
     }
@@ -355,27 +357,27 @@ public partial class MainForm : Form
     //    ToggleCapsLock();
     //}
 
-    public void actionUpperCaseOnce(object sender, EventArgs e)
+    public void ActionUpperCaseOnce(object sender, EventArgs e)
     {
-        main.UpperCaseOnce(forceClipboardUpdate: true);
+        Main.UpperCaseOnce(forceClipboardUpdate: true);
     }
 
-    public void actionLowerCaseOnce(object sender, EventArgs e)
+    public void ActionLowerCaseOnce(object sender, EventArgs e)
     {
-        main.LowerCaseOnce(forceClipboardUpdate: true);
+        Main.LowerCaseOnce(forceClipboardUpdate: true);
     }
 
-    public void actionHideFromTaskbar(object sender, EventArgs e)
+    public void ActionHideFromTaskbar(object sender, EventArgs e)
     {
         Hide();
     }
 
-    public void actionPlainTextOnce(object sender, EventArgs e)
+    public void ActionPlainTextOnce(object sender, EventArgs e)
     {
-        main.PlainTextOnce(forceClipboardUpdate: true);
+        Main.PlainTextOnce(forceClipboardUpdate: true);
     }
 
-    private void actionShowToolbar(object sender, EventArgs e)
+    private void ActionShowToolbar(object sender, EventArgs e)
     {
         Toolbar toolbar = new(this)
         {
@@ -385,54 +387,54 @@ public partial class MainForm : Form
         //toolbar.Parent = this;
     }
 
-    public void actionProcessText(object sender, EventArgs e)
+    public void ActionProcessText(object sender, EventArgs e)
     {
         Dbg.WriteWithCaller("Process text");
-        process.ProcessTextVariables(textCustom.Text, true);
+        Process.ProcessTextVariables(textCustom.Text, true);
     }
 
-    private void actionShowOptions(object sender, EventArgs e)
+    private void ActionShowOptions(object sender, EventArgs e)
     {
-        Options options = new Options(this);
+        Options options = new (this);
         options.ShowDialog();
         options.Dispose();
     }
 
-    private void actionSave(object sender, EventArgs e)
+    private void ActionSave(object sender, EventArgs e)
     {
         var button = (System.Windows.Forms.Button)sender;
-        string? tag = button.Tag.ToString();
+        string? tag = button.Tag?.ToString();
         if (tag != null)
         {
             int num = int.Parse(tag);
-            main.setTextBoxFromClipboard(num);
+            Main.SetTextBoxFromClipboard(num);
         }
     }
 
-    private void actionLoad(object sender, EventArgs e)
+    private void ActionLoad(object sender, EventArgs e)
     {
         var button = (System.Windows.Forms.Button)sender;
-        string? tag = button.Tag.ToString();
+        string? tag = button.Tag?.ToString();
         if (tag != null)
         {
             int num = int.Parse(tag);
-            main.setClipboardFromTextBox(num);
+            Main.SetClipboardFromTextBox(num);
         }
     }
 
-    private void actionSaveToFile(object sender, EventArgs e)
+    private void ActionSaveToFile(object sender, EventArgs e)
     {
         var button = (System.Windows.Forms.Button)sender;
-        string? tag = button.Tag.ToString();
+        string? tag = button.Tag?.ToString();
         if (tag != null)
         {
             int num = int.Parse(tag);
-            main.saveMemSlotToFile(num, warnIfFailed: true);
+            Main.SaveMemSlotToFile(num, warnIfFailed: true);
         }
     }
     #endregion
 
-    private void buttonTextLibrary_Click(object sender, EventArgs e)
+    private void ButtonTextLibrary_Click(object sender, EventArgs e)
     {
         ShowTextLibrary();
     }

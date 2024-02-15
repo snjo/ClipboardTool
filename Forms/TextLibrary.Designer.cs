@@ -65,9 +65,9 @@
             gridTextLibrary.RowTemplate.Height = 50;
             gridTextLibrary.Size = new Size(518, 487);
             gridTextLibrary.TabIndex = 3;
-            gridTextLibrary.CellClick += gridTextLibrary_CellClick;
-            gridTextLibrary.CellEndEdit += gridTextLibrary_CellEndEdit;
-            gridTextLibrary.MouseDoubleClick += gridTextLibrary_MouseDoubleClick;
+            gridTextLibrary.CellClick += GridTextLibrary_CellClick;
+            gridTextLibrary.CellEndEdit += GridTextLibrary_CellEndEdit;
+            gridTextLibrary.MouseDoubleClick += GridTextLibrary_MouseDoubleClick;
             // 
             // ColumnPinned
             // 
@@ -106,7 +106,7 @@
             buttonAddFromClipboard.TabIndex = 4;
             buttonAddFromClipboard.Text = "Add";
             buttonAddFromClipboard.UseVisualStyleBackColor = true;
-            buttonAddFromClipboard.Click += buttonAddFromClipboard_Click;
+            buttonAddFromClipboard.Click += ButtonAddFromClipboard_Click;
             // 
             // button1
             // 
@@ -117,7 +117,7 @@
             button1.TabIndex = 5;
             button1.Text = "📌";
             button1.UseVisualStyleBackColor = true;
-            button1.Click += actionAlwaysOnTop;
+            button1.Click += ActionAlwaysOnTop;
             // 
             // checkBoxMinimize
             // 
@@ -129,7 +129,7 @@
             checkBoxMinimize.TabIndex = 6;
             checkBoxMinimize.Text = "Minimize when clicking Copy";
             checkBoxMinimize.UseVisualStyleBackColor = true;
-            checkBoxMinimize.CheckedChanged += checkBoxMinimize_CheckedChanged;
+            checkBoxMinimize.CheckedChanged += CheckBoxMinimize_CheckedChanged;
             // 
             // buttonColor
             // 
@@ -140,7 +140,7 @@
             buttonColor.TabIndex = 7;
             buttonColor.Text = "Color";
             buttonColor.UseVisualStyleBackColor = true;
-            buttonColor.Click += buttonColor_Click;
+            buttonColor.Click += ButtonColor_Click;
             // 
             // linkLabelHistoryFolder
             // 

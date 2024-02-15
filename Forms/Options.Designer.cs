@@ -168,7 +168,7 @@
             buttonSave.TabIndex = 38;
             buttonSave.Text = "Save";
             buttonSave.UseVisualStyleBackColor = true;
-            buttonSave.Click += buttonSave_Click;
+            buttonSave.Click += ButtonSave_Click;
             // 
             // buttonCancel
             // 
@@ -179,7 +179,7 @@
             buttonCancel.TabIndex = 39;
             buttonCancel.Text = "Cancel";
             buttonCancel.UseVisualStyleBackColor = true;
-            buttonCancel.Click += buttonCancel_Click;
+            buttonCancel.Click += ButtonCancel_Click;
             // 
             // optionCut
             // 
@@ -200,7 +200,7 @@
             optionType.TabIndex = 41;
             optionType.Text = "Send text as keystrokes when using hotkey";
             optionType.UseVisualStyleBackColor = true;
-            optionType.CheckedChanged += optionType_CheckedChanged;
+            optionType.CheckedChanged += OptionType_CheckedChanged;
             // 
             // optionPaste
             // 
@@ -211,7 +211,7 @@
             optionPaste.TabIndex = 42;
             optionPaste.Text = "Paste text (Ctrl+V) when using hotkey (recommended)";
             optionPaste.UseVisualStyleBackColor = true;
-            optionPaste.CheckedChanged += optionPaste_CheckedChanged;
+            optionPaste.CheckedChanged += OptionPaste_CheckedChanged;
             // 
             // optionUpdateClipboard
             // 
@@ -286,7 +286,7 @@
             linkLabel1.TabIndex = 53;
             linkLabel1.TabStop = true;
             linkLabel1.Text = "Website";
-            linkLabel1.LinkClicked += linkWebsite;
+            linkLabel1.LinkClicked += LinkWebsite;
             // 
             // linkLabel2
             // 
@@ -318,7 +318,7 @@
             buttonSelectSlotFolder.TabIndex = 56;
             buttonSelectSlotFolder.Text = "Select";
             buttonSelectSlotFolder.UseVisualStyleBackColor = true;
-            buttonSelectSlotFolder.Click += buttonSelectFolder_Click;
+            buttonSelectSlotFolder.Click += ButtonSelectFolder_Click;
             // 
             // folderBrowserDialog1
             // 
@@ -333,7 +333,7 @@
             buttonSelectHistoryFolder.TabIndex = 58;
             buttonSelectHistoryFolder.Text = "Select";
             buttonSelectHistoryFolder.UseVisualStyleBackColor = true;
-            buttonSelectHistoryFolder.Click += buttonSelectHistoryFolder_Click;
+            buttonSelectHistoryFolder.Click += ButtonSelectHistoryFolder_Click;
             // 
             // textBoxHistory
             // 
@@ -537,7 +537,7 @@
             button1.TabIndex = 77;
             button1.Text = "Check";
             button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            button1.Click += Button1_Click;
             // 
             // label13
             // 
@@ -624,7 +624,7 @@
             buttonRTFDefaultFonts.TabIndex = 68;
             buttonRTFDefaultFonts.Text = "Default";
             buttonRTFDefaultFonts.UseVisualStyleBackColor = true;
-            buttonRTFDefaultFonts.Click += buttonRTFDefaultFonts_Click;
+            buttonRTFDefaultFonts.Click += ButtonRTFDefaultFonts_Click;
             // 
             // buttonRTFDefaultColors
             // 
@@ -635,7 +635,7 @@
             buttonRTFDefaultColors.TabIndex = 67;
             buttonRTFDefaultColors.Text = "Default";
             buttonRTFDefaultColors.UseVisualStyleBackColor = true;
-            buttonRTFDefaultColors.Click += buttonRTFDefaultColors_Click;
+            buttonRTFDefaultColors.Click += ButtonRTFDefaultColors_Click;
             // 
             // label5
             // 

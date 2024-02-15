@@ -137,7 +137,7 @@ namespace ClipboardTool
             }
             else
             {
-                mainForm.main.SetClipBoard(plainText, richText, forceClipboardUpdate, "Process Text");
+                mainForm.Main.SetClipBoard(plainText, richText, forceClipboardUpdate, "Process Text");
                 return (PlainText: plainText, RichText: richText);
             }
         }
