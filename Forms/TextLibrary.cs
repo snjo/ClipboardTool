@@ -277,7 +277,7 @@ public partial class TextLibrary : Form
         if (Clipboard.ContainsText())
         {
             string title;
-            TextPrompt textPrompt = new ("Set entry title", "Set title and click OK to pin entry." + Environment.NewLine + "Cancel adds entry but does not pin.", true, TextPrompt.IllegalFileCharacters);
+            TextPrompt textPrompt = new("Set entry title", "Set title and click OK to pin entry." + Environment.NewLine + "Cancel adds entry but does not pin.", true, TextPrompt.IllegalFileCharacters);
             DialogResult = textPrompt.ShowDialog();
             if (DialogResult == DialogResult.OK)
             {
@@ -360,7 +360,7 @@ public partial class TextLibrary : Form
 
                     if (cells[titleColumnIndex].Value.ToString() == string.Empty)
                     {
-                        TextPrompt textPrompt = new ();
+                        TextPrompt textPrompt = new();
                         if (textPrompt.ShowDialog() == DialogResult.OK)
                         {
                             title = textPrompt.TextResult;

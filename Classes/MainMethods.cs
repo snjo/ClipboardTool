@@ -460,7 +460,7 @@ public partial class MainMethods
                     // When pasting special unicode characters like smileys, the may be converted to ??
                     // plaintext loses the unicode because it's copied from textBox.Text, RTF for an unknown reason when using SetData(DataFormats.RTF
                     Clipboard.Clear();
-                    DataObject data = new ();
+                    DataObject data = new();
                     data.SetData(DataFormats.UnicodeText, plainText);
                     data.SetData(DataFormats.Rtf, richText);
                     Clipboard.SetDataObject(data);

@@ -162,7 +162,7 @@ public partial class Toolbar : Form
     private Button buttonPlain;
     private Button buttonUpper;
     private Button buttonLower;
-    private object resources;
+    //private object resources;
 
     private void InitializeComponent()
     {

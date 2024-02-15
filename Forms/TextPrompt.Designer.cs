@@ -45,8 +45,8 @@
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(309, 23);
             textBox1.TabIndex = 0;
-            textBox1.TextChanged += textBox1_TextChanged;
-            textBox1.KeyPress += textBox1_KeyPress;
+            textBox1.TextChanged += TextBox1_TextChanged;
+            textBox1.KeyPress += TextBox1_KeyPress;
             // 
             // buttonOK
             // 
@@ -57,7 +57,7 @@
             buttonOK.TabIndex = 1;
             buttonOK.Text = "OK";
             buttonOK.UseVisualStyleBackColor = true;
-            buttonOK.Click += buttonOK_Click;
+            buttonOK.Click += ButtonOK_Click;
             // 
             // buttonCancel
             // 
@@ -68,7 +68,7 @@
             buttonCancel.TabIndex = 2;
             buttonCancel.Text = "Cancel";
             buttonCancel.UseVisualStyleBackColor = true;
-            buttonCancel.Click += buttonCancel_Click;
+            buttonCancel.Click += ButtonCancel_Click;
             // 
             // labelInfo
             // 
@@ -87,7 +87,7 @@
             buttonColorPicker.TabIndex = 4;
             buttonColorPicker.Text = "Color";
             buttonColorPicker.UseVisualStyleBackColor = true;
-            buttonColorPicker.Click += buttonColor_Click;
+            buttonColorPicker.Click += ButtonColor_Click;
             // 
             // toolTipIllegal
             // 

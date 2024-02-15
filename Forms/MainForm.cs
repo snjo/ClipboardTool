@@ -49,7 +49,7 @@ public partial class MainForm : Form
     private bool oldCapslockState;
     private bool capLockStateSet = false;
     private bool alwaysOnTop = false;
-    HelpForm helpForm = new ();
+    HelpForm helpForm = new();
     public CultureInfo startingCulture = CultureInfo.CurrentCulture;
 
     public MainForm()
@@ -63,7 +63,7 @@ public partial class MainForm : Form
         iconUpper = notifyIconUpper?.Icon;
         iconLower = notifyIconLower?.Icon;
         iconNormal = systrayIcon?.Icon;
-        helpForm.setText(Process.commands.GetListAsText());
+        helpForm.SetText(Process.commands.GetListAsText());
         HotkeyList = HotkeyTools.LoadHotkeys(HotkeyList, HotkeyNames, this);
         if (settings.RegisterHotkeys) // optional
         {
@@ -326,7 +326,7 @@ public partial class MainForm : Form
             helpForm = new HelpForm();
         }
 
-        helpForm.setText(Process.commands.GetListAsText());
+        helpForm.SetText(Process.commands.GetListAsText());
         helpForm.Show();
     }
 
@@ -395,7 +395,7 @@ public partial class MainForm : Form
 
     private void ActionShowOptions(object sender, EventArgs e)
     {
-        Options options = new (this);
+        Options options = new(this);
         options.ShowDialog();
         options.Dispose();
     }

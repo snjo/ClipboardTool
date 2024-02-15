@@ -42,7 +42,7 @@
             button1.TabIndex = 1;
             button1.Text = "Close";
             button1.UseVisualStyleBackColor = true;
-            button1.Click += actionClose;
+            button1.Click += ActionClose;
             // 
             // richTextBox1
             // 
@@ -65,7 +65,7 @@
             linkLabel1.TabIndex = 3;
             linkLabel1.TabStop = true;
             linkLabel1.Text = "Full documentation on Github";
-            linkLabel1.LinkClicked += linkLabel1_LinkClicked;
+            linkLabel1.LinkClicked += LinkLabel1_LinkClicked;
             // 
             // HelpForm
             // 
