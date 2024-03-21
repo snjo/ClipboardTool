@@ -84,6 +84,7 @@
             buttonRTFDefaultColors = new Button();
             label5 = new Label();
             textBoxRTFfonts = new TextBox();
+            optionAutoStart = new CheckBox();
             ((System.ComponentModel.ISupportInitialize)HotkeyGrid).BeginInit();
             tabControl1.SuspendLayout();
             tabPageGeneral.SuspendLayout();
@@ -95,7 +96,7 @@
             // optionStartHidden
             // 
             optionStartHidden.AutoSize = true;
-            optionStartHidden.Location = new Point(26, 34);
+            optionStartHidden.Location = new Point(26, 57);
             optionStartHidden.Name = "optionStartHidden";
             optionStartHidden.Size = new Size(92, 19);
             optionStartHidden.TabIndex = 0;
@@ -105,7 +106,7 @@
             // optionStartToolbar
             // 
             optionStartToolbar.AutoSize = true;
-            optionStartToolbar.Location = new Point(26, 57);
+            optionStartToolbar.Location = new Point(26, 80);
             optionStartToolbar.Name = "optionStartToolbar";
             optionStartToolbar.Size = new Size(118, 19);
             optionStartToolbar.TabIndex = 1;
@@ -125,7 +126,7 @@
             // optionResetCounter
             // 
             optionResetCounter.AutoSize = true;
-            optionResetCounter.Location = new Point(21, 257);
+            optionResetCounter.Location = new Point(21, 280);
             optionResetCounter.Name = "optionResetCounter";
             optionResetCounter.Size = new Size(252, 19);
             optionResetCounter.TabIndex = 3;
@@ -152,7 +153,7 @@
             // 
             // label1
             // 
-            label1.Font = new Font("Segoe UI", 9F, FontStyle.Italic, GraphicsUnit.Point);
+            label1.Font = new Font("Segoe UI", 9F, FontStyle.Italic);
             label1.Location = new Point(3, 81);
             label1.Name = "label1";
             label1.Size = new Size(232, 30);
@@ -184,7 +185,7 @@
             // optionCut
             // 
             optionCut.AutoSize = true;
-            optionCut.Location = new Point(22, 132);
+            optionCut.Location = new Point(22, 155);
             optionCut.Name = "optionCut";
             optionCut.Size = new Size(216, 19);
             optionCut.TabIndex = 40;
@@ -194,7 +195,7 @@
             // optionType
             // 
             optionType.AutoSize = true;
-            optionType.Location = new Point(22, 182);
+            optionType.Location = new Point(22, 205);
             optionType.Name = "optionType";
             optionType.Size = new Size(250, 19);
             optionType.TabIndex = 41;
@@ -205,7 +206,7 @@
             // optionPaste
             // 
             optionPaste.AutoSize = true;
-            optionPaste.Location = new Point(22, 157);
+            optionPaste.Location = new Point(22, 180);
             optionPaste.Name = "optionPaste";
             optionPaste.Size = new Size(314, 19);
             optionPaste.TabIndex = 42;
@@ -216,7 +217,7 @@
             // optionUpdateClipboard
             // 
             optionUpdateClipboard.AutoSize = true;
-            optionUpdateClipboard.Location = new Point(22, 207);
+            optionUpdateClipboard.Location = new Point(22, 230);
             optionUpdateClipboard.Name = "optionUpdateClipboard";
             optionUpdateClipboard.Size = new Size(292, 19);
             optionUpdateClipboard.TabIndex = 44;
@@ -234,7 +235,6 @@
             HotkeyGrid.Location = new Point(6, 31);
             HotkeyGrid.Name = "HotkeyGrid";
             HotkeyGrid.RowHeadersVisible = false;
-            HotkeyGrid.RowTemplate.Height = 25;
             HotkeyGrid.Size = new Size(427, 418);
             HotkeyGrid.TabIndex = 52;
             // 
@@ -355,7 +355,7 @@
             // checkBoxHistoryMinimize
             // 
             checkBoxHistoryMinimize.AutoSize = true;
-            checkBoxHistoryMinimize.Location = new Point(21, 282);
+            checkBoxHistoryMinimize.Location = new Point(21, 305);
             checkBoxHistoryMinimize.Name = "checkBoxHistoryMinimize";
             checkBoxHistoryMinimize.Size = new Size(193, 19);
             checkBoxHistoryMinimize.TabIndex = 60;
@@ -375,7 +375,7 @@
             // checkBoxTrayCapslock
             // 
             checkBoxTrayCapslock.AutoSize = true;
-            checkBoxTrayCapslock.Location = new Point(26, 82);
+            checkBoxTrayCapslock.Location = new Point(26, 105);
             checkBoxTrayCapslock.Name = "checkBoxTrayCapslock";
             checkBoxTrayCapslock.Size = new Size(164, 19);
             checkBoxTrayCapslock.TabIndex = 62;
@@ -415,6 +415,7 @@
             // 
             // tabPageGeneral
             // 
+            tabPageGeneral.Controls.Add(optionAutoStart);
             tabPageGeneral.Controls.Add(checkBoxMathWarning);
             tabPageGeneral.Controls.Add(label9);
             tabPageGeneral.Controls.Add(label8);
@@ -439,7 +440,7 @@
             // checkBoxMathWarning
             // 
             checkBoxMathWarning.AutoSize = true;
-            checkBoxMathWarning.Location = new Point(21, 307);
+            checkBoxMathWarning.Location = new Point(21, 330);
             checkBoxMathWarning.Name = "checkBoxMathWarning";
             checkBoxMathWarning.Size = new Size(222, 19);
             checkBoxMathWarning.TabIndex = 66;
@@ -449,8 +450,8 @@
             // label9
             // 
             label9.AutoSize = true;
-            label9.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label9.Location = new Point(0, 234);
+            label9.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            label9.Location = new Point(0, 257);
             label9.Name = "label9";
             label9.Size = new Size(60, 15);
             label9.TabIndex = 65;
@@ -459,8 +460,8 @@
             // label8
             // 
             label8.AutoSize = true;
-            label8.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label8.Location = new Point(3, 109);
+            label8.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            label8.Location = new Point(3, 132);
             label8.Name = "label8";
             label8.Size = new Size(90, 15);
             label8.TabIndex = 64;
@@ -469,7 +470,7 @@
             // label7
             // 
             label7.AutoSize = true;
-            label7.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label7.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             label7.Location = new Point(3, 11);
             label7.Name = "label7";
             label7.Size = new Size(88, 15);
@@ -542,7 +543,7 @@
             // label13
             // 
             label13.AutoSize = true;
-            label13.Font = new Font("Segoe UI", 9F, FontStyle.Italic, GraphicsUnit.Point);
+            label13.Font = new Font("Segoe UI", 9F, FontStyle.Italic);
             label13.Location = new Point(21, 386);
             label13.Name = "label13";
             label13.Size = new Size(301, 15);
@@ -568,7 +569,7 @@
             // label11
             // 
             label11.AutoSize = true;
-            label11.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label11.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             label11.Location = new Point(3, 323);
             label11.Name = "label11";
             label11.Size = new Size(48, 15);
@@ -578,7 +579,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label2.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             label2.Location = new Point(3, 6);
             label2.Name = "label2";
             label2.Size = new Size(59, 15);
@@ -588,7 +589,7 @@
             // label6
             // 
             label6.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            label6.Font = new Font("Segoe UI", 9F, FontStyle.Italic, GraphicsUnit.Point);
+            label6.Font = new Font("Segoe UI", 9F, FontStyle.Italic);
             label6.Location = new Point(16, 281);
             label6.Name = "label6";
             label6.Size = new Size(419, 51);
@@ -654,6 +655,16 @@
             textBoxRTFfonts.Name = "textBoxRTFfonts";
             textBoxRTFfonts.Size = new Size(417, 85);
             textBoxRTFfonts.TabIndex = 65;
+            // 
+            // optionAutoStart
+            // 
+            optionAutoStart.AutoSize = true;
+            optionAutoStart.Location = new Point(26, 32);
+            optionAutoStart.Name = "optionAutoStart";
+            optionAutoStart.Size = new Size(253, 19);
+            optionAutoStart.TabIndex = 67;
+            optionAutoStart.Text = "Automatically start when starting Windows";
+            optionAutoStart.UseVisualStyleBackColor = true;
             // 
             // Options
             // 
@@ -741,5 +752,6 @@
         private Label label2;
         private Label label13;
         private Button button1;
+        private CheckBox optionAutoStart;
     }
 }

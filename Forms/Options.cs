@@ -1,6 +1,7 @@
 ﻿using ClipboardTool.Classes;
 using ClipboardTool.Properties;
 using Hotkeys;
+using Microsoft.VisualBasic.ApplicationServices;
 using System.Configuration;
 using System.Diagnostics;
 using System.Globalization;
@@ -42,6 +43,7 @@ public partial class Options : Form
         checkBoxRTFfont.Checked = settings.RTFallowFontTable;
         checkBoxMathWarning.Checked = settings.MathWarning;
         textBoxCulture.Text = settings.Culture;
+        optionAutoStart.Checked = Autorun.Autorun.IsEnabled(MainForm.ApplicationName);
 
         FillGrid();
 
@@ -152,6 +154,15 @@ public partial class Options : Form
 
         ReloadHotkeys();
         cbt.UpdateCulture();
+
+        if (optionAutoStart.Checked)
+        {
+            Autorun.Autorun.Enable(MainForm.ApplicationName);
+        }
+        else
+        {
+            Autorun.Autorun.Disable(MainForm.ApplicationName);
+        }
     }
 
     private static bool DoesSettingExist(string settingName)

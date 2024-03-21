@@ -20,6 +20,7 @@ public partial class MainForm : Form
     [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
     static extern bool SetForegroundWindow(IntPtr hWnd);
 
+    public static readonly string ApplicationName = "ClipboardTool";
     readonly Settings settings = Settings.Default;
     private ProcessText _process;
     private MainMethods _mainMethods;
@@ -70,6 +71,7 @@ public partial class MainForm : Form
             HotkeyTools.RegisterHotkeys(HotkeyList);
         }
         UpdateCapsLock(forceUpdate: true);
+        Autorun.Autorun.UpdatePathIfEnabled(ApplicationName);
     }
 
     public ProcessText Process
