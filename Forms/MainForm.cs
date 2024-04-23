@@ -64,7 +64,7 @@ public partial class MainForm : Form
         iconUpper = notifyIconUpper?.Icon;
         iconLower = notifyIconLower?.Icon;
         iconNormal = systrayIcon?.Icon;
-        helpForm.SetText(Process.commands.GetListAsText());
+        helpForm.SetText(ProcessingCommands.GetListAsText());
         HotkeyList = HotkeyTools.LoadHotkeys(HotkeyList, HotkeyNames, this);
         if (settings.RegisterHotkeys) // optional
         {
@@ -328,7 +328,7 @@ public partial class MainForm : Form
             helpForm = new HelpForm();
         }
 
-        helpForm.SetText(Process.commands.GetListAsText());
+        helpForm.SetText(ProcessingCommands.GetListAsText());
         helpForm.Show();
     }
 

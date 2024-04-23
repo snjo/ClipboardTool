@@ -228,7 +228,7 @@ $Round: Rounds off equation results to integers.
 		Example: $Math$Round[2+(3/2)]
 		Output: 4
 
-If there's an error in the equation, an warning popup is shown. This can be disabled in Options.
+If there's an error in the equation, a warning popup is shown. This can be disabled in Options.
 
 The datatable used to process the equation only works with US notation, so any commas will be converted to periods. The result will be output with commas or period as decimal separator based on the region/culture setting in Options. By default it uses your Windows region setting.
 

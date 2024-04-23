@@ -33,47 +33,47 @@ namespace ClipboardTool
             string clip = Clipboard.GetText();
 
             // replace text in clipboard string. place first to allow for other processing on the result text. Uses mem slots 1 & 2
-            if (customText.Contains(commands.Replace.Name))
+            if (customText.Contains(ProcessingCommands.Replace.Name))
             {
                 ReplaceText(ref customText, ref clip);
             }
 
             // get mem slot data first, so you can run other processing on it
-            customText = customText.Replace(commands.MemSlot1.Name, mainForm.MemorySlotText(1));
-            customText = customText.Replace(commands.MemSlot2.Name, mainForm.MemorySlotText(2));
-            customText = customText.Replace(commands.MemSlot3.Name, mainForm.MemorySlotText(3));
+            customText = customText.Replace(ProcessingCommands.MemSlot1.Name, mainForm.MemorySlotText(1));
+            customText = customText.Replace(ProcessingCommands.MemSlot2.Name, mainForm.MemorySlotText(2));
+            customText = customText.Replace(ProcessingCommands.MemSlot3.Name, mainForm.MemorySlotText(3));
 
             // date and time
-            customText = customText.Replace(commands.Date.Name, DateTime.Now.ToShortDateString());
-            customText = customText.Replace(commands.Time.Name, DateTime.Now.ToShortTimeString());
+            customText = customText.Replace(ProcessingCommands.Date.Name, DateTime.Now.ToShortDateString());
+            customText = customText.Replace(ProcessingCommands.Time.Name, DateTime.Now.ToShortTimeString());
 
             // clipboard, case conversion
-            customText = customText.Replace(commands.ClipboardPlain.Name, clip);
-            customText = customText.Replace(commands.ClipboardUpper.Name, clip.ToUpper());
-            customText = customText.Replace(commands.ClipboardLower.Name, clip.ToLower());
+            customText = customText.Replace(ProcessingCommands.ClipboardPlain.Name, clip);
+            customText = customText.Replace(ProcessingCommands.ClipboardUpper.Name, clip.ToUpper());
+            customText = customText.Replace(ProcessingCommands.ClipboardLower.Name, clip.ToLower());
 
             // pad number with leading zeroes
             PadNumber(ref customText, ref padNumber);
 
             // output counter number
-            customText = customText.Replace(commands.Number.Name, mainForm.NumberSpinner.ToString().PadLeft(padNumber, '0'));
+            customText = customText.Replace(ProcessingCommands.Number.Name, mainForm.NumberSpinner.ToString().PadLeft(padNumber, '0'));
 
             // output counter number, then increment it
-            if (customText.Contains(commands.Increment.Name))
+            if (customText.Contains(ProcessingCommands.Increment.Name))
             {
-                customText = customText.Replace(commands.Increment.Name, mainForm.NumberSpinner.ToString().PadLeft(padNumber, '0'));
+                customText = customText.Replace(ProcessingCommands.Increment.Name, mainForm.NumberSpinner.ToString().PadLeft(padNumber, '0'));
                 mainForm.NumberSpinner++;
             }
 
             // output counter number, then decrement it
-            if (customText.Contains(commands.Decrement.Name))
+            if (customText.Contains(ProcessingCommands.Decrement.Name))
             {
-                customText = customText.Replace(commands.Decrement.Name, mainForm.NumberSpinner.ToString().PadLeft(padNumber, '0'));
+                customText = customText.Replace(ProcessingCommands.Decrement.Name, mainForm.NumberSpinner.ToString().PadLeft(padNumber, '0'));
                 mainForm.NumberSpinner--;
             }
 
             // Excel double quote fix
-            if (customText.Contains(commands.ExcelQuotes.Name))
+            if (customText.Contains(ProcessingCommands.ExcelQuotes.Name))
             {
                 customText = ExcelQuotes(customText);
             }
@@ -83,44 +83,51 @@ namespace ClipboardTool
 
 
             // split lines in main textbox, output lines by counter number
-            if (customText.Contains(commands.List.Name))
+            if (customText.Contains(ProcessingCommands.List.Name))
             {
                 customText = ListSplit(customText);
             }
 
             //"$prompt Popup prompt to fill in a value\n" + // testing if the control can revert back to the active application
-            if (customText.Contains(commands.Prompt.Name))
+            if (customText.Contains(ProcessingCommands.Prompt.Name))
             {
                 customText = PromptForText(customText);
             }
 
             // Convert characters in clipboard string to numbers for debugging text
-            if (customText.Contains(commands.ClipboardCharToInt.Name))
+            if (customText.Contains(ProcessingCommands.ClipboardCharToInt.Name))
             {
-                customText = customText.Replace(commands.ClipboardCharToInt.Name, StringToIntSequence(clip));
+                customText = customText.Replace(ProcessingCommands.ClipboardCharToInt.Name, StringToIntSequence(clip));
             }
 
             // Math
-            if (customText.Contains(commands.Math.Name))
+            if (customText.Contains(ProcessingCommands.Math.Name))
             {
                 bool round = false;
-                customText = customText.Replace(commands.Math.Name, "");
-                if (customText.Contains(commands.Round.Name))
+                customText = customText.Replace(ProcessingCommands.Math.Name, "");
+                if (customText.Contains(ProcessingCommands.Round.Name))
                 {
-                    customText = customText.Replace(commands.Round.Name, "");
+                    customText = customText.Replace(ProcessingCommands.Round.Name, "");
                     round = true;
                 }
                 customText = solveEquation(customText, round);
             }
 
+            // Replace digits with numeral words
+            if (customText.Contains(ProcessingCommands.DigitToWord.Name))
+            {
+                customText = DigitsToWords.ProcessDigitsEnclosed(customText);
+                customText = customText.Replace(ProcessingCommands.DigitToWord.Name, "");
+            }
+
             // Remove None-Command, used for separating the end of a tag from text, or splitting up what could be construed as a tag. For edge cases.
-            customText = customText.Replace(commands.None.Name, "");
+            customText = customText.Replace(ProcessingCommands.None.Name, "");
 
             // Decide if output should be plain text or rich text.
             // Don't add any more processing to customText after this, it will be ignored.
-            if (customText.Contains(commands.RTF.Name))
+            if (customText.Contains(ProcessingCommands.RTF.Name))
             {
-                customText = customText.Replace(commands.RTF.Name, "");
+                customText = customText.Replace(ProcessingCommands.RTF.Name, "");
                 (plainText, richText) = ConvertToRichText(customText);
             }
             else
@@ -186,6 +193,7 @@ namespace ClipboardTool
 
         private string solveEquation(string mixedText, bool round)
         {
+            Debug.WriteLine($"Solve equation: '{mixedText}', round: {round}");
             string result = "";
             string tagStart = "[";
             string tagEnd = "]";
@@ -238,7 +246,7 @@ namespace ClipboardTool
                         catch
                         {
                             if (Settings.Default.MathWarning)
-                                MessageBox.Show("Can't solve equation:" + Environment.NewLine + equation, commands.Math.Name + " error");
+                                MessageBox.Show("Can't solve equation:" + Environment.NewLine + equation, ProcessingCommands.Math.Name + " error");
                             Dbg.Writeline("Can't compute equation: " + equation);
                         }
                     }
@@ -391,10 +399,10 @@ namespace ClipboardTool
 
         private string PromptForText(string customText)
         {
-            TextPrompt prompt = new TextPrompt("Input text", "Text processing is requesting an input value." + Environment.NewLine + "(" + commands.Prompt.Name + " function)");
+            TextPrompt prompt = new TextPrompt("Input text", "Text processing is requesting an input value." + Environment.NewLine + "(" + ProcessingCommands.Prompt.Name + " function)");
             if (prompt.ShowDialog() == DialogResult.OK)
             {
-                customText = customText.Replace(commands.Prompt.Name, prompt.TextResult);
+                customText = customText.Replace(ProcessingCommands.Prompt.Name, prompt.TextResult);
             }
             else
             {
@@ -406,28 +414,28 @@ namespace ClipboardTool
 
         private void PadNumber(ref string customText, ref int padNumber)
         {
-            if (customText.Contains(commands.PadNumber2.Name))
+            if (customText.Contains(ProcessingCommands.PadNumber2.Name))
             {
-                customText = customText.Replace(commands.PadNumber2.Name, "");
+                customText = customText.Replace(ProcessingCommands.PadNumber2.Name, "");
                 padNumber = 2;
             }
-            if (customText.Contains(commands.PadNumber3.Name))
+            if (customText.Contains(ProcessingCommands.PadNumber3.Name))
             {
-                customText = customText.Replace(commands.PadNumber3.Name, "");
+                customText = customText.Replace(ProcessingCommands.PadNumber3.Name, "");
                 padNumber = 3;
             }
         }
 
         private void ReplaceText(ref string customText, ref string clip)
         {
-            customText = customText.Replace(commands.Replace.Name, String.Empty);
+            customText = customText.Replace(ProcessingCommands.Replace.Name, String.Empty);
             Clipboard.SetText(clip.Replace(mainForm.MemorySlot(1).Text, mainForm.MemorySlot(2).Text));
             clip = clip.Replace(mainForm.MemorySlot(1).Text, mainForm.MemorySlot(2).Text);
         }
 
         private string ExcelQuotes(string customText)
         {
-            customText = customText.Replace(commands.ExcelQuotes.Name, "");
+            customText = customText.Replace(ProcessingCommands.ExcelQuotes.Name, "");
             customText = customText.Replace("\"\"", "£Q");
             customText = customText.Replace("\"", "");
             customText = customText.Replace("£Q", "\"");
@@ -450,7 +458,7 @@ namespace ClipboardTool
 
             if (values.Length > 0)
             {
-                if (currentline.Contains(commands.List.Name)) //skip this line
+                if (currentline.Contains(ProcessingCommands.List.Name)) //skip this line
                 {
                     mainForm.NumberSpinner++;
                     return String.Empty;
@@ -471,20 +479,20 @@ namespace ClipboardTool
         {
             char separator = ',';
             string command = string.Empty;
-            if (customText.Contains(commands.ValueSplitComma.Name)) // comma separator
+            if (customText.Contains(ProcessingCommands.ValueSplitComma.Name)) // comma separator
             {
                 separator = ',';
-                command = commands.ValueSplitComma.Name;
+                command = ProcessingCommands.ValueSplitComma.Name;
             }
-            else if (customText.Contains(commands.ValueSplitSemicolon.Name)) // semicolon separator
+            else if (customText.Contains(ProcessingCommands.ValueSplitSemicolon.Name)) // semicolon separator
             {
                 separator = ';';
-                command = commands.ValueSplitSemicolon.Name;
+                command = ProcessingCommands.ValueSplitSemicolon.Name;
             }
-            else if (customText.Contains(commands.ValueSplitSpace.Name)) // space separator
+            else if (customText.Contains(ProcessingCommands.ValueSplitSpace.Name)) // space separator
             {
                 separator = ' ';
-                command = commands.ValueSplitSpace.Name;
+                command = ProcessingCommands.ValueSplitSpace.Name;
             }
             else return customText;
 
