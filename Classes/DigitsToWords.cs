@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
+﻿using System.Diagnostics;
 using System.Text;
-using System.Threading.Tasks;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace ClipboardTool.Classes
 {
@@ -12,7 +7,7 @@ namespace ClipboardTool.Classes
     {
         public static string ToWords(long number)
         {
-            List<string> words = new List<string>();
+            List<string> words = [];
             if (number > long.MaxValue)
             {
                 return "a number too high to count";
@@ -26,7 +21,7 @@ namespace ClipboardTool.Classes
                 number = Math.Abs(number);
                 words.Add("minus");
             }
-            
+
             long onesAndTens = number % 100;
             long hundreds = (number / 100) % 10;
             long thousands = (number / 1000) % 1000;
@@ -35,7 +30,7 @@ namespace ClipboardTool.Classes
             long trillions = (number / 1000000000000) % 1000;
             long quadrillions = (number / 1000000000000000) % 1000;
             long quintillions = (number / 1000000000000000000) % 1000;
-            
+
             if (quintillions > 0)
             {
                 words.Add(ToWords(quintillions));
@@ -68,13 +63,13 @@ namespace ClipboardTool.Classes
             }
             if (hundreds > 0)
             {
-                words.Add(toNumeralWordLow(hundreds));
+                words.Add(ToNumeralWordLow(hundreds));
                 words.Add("hundred");
             }
             if (onesAndTens > 0)
             {
                 if (number > 99) words.Add("and");
-                words.Add(onesAndTensToText(onesAndTens));
+                words.Add(OnesAndTensToText(onesAndTens));
             }
 
             string result = string.Join(" ", words);
@@ -82,19 +77,19 @@ namespace ClipboardTool.Classes
             return result;
         }
 
-        private static string onesAndTensToText(long num)
+        private static string OnesAndTensToText(long num)
         {
             if (num > 19)
             {
-                return toNumeralWordHigh(num); 
+                return ToNumeralWordHigh(num);
             }
             else
             {
-                return toNumeralWordLow(num);
+                return ToNumeralWordLow(num);
             }
         }
 
-        private static string toNumeralWordHigh(long number)
+        private static string ToNumeralWordHigh(long number)
         {
             long tens = number / 10;
             string result = tens switch
@@ -111,7 +106,7 @@ namespace ClipboardTool.Classes
             };
             if (number % 10 > 0)
             {
-                return result + " " + toNumeralWordLow(number % 10);
+                return result + " " + ToNumeralWordLow(number % 10);
             }
             else
             {
@@ -119,7 +114,7 @@ namespace ClipboardTool.Classes
             }
         }
 
-        private static string toNumeralWordLow(long number)
+        private static string ToNumeralWordLow(long number)
         {
             return number switch
             {
@@ -160,10 +155,10 @@ namespace ClipboardTool.Classes
             string decimalSplitWord = "";
 
             int lastDot = digits.LastIndexOf('.');
-            int lastComma = digits.LastIndexOf(",");
+            int lastComma = digits.LastIndexOf(',');
 
             if (lastDot > -1 && lastComma > -1) // remove cosmetic . or , in numbers like 1.000.000,50
-            { 
+            {
                 if (lastDot > lastComma)
                 {
                     digits = digits.Replace(",", "");
@@ -181,20 +176,20 @@ namespace ClipboardTool.Classes
                 digits = split[0];
                 if (split.Length > 1) decimalsText = split[1];
             }
-            else if (digits.Contains(","))
+            else if (digits.Contains(','))
             {
-                string[] split = digits.Split(',',2);
+                string[] split = digits.Split(',', 2);
                 decimalSplitWord = "comma";
                 digits = split[0];
                 if (split.Length > 1) decimalsText = split[1];
             }
             if (digits.Length == 0) digits = "0";
-            
+
             if (long.TryParse(digits, out long parsedInts) == false)
             {
                 return "NaN";
             }
-                //long parsedInts = long.Parse(digits);
+            //long parsedInts = long.Parse(digits);
 
             string result = ToWords(parsedInts);
 
@@ -215,11 +210,11 @@ namespace ClipboardTool.Classes
         {
             Debug.WriteLine($"Process digit text: '{text}'");
             string tag = ProcessingCommands.DigitToWord.Name;
-            StringBuilder stringBuilder = new StringBuilder();
-            
+            StringBuilder stringBuilder = new();
+
             string[] sections = text.Split(tag, StringSplitOptions.RemoveEmptyEntries);
             int firstSection = 1;
-            if (text.IndexOf(tag) == 0)
+            if (text.StartsWith(tag))
             {
                 firstSection = 0;
                 Debug.WriteLine("starting with tag");
@@ -240,7 +235,7 @@ namespace ClipboardTool.Classes
                     if (sections[i][start] == '{')
                     {
                         Debug.WriteLine("Found {");
-                        end = sections[i].IndexOf("}", start+1);
+                        end = sections[i].IndexOf('}', start + 1);
                         if (end < 0)
                         {
                             DebugTools.Dbg.WriteWithCaller("No end } for Digit to Word value");
@@ -248,7 +243,7 @@ namespace ClipboardTool.Classes
                         else
                         {
                             int startDigit = start + 1;
-                            string enclosedDigits = sections[i][startDigit .. end];
+                            string enclosedDigits = sections[i][startDigit..end];
                             Debug.WriteLine($"Found digits: {enclosedDigits}");
                             if (enclosedDigits.Length > 0)
                             {
@@ -262,7 +257,7 @@ namespace ClipboardTool.Classes
                     }
                     if (end > -1)
                     {
-                        stringBuilder.Append(sections[i][(end+1)..]);
+                        stringBuilder.Append(sections[i][(end + 1)..]);
                     }
                     else
                     {

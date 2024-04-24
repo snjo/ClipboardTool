@@ -1,7 +1,6 @@
 ﻿using ClipboardTool.Classes;
 using ClipboardTool.Properties;
 using Hotkeys;
-using Microsoft.VisualBasic.ApplicationServices;
 using System.Configuration;
 using System.Diagnostics;
 using System.Globalization;

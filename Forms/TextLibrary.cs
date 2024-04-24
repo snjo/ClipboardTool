@@ -99,7 +99,7 @@ public partial class TextLibrary : Form
             {
                 if (entry.Value[0].Contains(colorTag))
                 {
-                    c = ParseColor(entry.Value[0].Substring(colorTag.Length));
+                    c = ParseColor(entry.Value[0][colorTag.Length..]);
 
                     tagCount++;
                 }

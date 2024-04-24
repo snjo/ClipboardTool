@@ -15,10 +15,11 @@ namespace ClipboardTool;
 
 public partial class MainForm : Form
 {
-    [DllImport("user32.dll")]
-    static extern void keybd_event(byte bVk, byte bScan, uint dwFlags, UIntPtr dwExtraInfo);
-    [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-    static extern bool SetForegroundWindow(IntPtr hWnd);
+    [LibraryImport("user32.dll")]
+    private static partial void keybd_event(byte bVk, byte bScan, uint dwFlags, UIntPtr dwExtraInfo);
+    [LibraryImport("user32.dll", SetLastError = true)]
+    [return: MarshalAs(UnmanagedType.Bool)]
+    private static partial bool SetForegroundWindow(IntPtr hWnd);
 
     public static readonly string ApplicationName = "ClipboardTool";
     readonly Settings settings = Settings.Default;
