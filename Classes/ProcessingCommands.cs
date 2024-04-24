@@ -39,7 +39,8 @@ namespace ClipboardTool.Classes
         public static Command Math = new Command(name: "$Math", description: "Flag: Solves equations enclosed in [] brackets", Commands);
         public static Command Round = new Command(name: "$Round", description: "Flag: Alters $Math to round off results. ", Commands);
         public static Command RTF = new Command(name: "$RTF", description: "Output Rich Text (.rtf format)", Commands);
-        public static Command DigitToWord = new Command(name: "$DTW", description: "Translates digits to numeral words", Commands);
+        public static Command DigitToWord = new Command(name: "$DTW", description: "Translates digits in curly braces to numeral words. ex: $DTW{12} = twelve", Commands);
+        public static Command DigitToWordUpperCase = new Command(name: "$DTU", "Flag: output from DTW is all upper case", Commands);
         public static Command ClipboardCharToInt = new Command(name: "$cci", description: "Convert text to character numbers for debugging", Commands);
         public static Command None = new Command(name: "$X", description: "No processing, but separates a tag from the rest of the text", Commands);
 

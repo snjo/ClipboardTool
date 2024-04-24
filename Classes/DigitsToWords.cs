@@ -27,22 +27,15 @@ namespace ClipboardTool.Classes
                 words.Add("minus");
             }
             
-            //StringBuilder sb = new StringBuilder();
-            
-            //long ones = number % 10;
-            //long tens = (number / 10) % 10;
             long onesAndTens = number % 100;
             long hundreds = (number / 100) % 10;
             long thousands = (number / 1000) % 1000;
-            //long tenThousands = (number / 10000) % 10;
-            //long oneAndTenThousands = (number / 1000) % 100;
-            //long hundredThousands = (number / 100000) %10;
             long millions = (number / 1000000) % 1000;
             long billions = (number / 1000000000) % 1000;
             long trillions = (number / 1000000000000) % 1000;
             long quadrillions = (number / 1000000000000000) % 1000;
             long quintillions = (number / 1000000000000000000) % 1000;
-            //Debug.WriteLine($"{tenThousands} {thousands} {hundreds} {tens} {ones}: {oneAndTenThousands}, {onesAndTens}");
+            
             if (quintillions > 0)
             {
                 words.Add(ToWords(quintillions));
@@ -68,11 +61,6 @@ namespace ClipboardTool.Classes
                 words.Add(ToWords(millions));
                 words.Add("million");
             }
-            //if (hundredThousands > 0)
-            //{
-            //    words.Add(toNumeralWordLow(hundredThousands));
-            //    words.Add("hundred");
-            //}
             if (thousands > 0)
             {
                 words.Add(ToWords(thousands));
@@ -221,25 +209,14 @@ namespace ClipboardTool.Classes
             }
 
             return result;
-            //bool success = int.TryParse(digits, out int parsed);
-            //if (success)
-            //{
-            //    return ToWords(parsed);
-            //}
-            //else
-            //{
-            //    return "NaN";
-            //}
         }
 
-        public static string ProcessDigitsEnclosed(string text)
+        public static string ProcessDigitsEnclosed(string text, bool UpperCase = false)
         {
             Debug.WriteLine($"Process digit text: '{text}'");
-            //string result = text;
             string tag = ProcessingCommands.DigitToWord.Name;
             StringBuilder stringBuilder = new StringBuilder();
             
-            //List<int> tagLocations = text.IndexOfAll(tag);
             string[] sections = text.Split(tag, StringSplitOptions.RemoveEmptyEntries);
             int firstSection = 1;
             if (text.IndexOf(tag) == 0)
@@ -253,22 +230,20 @@ namespace ClipboardTool.Classes
                 Debug.WriteLine("adding starting text");
             }
 
-            //foreach (int location in tagLocations)
             for (int i = firstSection; i < sections.Length; i++)
             {
-                //int start = location + ProcessingCommands.DigitToWord.Name.Length;
                 int start = 0;
                 int end = -1;
                 Debug.WriteLine($"Digits start: {start}");
                 if (start < sections[i].Length) // check that we're not at the end to avoid index error
                 {
-                    if (sections[i][start] == '[')
+                    if (sections[i][start] == '{')
                     {
-                        Debug.WriteLine($"Found [");
-                        end = sections[i].IndexOf("]", start+1);
+                        Debug.WriteLine("Found {");
+                        end = sections[i].IndexOf("}", start+1);
                         if (end < 0)
                         {
-                            DebugTools.Dbg.WriteWithCaller("No end ] for Digit to Word value");
+                            DebugTools.Dbg.WriteWithCaller("No end } for Digit to Word value");
                         }
                         else
                         {
@@ -302,6 +277,10 @@ namespace ClipboardTool.Classes
 
             //DebugTools.Dbg.WriteWithCaller("locations of tag: " + tagLocations.ToText());
 
+            if (UpperCase)
+            {
+                return stringBuilder.ToString().ToUpper();
+            }
             return stringBuilder.ToString();
         }
     }

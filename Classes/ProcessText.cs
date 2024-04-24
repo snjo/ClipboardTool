@@ -113,10 +113,18 @@ namespace ClipboardTool
                 customText = solveEquation(customText, round);
             }
 
+
             // Replace digits with numeral words
+            bool DTWUpperCaseFlag = false;
+            if (customText.Contains(ProcessingCommands.DigitToWordUpperCase.Name))
+            {
+                DTWUpperCaseFlag = true;
+                customText = customText.Replace(ProcessingCommands.DigitToWordUpperCase.Name, "");
+            }
+
             if (customText.Contains(ProcessingCommands.DigitToWord.Name))
             {
-                customText = DigitsToWords.ProcessDigitsEnclosed(customText);
+                customText = DigitsToWords.ProcessDigitsEnclosed(customText, DTWUpperCaseFlag);
                 customText = customText.Replace(ProcessingCommands.DigitToWord.Name, "");
             }
 
