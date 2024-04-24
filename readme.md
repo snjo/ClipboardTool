@@ -61,27 +61,29 @@ See the Text Library Window section below for more details
 
 *Commands are case sensitive*
 
-| Command   | Function                                                         |
-|-----------|------------------------------------------------------------------|
-| $d        | current date                                                     |
-| $t        | current time                                                     |
-| $cp       | clipboard (plain text)                                           |
-| $cl / $cu | clipboard in lower/upper case                                    |
-| $i        | output the number from the upDown spinner                        |
-| $+        | output number, then increment it                                 |
-| $-        | output number, then decrement it                                 |
-| $n2, $n3  | Flag: pad number with 1-2 zeroes (01, 001).                      |
-| $m1 - $m3 | contents of the memory slots                                     |
-| $eq       | Flag: Convert \"\" to \", and removes single \"                  |
-| $rep      | Replace text in clipboard. Use mem slot 1 & 2 as from/to strings |
-| $vcm      | Split value in slot 1 with comma, output value[number]           |
-| $vsc      | Split value in slot 1 with semicolon, output value[number]       |
-| $vsp      | Split value in slot 1 with space, output value[number]           |
-| $list     | Split lines in main textbox (skips line 1), output value[number] |
-| $prompt   | Opens a popup box to insert a text value                         |
-| $Math     | Flag: Solves equations enclosed in [] brackets                   |
-| $Round    | Flag: Alters $Math to round off results.                         |
-| $RTF      | Flag: Output Rich text. See details below                        |
+| Command   | Function                                                                  |
+|-----------|---------------------------------------------------------------------------|
+| $d        | current date                                                              |
+| $t        | current time                                                              |
+| $cp       | clipboard (plain text)                                                    |
+| $cl / $cu | clipboard in lower/upper case                                             |
+| $i        | output the number from the upDown spinner                                 |
+| $+        | output number, then increment it                                          |
+| $-        | output number, then decrement it                                          |
+| $n2, $n3  | Flag: pad number with 1-2 zeroes (01, 001).                               |
+| $m1 - $m3 | contents of the memory slots                                              |
+| $eq       | Flag: Convert \"\" to \", and removes single \"                           |
+| $rep      | Replace text in clipboard. Use mem slot 1 & 2 as from/to strings          |
+| $vcm      | Split value in slot 1 with comma, output value[number]                    |
+| $vsc      | Split value in slot 1 with semicolon, output value[number]                |
+| $vsp      | Split value in slot 1 with space, output value[number]                    |
+| $list     | Split lines in main textbox (skips line 1), output value[number]          |
+| $prompt   | Opens a popup box to insert a text value                                  |
+| $Math     | Flag: Solves equations enclosed in [] brackets                            |
+| $Round    | Flag: Alters $Math to round off results.                                  |
+| $RTF      | Flag: Output Rich text. See details below                                 |
+| $DTW      | Translates digits in curly braces to numeral words. ex: $DTW{12} = twelve |
+| $DTU      | Flag: output from DTW is all upper case                                   |
 
 #### Flags
 

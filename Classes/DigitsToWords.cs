@@ -258,7 +258,7 @@ namespace ClipboardTool.Classes
                     }
                     else
                     {
-                        Debug.WriteLine($"No [, char at {start} was '{sections[i][start]}'");
+                        Debug.WriteLine($"No {{, char at {start} was '{sections[i][start]}'");
                     }
                     if (end > -1)
                     {
