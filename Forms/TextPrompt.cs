@@ -7,12 +7,13 @@ namespace ClipboardTool;
 
 public partial class TextPrompt : Form
 {
-    [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-    private static extern bool SetForegroundWindow(IntPtr hWnd);
+    [LibraryImport("user32.dll", SetLastError = true)]
+    [return: MarshalAs(UnmanagedType.Bool)]
+    private static partial bool SetForegroundWindow(IntPtr hWnd);
     public static readonly string[] IllegalFileCharacters = ["\\", "/", ":", "*", "?", "<", ">", "|"];
 
     public List<string> TextResult = [];
-    List<TextBox> textBoxes = [];
+    readonly List<TextBox> textBoxes = [];
     public Color ColorPicked = Color.White;
     readonly string[]? IllegalCharacters = null;
 
@@ -33,12 +34,14 @@ public partial class TextPrompt : Form
         {
             for (int i = 1; i < amount; i++)
             {
-                TextBox textBox = new TextBox();
-                textBox.Left = textBox1.Left;
-                textBox.Size = textBox1.Size;
-                textBox.Top = textBox1.Top + (textBox.Height + 10) * i;
+                TextBox textBox = new()
+                {
+                    Left = textBox1.Left,
+                    Size = textBox1.Size,
+                    Top = textBox1.Top + (textBox1.Height + 10) * i,
+                    TabIndex = i
+                };
                 textBox.KeyPress += TextBox_KeyPress;
-                textBox.TabIndex = i;
                 textBoxes.Add(textBox);
                 Controls.Add(textBox);
             }
@@ -73,7 +76,7 @@ public partial class TextPrompt : Form
         {
             Debug.WriteLine("Prompt cancelled, returning null");
             textPrompt.Dispose();
-            return new List<string>();
+            return [];
         }
     }
 

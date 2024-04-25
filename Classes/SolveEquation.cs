@@ -45,7 +45,7 @@ internal class SolveEquation
                 if (equation != null)
                 {
                     Dbg.WriteWithCaller("Equation: " + equation);
-                    DataTable dt = new DataTable();
+                    DataTable dt = new();
                     try
                     {
                         var comp = dt.Compute(equation, "");
