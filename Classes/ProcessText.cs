@@ -94,7 +94,7 @@ public class ProcessText
         //"$prompt Popup prompt to fill in a value\n" + // testing if the control can revert back to the active application
         if (customText.Contains(ProcessingCommands.Prompt.Name))
         {
-            customText = PromptForText(customText);
+            customText = PromptForText.Process(customText);
         }
 
         // Convert characters in clipboard string to numbers for debugging text
@@ -408,20 +408,20 @@ public class ProcessText
         }
     }
 
-    private static string PromptForText(string customText)
-    {
-        TextPrompt prompt = new TextPrompt("Input text", "Text processing is requesting an input value." + Environment.NewLine + "(" + ProcessingCommands.Prompt.Name + " function)");
-        if (prompt.ShowDialog() == DialogResult.OK)
-        {
-            customText = customText.Replace(ProcessingCommands.Prompt.Name, prompt.TextResult);
-        }
-        else
-        {
-            return string.Empty; // stop the text output if the calling function respects a string.Empty as an abort
-        }
-        prompt.Dispose();
-        return customText;
-    }
+    //private static string PromptForText(string customText)
+    //{
+    //    TextPrompt prompt = new TextPrompt("Input text", "Text processing is requesting an input value." + Environment.NewLine + "(" + ProcessingCommands.Prompt.Name + " function)");
+    //    if (prompt.ShowDialog() == DialogResult.OK)
+    //    {
+    //        customText = customText.Replace(ProcessingCommands.Prompt.Name, prompt.TextResult);
+    //    }
+    //    else
+    //    {
+    //        return string.Empty; // stop the text output if the calling function respects a string.Empty as an abort
+    //    }
+    //    prompt.Dispose();
+    //    return customText;
+    //}
 
     private static void PadNumber(ref string customText, ref int padNumber)
     {

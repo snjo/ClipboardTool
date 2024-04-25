@@ -277,17 +277,17 @@ public partial class TextLibrary : Form
         if (Clipboard.ContainsText())
         {
             string title;
-            TextPrompt textPrompt = new("Set entry title", "Set title and click OK to pin entry." + Environment.NewLine + "Cancel adds entry but does not pin.", true, TextPrompt.IllegalFileCharacters);
+            TextPrompt textPrompt = new(1, "Set entry title", "Set title and click OK to pin entry." + Environment.NewLine + "Cancel adds entry but does not pin.", true, TextPrompt.IllegalFileCharacters);
             DialogResult = textPrompt.ShowDialog();
             if (DialogResult == DialogResult.OK)
             {
-                title = textPrompt.TextResult;
+                title = textPrompt.TextResult.First();
                 Color color = textPrompt.ColorPicked;
                 string clipboardtext = Clipboard.GetText();
                 bool saveSuccessful = false;
                 if (clipboardtext.Length > 0)
                 {
-                    saveSuccessful = SaveEntry(textPrompt.TextResult, clipboardtext, color);
+                    saveSuccessful = SaveEntry(textPrompt.TextResult.First(), clipboardtext, color);
                 }
                 int row = gridTextLibrary.Rows.Add(saveSuccessful, title, clipboardtext);
                 SetEntryColor(row, color);
@@ -363,7 +363,7 @@ public partial class TextLibrary : Form
                         TextPrompt textPrompt = new();
                         if (textPrompt.ShowDialog() == DialogResult.OK)
                         {
-                            title = textPrompt.TextResult;
+                            title = textPrompt.TextResult.First();
                             cells[titleColumnIndex].Value = title;
                         }
                         else
