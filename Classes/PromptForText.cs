@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
+﻿using System.Diagnostics;
 using System.Runtime.Versioning;
 using System.Text;
-using System.Threading.Tasks;
 
 
 
@@ -22,7 +18,7 @@ public static class PromptForText
 
         promptResults = TextPrompt.PromptMultiple(foundTags.Count);
 
-        if (promptResults.Count == 0 ) 
+        if (promptResults.Count == 0)
         {
             return text.Replace(ProcessingCommands.Prompt.Name, "");
         }
@@ -30,10 +26,10 @@ public static class PromptForText
         StringBuilder sb = new StringBuilder();
 
         int lastTagLoc = text.Length;
-        for (int i = foundTags.Count-1; i >= 0; i--)
+        for (int i = foundTags.Count - 1; i >= 0; i--)
         {
             Debug.WriteLine($"tag {i} at {foundTags[i]}");
-            sb.Insert(0,(text[(foundTags[i] + ProcessingCommands.Prompt.Name.Length)..lastTagLoc]));
+            sb.Insert(0, (text[(foundTags[i] + ProcessingCommands.Prompt.Name.Length)..lastTagLoc]));
             sb.Insert(0, promptResults[i]);
             lastTagLoc = foundTags[i];
         }

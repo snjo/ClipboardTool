@@ -1,10 +1,6 @@
 ﻿using ClipboardTool.Classes;
-using ClipboardTool.Properties;
 using DebugTools;
-using System.Data;
-using System.Diagnostics;
 using System.Runtime.Versioning;
-using System.Text;
 
 namespace ClipboardTool;
 

@@ -1,10 +1,6 @@
 ﻿using ClipboardTool.Properties;
 using DebugTools;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace ClipboardTool.Classes;
 
