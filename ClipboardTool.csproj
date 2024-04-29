@@ -13,6 +13,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <ApplicationIcon>img\cbt.ico</ApplicationIcon>
     <SignAssembly>True</SignAssembly>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <AssemblyOriginatorKeyFile>D:\Github\cert\keypair.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
