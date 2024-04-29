@@ -2,23 +2,25 @@
 using DebugTools;
 using Hotkeys;
 using System.Diagnostics;
+using System.Runtime.Versioning;
 using System.Text.RegularExpressions;
 
 namespace ClipboardTool.Classes;
+[SupportedOSPlatform("windows")]
 
-public class MainMethods
+public partial class MainMethods
 {
-    MainForm mainForm;
-    Settings settings = Settings.Default;
-    ProcessText process;
+    readonly MainForm mainForm;
+    readonly Settings settings = Settings.Default;
+    readonly ProcessText process;
     public MainMethods(MainForm parent)
     {
         mainForm = parent;
         settings = ClipboardTool.Properties.Settings.Default;
-        process = mainForm.process;
+        process = mainForm.Process;
     }
 
-    public void updateHotkeyLabel(Hotkey hotkey, Label label)
+    public static void UpdateHotkeyLabel(Hotkey hotkey, Label label)
     {
         if (hotkey != null)
         {
@@ -95,7 +97,7 @@ public class MainMethods
 
     // FILE INPUT AND OUTPUT
 
-    public string loadTextFromFile(string filename)
+    public string LoadTextFromFile(string filename)
     {
         string folder = settings.MemorySlotFolder;
         string fullpath = Environment.ExpandEnvironmentVariables(folder);
@@ -114,7 +116,7 @@ public class MainMethods
         return string.Empty;
     }
 
-    public void saveTextToFile(string filename, string text, bool warnIfFailed)
+    public void SaveTextToFile(string filename, string text, bool warnIfFailed)
     {
         string folder = settings.MemorySlotFolder;
         if (folder.Length > 0)
@@ -130,7 +132,7 @@ public class MainMethods
             {
                 Dbg.WriteWithCaller("Save failed to folder: " + folderExpanded);
                 if (warnIfFailed)
-                    writeMessage("Couldn't save file " + filename + " to folder " + folder + Environment.NewLine +
+                    WriteMessage("Couldn't save file " + filename + " to folder " + folder + Environment.NewLine +
                     "The folder does not exist." + Environment.NewLine +
                     "You can set the save location in Settings, '.txt file folder'");
             }
@@ -141,7 +143,7 @@ public class MainMethods
         }
     }
 
-    public bool WriteToFile(string filename, string text, bool warnIfFailed)
+    public static bool WriteToFile(string filename, string text, bool warnIfFailed)
     {
         try
         {
@@ -153,21 +155,21 @@ public class MainMethods
         {
             Debug.WriteLine("Save failed to file: " + filename);
             if (warnIfFailed)
-                writeMessage("Couldn't save file " + filename + " to folder." + Environment.NewLine +
+                WriteMessage("Couldn't save file " + filename + " to folder." + Environment.NewLine +
                 "Ensure that the folder is not write protected." + Environment.NewLine +
                 "You can set the save location in Settings, '.txt file folder'");
             return false;
         }
     }
 
-    private void writeMessage(string text)
+    private static void WriteMessage(string text)
     {
         MessageBox.Show(text);
     }
 
-    public void saveMemSlotToFile(int num, bool warnIfFailed)
+    public void SaveMemSlotToFile(int num, bool warnIfFailed)
     {
-        saveTextToFile("mem" + num + ".txt", mainForm.MemorySlot(num).Text, warnIfFailed);
+        SaveTextToFile("mem" + num + ".txt", mainForm.MemorySlot(num).Text, warnIfFailed);
     }
 
     // HOTKEY HANDLING
@@ -191,10 +193,10 @@ public class MainMethods
             if (!hotkeyHeldDown)
             {
                 hotkeyHeldDown = true;
-                sendCut();
+                SendCut();
                 string t = LowerCaseOnce();
                 SetClipBoard(t, null, settings.sendPaste, "Hotkey PlainText");
-                sendPaste(t, "Hotkey LowerCase");
+                SendPaste(t, "Hotkey LowerCase");
             }
         }
 
@@ -203,16 +205,16 @@ public class MainMethods
             if (!hotkeyHeldDown)
             {
                 hotkeyHeldDown = true;
-                sendCut();
+                SendCut();
                 string t = UpperCaseOnce();
                 SetClipBoard(t, null, settings.sendPaste, "Hotkey PlainText");
-                sendPaste(t, "Hotkey UpperCase");
+                SendPaste(t, "Hotkey UpperCase");
             }
         }
 
         if (CheckHotkey("CapsLock", id))
         {
-            mainForm.ToggleCapsLock();
+            MainForm.ToggleCapsLock();
         }
 
         if (CheckHotkey("PlainText", id))
@@ -220,10 +222,10 @@ public class MainMethods
             if (!hotkeyHeldDown)
             {
                 hotkeyHeldDown = true;
-                sendCut();
+                SendCut();
                 string t = PlainTextOnce();
                 SetClipBoard(t, null, settings.sendPaste, "Hotkey PlainText");
-                sendPaste(t, "Hotkey PlainText");
+                SendPaste(t, "Hotkey PlainText");
             }
         }
 
@@ -233,15 +235,15 @@ public class MainMethods
             if (!hotkeyHeldDown)
             {
                 hotkeyHeldDown = true;
-                sendCut();
+                SendCut();
                 Dbg.WriteWithCaller("Process text");
-                sendPaste(process.ProcessTextVariables(mainForm.MemorySlot(0).Text, settings.sendPaste).PlainText, "Hotkey Process");
+                SendPaste(process.ProcessTextVariables(mainForm.MemorySlot(0).Text, settings.sendPaste).PlainText, "Hotkey Process");
             }
         }
 
         if (CheckHotkey("Date", id))
         {
-            sendDate();
+            SendDate();
         }
 
         if (CheckHotkey("MemSlot1", id))
@@ -249,9 +251,9 @@ public class MainMethods
             if (!hotkeyHeldDown)
             {
                 hotkeyHeldDown = true;
-                sendCut();
+                SendCut();
                 Dbg.WriteWithCaller("Process text");
-                sendPaste(process.ProcessTextVariables(mainForm.MemorySlot(1).Text, settings.sendPaste).PlainText);
+                SendPaste(process.ProcessTextVariables(mainForm.MemorySlot(1).Text, settings.sendPaste).PlainText);
             }
         }
 
@@ -260,9 +262,9 @@ public class MainMethods
             if (!hotkeyHeldDown)
             {
                 hotkeyHeldDown = true;
-                sendCut();
+                SendCut();
                 Dbg.WriteWithCaller("Process text");
-                sendPaste(process.ProcessTextVariables(mainForm.MemorySlot(2).Text, settings.sendPaste).PlainText);
+                SendPaste(process.ProcessTextVariables(mainForm.MemorySlot(2).Text, settings.sendPaste).PlainText);
             }
         }
 
@@ -271,9 +273,9 @@ public class MainMethods
             if (!hotkeyHeldDown)
             {
                 hotkeyHeldDown = true;
-                sendCut();
+                SendCut();
                 Dbg.WriteWithCaller("Process text");
-                sendPaste(process.ProcessTextVariables(mainForm.MemorySlot(3).Text, settings.sendPaste).PlainText);
+                SendPaste(process.ProcessTextVariables(mainForm.MemorySlot(3).Text, settings.sendPaste).PlainText);
             }
         }
 
@@ -282,9 +284,9 @@ public class MainMethods
             mainForm.NumberSpinner = 1;
         }
 
-        if (CheckHotkey("History", id))
+        if (CheckHotkey("TextLibrary", id))
         {
-            mainForm.ShowHistory();
+            mainForm.ShowTextLibrary();
         }
     }
 
@@ -300,7 +302,7 @@ public class MainMethods
         return false;
     }
 
-    private void sendCut()
+    private void SendCut()
     {
         if (settings.sendCut)
         {
@@ -308,7 +310,7 @@ public class MainMethods
         }
     }
 
-    private void sendPaste(string output, string source = "unknown")
+    private void SendPaste(string output, string source = "unknown")
     {
         Debug.WriteLine("SendPaste start from " + source);
         //hotkeyHeldDown = true;
@@ -320,21 +322,21 @@ public class MainMethods
 
         if (settings.sendPaste)
         {
-            delayKeystrokes("^v");
+            DelayKeystrokes("^v");
         }
         else if (settings.sendType)
         {
-            delayKeystrokes(output);
+            DelayKeystrokes(output);
         }
     }
 
-    private void delayKeystrokes(string keystrokes)
+    private void DelayKeystrokes(string keystrokes)
     {
         delayedKeystrokes = keystrokes;
         mainForm.StartTimerKeystrokes();
     }
 
-    private void sendKeystrokes(string keystrokes)
+    private void SendKeystrokes(string keystrokes)
     {
         switch (keystrokes)
         {
@@ -352,7 +354,7 @@ public class MainMethods
                 sendDateChoice = SendDateOption.NotStarted;
                 break;
             default:
-                keystrokes = Regex.Replace(keystrokes, "[+^%~(){}]", "{$0}");
+                keystrokes = SendKeysSafeRegex().Replace(keystrokes, "{$0}");
                 SendKeys.Send(keystrokes);
                 break;
         }
@@ -399,41 +401,29 @@ public class MainMethods
     {
         mainForm.StopTimerKeystrokes();
         if (delayedKeystrokes != null)
-            sendKeystrokes(delayedKeystrokes);
+            SendKeystrokes(delayedKeystrokes);
     }
 
-    private void sendDate()
+    private void SendDate()
     {
         if (sendDateChoice < SendDateOption.END - 1)
         {
-            sendDateChoice = sendDateChoice + 1;
+            sendDateChoice++;
         }
 
-        delayKeystrokes("$SendDate");
+        DelayKeystrokes("$SendDate");
     }
 
     private string SendDateText()
     {
-        string outDate = "init outDate (SendDate error)";
-        switch (sendDateChoice)
+        string outDate = sendDateChoice switch
         {
-            case SendDateOption.NotStarted:
-                outDate = "Use Date/Time hotkey (SendDate error)";
-                break;
-            case SendDateOption.JustDate:
-                outDate = DateTime.Now.ToShortDateString();
-                break;
-            case SendDateOption.DateAndTime:
-                outDate = DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString();
-                break;
-            case SendDateOption.JustTime:
-                outDate = DateTime.Now.ToShortTimeString();
-                break;
-            default:
-                outDate = "Pressed beyond the enum (SendDate error)";
-                break;
-        }
-
+            SendDateOption.NotStarted => "Use Date/Time hotkey (SendDate error)",
+            SendDateOption.JustDate => DateTime.Now.ToShortDateString(),
+            SendDateOption.DateAndTime => DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString(),
+            SendDateOption.JustTime => DateTime.Now.ToShortTimeString(),
+            _ => "Pressed beyond the enum (SendDate error)",
+        };
         return outDate;
     }
 
@@ -450,10 +440,8 @@ public class MainMethods
         {
             if (richText == null)
             {
-                DateTime clipStart = DateTime.Now;
                 try
                 {
-                    //string testEmoji = char.ConvertFromUtf32(128076).ToString();
                     Clipboard.SetText(plainText, TextDataFormat.UnicodeText);
                 }
                 catch
@@ -464,24 +452,18 @@ public class MainMethods
                     //this was probably caused by another program accessing the clipboard at the same time, or sending requests too rapidly.
                     //should be fixed after fixing some spammy clipboard updates.
                 }
-                TimeSpan ts = DateTime.Now - clipStart;
             }
             else
             {
-                DateTime clipStart = DateTime.Now;
                 try
                 {
                     // When pasting special unicode characters like smileys, the may be converted to ??
                     // plaintext loses the unicode because it's copied from textBox.Text, RTF for an unknown reason when using SetData(DataFormats.RTF
                     Clipboard.Clear();
-                    DataObject data = new DataObject();
+                    DataObject data = new();
                     data.SetData(DataFormats.UnicodeText, plainText);
                     data.SetData(DataFormats.Rtf, richText);
                     Clipboard.SetDataObject(data);
-
-                    //test
-                    //Debug.WriteLine("Set to clip from RTF");
-                    //Clipboard.SetText(plainText, TextDataFormat.UnicodeText);
                 }
                 catch
                 {
@@ -489,7 +471,6 @@ public class MainMethods
                     //    SystemSounds.Asterisk.Play();
                     Dbg.WriteWithCaller("Error updating clipboard");
                 }
-                TimeSpan ts = DateTime.Now - clipStart;
             }
         }
         else
@@ -498,7 +479,7 @@ public class MainMethods
         }
     }
 
-    public void setTextBoxFromClipboard(int num)
+    public void SetTextBoxFromClipboard(int num)
     {
         TextBox textBox;
         textBox = mainForm.MemorySlot(num);
@@ -509,7 +490,7 @@ public class MainMethods
 
             if (settings.SaveMemorySlots)
             {
-                saveMemSlotToFile(num, warnIfFailed: true);
+                SaveMemSlotToFile(num, warnIfFailed: true);
             }
 
             if (settings.ResetCounterWhenSet)
@@ -520,7 +501,7 @@ public class MainMethods
         }
     }
 
-    public void setClipboardFromTextBox(int num)
+    public void SetClipboardFromTextBox(int num)
     {
         TextBox textBox;
         textBox = mainForm.MemorySlot(num);
@@ -538,4 +519,7 @@ public class MainMethods
         }
 
     }
+
+    [GeneratedRegex("[+^%~(){}]")]
+    private static partial Regex SendKeysSafeRegex();
 }

@@ -102,7 +102,7 @@
             buttonLower.TabIndex = 20;
             buttonLower.Text = "lower";
             buttonLower.UseVisualStyleBackColor = true;
-            buttonLower.Click += actionLowerCaseOnce;
+            buttonLower.Click += ActionLowerCaseOnce;
             // 
             // button2
             // 
@@ -112,7 +112,7 @@
             button2.TabIndex = 21;
             button2.Text = "UPPER";
             button2.UseVisualStyleBackColor = true;
-            button2.Click += actionUpperCaseOnce;
+            button2.Click += ActionUpperCaseOnce;
             // 
             // button3
             // 
@@ -122,7 +122,7 @@
             button3.TabIndex = 22;
             button3.Text = "Plain";
             button3.UseVisualStyleBackColor = true;
-            button3.Click += actionPlainTextOnce;
+            button3.Click += ActionPlainTextOnce;
             // 
             // labelLower
             // 
@@ -169,7 +169,7 @@
             checkBoxCapsLock.TabIndex = 23;
             checkBoxCapsLock.Text = "Caps Lock";
             checkBoxCapsLock.UseVisualStyleBackColor = true;
-            checkBoxCapsLock.Click += actionCapsLock;
+            checkBoxCapsLock.Click += ActionCapsLock;
             // 
             // buttonOptions
             // 
@@ -180,8 +180,8 @@
             buttonOptions.TabIndex = 13;
             buttonOptions.Text = "⚙️";
             buttonOptions.UseVisualStyleBackColor = true;
-            buttonOptions.Click += actionShowOptions;
-            buttonOptions.MouseHover += showTooltipSettings;
+            buttonOptions.Click += ActionShowOptions;
+            buttonOptions.MouseHover += ShowTooltipSettings;
             // 
             // buttonPin
             // 
@@ -192,8 +192,8 @@
             buttonPin.TabIndex = 12;
             buttonPin.Text = "📌";
             buttonPin.UseVisualStyleBackColor = true;
-            buttonPin.Click += actionAlwaysOnTop;
-            buttonPin.MouseHover += showTooltipPin;
+            buttonPin.Click += ActionAlwaysOnTop;
+            buttonPin.MouseHover += ShowTooltipPin;
             // 
             // buttonHide
             // 
@@ -204,8 +204,8 @@
             buttonHide.TabIndex = 11;
             buttonHide.Text = "👻";
             buttonHide.UseVisualStyleBackColor = true;
-            buttonHide.Click += actionHideFromTaskbar;
-            buttonHide.MouseHover += showToolTipHide;
+            buttonHide.Click += ActionHideFromTaskbar;
+            buttonHide.MouseHover += ShowToolTipHide;
             // 
             // buttonToolbar
             // 
@@ -216,7 +216,7 @@
             buttonToolbar.TabIndex = 10;
             buttonToolbar.Text = "toolbar";
             buttonToolbar.UseVisualStyleBackColor = true;
-            buttonToolbar.Click += actionShowToolbar;
+            buttonToolbar.Click += ActionShowToolbar;
             // 
             // panel1
             // 
@@ -263,7 +263,7 @@
             buttonProcess.TabIndex = 30;
             buttonProcess.Text = "Process";
             buttonProcess.UseVisualStyleBackColor = true;
-            buttonProcess.Click += actionProcessText;
+            buttonProcess.Click += ActionProcessText;
             // 
             // textCustom
             // 
@@ -305,8 +305,8 @@
             buttonSave1.Tag = "1";
             buttonSave1.Text = "▽";
             buttonSave1.UseVisualStyleBackColor = true;
-            buttonSave1.Click += actionSave;
-            buttonSave1.MouseHover += showToolTipMemSave;
+            buttonSave1.Click += ActionSave;
+            buttonSave1.MouseHover += ShowToolTipMemSave;
             // 
             // buttonLoad1
             // 
@@ -318,8 +318,8 @@
             buttonLoad1.Tag = "1";
             buttonLoad1.Text = "△";
             buttonLoad1.UseVisualStyleBackColor = true;
-            buttonLoad1.Click += actionLoad;
-            buttonLoad1.MouseHover += showToolTipMemLoad;
+            buttonLoad1.Click += ActionLoad;
+            buttonLoad1.MouseHover += ShowToolTipMemLoad;
             // 
             // textBox2
             // 
@@ -347,7 +347,7 @@
             // 
             timerStatus.Enabled = true;
             timerStatus.Interval = 500;
-            timerStatus.Tick += timerStatus_Tick;
+            timerStatus.Tick += TimerStatus_Tick;
             // 
             // contextMenuStrip1
             // 
@@ -360,56 +360,56 @@
             hideToolStripMenuItem.Name = "hideToolStripMenuItem";
             hideToolStripMenuItem.Size = new Size(188, 22);
             hideToolStripMenuItem.Text = "Hide";
-            hideToolStripMenuItem.Click += actionHideFromTaskbar;
+            hideToolStripMenuItem.Click += ActionHideFromTaskbar;
             // 
             // showToolStripMenuItem
             // 
             showToolStripMenuItem.Name = "showToolStripMenuItem";
             showToolStripMenuItem.Size = new Size(188, 22);
             showToolStripMenuItem.Text = "Show";
-            showToolStripMenuItem.Click += actionShowWindow;
+            showToolStripMenuItem.Click += ActionShowWindow;
             // 
             // capsLockToolStripMenuItem
             // 
             capsLockToolStripMenuItem.Name = "capsLockToolStripMenuItem";
             capsLockToolStripMenuItem.Size = new Size(188, 22);
             capsLockToolStripMenuItem.Text = "Caps Lock";
-            capsLockToolStripMenuItem.Click += actionCapsLock;
+            capsLockToolStripMenuItem.Click += ActionCapsLock;
             // 
             // uPPERCaseClipboardToolStripMenuItem
             // 
             uPPERCaseClipboardToolStripMenuItem.Name = "uPPERCaseClipboardToolStripMenuItem";
             uPPERCaseClipboardToolStripMenuItem.Size = new Size(188, 22);
             uPPERCaseClipboardToolStripMenuItem.Text = "UPPER case clipboard";
-            uPPERCaseClipboardToolStripMenuItem.Click += actionUpperCaseOnce;
+            uPPERCaseClipboardToolStripMenuItem.Click += ActionUpperCaseOnce;
             // 
             // lowerCaseClipboardToolStripMenuItem
             // 
             lowerCaseClipboardToolStripMenuItem.Name = "lowerCaseClipboardToolStripMenuItem";
             lowerCaseClipboardToolStripMenuItem.Size = new Size(188, 22);
             lowerCaseClipboardToolStripMenuItem.Text = "lower case clipboard";
-            lowerCaseClipboardToolStripMenuItem.Click += actionLowerCaseOnce;
+            lowerCaseClipboardToolStripMenuItem.Click += ActionLowerCaseOnce;
             // 
             // plainTextClipboardToolStripMenuItem
             // 
             plainTextClipboardToolStripMenuItem.Name = "plainTextClipboardToolStripMenuItem";
             plainTextClipboardToolStripMenuItem.Size = new Size(188, 22);
             plainTextClipboardToolStripMenuItem.Text = "Plain text clipboard";
-            plainTextClipboardToolStripMenuItem.Click += actionPlainTextOnce;
+            plainTextClipboardToolStripMenuItem.Click += ActionPlainTextOnce;
             // 
             // historyStripMenuItem
             // 
             historyStripMenuItem.Name = "historyStripMenuItem";
             historyStripMenuItem.Size = new Size(188, 22);
             historyStripMenuItem.Text = "History";
-            historyStripMenuItem.Click += buttonHistory_Click;
+            historyStripMenuItem.Click += ButtonTextLibrary_Click;
             // 
             // exitToolStripMenuItem
             // 
             exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             exitToolStripMenuItem.Size = new Size(188, 22);
             exitToolStripMenuItem.Text = "Exit";
-            exitToolStripMenuItem.Click += actionExit;
+            exitToolStripMenuItem.Click += ActionExit;
             // 
             // notifyIconUpper
             // 
@@ -422,7 +422,7 @@
             systrayIcon.Icon = (Icon)resources.GetObject("systrayIcon.Icon");
             systrayIcon.Text = "Clipboard Tool - Caps Lock is ?";
             systrayIcon.Visible = true;
-            systrayIcon.DoubleClick += actionShowWindow;
+            systrayIcon.DoubleClick += ActionShowWindow;
             // 
             // toolTip
             // 
@@ -437,8 +437,8 @@
             buttonHelp.TabIndex = 33;
             buttonHelp.Text = "?";
             buttonHelp.UseVisualStyleBackColor = true;
-            buttonHelp.Click += actionShowHelp;
-            buttonHelp.MouseHover += showTooltipHelp;
+            buttonHelp.Click += ActionShowHelp;
+            buttonHelp.MouseHover += ShowTooltipHelp;
             // 
             // buttonSaveCustom
             // 
@@ -449,12 +449,12 @@
             buttonSaveCustom.TabIndex = 34;
             buttonSaveCustom.Text = "💾";
             buttonSaveCustom.UseVisualStyleBackColor = true;
-            buttonSaveCustom.Click += actionSaveCustomText;
-            buttonSaveCustom.MouseHover += showTooltipSaveTextToFile;
+            buttonSaveCustom.Click += ActionSaveCustomText;
+            buttonSaveCustom.MouseHover += ShowTooltipSaveTextToFile;
             // 
             // timerKeystrokes
             // 
-            timerKeystrokes.Tick += actionDelayedKeystrokes;
+            timerKeystrokes.Tick += ActionDelayedKeystrokes;
             // 
             // splitContainer1
             // 
@@ -488,8 +488,8 @@
             button7.Tag = "1";
             button7.Text = "💾";
             button7.UseVisualStyleBackColor = true;
-            button7.Click += actionSaveToFile;
-            button7.MouseHover += showTooltipSaveTextToFile;
+            button7.Click += ActionSaveToFile;
+            button7.MouseHover += ShowTooltipSaveTextToFile;
             // 
             // splitContainer2
             // 
@@ -526,8 +526,8 @@
             button1.Tag = "2";
             button1.Text = "💾";
             button1.UseVisualStyleBackColor = true;
-            button1.Click += actionSaveToFile;
-            button1.MouseHover += showTooltipSaveTextToFile;
+            button1.Click += ActionSaveToFile;
+            button1.MouseHover += ShowTooltipSaveTextToFile;
             // 
             // button4
             // 
@@ -539,8 +539,8 @@
             button4.Tag = "2";
             button4.Text = "▽";
             button4.UseVisualStyleBackColor = true;
-            button4.Click += actionSave;
-            button4.MouseHover += showToolTipMemSave;
+            button4.Click += ActionSave;
+            button4.MouseHover += ShowToolTipMemSave;
             // 
             // button5
             // 
@@ -552,8 +552,8 @@
             button5.Tag = "2";
             button5.Text = "△";
             button5.UseVisualStyleBackColor = true;
-            button5.Click += actionLoad;
-            button5.MouseHover += showToolTipMemLoad;
+            button5.Click += ActionLoad;
+            button5.MouseHover += ShowToolTipMemLoad;
             // 
             // button6
             // 
@@ -565,8 +565,8 @@
             button6.Tag = "3";
             button6.Text = "💾";
             button6.UseVisualStyleBackColor = true;
-            button6.Click += actionSaveToFile;
-            button6.MouseHover += showTooltipSaveTextToFile;
+            button6.Click += ActionSaveToFile;
+            button6.MouseHover += ShowTooltipSaveTextToFile;
             // 
             // button8
             // 
@@ -578,8 +578,8 @@
             button8.Tag = "3";
             button8.Text = "▽";
             button8.UseVisualStyleBackColor = true;
-            button8.Click += actionSave;
-            button8.MouseHover += showToolTipMemSave;
+            button8.Click += ActionSave;
+            button8.MouseHover += ShowToolTipMemSave;
             // 
             // button9
             // 
@@ -591,19 +591,19 @@
             button9.Tag = "3";
             button9.Text = "△";
             button9.UseVisualStyleBackColor = true;
-            button9.Click += actionLoad;
-            button9.MouseHover += showToolTipMemLoad;
+            button9.Click += ActionLoad;
+            button9.MouseHover += ShowToolTipMemLoad;
             // 
             // buttonHistory
             // 
             buttonHistory.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            buttonHistory.Location = new Point(147, 5);
+            buttonHistory.Location = new Point(123, 5);
             buttonHistory.Name = "buttonHistory";
-            buttonHistory.Size = new Size(60, 23);
+            buttonHistory.Size = new Size(84, 23);
             buttonHistory.TabIndex = 50;
-            buttonHistory.Text = "history";
+            buttonHistory.Text = "text library";
             buttonHistory.UseVisualStyleBackColor = true;
-            buttonHistory.Click += buttonHistory_Click;
+            buttonHistory.Click += ButtonTextLibrary_Click;
             // 
             // notifyIcon1
             // 

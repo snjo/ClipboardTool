@@ -1,0 +1,17 @@
+LICENSE
+This license applies to any original work within the source code or resources. I claim no rights to any code or resources made by others.
+Any changes to this license that restrict use of the software or code shall not affect any part made prior to the change.
+
+USE OF THE SOFTWARE AS-IS
+This software is free for private or commercial use, either using the released versions, or compiled from the source code.
+
+NON-COMMERCIAL USE OF THE CODE AND RESOURCES
+You may use the program, code or other resources however you like. This includes re-using the code in any other FREE software, whether closed or open source.
+
+LIMITATIONS ON COMMERCIAL USE OR RE-DISTRIBUTION OF THE CODE AND RESOURCES
+You may use the program or source code as stated above, unless it's re-distributed as part of a paid product or service.
+If you wish to use any part of this software or code in a paid product, you must get explicit permission from the author.
+
+
+-Andreas Aakvik Gogstad
+2024-01-28

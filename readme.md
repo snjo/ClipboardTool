@@ -16,7 +16,7 @@ https://github.com/snjo/ClipboardTool
 
 The buttons in the main application window alter or replace the content of the clipboard. The hotkeys to perform the same operation are also listed, and can be changed in Options.
 
-	History - Opens a window with saved text entries, much like sticky notes.
+	Text Library - Opens a window with saved text entries, much like sticky notes.
 	Toolbar - Opens a floating window with a small number of buttons.
 	Ghost - Hides the main window from the task bar. Use the system tray, toolbar or hotkeys to control the program.
 	Pin - Toggles on Always on top mode.
@@ -39,7 +39,7 @@ The buttons in the main application window alter or replace the content of the c
 	Down arrow - Fills the textbox with the current contents of the clipboard.
 	Up arrow - Outputs the text in the textbox to the clipboard, performing any text processing using $ commands.
 	
-#### History Window
+#### TextLibrary Window
 	
 	Pin - Toggles on Always on top mode.
 	Color - Change the color of the selected text entry
@@ -51,37 +51,39 @@ The buttons in the main application window alter or replace the content of the c
 	Text - The text that will be output. Text processing is performed on any $ commands.
 	> - Copies the text to the clipboard.
 
-	History folder link - Opens the folder with any saved text entries.
+	Text Library folder link - Opens the folder with any saved text entries.
 	Minimize - If checked, the window minimizes after clicking a > button
 
-See the History Window section below for more details
+See the Text Library Window section below for more details
 
 -----------------------------------------
 ## Commands for text processing:
 
 *Commands are case sensitive*
 
-| Command   | Function                                                         |
-|-----------|------------------------------------------------------------------|
-| $d        | current date                                                     |
-| $t        | current time                                                     |
-| $cp       | clipboard (plain text)                                           |
-| $cl / $cu | clipboard in lower/upper case                                    |
-| $i        | output the number from the upDown spinner                        |
-| $+        | output number, then increment it                                 |
-| $-        | output number, then decrement it                                 |
-| $n2, $n3  | Flag: pad number with 1-2 zeroes (01, 001).                      |
-| $m1 - $m3 | contents of the memory slots                                     |
-| $eq       | Flag: Convert \"\" to \", and removes single \"                  |
-| $rep      | Replace text in clipboard. Use mem slot 1 & 2 as from/to strings |
-| $vcm      | Split value in slot 1 with comma, output value[number]           |
-| $vsc      | Split value in slot 1 with semicolon, output value[number]       |
-| $vsp      | Split value in slot 1 with space, output value[number]           |
-| $list     | Split lines in main textbox (skips line 1), output value[number] |
-| $prompt   | Opens a popup box to insert a text value                         |
-| $Math     | Flag: Solves equations enclosed in [] brackets                   |
-| $Round    | Flag: Alters $Math to round off results.                         |
-| $RTF      | Flag: Output Rich text. See details below                        |
+| Command   | Function                                                                  |
+|-----------|---------------------------------------------------------------------------|
+| $d        | current date                                                              |
+| $t        | current time                                                              |
+| $cp       | clipboard (plain text)                                                    |
+| $cl / $cu | clipboard in lower/upper case                                             |
+| $i        | output the number from the upDown spinner                                 |
+| $+        | output number, then increment it                                          |
+| $-        | output number, then decrement it                                          |
+| $n2, $n3  | Flag: pad number with 1-2 zeroes (01, 001).                               |
+| $m1 - $m3 | contents of the memory slots                                              |
+| $eq       | Flag: Convert \"\" to \", and removes single \"                           |
+| $rep      | Replace text in clipboard. Use mem slot 1 & 2 as from/to strings          |
+| $vcm      | Split value in slot 1 with comma, output value[number]                    |
+| $vsc      | Split value in slot 1 with semicolon, output value[number]                |
+| $vsp      | Split value in slot 1 with space, output value[number]                    |
+| $list     | Split lines in main textbox (skips line 1), output value[number]          |
+| $prompt   | Opens a popup box to insert a text value                                  |
+| $Math     | Flag: Solves equations enclosed in [] brackets                            |
+| $Round    | Flag: Alters $Math to round off results.                                  |
+| $RTF      | Flag: Output Rich text. See details below                                 |
+| $DTW      | Translates digits in curly braces to numeral words. ex: $DTW{12} = twelve |
+| $DTU      | Flag: output from DTW is all upper case                                   |
 
 #### Flags
 
@@ -105,7 +107,7 @@ The program settings user.config are stored in a folder in %localappdata%\Clipbo
 | Function                       | Default hotkey         |
 |--------------------------------|------------------------|
 | Convert to upper case          | Ctrl+Shift+U           |
-| Convert to lower case          | Ctrl+Shift+D           |
+| Convert to lower case          | Ctrl+Shift+L           |
 | Convert to plain text          | Ctrl+Shift+T           |
 | Process text using $'s         | Ctrl+Shift+P           |
 | Caps Lock toggle               | Ctrl+Shift+Backspace   |
@@ -114,7 +116,7 @@ The program settings user.config are stored in a folder in %localappdata%\Clipbo
 | Memory Slot 3                  | Ctrl+Shift+3           |
 | Reset Number UpDown to 1       | Ctrl+Shift+R           |
 | Date/Time                      | Ctrl+Shift+D           |
-| History/Saved Text Window      | Ctrl+Shift+H           |
+| Text Library Window            | Ctrl+Shift+H           |
 
 Memory Slot hotkeys also does any $ processing in the field, but some functions are not suited for these slots since they rely on values in the mem slots ($rep, $vcm, $list etc.)
 
@@ -129,21 +131,21 @@ Tap the date hotkey 1-3 times while holding the modifier keys:
 The date format is based on your Windows region settings, but can be overridden in the Options / Culture setting.
 
 -----------------------------------------
-## History Window
+## Text Library Window
 
-The History window allows you to save text and quickly load them into the clipboard. Any $ commands in the text will be processed if you use the [>] Copy button.
+The Text Library window allows you to save text and quickly load them into the clipboard. Any $ commands in the text will be processed if you use the [>] Copy button.
 
-Set the folder for these text files in Options, or allow the program to create the folder for you when opening History the first time.
+Set the folder for these text files in Options, or allow the program to create the folder for you when opening Text Library the first time.
 
 The Minimize on Copy checkbox default setting can be saved in Options.
 
-If you pin an entry, the file will be saved. Unpinning the entry will delete the file. Any entries that are not pinned (saved) will be lost if you close the History window.
+If you pin an entry, the file will be saved. Unpinning the entry will delete the file. Any entries that are not pinned (saved) will be lost if you close the Text Library window.
 
 When adding a new entry from clipboard using the Add button, or pinning a manually created entry, you must specify a title. This title will be used as the file name (.txt will be added automatically)
 If you have selected a color, the text file will begin with a color tag on the first line.
 
 #### Quick Tip
-Set the History hotkey to a convenient key like F2 (without modifiers), and set the "Minimize after copy" on in options.
+Set the Text Library hotkey to a convenient key like F2 (without modifiers), and set the "Minimize after copy" on in options.
 
 Then while working in an application, you can press the hotkey, copy the text, and paste into your application.
 
@@ -228,7 +230,7 @@ $Round: Rounds off equation results to integers.
 		Example: $Math$Round[2+(3/2)]
 		Output: 4
 
-If there's an error in the equation, an warning popup is shown. This can be disabled in Options.
+If there's an error in the equation, a warning popup is shown. This can be disabled in Options.
 
 The datatable used to process the equation only works with US notation, so any commas will be converted to periods. The result will be output with commas or period as decimal separator based on the region/culture setting in Options. By default it uses your Windows region setting.
 
