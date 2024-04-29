@@ -6,10 +6,14 @@ namespace ClipboardTool;
 
 [SupportedOSPlatform("windows")]
 
-public class ProcessText(MainForm parent)
+public class ProcessText
 {
-    readonly MainForm mainForm = parent;
-    public ProcessingCommands commands = new();
+    readonly MainForm mainForm;
+    public ProcessingCommands commands = new ProcessingCommands();
+    public ProcessText(MainForm parent)
+    {
+        mainForm = parent;
+    }
 
     /// <summary>
     /// Processes text with $-commands, outputs both plain and rich text.
@@ -20,8 +24,8 @@ public class ProcessText(MainForm parent)
     {
         //Debug.WriteLine("ProcessTextVariables start, clipboardupdate: " + forceClipboardUpdate);
         if (customText == null) return (PlainText: string.Empty, RichText: null);
-        string plainText;
-        string? richText;
+        string plainText = String.Empty;
+        string? richText = String.Empty;
 
         int padNumber = 1;
         //string clip = Clipboard.GetText(TextDataFormat.UnicodeText);
@@ -194,8 +198,8 @@ public class ProcessText(MainForm parent)
 
     private string SeparatorList(string customText, int slot = 1)
     {
-        char separator;
-        string command;
+        char separator = ',';
+        string command = string.Empty;
         if (customText.Contains(ProcessingCommands.ValueSplitComma.Name)) // comma separator
         {
             separator = ',';

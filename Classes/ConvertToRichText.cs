@@ -1,14 +1,11 @@
 ﻿using ClipboardTool.Properties;
 using DebugTools;
-using System.Runtime.Versioning;
 using System.Text;
 
 namespace ClipboardTool.Classes;
 
 internal class ConvertToRichText
 {
-    [SupportedOSPlatform("windows")]
-
     /// <summary>
     /// Parses tags into Rich Text, outputs both plain and rich text.
     /// </summary>
@@ -19,9 +16,9 @@ internal class ConvertToRichText
         //https://www.biblioscape.com/rtf15_spec.htm
         Dbg.WriteWithCaller("Parsing Rich Text: ");
 
-        RichTextBox rtfBox = new();
-        StringBuilder builder = new();
-        string plainTextResult;
+        RichTextBox rtfBox = new RichTextBox();
+        StringBuilder builder = new StringBuilder();
+        string plainTextResult = "";
         string richTextResult = "";
         string tagStart = "<";
         string tagEnd = ">";
