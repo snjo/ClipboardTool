@@ -206,7 +206,7 @@ namespace ClipboardTool.Classes
             return result;
         }
 
-        public static string ProcessDigitsEnclosed(string text, bool UpperCase = false)
+        public static string ProcessDigitsEnclosed(string text, bool UpperCase = false, bool FirstCap = false)
         {
             Debug.WriteLine($"Process digit text: '{text}'");
             string tag = ProcessingCommands.DigitToWord.Name;
@@ -247,7 +247,17 @@ namespace ClipboardTool.Classes
                             Debug.WriteLine($"Found digits: {enclosedDigits}");
                             if (enclosedDigits.Length > 0)
                             {
-                                stringBuilder.Append(ToWords(enclosedDigits));
+                                string digitWord = ToWords(enclosedDigits);
+                                if (UpperCase)
+                                {
+                                    Debug.WriteLine("Converting digits to upper case");
+                                    digitWord = digitWord.ToUpper();
+                                }
+                                else if (FirstCap && digitWord.Length > 1)
+                                {
+                                    digitWord = digitWord[0].ToString().ToUpper() + digitWord[1..];
+                                }
+                                stringBuilder.Append(digitWord);
                             }
                         }
                     }
@@ -272,10 +282,6 @@ namespace ClipboardTool.Classes
 
             //DebugTools.Dbg.WriteWithCaller("locations of tag: " + tagLocations.ToText());
 
-            if (UpperCase)
-            {
-                return stringBuilder.ToString().ToUpper();
-            }
             return stringBuilder.ToString();
         }
     }

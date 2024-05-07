@@ -121,9 +121,16 @@ public class ProcessText
             customText = customText.Replace(ProcessingCommands.DigitToWordUpperCase.Name, "");
         }
 
+        bool DTWFirstCapFlag = false;
+        if (customText.Contains(ProcessingCommands.DigitToWordFirstCap.Name))
+        {
+            DTWFirstCapFlag = true;
+            customText = customText.Replace(ProcessingCommands.DigitToWordFirstCap.Name, "");
+        }
+
         if (customText.Contains(ProcessingCommands.DigitToWord.Name))
         {
-            customText = DigitsToWords.ProcessDigitsEnclosed(customText, DTWUpperCaseFlag);
+            customText = DigitsToWords.ProcessDigitsEnclosed(customText, DTWUpperCaseFlag, DTWFirstCapFlag);
             customText = customText.Replace(ProcessingCommands.DigitToWord.Name, "");
         }
 
