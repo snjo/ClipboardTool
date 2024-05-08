@@ -38,8 +38,8 @@
         public static readonly Command Round = new Command(name: "$Round", description: "Flag: Alters $Math to round off results. ", Commands);
         public static readonly Command RTF = new Command(name: "$RTF", description: "Output Rich Text (.rtf format)", Commands);
         public static readonly Command DigitToWord = new Command(name: "$DTW", description: "Translates digits in curly braces to numeral words. ex: $DTW{12} = twelve", Commands);
-        public static readonly Command DigitToWordUpperCase = new Command(name: "$DTU", "Flag: output from DTW is all upper case", Commands);
-        public static readonly Command DigitToWordFirstCap = new Command(name: "$DTF", "Flag: output from DTW first character is upper case", Commands);
+        public static readonly Command DigitToWordUpperCase = new Command(name: "$DTU", "Flag: DTW output is all upper case", Commands);
+        public static readonly Command DigitToWordFirstCap = new Command(name: "$DTF", "Flag: DTW output starts with upper case", Commands);
         public static readonly Command ClipboardCharToInt = new Command(name: "$cci", description: "Convert text to character numbers for debugging", Commands);
         public static readonly Command None = new Command(name: "$X", description: "No processing, but separates a tag from the rest of the text", Commands);
 
