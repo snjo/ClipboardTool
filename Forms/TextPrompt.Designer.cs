@@ -54,7 +54,7 @@
             buttonOK.Location = new Point(246, 71);
             buttonOK.Name = "buttonOK";
             buttonOK.Size = new Size(75, 23);
-            buttonOK.TabIndex = 12;
+            buttonOK.TabIndex = 102;
             buttonOK.Text = "OK";
             buttonOK.UseVisualStyleBackColor = true;
             buttonOK.Click += ButtonOK_Click;
@@ -65,7 +65,7 @@
             buttonCancel.Location = new Point(165, 71);
             buttonCancel.Name = "buttonCancel";
             buttonCancel.Size = new Size(75, 23);
-            buttonCancel.TabIndex = 11;
+            buttonCancel.TabIndex = 101;
             buttonCancel.Text = "Cancel";
             buttonCancel.UseVisualStyleBackColor = true;
             buttonCancel.Click += ButtonCancel_Click;
@@ -84,7 +84,7 @@
             buttonColorPicker.Location = new Point(12, 72);
             buttonColorPicker.Name = "buttonColorPicker";
             buttonColorPicker.Size = new Size(57, 23);
-            buttonColorPicker.TabIndex = 10;
+            buttonColorPicker.TabIndex = 100;
             buttonColorPicker.Text = "Color";
             buttonColorPicker.UseVisualStyleBackColor = true;
             buttonColorPicker.Click += ButtonColor_Click;
