@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 
@@ -14,34 +15,70 @@ public partial class TextPrompt : Form
     public List<string> TextResult = [];
     List<TextBox> textBoxes = [];
     public Color ColorPicked = Color.White;
-    readonly string[]? IllegalCharacters = null;
 
+    public int AmountOfTextPrompts = 1;
+    public string TitleText;
+    public string InfoText;
+    public bool ShowColorPicker;
+    public string[]? IllegalCharacters;
+    public string[] PromptHeadings = {};
+    public int DialogWidth = 350;
+    //public Size TextboxSize = new Size(300, 23);
+    //public bool TextboxMultiline = false;
+    public List<PromptTextBoxConfig> textPromptConfigs = [];
+
+    /// <summary>
+    /// Creates TextPrompt and initializes the form
+    /// </summary>
+    /// <param name="amount">Number of text input fields</param>
+    /// <param name="title">The form titlebar text</param>
+    /// <param name="info">Text at the beginning of the form with instructions</param>
+    /// <param name="showColorPicker">Enables the color picker button</param>
+    /// <param name="illegalCharacters">If configured, disallows certain characters or phrases in the first field</param>
     public TextPrompt(int amount = 1, string title = "Input text", string info = "", bool showColorPicker = false, string[]? illegalCharacters = null)
     {
-        InitializeComponent();
-        Text = title;
-        labelInfo.Text = info;
-
-        buttonColorPicker.Visible = showColorPicker;
-
+        Debug.WriteLine($"Adding TextPrompt with arguments");
+        AmountOfTextPrompts = amount;
+        TitleText = title;
+        InfoText = info;
+        ShowColorPicker = showColorPicker;
         IllegalCharacters = illegalCharacters;
+        InitializePrompt();
+    }
+
+    public void InitializePrompt()
+    {
+        InitializeComponent();
+        Text = TitleText;
+        labelInfo.Text = InfoText;
+
+        buttonColorPicker.Visible = ShowColorPicker;
+        Debug.WriteLine($"Show color picker: {ShowColorPicker}");
 
         textBoxes.Clear();
-        textBoxes.Add(textBox1);
 
-        if (amount > 1)
+        if (AmountOfTextPrompts > 0)
         {
-            for (int i = 1; i < amount; i++)
+            int top = 20;
+            for (int i = 0; i < AmountOfTextPrompts; i++)
             {
-                TextBox textBox = new TextBox();
-                textBox.Left = textBox1.Left;
-                textBox.Size = textBox1.Size;
-                textBox.Top = textBox1.Top + (textBox.Height + 10) * i;
-                textBox.KeyPress += TextBox_KeyPress;
-                textBox.TabIndex = i;
-                textBoxes.Add(textBox);
-                Controls.Add(textBox);
+                string promptheading = "";
+                if (i < PromptHeadings.Length) promptheading = PromptHeadings[i];
+                PromptTextBoxConfig newTBC = new PromptTextBoxConfig(top, 10, this.Width - 20, 1, promptheading, string.Empty);
+                this.Controls.Add(newTBC.label);
+                this.Controls.Add(newTBC.textbox);
+                textPromptConfigs.Add(newTBC);
+                textBoxes.Add(newTBC.textbox);
+
+                top = newTBC.GetBottom() + 5;
             }
+
+            // ENTER confirms the text prompt only if it's single prompt, single line
+            if (AmountOfTextPrompts == 1 && textPromptConfigs.First().Multiline == false)
+            {
+                textBoxes.First().KeyPress += TextBox_KeyPress;
+            }
+
             buttonOK.Top = textBoxes.Last().Bottom + 10;
             buttonCancel.Top = buttonOK.Top;
             buttonColorPicker.Top = buttonOK.Top;
@@ -50,17 +87,75 @@ public partial class TextPrompt : Form
     }
 
     /// <summary>
+    /// Creates the TextPrompt object, using a list of configs
+    /// </summary>
+    /// <param name="configs">A list of 1-n text input fields</param>
+    /// <param name="title">The form titlebar text</param>
+    /// <param name="info">Text at the beginning of the form with instructions</param>
+    public TextPrompt(List<PromptTextBoxConfig> configs, string title, string info)
+    {
+        Debug.WriteLine($"Adding TextPrompt with list of configs");
+        InitializeComponent();
+        TitleText = title;
+        InfoText = info;
+        labelInfo.Text = info;
+        Text = title;
+        AmountOfTextPrompts = configs.Count;
+        textPromptConfigs = configs;
+
+        foreach (PromptTextBoxConfig cfg in configs)
+        {
+            Controls.Add(cfg.label);
+            Controls.Add(cfg.textbox);
+            textBoxes.Add(cfg.textbox);
+        }
+
+        //InitializePrompt();
+        Debug.WriteLine($"show color picker: {ShowColorPicker}");
+    }
+
+    public void UpdateControls()
+    {
+        int controlsLeft = 5;
+        int controlsWidth = this.Width - 10;
+        int previousBottom = labelInfo.Bottom;
+        foreach (PromptTextBoxConfig cfg in textPromptConfigs)
+        {
+            cfg.UpdateControlPositions(controlsLeft, previousBottom + 5, this.Width - 10);
+            //cfg.label.Left = controlsLeft;
+            //cfg.label.Top = previousBottom + 5;
+            //cfg.textbox.Left = controlsLeft;
+            //cfg.textbox.Top = cfg.label.Bottom;
+            previousBottom = cfg.GetBottom();
+            Debug.WriteLine($"Form height {this.Height} to: {previousBottom + 30}");
+            this.Height = previousBottom + 75;
+            Debug.WriteLine($"Form height {this.Height}");
+        }
+        Debug.WriteLine($"Illegal characters: {IllegalCharacters != null}");
+        if (ShowColorPicker)
+        {
+            buttonColorPicker.Visible = true;
+        }
+    }
+
+   
+
+    /// <summary>
     /// Shows a dialog with a text entry box.
     /// </summary>
     /// <returns>String if OK, null if cancelled</returns>
-    public static string Prompt(string title = "Input text", string info = "", bool showColorPicker = false, string[]? illegalCharacters = null)
+    public static string? Prompt(string title = "Input text", string info = "", bool showColorPicker = false, string[]? illegalCharacters = null)
     {
-        return PromptMultiple(1, title, info, showColorPicker, illegalCharacters).First();
+        Debug.WriteLine($"Spawning prompt");
+        List<string> result = PromptMultiple(1, title, info, showColorPicker, illegalCharacters);
+        if (result.Count < 1) return null;
+        return result.First();
     }
 
     public static List<string> PromptMultiple(int amount = 2, string title = "Input text", string info = "", bool showColorPicker = false, string[]? illegalCharacters = null)
     {
         TextPrompt textPrompt = new(amount, title, info, showColorPicker, illegalCharacters);
+        
         DialogResult dialogResult = textPrompt.ShowDialog();
         if (dialogResult == DialogResult.OK)
         {
@@ -79,9 +174,11 @@ public partial class TextPrompt : Form
 
     private void AssembleResult()
     {
+        Debug.WriteLine($"Assemble prompt result from {textBoxes.Count} textboxes");
         TextResult.Clear();
         foreach (TextBox box in textBoxes)
         {
+            Debug.WriteLine($"   Adding {box.Text}");
             TextResult.Add(box.Text);
         }
     }
@@ -89,7 +186,10 @@ public partial class TextPrompt : Form
     private void TextPrompt_Load(object sender, EventArgs e)
     {
         SetForegroundWindow(Handle);
-        this.ActiveControl = textBox1;
+        if (textBoxes.Count > 0)
+        {
+            this.ActiveControl = textBoxes.FirstOrDefault();
+        }
     }
 
     private void ButtonOK_Click(object sender, EventArgs e)
@@ -117,9 +217,20 @@ public partial class TextPrompt : Form
             }
             e.Handled = true; // stops ding sound
         }
+        //if (e.KeyChar == (char)Keys.Escape)
+        //{
+        //    //TextResult = string.Empty;
+        //    DialogResult = DialogResult.Cancel;
+        //    e.Handled = true;
+        //}
+    }
+
+    private void Form_KeyPress(object sender, KeyPressEventArgs e)
+    {
+        Debug.WriteLine($"Prompt form keypress");
         if (e.KeyChar == (char)Keys.Escape)
         {
-            //TextResult = string.Empty;
+            Debug.WriteLine($"Cancel prompt form");
             DialogResult = DialogResult.Cancel;
             e.Handled = true;
         }
@@ -137,14 +248,14 @@ public partial class TextPrompt : Form
         if (result == DialogResult.OK)
         {
             ColorPicked = colorDialog1.Color;
-            textBox1.BackColor = ColorPicked;
+            textBoxes.First().BackColor = ColorPicked;
         }
     }
 
     private void TextBox1_TextChanged(object sender, EventArgs e)
     {
         if (IllegalCharacters == null) return;
-        string text = textBox1.Text;
+        string text = textBoxes.FirstOrDefault().Text;
         bool illegalFound = false;
         foreach (string illegal in IllegalCharacters)
         {
@@ -157,12 +268,12 @@ public partial class TextPrompt : Form
         if (illegalFound)
         {
             toolTipIllegal.ShowAlways = true;
-            toolTipIllegal.Show("You can't include these characters: " + ArrayToString(IllegalCharacters), textBox1);
+            toolTipIllegal.Show("You can't include these characters: " + ArrayToString(IllegalCharacters), textBoxes.FirstOrDefault());
         }
         else
         {
             toolTipIllegal.ShowAlways = true;
-            toolTipIllegal.Hide(textBox1);
+            toolTipIllegal.Hide(textBoxes.FirstOrDefault());
         }
     }
 

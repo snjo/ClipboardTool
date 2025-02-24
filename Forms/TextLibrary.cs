@@ -198,7 +198,6 @@ public partial class TextLibrary : Form
                     text = colorInfo + Environment.NewLine + text;
                 }
 
-
                 File.WriteAllText(path, text);
                 Dbg.WriteWithCaller("Saved entry to: " + path);
                 return true;
@@ -274,29 +273,60 @@ public partial class TextLibrary : Form
 
     private void ButtonAddFromClipboard_Click(object sender, EventArgs e)
     {
+        string clipboardtext = string.Empty;
         if (Clipboard.ContainsText())
         {
-            string title;
-            TextPrompt textPrompt = new(1, "Set entry title", "Set title and click OK to pin entry." + Environment.NewLine + "Cancel adds entry but does not pin.", true, TextPrompt.IllegalFileCharacters);
-            DialogResult = textPrompt.ShowDialog();
-            if (DialogResult == DialogResult.OK)
+            clipboardtext = Clipboard.GetText();
+        }
+
+        string title;
+        
+        Debug.WriteLine($"Adding new from clipboard");
+        
+        List<PromptTextBoxConfig> promptConfig = [];
+        promptConfig.Add(new PromptTextBoxConfig(1, "Set entry title", ""));
+        promptConfig.Add(new PromptTextBoxConfig(5, "Content", clipboardtext));
+
+        
+
+        TextPrompt textPrompt = new TextPrompt(promptConfig, "Add new from clipboard", "Set title and click OK to pin entry." + Environment.NewLine + "Cancel adds entry but does not pin.")
+        {
+            ShowColorPicker = true,
+            IllegalCharacters = TextPrompt.IllegalFileCharacters
+        };
+
+        textPrompt.UpdateControls();
+
+
+        //TextPrompt textPrompt = new(2, "Set entry title", "Set title and click OK to pin entry." + Environment.NewLine + "Cancel adds entry but does not pin.", true, TextPrompt.IllegalFileCharacters);
+        //textPrompt.textPromptConfigs[1].label.Text = "Clipboard text";
+        //textPrompt.textPromptConfigs[1].textbox.Text = clipboardtext;
+
+        //TextPrompt textPrompt = new()
+        //{
+        //    AmountOfTextPrompts = 1,
+        //    TitleText = "Set entry title",
+        //    InfoText = "Set title and click OK to pin entry." + Environment.NewLine + "Cancel adds entry but does not pin.",
+        //    IllegalCharacters = TextPrompt.IllegalFileCharacters,
+        //    ShowColorPicker = true,
+        //};
+        DialogResult = textPrompt.ShowDialog();
+        if (DialogResult == DialogResult.OK)
+        {
+            title = textPrompt.TextResult.First();
+            Color color = textPrompt.ColorPicked;
+            
+            bool saveSuccessful = false;
+            if (clipboardtext.Length > 0)
             {
-                title = textPrompt.TextResult.First();
-                Color color = textPrompt.ColorPicked;
-                string clipboardtext = Clipboard.GetText();
-                bool saveSuccessful = false;
-                if (clipboardtext.Length > 0)
-                {
-                    saveSuccessful = SaveEntry(textPrompt.TextResult.First(), clipboardtext, color);
-                }
-                int row = gridTextLibrary.Rows.Add(saveSuccessful, title, clipboardtext);
-                SetEntryColor(row, color);
+                saveSuccessful = SaveEntry(textPrompt.TextResult.First(), clipboardtext, color);
             }
-            else
-            {
-                string clipboardtext = Clipboard.GetText();
-                gridTextLibrary.Rows.Add(false, "", clipboardtext);
-            }
+            int row = gridTextLibrary.Rows.Add(saveSuccessful, title, clipboardtext);
+            SetEntryColor(row, color);
+        }
+        else
+        {
+            gridTextLibrary.Rows.Add(false, "", clipboardtext);
         }
     }
 
@@ -309,89 +339,103 @@ public partial class TextLibrary : Form
         // Load text to clipboard
         if (e.ColumnIndex == buttonColumnIndex)
         {
-            string? cellText = "";
-            if (gridTextLibrary.Rows[e.RowIndex].Cells[textColumnIndex].Value != null)
-            {
-                cellText = gridTextLibrary.Rows[e.RowIndex].Cells[textColumnIndex].Value.ToString();
-            }
-            if (cellText != null)
-            {
-                if (cellText.Length > 0)
-                {
-                    Dbg.WriteWithCaller("Process text");
-                    mainForm.Process.ProcessTextVariables(cellText, true);
-                    if (checkBoxMinimize.Checked)
-                    {
-                        this.WindowState = FormWindowState.Minimized;
-                    }
-
-                }
-                else
-                {
-                    Clipboard.Clear();
-                }
-            }
-
+            ClickCopyButton(e);
         }
 
         // Pin or unpin (save file)
         if (e.ColumnIndex == checkboxColumnIndex)
         {
-            if (gridTextLibrary.Rows[e.RowIndex] == null)
+            ClickCheckbox(e);
+        }
+    }
+
+    private void ClickCheckbox(DataGridViewCellEventArgs e)
+    {
+        if (gridTextLibrary.Rows[e.RowIndex] == null)
+        {
+            Dbg.WriteWithCaller("Row is null");
+            return;
+        }
+        else
+        {
+            bool oldCheckState = GetPinnedCheckboxValue(e.RowIndex);
+            bool pinned = !oldCheckState;
+            if (pinned)
             {
-                Dbg.WriteWithCaller("Row is null");
-                return;
-            }
-            else
-            {
-                bool oldCheckState = GetPinnedCheckboxValue(e.RowIndex);
-                bool pinned = !oldCheckState;
-                if (pinned)
+                string title;
+                DataGridViewCellCollection cells = gridTextLibrary.Rows[e.RowIndex].Cells;
+
+                if (cells[textColumnIndex].Value == null) return;
+
+                if (cells[titleColumnIndex].Value == null)
                 {
-                    string title;
-                    DataGridViewCellCollection cells = gridTextLibrary.Rows[e.RowIndex].Cells;
+                    cells[titleColumnIndex].Value = string.Empty;
+                }
 
-                    if (cells[textColumnIndex].Value == null) return;
+                if (cells[titleColumnIndex].Value.ToString() == string.Empty)
+                {
+                    string? contentText = cells[textColumnIndex].Value.ToString();
+                    List<PromptTextBoxConfig> promptcfgs = [];
+                    promptcfgs.Add(new PromptTextBoxConfig(1, "Title", ""));
+                    promptcfgs.Add(new PromptTextBoxConfig(5, "Contents", contentText));
 
-                    if (cells[titleColumnIndex].Value == null)
+                    TextPrompt textPrompt = new TextPrompt(promptcfgs, "Add new text", "");
+                    textPrompt.UpdateControls();
+
+                    if (textPrompt.ShowDialog() == DialogResult.OK)
                     {
-                        cells[titleColumnIndex].Value = string.Empty;
-                    }
-
-                    if (cells[titleColumnIndex].Value.ToString() == string.Empty)
-                    {
-                        TextPrompt textPrompt = new();
-                        if (textPrompt.ShowDialog() == DialogResult.OK)
-                        {
-                            title = textPrompt.TextResult.First();
-                            cells[titleColumnIndex].Value = title;
-                        }
-                        else
-                        {
-                            title = "entry " + e.RowIndex;
-                            cells[titleColumnIndex].Value = title;
-                        }
+                        title = textPrompt.TextResult[0];
+                        cells[titleColumnIndex].Value = title;
+                        cells[textColumnIndex].Value = textPrompt.TextResult[1];
                     }
                     else
                     {
-                        title = cells[titleColumnIndex].Value.ToString() + "";
+                        title = "entry " + e.RowIndex;
+                        cells[titleColumnIndex].Value = title;
                     }
-                    string text = cells[textColumnIndex].Value.ToString() + "";
-                    pinned = SaveEntry(title, text, cells[titleColumnIndex].Style.BackColor);
-                    SetPinnedCheckboxValue(cells[textColumnIndex].RowIndex, pinned);
                 }
                 else
                 {
-                    Dbg.WriteWithCaller("Unpinned. Trying to delete corresponding file");
-                    DataGridViewCellCollection cells = gridTextLibrary.Rows[e.RowIndex].Cells;
-                    if (cells[titleColumnIndex].Value != null)
-                        DeleteEntry(cells[titleColumnIndex].Value.ToString());
-                    SetPinnedCheckboxValue(e.RowIndex, false);
+                    title = cells[titleColumnIndex].Value.ToString() + "";
                 }
-                //checkboxCell.Value = pinned;
-                //SetPinnedCheckboxValue(e.RowIndex, pinned);
+                string text = cells[textColumnIndex].Value.ToString() + "";
+                pinned = SaveEntry(title, text, cells[titleColumnIndex].Style.BackColor);
+                SetPinnedCheckboxValue(cells[textColumnIndex].RowIndex, pinned);
             }
+            else
+            {
+                Dbg.WriteWithCaller("Unpinned. Trying to delete corresponding file");
+                DataGridViewCellCollection cells = gridTextLibrary.Rows[e.RowIndex].Cells;
+                if (cells[titleColumnIndex].Value != null)
+                    DeleteEntry(cells[titleColumnIndex].Value.ToString());
+                SetPinnedCheckboxValue(e.RowIndex, false);
+            }
+        }
+    }
 
+    private void ClickCopyButton(DataGridViewCellEventArgs e)
+    {
+        string? cellText = "";
+        if (gridTextLibrary.Rows[e.RowIndex].Cells[textColumnIndex].Value != null)
+        {
+            cellText = gridTextLibrary.Rows[e.RowIndex].Cells[textColumnIndex].Value.ToString();
+        }
+        if (cellText != null)
+        {
+            if (cellText.Length > 0)
+            {
+                Dbg.WriteWithCaller("Process text");
+                mainForm.Process.ProcessTextVariables(cellText, true);
+                if (checkBoxMinimize.Checked)
+                {
+                    this.WindowState = FormWindowState.Minimized;
+                }
+
+            }
+            else
+            {
+                Clipboard.Clear();
+            }
         }
     }
 

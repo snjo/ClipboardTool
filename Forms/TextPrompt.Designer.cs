@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            textBox1 = new TextBox();
             buttonOK = new Button();
             buttonCancel = new Button();
             labelInfo = new Label();
@@ -38,19 +37,9 @@
             toolTipIllegal = new ToolTip(components);
             SuspendLayout();
             // 
-            // textBox1
-            // 
-            textBox1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            textBox1.Location = new Point(12, 33);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(309, 23);
-            textBox1.TabIndex = 0;
-            textBox1.TextChanged += TextBox1_TextChanged;
-            textBox1.KeyPress += TextBox_KeyPress;
-            // 
             // buttonOK
             // 
-            buttonOK.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            buttonOK.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             buttonOK.Location = new Point(246, 71);
             buttonOK.Name = "buttonOK";
             buttonOK.Size = new Size(75, 23);
@@ -61,7 +50,7 @@
             // 
             // buttonCancel
             // 
-            buttonCancel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            buttonCancel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             buttonCancel.Location = new Point(165, 71);
             buttonCancel.Name = "buttonCancel";
             buttonCancel.Size = new Size(75, 23);
@@ -81,6 +70,7 @@
             // 
             // buttonColorPicker
             // 
+            buttonColorPicker.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             buttonColorPicker.Location = new Point(12, 72);
             buttonColorPicker.Name = "buttonColorPicker";
             buttonColorPicker.Size = new Size(57, 23);
@@ -102,17 +92,16 @@
             Controls.Add(labelInfo);
             Controls.Add(buttonCancel);
             Controls.Add(buttonOK);
-            Controls.Add(textBox1);
+            KeyPreview = true;
             Name = "TextPrompt";
             Text = "Text Prompt";
             Load += TextPrompt_Load;
+            KeyPress += Form_KeyPress;
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-
-        private TextBox textBox1;
         private Button buttonOK;
         private Button buttonCancel;
         private Label labelInfo;
