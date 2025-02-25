@@ -1,19 +1,14 @@
-﻿using ClipboardTool.Classes;
-using DebugTools;
+﻿using DebugTools;
 using System.Runtime.Versioning;
 
-namespace ClipboardTool;
+namespace ClipboardTool.Classes;
 
 [SupportedOSPlatform("windows")]
 
-public class ProcessText
+public class ProcessText(MainForm parent)
 {
-    readonly MainForm mainForm;
-    public ProcessingCommands commands = new ProcessingCommands();
-    public ProcessText(MainForm parent)
-    {
-        mainForm = parent;
-    }
+    readonly MainForm mainForm = parent;
+    public ProcessingCommands commands = new();
 
     /// <summary>
     /// Processes text with $-commands, outputs both plain and rich text.
@@ -24,8 +19,8 @@ public class ProcessText
     {
         //Debug.WriteLine("ProcessTextVariables start, clipboardupdate: " + forceClipboardUpdate);
         if (customText == null) return (PlainText: string.Empty, RichText: null);
-        string plainText = String.Empty;
-        string? richText = String.Empty;
+        string plainText;// = string.Empty;
+        string? richText;// = string.Empty;
 
         int padNumber = 1;
         //string clip = Clipboard.GetText(TextDataFormat.UnicodeText);
@@ -165,7 +160,7 @@ public class ProcessText
 
     private void ReplaceText(ref string customText, ref string clip)
     {
-        customText = customText.Replace(ProcessingCommands.Replace.Name, String.Empty);
+        customText = customText.Replace(ProcessingCommands.Replace.Name, string.Empty);
         Clipboard.SetText(clip.Replace(mainForm.MemorySlot(1).Text, mainForm.MemorySlot(2).Text));
         clip = clip.Replace(mainForm.MemorySlot(1).Text, mainForm.MemorySlot(2).Text);
     }
@@ -179,7 +174,7 @@ public class ProcessText
         int num = mainForm.NumberSpinner;
         if (num >= values.Length)
         {
-            return String.Empty;
+            return string.Empty;
         }
 
         string currentline = values[num];
@@ -189,14 +184,14 @@ public class ProcessText
             if (currentline.Contains(ProcessingCommands.List.Name)) //skip this line
             {
                 mainForm.NumberSpinner++;
-                return String.Empty;
+                return string.Empty;
             }
             Dbg.WriteWithCaller("Process text");
             customText = ProcessTextVariables(currentline, false).PlainText;
         }
         else
         {
-            customText = String.Empty;
+            customText = string.Empty;
         }
 
         mainForm.NumberSpinner++;
@@ -205,8 +200,8 @@ public class ProcessText
 
     private string SeparatorList(string customText, int slot = 1)
     {
-        char separator = ',';
-        string command = string.Empty;
+        char separator;
+        string command;
         if (customText.Contains(ProcessingCommands.ValueSplitComma.Name)) // comma separator
         {
             separator = ',';
@@ -227,11 +222,11 @@ public class ProcessText
         string[] values = mainForm.MemorySlot(slot).Text.Split(separator);
         if (values.Length > 0 && mainForm.NumberSpinner <= values.Length && mainForm.NumberSpinner >= 1)
         {
-            customText = customText.Replace(command, values[(int)mainForm.NumberSpinner - 1]);
+            customText = customText.Replace(command, values[mainForm.NumberSpinner - 1]);
         }
         else
         {
-            customText = customText.Replace(command, String.Empty);
+            customText = customText.Replace(command, string.Empty);
         }
         mainForm.NumberSpinner++;
         return customText;

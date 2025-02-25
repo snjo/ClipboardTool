@@ -1,4 +1,5 @@
-﻿using ClipboardTool.Properties;
+﻿using ClipboardTool.Forms;
+using ClipboardTool.Properties;
 using DebugTools;
 using System.Diagnostics;
 using System.Runtime.Versioning;
@@ -280,29 +281,27 @@ public partial class TextLibrary : Form
         }
 
         string title;
-        
+
         Debug.WriteLine($"Adding new from clipboard");
-        
+
         List<PromptTextBoxConfig> promptConfig = [];
         promptConfig.Add(new PromptTextBoxConfig(1, "Set entry title", "", TextPrompt.IllegalFileCharacters));
         promptConfig.Add(new PromptTextBoxConfig(5, "Content", clipboardtext, null));
 
-        
 
-        TextPrompt textPrompt = new TextPrompt(promptConfig, "Add new from clipboard", "Set title and click OK to pin entry." + Environment.NewLine + "Cancel adds entry but does not pin.")
+
+        TextPrompt textPrompt = new(promptConfig, "Add new from clipboard", "Set title and click OK to pin entry." + Environment.NewLine + "Cancel adds entry but does not pin.")
         {
             ShowColorPicker = true,
-            
-        };
 
-        //textPrompt.UpdateControls();
+        };
 
         DialogResult = textPrompt.ShowDialog();
         if (DialogResult == DialogResult.OK)
         {
             title = textPrompt.TextResult.First();
             Color color = textPrompt.ColorPicked;
-            
+
             bool saveSuccessful = false;
             if (clipboardtext.Length > 0)
             {
@@ -366,7 +365,7 @@ public partial class TextLibrary : Form
                     promptcfgs.Add(new PromptTextBoxConfig(1, "Title", "", TextPrompt.IllegalFileCharacters));
                     promptcfgs.Add(new PromptTextBoxConfig(5, "Contents", contentText));
 
-                    TextPrompt textPrompt = new TextPrompt(promptcfgs, "Add new text", "");
+                    TextPrompt textPrompt = new(promptcfgs, "Add new text", "");
 
                     if (textPrompt.ShowDialog() == DialogResult.OK)
                     {
@@ -592,7 +591,7 @@ public partial class TextLibrary : Form
             Dbg.WriteWithCaller("rowIndex error");
             return;
         }
-        
+
         DataGridViewCell cell = gridTextLibrary.Rows[rowIndex].Cells[titleColumnIndex];
         if (cell == null)
         {

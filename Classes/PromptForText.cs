@@ -13,17 +13,16 @@ public static class PromptForText
     public static string Process(string text)
     {
         List<int> foundTags = text.IndexOfAll(ProcessingCommands.Prompt.Name);
-        List<string> promptResults = [];
         Debug.WriteLine($"foundTags {foundTags.Count}");
 
-        promptResults = TextPrompt.PromptMultiple(foundTags.Count);
+        List<string> promptResults = TextPrompt.PromptMultiple(foundTags.Count);
 
         if (promptResults.Count == 0)
         {
             return text.Replace(ProcessingCommands.Prompt.Name, "");
         }
 
-        StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new();
 
         int lastTagLoc = text.Length;
         for (int i = foundTags.Count - 1; i >= 0; i--)

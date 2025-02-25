@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Runtime.Versioning;
 
-namespace ClipboardTool
+namespace ClipboardTool.Forms
 {
 
     [SupportedOSPlatform("windows")]

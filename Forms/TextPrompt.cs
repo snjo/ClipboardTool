@@ -1,5 +1,5 @@
-﻿using System.Diagnostics;
-using System.Runtime.CompilerServices;
+﻿using ClipboardTool.Forms;
+using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 
@@ -20,7 +20,7 @@ public partial class TextPrompt : Form
     public string TitleText;
     public string InfoText;
     public bool ShowColorPicker;
-    public string[] PromptHeadings = {};
+    public string[] PromptHeadings = [];
     public int DialogWidth = 350;
     public List<PromptTextBoxConfig> textPromptConfigs = [];
 
@@ -67,7 +67,7 @@ public partial class TextPrompt : Form
             this.Height = previousBottom + 75;
             Debug.WriteLine($"Form height {this.Height}");
         }
-        
+
         if (ShowColorPicker)
         {
             buttonColorPicker.Visible = true;
@@ -93,7 +93,10 @@ public partial class TextPrompt : Form
         {
             promptconfigs.Add(new PromptTextBoxConfig(1, $"Input {i}:", "", illegalCharacters));
         }
-        TextPrompt textPrompt = new(promptconfigs, title, "");
+        TextPrompt textPrompt = new(promptconfigs, title, info)
+        {
+            ShowColorPicker = showColorPicker
+        };
 
         DialogResult dialogResult = textPrompt.ShowDialog();
         if (dialogResult == DialogResult.OK)
@@ -107,7 +110,7 @@ public partial class TextPrompt : Form
         {
             Debug.WriteLine("Prompt cancelled, returning null");
             textPrompt.Dispose();
-            return new List<string>();
+            return [];
         }
     }
 
@@ -182,8 +185,9 @@ public partial class TextPrompt : Form
         }
     }
 
-    private void TextBox_TextChanged(object sender, EventArgs e)
+    private void TextBox_TextChanged(object? sender, EventArgs e)
     {
+        if (sender == null) return;
         Debug.WriteLine($"Textbox text changed");
         TextBox textbox = (TextBox)sender;
         if (textbox.Tag == null)
