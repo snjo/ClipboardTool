@@ -16,17 +16,34 @@ namespace ClipboardTool
         public TextBox textbox = new();
         public Label label = new();
 
+        private string[]? _illegalChars = null;
+        public string[]? IllegalCharacters
+        {
+            get
+            {
+                return _illegalChars;
+            }
+            set
+            {
+                Debug.WriteLine($"Textbox illegalcharacters set, null: {value == null}");
+                textbox.Tag = value;
+                _illegalChars = value;
+            }
+        }
+
         public PromptTextBoxConfig()
         {
         }
 
-        public PromptTextBoxConfig(int lines, string infoLabelText, string? prefilledText)
+        public PromptTextBoxConfig(int lines, string infoLabelText, string? prefilledText, string[]? illegalcharaters = null)
         {
             //parent.Controls.Add(label);
             //parent.Controls.Add(textbox);
+            Debug.WriteLine($"Create PromptTextBoxConfig, illegalcharacters null: {illegalcharaters == null}");
 
             Multiline = lines > 1;
             textbox.Multiline = Multiline;
+            IllegalCharacters = illegalcharaters;
             if (lines < 1) lines = 1;
 
             textbox.Height = lines * textbox.Font.Height;
@@ -49,37 +66,37 @@ namespace ClipboardTool
             {
                 PrefilledText = prefilledText;
             }
-
         }
 
-        public PromptTextBoxConfig(int top, int left, int textboxWidth, int lines, string infoLabelText, string prefilledText)
-        {
-            //parent.Controls.Add(label);
-            //parent.Controls.Add(textbox);
+        //public PromptTextBoxConfig(int top, int left, int textboxWidth, int lines, string infoLabelText, string prefilledText, string[]? illegalcharaters = null)
+        //{
+        //    //parent.Controls.Add(label);
+        //    //parent.Controls.Add(textbox);
 
-            Multiline = lines > 1;
-            textbox.Multiline = Multiline;
-            if (lines < 1) lines = 1;
+        //    Multiline = lines > 1;
+        //    textbox.Multiline = Multiline;
+        //    IllegalCharacters = illegalcharaters;
+        //    if (lines < 1) lines = 1;
 
-            textbox.Height = lines * textbox.Font.Height;
-            Debug.WriteLine($"Lines: {lines}, Font{textbox.Font.Height}, Height:{textbox.Height}");
+        //    textbox.Height = lines * textbox.Font.Height;
+        //    Debug.WriteLine($"Lines: {lines}, Font{textbox.Font.Height}, Height:{textbox.Height}");
 
-            label.Width = textboxWidth;
-            textbox.Width = textboxWidth;
+        //    label.Width = textboxWidth;
+        //    textbox.Width = textboxWidth;
 
-            label.Left = left;
-            textbox.Left = left;
+        //    label.Left = left;
+        //    textbox.Left = left;
 
-            label.Top = top;
-            textbox.Top = top + label.Height + 1;
+        //    label.Top = top;
+        //    textbox.Top = top + label.Height + 1;
 
-            label.Text = infoLabelText;
-            textbox.Text = prefilledText;
+        //    label.Text = infoLabelText;
+        //    textbox.Text = prefilledText;
 
-            InfoLabelText = infoLabelText;
-            PrefilledText = prefilledText;
+        //    InfoLabelText = infoLabelText;
+        //    PrefilledText = prefilledText;
             
-        }
+        //}
 
         public int GetBottom()
         {

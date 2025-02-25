@@ -284,8 +284,8 @@ public partial class TextLibrary : Form
         Debug.WriteLine($"Adding new from clipboard");
         
         List<PromptTextBoxConfig> promptConfig = [];
-        promptConfig.Add(new PromptTextBoxConfig(1, "Set entry title", ""));
-        promptConfig.Add(new PromptTextBoxConfig(5, "Content", clipboardtext));
+        promptConfig.Add(new PromptTextBoxConfig(1, "Set entry title", "", TextPrompt.IllegalFileCharacters));
+        promptConfig.Add(new PromptTextBoxConfig(5, "Content", clipboardtext, null));
 
         
 
@@ -376,7 +376,7 @@ public partial class TextLibrary : Form
                 {
                     string? contentText = cells[textColumnIndex].Value.ToString();
                     List<PromptTextBoxConfig> promptcfgs = [];
-                    promptcfgs.Add(new PromptTextBoxConfig(1, "Title", ""));
+                    promptcfgs.Add(new PromptTextBoxConfig(1, "Title", "", TextPrompt.IllegalFileCharacters));
                     promptcfgs.Add(new PromptTextBoxConfig(5, "Contents", contentText));
 
                     TextPrompt textPrompt = new TextPrompt(promptcfgs, "Add new text", "");
