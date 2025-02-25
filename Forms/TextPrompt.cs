@@ -50,7 +50,7 @@ public partial class TextPrompt : Form
             cfg.textbox.TextChanged += TextBox_TextChanged;
         }
 
-        //InitializePrompt();
+        UpdateControls();
         Debug.WriteLine($"show color picker: {ShowColorPicker}");
     }
 
@@ -94,12 +94,6 @@ public partial class TextPrompt : Form
             promptconfigs.Add(new PromptTextBoxConfig(1, $"Input {i}:", "", illegalCharacters));
         }
         TextPrompt textPrompt = new(promptconfigs, title, "");
-        foreach (PromptTextBoxConfig cfg in promptconfigs)
-        {
-            textPrompt.Controls.Add(cfg.label);
-            textPrompt.Controls.Add(cfg.textbox);
-        }
-        textPrompt.UpdateControls();
 
         DialogResult dialogResult = textPrompt.ShowDialog();
         if (dialogResult == DialogResult.OK)
@@ -140,7 +134,6 @@ public partial class TextPrompt : Form
     private void ButtonOK_Click(object sender, EventArgs e)
     {
         AssembleResult();
-        //TextResult = textBox1.Text;
         DialogResult = DialogResult.OK;
     }
 

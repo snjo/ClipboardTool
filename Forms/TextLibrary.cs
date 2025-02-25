@@ -295,7 +295,7 @@ public partial class TextLibrary : Form
             
         };
 
-        textPrompt.UpdateControls();
+        //textPrompt.UpdateControls();
 
         DialogResult = textPrompt.ShowDialog();
         if (DialogResult == DialogResult.OK)
@@ -367,7 +367,6 @@ public partial class TextLibrary : Form
                     promptcfgs.Add(new PromptTextBoxConfig(5, "Contents", contentText));
 
                     TextPrompt textPrompt = new TextPrompt(promptcfgs, "Add new text", "");
-                    textPrompt.UpdateControls();
 
                     if (textPrompt.ShowDialog() == DialogResult.OK)
                     {
