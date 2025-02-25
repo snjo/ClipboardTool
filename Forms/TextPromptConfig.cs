@@ -8,8 +8,6 @@ namespace ClipboardTool
 
     public class PromptTextBoxConfig
     {
-        //public int TextboxWidth = 300;
-        //public int TextboxHeight = 23;
         public string InfoLabelText = "Input:";
         public string PrefilledText = "";
         public bool Multiline = false;
@@ -31,14 +29,20 @@ namespace ClipboardTool
             }
         }
 
-        public PromptTextBoxConfig()
+        private PromptTextBoxConfig()
         {
         }
 
+        /// <summary>
+        /// Creates a configuration with included Label and Textbox for a text entry field. Add the label and textbox controls to the Form.Controls. You should run UpdateControlPositions to set the correct placement.
+        /// </summary>
+        /// <param name="lines">Lines/height of the textbox. Enables Multiline if above 1</param>
+        /// <param name="infoLabelText">The label above the textbox</param>
+        /// <param name="prefilledText">Fill the textbox with a preset value</param>
+        /// <param name="illegalcharaters">Used by other methods to prevent confirming a dialog with bad characters (bad file names)</param>
         public PromptTextBoxConfig(int lines, string infoLabelText, string? prefilledText, string[]? illegalcharaters = null)
         {
-            //parent.Controls.Add(label);
-            //parent.Controls.Add(textbox);
+
             Debug.WriteLine($"Create PromptTextBoxConfig, illegalcharacters null: {illegalcharaters == null}");
 
             Multiline = lines > 1;
@@ -49,14 +53,6 @@ namespace ClipboardTool
             textbox.Height = lines * textbox.Font.Height;
             Debug.WriteLine($"Lines: {lines}, Font{textbox.Font.Height}, Height:{textbox.Height}");
 
-            //label.Width = textboxWidth;
-            //textbox.Width = textboxWidth;
-
-            //label.Left = left;
-            //textbox.Left = left;
-
-            //label.Top = top;
-            //textbox.Top = top + label.Height + 1;
 
             label.Text = infoLabelText;
             textbox.Text = prefilledText;
@@ -67,36 +63,6 @@ namespace ClipboardTool
                 PrefilledText = prefilledText;
             }
         }
-
-        //public PromptTextBoxConfig(int top, int left, int textboxWidth, int lines, string infoLabelText, string prefilledText, string[]? illegalcharaters = null)
-        //{
-        //    //parent.Controls.Add(label);
-        //    //parent.Controls.Add(textbox);
-
-        //    Multiline = lines > 1;
-        //    textbox.Multiline = Multiline;
-        //    IllegalCharacters = illegalcharaters;
-        //    if (lines < 1) lines = 1;
-
-        //    textbox.Height = lines * textbox.Font.Height;
-        //    Debug.WriteLine($"Lines: {lines}, Font{textbox.Font.Height}, Height:{textbox.Height}");
-
-        //    label.Width = textboxWidth;
-        //    textbox.Width = textboxWidth;
-
-        //    label.Left = left;
-        //    textbox.Left = left;
-
-        //    label.Top = top;
-        //    textbox.Top = top + label.Height + 1;
-
-        //    label.Text = infoLabelText;
-        //    textbox.Text = prefilledText;
-
-        //    InfoLabelText = infoLabelText;
-        //    PrefilledText = prefilledText;
-            
-        //}
 
         public int GetBottom()
         {

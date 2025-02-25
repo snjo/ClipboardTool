@@ -292,24 +292,11 @@ public partial class TextLibrary : Form
         TextPrompt textPrompt = new TextPrompt(promptConfig, "Add new from clipboard", "Set title and click OK to pin entry." + Environment.NewLine + "Cancel adds entry but does not pin.")
         {
             ShowColorPicker = true,
-            IllegalCharacters = TextPrompt.IllegalFileCharacters
+            
         };
 
         textPrompt.UpdateControls();
 
-
-        //TextPrompt textPrompt = new(2, "Set entry title", "Set title and click OK to pin entry." + Environment.NewLine + "Cancel adds entry but does not pin.", true, TextPrompt.IllegalFileCharacters);
-        //textPrompt.textPromptConfigs[1].label.Text = "Clipboard text";
-        //textPrompt.textPromptConfigs[1].textbox.Text = clipboardtext;
-
-        //TextPrompt textPrompt = new()
-        //{
-        //    AmountOfTextPrompts = 1,
-        //    TitleText = "Set entry title",
-        //    InfoText = "Set title and click OK to pin entry." + Environment.NewLine + "Cancel adds entry but does not pin.",
-        //    IllegalCharacters = TextPrompt.IllegalFileCharacters,
-        //    ShowColorPicker = true,
-        //};
         DialogResult = textPrompt.ShowDialog();
         if (DialogResult == DialogResult.OK)
         {
@@ -454,15 +441,6 @@ public partial class TextLibrary : Form
         return Convert.ToBoolean(checkboxCell.Value);
     }
 
-    //private bool TogglePinnedCheckboxValue(int rowIndex)
-    //{
-    //    DataGridViewCheckBoxCell? checkboxCell = gridTextLibrary.Rows[rowIndex].Cells[checkboxColumnIndex] as DataGridViewCheckBoxCell;
-    //    if (checkboxCell == null) checkboxCell = new DataGridViewCheckBoxCell();
-    //    if (checkboxCell.Value == null) checkboxCell.Value = false;
-    //    checkboxCell.Value = !Convert.ToBoolean(checkboxCell.Value);
-    //    return Convert.ToBoolean(checkboxCell.Value);
-    //}
-
     private bool alwaysOnTop = false;
     private void ActionAlwaysOnTop(object sender, EventArgs e)
     {
@@ -486,11 +464,8 @@ public partial class TextLibrary : Form
     {
         if (gridTextLibrary.SelectedCells.Count <= 0) return;
 
-
-
         colorDialog1.Dispose();
         colorDialog1 = new ColorDialog();
-        //colorDialog1.CustomColors = new int[] { unchecked((Int32)0xAAFFFF), unchecked((Int32)0xBBFF00) };
         int[]? colors = GetSavedColors();
         if (colors != null)
             colorDialog1.CustomColors = GetSavedColors();
@@ -618,7 +593,7 @@ public partial class TextLibrary : Form
             Dbg.WriteWithCaller("rowIndex error");
             return;
         }
-        //DataGridViewRow gridRow = gridTextLibrary.Rows[rowIndex];
+        
         DataGridViewCell cell = gridTextLibrary.Rows[rowIndex].Cells[titleColumnIndex];
         if (cell == null)
         {
@@ -666,7 +641,6 @@ public partial class TextLibrary : Form
                 Dbg.WriteWithCaller("Rename cancelled");
             }
         }
-        //string oldTitle = 
     }
 
     private void CheckBoxMinimize_CheckedChanged(object sender, EventArgs e)
