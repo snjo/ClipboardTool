@@ -4,8 +4,11 @@
 *by Andreas Aakvik Gogstad*  
 *2022*
 
-Source code:
+Source code:  
 https://github.com/snjo/ClipboardTool
+
+Changelog:  
+https://github.com/snjo/ClipboardTool/blob/master/changelog.md
 
 ![image](img/clipboardtool1.png)
 
@@ -183,7 +186,7 @@ Any Backslashes ( \ ) in RTF text will be intercepted as an RTF code. Use a doub
 | \<script>               | Font 4 Script            |
 | \<decor>                | Font 5 Decorative        |
 | \<fs**>                 | Size in half-points      |
-|                         | Ex: £\<fs18> = 9 point   |
+|                         | Ex: Â£\<fs18> = 9 point   |
 | \<cf*>                  | Color, see Colors section|
 | \<red> \<black> etc.    | Predefined colors        |
 | \<[RTF code without]>   | Ex: \<nl> = \\nl         |
