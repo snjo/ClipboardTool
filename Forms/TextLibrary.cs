@@ -425,7 +425,6 @@ public partial class TextLibrary : Form
                     }
                     else
                     {
-                        MessageBox.Show("You must set a title to pin and save");
                         return;
                         //title = "entry " + e.RowIndex;
                         //cells[titleColumnIndex].Value = title;
