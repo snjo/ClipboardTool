@@ -7,6 +7,7 @@
 - Text prompt command can now handle multiple prompts in a text
 - Improved Text History, double click Title to edit title and contents in a new window
 - When adding new Text History entries, Cancel no longer adds a new unpinned entry
+- Text History Add button now works with an empty clipboard
 
 ## v1.8
 

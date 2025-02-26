@@ -38,6 +38,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="changelog.md">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="img\clipboardtool.svg">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
