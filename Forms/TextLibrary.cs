@@ -140,6 +140,7 @@ public partial class TextLibrary : Form
     private bool SaveEntry(string? filename, string? text, Color? color)
     {
         if (filename == null || text == null) return false;
+        filename = filename.Trim();
         if (filename.Length == 0) return false;
         if (color == Color.Empty) color = Color.White;
         string path = Path.Join(TextLibraryFolder, filename + entryFileExtension);
@@ -328,7 +329,7 @@ public partial class TextLibrary : Form
             DialogResult promptResult = textPrompt.ShowDialog();
             if (promptResult != DialogResult.OK) return;
 
-            string newTitle = textPrompt.TextResult[0];
+            string newTitle = textPrompt.TextResult[0].Trim();
             string newContent = textPrompt.TextResult[1];
 
             //update contents
@@ -410,11 +411,6 @@ public partial class TextLibrary : Form
                 if (cells[titleColumnIndex].Value.ToString() == string.Empty)
                 {
                     string? contentText = cells[textColumnIndex].Value.ToString();
-                    //List<PromptTextBoxConfig> promptcfgs = [];
-                    //promptcfgs.Add(new PromptTextBoxConfig(1, "Title", "", TextPrompt.IllegalFileCharacters));
-                    //promptcfgs.Add(new PromptTextBoxConfig(5, "Contents", contentText));
-
-                    //TextPrompt textPrompt = new(promptcfgs, "Add new text", "");
 
                     TextPrompt textPrompt = UpdateTextEntryPrompt("Save text", "Update title and contents. You must use a valid file name.", "", contentText, GetRowColor(e.RowIndex));
                     DialogResult promptResult = textPrompt.ShowDialog();
@@ -429,14 +425,23 @@ public partial class TextLibrary : Form
                     }
                     else
                     {
-                        title = "entry " + e.RowIndex;
-                        cells[titleColumnIndex].Value = title;
+                        MessageBox.Show("You must set a title to pin and save");
+                        return;
+                        //title = "entry " + e.RowIndex;
+                        //cells[titleColumnIndex].Value = title;
                     }
                 }
                 else
                 {
                     title = cells[titleColumnIndex].Value.ToString() + "";
                 }
+                
+                if (title.Trim() == "")
+                {
+                    title = "entry " + e.RowIndex;
+                    cells[titleColumnIndex].Value = title;
+                }
+
                 string text = cells[textColumnIndex].Value.ToString() + "";
                 pinned = SaveEntry(title, text, cells[titleColumnIndex].Style.BackColor);
                 SetPinnedCheckboxValue(cells[textColumnIndex].RowIndex, pinned);
