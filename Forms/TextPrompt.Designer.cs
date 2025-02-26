@@ -64,9 +64,9 @@
             labelInfo.AutoSize = true;
             labelInfo.Location = new Point(12, 6);
             labelInfo.Name = "labelInfo";
-            labelInfo.Size = new Size(38, 15);
+            labelInfo.Size = new Size(16, 15);
             labelInfo.TabIndex = 3;
-            labelInfo.Text = "label1";
+            labelInfo.Text = "...";
             // 
             // buttonColorPicker
             // 

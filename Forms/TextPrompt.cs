@@ -1,4 +1,5 @@
-﻿using ClipboardTool.Forms;
+﻿using ClipboardTool.Classes;
+using ClipboardTool.Forms;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
@@ -31,7 +32,7 @@ public partial class TextPrompt : Form
     /// <param name="configs">A list of 1-n text input fields</param>
     /// <param name="title">The form titlebar text</param>
     /// <param name="info">Text at the beginning of the form with instructions</param>
-    public TextPrompt(List<PromptTextBoxConfig> configs, string title, string info)
+    public TextPrompt(List<PromptTextBoxConfig> configs, string title, string info, Color color)
     {
         Debug.WriteLine($"Adding TextPrompt with list of configs");
         InitializeComponent();
@@ -50,6 +51,10 @@ public partial class TextPrompt : Form
             cfg.textbox.TextChanged += TextBox_TextChanged;
         }
 
+        buttonColorPicker.BackColor = color;
+        ColorPicked = color;
+        buttonColorPicker.ForeColor = ColorHelpers.TextColorFromBackColor(color);
+
         UpdateControls();
         Debug.WriteLine($"show color picker: {ShowColorPicker}");
     }
@@ -59,6 +64,16 @@ public partial class TextPrompt : Form
         int controlsLeft = 5;
         int controlsWidth = this.Width - 25;
         int previousBottom = labelInfo.Bottom;
+        if (labelInfo.Text == "")
+        {
+            previousBottom = labelInfo.Top;
+            labelInfo.Visible = false;
+        }
+        else
+        {
+            labelInfo.Visible = true;
+        }
+
         foreach (PromptTextBoxConfig cfg in textPromptConfigs)
         {
             cfg.UpdateControlPositions(controlsLeft, previousBottom + 5, controlsWidth);
@@ -93,13 +108,13 @@ public partial class TextPrompt : Form
         {
             promptconfigs.Add(new PromptTextBoxConfig(1, $"Input {i}:", "", illegalCharacters));
         }
-        TextPrompt textPrompt = new(promptconfigs, title, info)
+        TextPrompt textPrompt = new(promptconfigs, title, info, Color.White)
         {
             ShowColorPicker = showColorPicker
         };
 
-        DialogResult dialogResult = textPrompt.ShowDialog();
-        if (dialogResult == DialogResult.OK)
+        DialogResult promptResult = textPrompt.ShowDialog();
+        if (promptResult == DialogResult.OK)
         {
             Debug.WriteLine("Prompt result: " + textPrompt.TextResult);
             List<string> textResult = textPrompt.TextResult;
@@ -181,7 +196,9 @@ public partial class TextPrompt : Form
         if (result == DialogResult.OK)
         {
             ColorPicked = colorDialog1.Color;
-            textBoxes.First().BackColor = ColorPicked;
+            //textBoxes.First().BackColor = ColorPicked;
+            buttonColorPicker.BackColor = ColorPicked;
+            buttonColorPicker.ForeColor = ColorHelpers.TextColorFromBackColor(ColorPicked);
         }
     }
 

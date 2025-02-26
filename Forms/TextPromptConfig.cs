@@ -13,6 +13,7 @@ namespace ClipboardTool.Forms
         public bool Multiline = false;
         public TextBox textbox = new();
         public Label label = new();
+        public Color color = Color.White;
 
         private string[]? _illegalChars = null;
         public string[]? IllegalCharacters
@@ -62,6 +63,8 @@ namespace ClipboardTool.Forms
             {
                 PrefilledText = prefilledText;
             }
+
+            textbox.Anchor = AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Right;
         }
 
         public int GetBottom()

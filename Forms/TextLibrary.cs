@@ -1,8 +1,10 @@
-﻿using ClipboardTool.Forms;
+﻿using ClipboardTool.Classes;
+using ClipboardTool.Forms;
 using ClipboardTool.Properties;
 using DebugTools;
 using System.Diagnostics;
 using System.Runtime.Versioning;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace ClipboardTool;
 [SupportedOSPlatform("windows")]
@@ -100,7 +102,7 @@ public partial class TextLibrary : Form
             {
                 if (entry.Value[0].Contains(colorTag))
                 {
-                    c = ParseColor(entry.Value[0][colorTag.Length..]);
+                    c = ColorHelpers.ParseColor(entry.Value[0][colorTag.Length..]);
 
                     tagCount++;
                 }
@@ -126,58 +128,13 @@ public partial class TextLibrary : Form
             if (row.Cells[1] != null)
             {
                 row.Cells[titleColumnIndex].Style.BackColor = color;
-                Color mixColor = MixColor(color, Color.White, 0.5f);
+                Color mixColor = ColorHelpers.MixColor(color, Color.White, 0.5f);
                 row.Cells[textColumnIndex].Style.BackColor = mixColor;
 
-                row.Cells[titleColumnIndex].Style.ForeColor = TextColorFromBackColor(color, 0.6f);
-                row.Cells[textColumnIndex].Style.ForeColor = TextColorFromBackColor(mixColor, 0.6f);
+                row.Cells[titleColumnIndex].Style.ForeColor = ColorHelpers.TextColorFromBackColor(color, 0.6f);
+                row.Cells[textColumnIndex].Style.ForeColor = ColorHelpers.TextColorFromBackColor(mixColor, 0.6f);
             }
         }
-    }
-
-    private static Color TextColorFromBackColor(Color backColor, float threshold)
-    {
-        Color result = Color.Black;
-        if (ColorValue(backColor) < threshold)
-            result = Color.White;
-        return result;
-    }
-
-    private static float ColorValue(Color color)
-    {
-        // returns a value of 0-1f based on the total brightness of the input color
-        //https://stackoverflow.com/questions/596216/formula-to-determine-perceived-brightness-of-rgb-color
-        //https://en.wikipedia.org/wiki/Relative_luminance
-        //perceived value (0.2126 * R + 0.7152 * G + 0.0722 * B)
-        float pR = 0.2126f;
-        float pG = 0.7152f;
-        float pB = 0.0722f;
-        float result = ((color.R * pR) + (color.G * pG) + (color.B * pB)) / 256f;
-        return result;
-    }
-
-    public static Color MixColor(Color color1, Color color2, float mix = 0.5f)
-    {
-        int R = (int)Lerp(color1.R, color2.R, mix);
-        int G = (int)Lerp(color1.G, color2.G, mix);
-        int B = (int)Lerp(color1.B, color2.B, mix);
-        return Color.FromArgb(R, G, B);
-    }
-
-    public static float Lerp(float firstFloat, float secondFloat, float by)
-    {
-        return firstFloat * (1 - by) + secondFloat * by;
-    }
-
-    private static Color ParseColor(string text)
-    {
-        string[] rgbText = text.Split(',');
-        int[] rgbValues = [255, 255, 255];
-        rgbValues[0] = int.Parse(rgbText[0]);
-        rgbValues[1] = int.Parse(rgbText[1]);
-        rgbValues[2] = int.Parse(rgbText[2]);
-        Color color = Color.FromArgb(rgbValues[0], rgbValues[1], rgbValues[2]);
-        return color;
     }
 
     private bool SaveEntry(string? filename, string? text, Color? color)
@@ -232,11 +189,16 @@ public partial class TextLibrary : Form
                 gridTextLibrary.Rows[row].Cells[textColumnIndex].Value = string.Empty;
             string text = gridTextLibrary.Rows[row].Cells[textColumnIndex].Value.ToString() + "";
             Dbg.WriteWithCaller("Saving: " + filename);
-            Color color = gridTextLibrary.Rows[row].Cells[titleColumnIndex].Style.BackColor;
+            Color color = GetRowColor(row);
             result = SaveEntry(filename, text, color);
             SetPinnedCheckboxValue(row, result);
         }
         return result;
+    }
+
+    private Color GetRowColor(int row)
+    {
+        return gridTextLibrary.Rows[row].Cells[titleColumnIndex].Style.BackColor;
     }
 
     private void DeleteEntry(string? filename)
@@ -272,6 +234,23 @@ public partial class TextLibrary : Form
         }
     }
 
+    private TextPrompt UpdateTextEntryPrompt(string dialogHeading, string info, string titleText, string? contentsText, Color color)
+    {
+        List<PromptTextBoxConfig> promptConfig = [];
+        promptConfig.Add(new PromptTextBoxConfig(1, "Title", titleText, TextPrompt.IllegalFileCharacters));
+        PromptTextBoxConfig contentsCfg = new(10, "Contents", contentsText, null);
+        contentsCfg.textbox.ScrollBars = ScrollBars.Vertical;
+        
+        promptConfig.Add(contentsCfg);
+
+        TextPrompt textPrompt = new(promptConfig, dialogHeading, info, color)
+        {
+            ShowColorPicker = true,
+        };
+
+        return textPrompt;
+    }
+
     private void ButtonAddFromClipboard_Click(object sender, EventArgs e)
     {
         string clipboardtext = string.Empty;
@@ -284,20 +263,22 @@ public partial class TextLibrary : Form
 
         Debug.WriteLine($"Adding new from clipboard");
 
-        List<PromptTextBoxConfig> promptConfig = [];
-        promptConfig.Add(new PromptTextBoxConfig(1, "Set entry title", "", TextPrompt.IllegalFileCharacters));
-        promptConfig.Add(new PromptTextBoxConfig(5, "Content", clipboardtext, null));
+        //List<PromptTextBoxConfig> promptConfig = [];
+        //promptConfig.Add(new PromptTextBoxConfig(1, "Title", "", TextPrompt.IllegalFileCharacters));
+        //promptConfig.Add(new PromptTextBoxConfig(5, "Contents", clipboardtext, null));
 
+        //TextPrompt textPrompt = new(promptConfig, "Add new from clipboard", "Set title and click OK to pin entry." + Environment.NewLine + "Cancel adds entry but does not pin.")
+        //{
+        //    ShowColorPicker = true,
 
+        //};
 
-        TextPrompt textPrompt = new(promptConfig, "Add new from clipboard", "Set title and click OK to pin entry." + Environment.NewLine + "Cancel adds entry but does not pin.")
-        {
-            ShowColorPicker = true,
+        TextPrompt textPrompt = UpdateTextEntryPrompt("Add new from clipboard", 
+            "Set title and click OK to pin entry." + Environment.NewLine + "Cancel adds entry but does not pin.", 
+            "", clipboardtext, Color.White);
 
-        };
-
-        DialogResult = textPrompt.ShowDialog();
-        if (DialogResult == DialogResult.OK)
+        DialogResult promptResult = textPrompt.ShowDialog();
+        if (promptResult == DialogResult.OK)
         {
             title = textPrompt.TextResult.First();
             Color color = textPrompt.ColorPicked;
@@ -313,6 +294,74 @@ public partial class TextLibrary : Form
         else
         {
             gridTextLibrary.Rows.Add(false, "", clipboardtext);
+        }
+    }
+
+
+    private void RenameEntry(int rowIndex)
+    {
+        if (rowIndex > gridTextLibrary.Rows.Count - 1)
+        {
+            Dbg.WriteWithCaller("rowIndex error");
+            return;
+        }
+
+        DataGridViewCell titleCell = gridTextLibrary.Rows[rowIndex].Cells[titleColumnIndex];
+        if (titleCell == null)
+        {
+            Dbg.WriteWithCaller("Cell is null");
+            return;
+        }
+
+        if (titleCell.Value == null)
+        {
+            Dbg.WriteWithCaller("Cell value null, setting empty string");
+            titleCell.Value = string.Empty;
+        }
+
+        if (titleCell.Value != null)
+        {
+            string oldTitle = titleCell.Value.ToString() + "";
+            DataGridViewCell contentCell = gridTextLibrary.Rows[rowIndex].Cells[textColumnIndex];
+            string contents = contentCell.Value.ToString() + "";
+            TextPrompt textPrompt = UpdateTextEntryPrompt("Edit Text", "Update title and contents", oldTitle, contents, GetRowColor(rowIndex));
+            DialogResult promptResult = textPrompt.ShowDialog();
+            if (promptResult != DialogResult.OK) return;
+
+            string newTitle = textPrompt.TextResult[0];
+            string newContent = textPrompt.TextResult[1];
+
+            //update contents
+            contentCell.Value = newContent;
+
+            //update color
+            SetEntryColor(rowIndex, textPrompt.ColorPicked);
+
+            Dbg.WriteWithCaller("Renaming entry to: " + newTitle);
+
+            //delete old file
+            if (oldTitle.Length > 0)
+            {
+                string oldEntryPath = Path.Join(TextLibraryFolder, oldTitle + entryFileExtension);
+                if (File.Exists(oldEntryPath))
+                {
+                    try
+                    {
+                        File.Delete(oldEntryPath);
+                        Dbg.WriteWithCaller("Rename: Deleted old entry file " + oldEntryPath);
+                    }
+                    catch
+                    {
+                        Dbg.WriteWithCaller("Rename: Can't delete old entry file " + oldEntryPath);
+                    }
+                }
+            }
+
+            //save new file
+            titleCell.Value = newTitle;
+
+            SetPinnedCheckboxValue(rowIndex, (SaveEntry(rowIndex)));
+
         }
     }
 
@@ -361,17 +410,22 @@ public partial class TextLibrary : Form
                 if (cells[titleColumnIndex].Value.ToString() == string.Empty)
                 {
                     string? contentText = cells[textColumnIndex].Value.ToString();
-                    List<PromptTextBoxConfig> promptcfgs = [];
-                    promptcfgs.Add(new PromptTextBoxConfig(1, "Title", "", TextPrompt.IllegalFileCharacters));
-                    promptcfgs.Add(new PromptTextBoxConfig(5, "Contents", contentText));
+                    //List<PromptTextBoxConfig> promptcfgs = [];
+                    //promptcfgs.Add(new PromptTextBoxConfig(1, "Title", "", TextPrompt.IllegalFileCharacters));
+                    //promptcfgs.Add(new PromptTextBoxConfig(5, "Contents", contentText));
 
-                    TextPrompt textPrompt = new(promptcfgs, "Add new text", "");
+                    //TextPrompt textPrompt = new(promptcfgs, "Add new text", "");
 
-                    if (textPrompt.ShowDialog() == DialogResult.OK)
+                    TextPrompt textPrompt = UpdateTextEntryPrompt("Save text", "Update title and contents. You must use a valid file name.", "", contentText, GetRowColor(e.RowIndex));
+                    DialogResult promptResult = textPrompt.ShowDialog();
+
+                    if (promptResult == DialogResult.OK)
                     {
                         title = textPrompt.TextResult[0];
                         cells[titleColumnIndex].Value = title;
                         cells[textColumnIndex].Value = textPrompt.TextResult[1];
+                        //update color
+                        SetEntryColor(e.RowIndex, textPrompt.ColorPicked);
                     }
                     else
                     {
@@ -584,62 +638,6 @@ public partial class TextLibrary : Form
         }
     }
 
-    private void RenameEntry(int rowIndex)
-    {
-        if (rowIndex > gridTextLibrary.Rows.Count - 1)
-        {
-            Dbg.WriteWithCaller("rowIndex error");
-            return;
-        }
-
-        DataGridViewCell cell = gridTextLibrary.Rows[rowIndex].Cells[titleColumnIndex];
-        if (cell == null)
-        {
-            Dbg.WriteWithCaller("Cell is null");
-            return;
-        }
-
-        if (cell.Value == null)
-        {
-            Dbg.WriteWithCaller("Cell value null, setting empty string");
-            cell.Value = string.Empty;
-        }
-
-        if (cell.Value != null)
-        {
-            string oldTitle = cell.Value.ToString() + "";
-            string? newTitle = TextPrompt.Prompt("Entry title", "Enter the new name of the entry", false, TextPrompt.IllegalFileCharacters);
-            if (newTitle != null)
-            {
-                Dbg.WriteWithCaller("Renaming entry to: " + newTitle);
-                //delete old file
-                if (oldTitle.Length > 0)
-                {
-                    string oldEntryPath = Path.Join(TextLibraryFolder, oldTitle + entryFileExtension);
-                    if (File.Exists(oldEntryPath))
-                    {
-                        try
-                        {
-                            File.Delete(oldEntryPath);
-                            Dbg.WriteWithCaller("Rename: Deleted old entry file " + oldEntryPath);
-                        }
-                        catch
-                        {
-                            Dbg.WriteWithCaller("Rename: Can't delete old entry file " + oldEntryPath);
-                        }
-                    }
-                }
-                //save new file
-                cell.Value = newTitle;
-
-                SetPinnedCheckboxValue(rowIndex, (SaveEntry(rowIndex)));
-            }
-            else
-            {
-                Dbg.WriteWithCaller("Rename cancelled");
-            }
-        }
-    }
 
     private void CheckBoxMinimize_CheckedChanged(object sender, EventArgs e)
     {
