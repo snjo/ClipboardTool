@@ -47,7 +47,7 @@ The buttons in the main application window alter or replace the content of the c
 	
 	Each entry has the following elements (columns):
 	Pin - Saves the entry to a text file. Removing the pin deletes the file on disk.
-	Title - A title for convenience. Not used in the output. Used for the saved file name.
+	Title - A title for convenience. Must be a valid file name. Double click to edit title and contents.
 	Text - The text that will be output. Text processing is performed on any $ commands.
 	> - Copies the text to the clipboard.
 
@@ -141,8 +141,11 @@ The Minimize on Copy checkbox default setting can be saved in Options.
 
 If you pin an entry, the file will be saved. Unpinning the entry will delete the file. Any entries that are not pinned (saved) will be lost if you close the Text Library window.
 
-When adding a new entry from clipboard using the Add button, or pinning a manually created entry, you must specify a title. This title will be used as the file name (.txt will be added automatically)
+When adding a new entry from clipboard using the Add button, or pinning a manually created entry, you must specify a title.
+This title will be used as the file name (.txt will be added automatically), you must use a valid file name.
 If you have selected a color, the text file will begin with a color tag on the first line.
+
+To edit title, contents and color, double click the title field. This will open a new window for easier editing of longer text entries.
 
 #### Quick Tip
 Set the Text Library hotkey to a convenient key like F2 (without modifiers), and set the "Minimize after copy" on in options.
