@@ -234,7 +234,7 @@ public partial class TextLibrary : Form
         }
     }
 
-    private TextPrompt UpdateTextEntryPrompt(string dialogHeading, string info, string titleText, string? contentsText, Color color)
+    private static TextPrompt UpdateTextEntryPrompt(string dialogHeading, string info, string titleText, string? contentsText, Color color)
     {
         List<PromptTextBoxConfig> promptConfig = [];
         promptConfig.Add(new PromptTextBoxConfig(1, "Title", titleText, TextPrompt.IllegalFileCharacters));
@@ -274,7 +274,7 @@ public partial class TextLibrary : Form
         //};
 
         TextPrompt textPrompt = UpdateTextEntryPrompt("Add new from clipboard", 
-            "Set title and click OK to pin entry." + Environment.NewLine + "Cancel adds entry but does not pin.", 
+            "Set title and click OK to save entry.", 
             "", clipboardtext, Color.White);
 
         DialogResult promptResult = textPrompt.ShowDialog();
@@ -291,10 +291,10 @@ public partial class TextLibrary : Form
             int row = gridTextLibrary.Rows.Add(saveSuccessful, title, clipboardtext);
             SetEntryColor(row, color);
         }
-        else
-        {
-            gridTextLibrary.Rows.Add(false, "", clipboardtext);
-        }
+        //else
+        //{
+        //    gridTextLibrary.Rows.Add(false, "", clipboardtext);
+        //}
     }
 
 
