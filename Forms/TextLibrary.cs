@@ -249,6 +249,8 @@ public partial class TextLibrary : Form
             ShowColorPicker = true,
         };
 
+        textPrompt.textPromptConfigs.Last().textbox.Anchor |= AnchorStyles.Bottom;
+
         return textPrompt;
     }
 
