@@ -2,10 +2,13 @@
 using ClipboardTool.Properties;
 using DebugTools;
 using Hotkeys;
+using System.CodeDom.Compiler;
 using System.Globalization;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Threading.Channels;
 using TextBox = System.Windows.Forms.TextBox;
 
 [assembly: AssemblyVersion("1.10.*")]
@@ -52,11 +55,13 @@ public partial class MainForm : Form
     private bool capLockStateSet = false;
     private bool alwaysOnTop = false;
     HelpForm helpForm = new();
+    HelpForm changeLogForm = new();
     public CultureInfo startingCulture = CultureInfo.CurrentCulture;
 
     public MainForm()
     {
         InitializeComponent();
+
         timerStatus.Start();
         _process = new ProcessText(this);
         _mainMethods = new MainMethods(this);
@@ -73,6 +78,64 @@ public partial class MainForm : Form
         }
         UpdateCapsLock(forceUpdate: true);
         Autorun.Autorun.UpdatePathIfEnabled(ApplicationName);
+
+        ShowChangelog(showEvenIfOld: false);
+    }
+
+    private void ShowChangelog(bool showEvenIfOld)
+    {
+        string version = Application.ProductVersion;
+        bool newer = false;
+        (int oldMajor, int oldMinor, int oldBuild) = versionTextToNumbers(Settings.Default.LastVersionNumber);
+        Dbg.WriteLine($"Version text: {version}");
+        Dbg.WriteLine($"Version: Major: {oldMajor}, Minor: {oldMinor}, Build: {oldBuild}");
+        (int major, int minor, int build) = versionTextToNumbers(version);
+        Dbg.WriteLine($"Version: Major: {major}, Minor: {minor}, Build: {build}");
+
+        if (major > oldMajor)
+        {
+            newer = true;
+            Dbg.WriteLine($"Newer major");
+        }
+        else if (minor > oldMinor)
+        {
+            newer = true;
+            Dbg.WriteLine($"Newer minor");
+        }
+        else if (build > oldBuild)
+        {
+            Dbg.WriteLine($"Newer build");
+        }
+        if (newer || showEvenIfOld)
+        {
+
+
+            //MessageBox.Show($"Clipboard Tool has been updated.\n\n Changelog:\n{changes}");
+            ShowChangeLog();
+            Settings.Default.LastVersionNumber = version;
+            Settings.Default.Save();
+        }
+    }
+
+    private (int,int,int) versionTextToNumbers(string versionText)
+    {
+        int major = 0;
+        int minor = 0;
+        int build = 0;
+        string[] split = versionText.Split('.');
+        if (split.Length > 0)
+        {
+            int.TryParse(split[0], out major);
+        }
+        if (split.Length > 1)
+        {
+            int.TryParse(split[1], out minor);
+        }
+        if (split.Length > 2)
+        {
+            int.TryParse(split[2], out build);
+        }
+        return (major, minor, build);
     }
 
     public ProcessText Process
@@ -331,6 +394,29 @@ public partial class MainForm : Form
 
         helpForm.SetText(ProcessingCommands.GetListAsText());
         helpForm.Show();
+    }
+
+    private void ShowChangeLog()
+    {
+        string changes = "";
+        if (File.Exists("changelog.md"))
+        {
+            changes = File.ReadAllText("changelog.md");
+        }
+        if (changeLogForm == null || changeLogForm.IsDisposed)
+        {
+            changeLogForm = new HelpForm();
+        }
+
+        if (changes != "")
+        {
+            changeLogForm.SetText("ClipboardTool has been updated\nhttps://github.com/snjo/ClipboardTool/blob/master/changelog.md\n\n" + changes);
+            changeLogForm.Show();
+        }
+        else
+        {
+            Dbg.WriteLine("Couldn't load changelog, not showing form");
+        }
     }
 
     private void ActionSaveCustomText(object sender, EventArgs e)

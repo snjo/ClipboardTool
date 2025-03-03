@@ -35,7 +35,7 @@ namespace DebugTools
         }
 
         [Conditional("DEBUG")]
-        public static void Writeline(params string[] texts)
+        public static void WriteLine(params string[] texts)
         {
             string result = "";
             foreach (object t in texts)

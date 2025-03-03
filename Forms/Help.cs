@@ -38,4 +38,11 @@ public partial class HelpForm : Form
         string url = "https://github.com/snjo/ClipboardTool/blob/master/readme.md";
         Process.Start(new ProcessStartInfo() { FileName = url, UseShellExecute = true });
     }
+
+    private void richTextBox1_LinkClicked(object sender, LinkClickedEventArgs e)
+    {
+        if (e.LinkText == null) return;
+        string url = e.LinkText;
+        Process.Start(new ProcessStartInfo() { FileName = url, UseShellExecute = true });
+    }
 }

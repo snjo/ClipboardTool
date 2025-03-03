@@ -47,13 +47,14 @@
             // richTextBox1
             // 
             richTextBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            richTextBox1.Font = new Font("Lucida Console", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            richTextBox1.Font = new Font("Lucida Console", 9.75F);
             richTextBox1.Location = new Point(12, 12);
             richTextBox1.Name = "richTextBox1";
             richTextBox1.ReadOnly = true;
             richTextBox1.Size = new Size(673, 327);
             richTextBox1.TabIndex = 2;
             richTextBox1.Text = "";
+            richTextBox1.LinkClicked += richTextBox1_LinkClicked;
             // 
             // linkLabel1
             // 

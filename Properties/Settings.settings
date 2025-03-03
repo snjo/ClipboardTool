@@ -227,5 +227,8 @@
     <Setting Name="Culture" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="LastVersionNumber" Type="System.String" Scope="User">
+      <Value Profile="(Default)">none</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

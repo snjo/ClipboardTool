@@ -65,7 +65,7 @@ internal class SolveEquation
                     {
                         if (Settings.Default.MathWarning)
                             MessageBox.Show("Can't solve equation:" + Environment.NewLine + equation, ProcessingCommands.Math.Name + " error");
-                        Dbg.Writeline("Can't compute equation: " + equation);
+                        Dbg.WriteLine("Can't compute equation: " + equation);
                     }
                 }
                 result += answer + text;
