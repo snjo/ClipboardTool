@@ -10,6 +10,7 @@ public class ProcessText(MainForm parent)
 {
     readonly MainForm mainForm = parent;
     public ProcessingCommands commands = new();
+    string clip = "";
 
     /// <summary>
     /// Processes text with $-commands, outputs both plain and rich text.
@@ -18,9 +19,10 @@ public class ProcessText(MainForm parent)
     /// <returns>string PlainText, string RichText</returns>
     public (string PlainText, string? RichText) ProcessTextVariables(string customText, int recursionDepth, bool forceClipboardUpdate = false) //(string, string)
     {
-        if (recursionDepth > 2)
+        Debug.WriteLine($"Recursion {recursionDepth}");
+        if (recursionDepth > 3)
         {
-            Debug.WriteLine($"Halting processing at recursion depth of 2");
+            Debug.WriteLine($"Halting processing at recursion depth of 3");
             return ("", null);
         }
         //Debug.WriteLine("ProcessTextVariables start, clipboardupdate: " + forceClipboardUpdate);
@@ -30,7 +32,10 @@ public class ProcessText(MainForm parent)
 
         int padNumber = 1;
         //string clip = Clipboard.GetText(TextDataFormat.UnicodeText);
-        string clip = Clipboard.GetText();
+        if (recursionDepth < 1)
+        {
+            clip = Clipboard.GetText();
+        }
 
         int modifyNumberSpinnerValue = 0;
 
@@ -241,38 +246,16 @@ public class ProcessText(MainForm parent)
 
     private string ListLineFromSlot(int slotNumber, int recursionDepth)
     {
+        recursionDepth++;
+        Debug.WriteLine($"ListLines slot:{slotNumber} rec:{recursionDepth}");
         string[] values = mainForm.MemorySlot(slotNumber).Text.Split(Environment.NewLine, StringSplitOptions.None);
         return GetSplitLines(recursionDepth, values);
     }
 
     private string ListSplit(string customText, int recursionDepth)
     {
+        recursionDepth++;
         string[] values = customText.Split(Environment.NewLine, StringSplitOptions.None);
-
-        //if (mainForm.NumberSpinner < 1) mainForm.NumberSpinner = 1; // skip the first line with the $list
-
-        //int num = mainForm.NumberSpinner;
-        //if (num >= values.Length)
-        //{
-        //    return string.Empty;
-        //}
-
-        //string currentline = values[num];
-
-        //if (values.Length > 0)
-        //{
-        //    if (currentline.Contains(ProcessingCommands.List.Name)) //skip this line
-        //    {
-        //        mainForm.NumberSpinner++;
-        //        return string.Empty;
-        //    }
-        //    Dbg.WriteWithCaller("Process text");
-        //    customText = ProcessTextVariables(currentline, recursionDepth, false).PlainText;
-        //}
-        //else
-        //{
-        //    customText = string.Empty;
-        //}
         string result = GetSplitLines(recursionDepth, values);
         mainForm.NumberSpinner++;
         return result;
