@@ -10,7 +10,7 @@ public class ProcessText(MainForm parent)
 {
     readonly MainForm mainForm = parent;
     public ProcessingCommands commands = new();
-    string clip = "";
+    string clipboardText = "";
 
     /// <summary>
     /// Processes text with $-commands, outputs both plain and rich text.
@@ -34,7 +34,7 @@ public class ProcessText(MainForm parent)
         //string clip = Clipboard.GetText(TextDataFormat.UnicodeText);
         if (recursionDepth < 1)
         {
-            clip = Clipboard.GetText();
+            clipboardText = Clipboard.GetText();
         }
 
         int modifyNumberSpinnerValue = 0;
@@ -69,7 +69,7 @@ public class ProcessText(MainForm parent)
         // replace text in clipboard string. place first to allow for other processing on the result text. Uses mem slots 1 & 2
         if (customText.Contains(ProcessingCommands.Replace.Name))
         {
-            ReplaceText(ref customText, ref clip);
+            ReplaceText(ref customText, ref clipboardText);
         }
 
         // get mem slot data first, so you can run other processing on it
@@ -82,9 +82,9 @@ public class ProcessText(MainForm parent)
         customText = customText.Replace(ProcessingCommands.Time.Name, DateTime.Now.ToShortTimeString());
 
         // clipboard, case conversion
-        customText = customText.Replace(ProcessingCommands.ClipboardPlain.Name, clip);
-        customText = customText.Replace(ProcessingCommands.ClipboardUpper.Name, clip.ToUpper());
-        customText = customText.Replace(ProcessingCommands.ClipboardLower.Name, clip.ToLower());
+        customText = customText.Replace(ProcessingCommands.ClipboardPlain.Name, clipboardText);
+        customText = customText.Replace(ProcessingCommands.ClipboardUpper.Name, clipboardText.ToUpper());
+        customText = customText.Replace(ProcessingCommands.ClipboardLower.Name, clipboardText.ToLower());
 
         // pad number with leading zeroes
         PadNumber.Convert(ref customText, ref padNumber);
@@ -131,7 +131,7 @@ public class ProcessText(MainForm parent)
         // Convert characters in clipboard string to numbers for debugging text
         if (customText.Contains(ProcessingCommands.ClipboardCharToInt.Name))
         {
-            customText = customText.Replace(ProcessingCommands.ClipboardCharToInt.Name, StringToIntSequence.Convert(clip));
+            customText = customText.Replace(ProcessingCommands.ClipboardCharToInt.Name, StringToIntSequence.Convert(clipboardText));
         }
 
         // Math
@@ -278,7 +278,7 @@ public class ProcessText(MainForm parent)
         {
             if (currentline.Contains(ProcessingCommands.List.Name)) //skip this line
             {
-                mainForm.NumberSpinner++;
+                //mainForm.NumberSpinner++;
                 return string.Empty;
             }
             Dbg.WriteWithCaller("Process text");

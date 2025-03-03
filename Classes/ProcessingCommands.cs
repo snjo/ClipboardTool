@@ -14,8 +14,8 @@
     public class ProcessingCommands
     {
         public static readonly List<Command> Commands = [];
-        public static readonly Command Date = new Command(name: "$d", description: "Outputs current date. Format/Culture can be set in Options", Commands);
-        public static readonly Command Time = new Command(name: "$t", description: "Outputs current time", Commands);
+        public static readonly Command Date = new Command(name: "$date", description: "Outputs current date. Format/Culture can be set in Options", Commands);
+        public static readonly Command Time = new Command(name: "$time", description: "Outputs current time", Commands);
         public static readonly Command ClipboardPlain = new Command(name: "$cp", description: "Clipboard (plain text)", Commands);
         public static readonly Command ClipboardUpper = new Command(name: "$cu", description: "Clipboard in upper case", Commands);
         public static readonly Command ClipboardLower = new Command(name: "$cl", description: "Clipboard in lower case", Commands);

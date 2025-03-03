@@ -66,15 +66,15 @@ See the Text Library Window section below for more details
 
 | Command   | Function                                                                  |
 |-----------|---------------------------------------------------------------------------|
-| $d        | current date                                                              |
-| $t        | current time                                                              |
+| $date     | current date                                                              |
+| $time     | current time                                                              |
 | $cp       | clipboard (plain text)                                                    |
 | $cl / $cu | clipboard in lower/upper case                                             |
 | $number   | output the number from the upDown spinner                                 |
-| $postinc  | Increments the number of the spinner AFTER processing is done             |
-| $postdec  | Decrements the number of the spinner AFTER processing is done             |
-| $preinc   | Increments the number of the spinner BEFORE processing is done            |
-| $predec   | Decrements the number of the spinner BEFORE processing is done            |
+| $postinc  | Flag: Increments the number of the spinner AFTER processing is done       |
+| $postdec  | Flag: Decrements the number of the spinner AFTER processing is done       |
+| $preinc   | Flag: Increments the number of the spinner BEFORE processing is done      |
+| $predec   | Flag: Decrements the number of the spinner BEFORE processing is done      |
 | $n2, $n3  | Flag: pad number with 1-2 zeroes (01, 001).                               |
 | $m1 - $m3 | contents of the memory slots                                              |
 | $eq       | Flag: Convert \"\" to \", and removes single \"                           |
@@ -84,7 +84,7 @@ See the Text Library Window section below for more details
 | $vsp      | Split value in slot 1 with space, output value[number]                    |
 | $list     | Split lines in main textbox (skips line 1), output value[number]          |
 | $prompt   | Opens a popup box to insert a text value                                  |
-| $Math     | Flag: Solves equations enclosed in [] brackets                            |
+| $Math     | Solves equations enclosed in [] brackets                                  |
 | $Round    | Flag: Alters $Math to round off results.                                  |
 | $RTF      | Flag: Output Rich text. See details below                                 |
 | $DTW      | Translates digits in curly braces to numeral words. ex: $DTW{12} = twelve |
@@ -94,7 +94,33 @@ See the Text Library Window section below for more details
 
 Commands marked as Flag do not output text directly, but alters the rest of the text or commands in some way.
 
+### Using multiple lists from slots at once
+
+Commands: $lln1 $lln2 $lln3
+These allow referencing lists of values from multiple slots when processing text from the Processing slot or Text Library.
+Don't use the $list command in the slots containing list values when using $lln commands.
+
+Fill slots 1-3 with individual lists of values and reference one or multiple of them in another text like this.
+Make sure to increment the number each time you process the text using $postinc (Increment the spinner number at the end)
+Values in the lists will also be processed if any commands are present.
+	
+	PROCESS SLOT: ID: $number Name: $lln1, team: $lln2 $postinc
+	MEMORY SLOT 1: Joe
+	               Mary
+				   Frank
+				   Sarah
+	MEMORY SLOT 1: Blue
+	               Red
+				   Green
+				   Blue
+
+	OUTPUT: ID: 1, Name: Joe, team: Blue
+	        ID: 2, Name: Mary, team Red
+			ID: 3, Name: Frank, team Green
+			ID: 4, Name: Sarah, team Blue
+
 -----------------------------------------
+
 ## Text Files in the program folder
 
 By default the program looks for these files in the user profile folder. You can direct it to another folder on your PC it the Options panel.
