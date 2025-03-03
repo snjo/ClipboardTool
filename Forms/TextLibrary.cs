@@ -470,7 +470,7 @@ public partial class TextLibrary : Form
             if (cellText.Length > 0)
             {
                 Dbg.WriteWithCaller("Process text");
-                mainForm.Process.ProcessTextVariables(cellText, true);
+                mainForm.Process.ProcessTextVariables(cellText, 0, true);
                 if (checkBoxMinimize.Checked)
                 {
                     this.WindowState = FormWindowState.Minimized;

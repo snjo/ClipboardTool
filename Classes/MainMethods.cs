@@ -237,7 +237,7 @@ public partial class MainMethods
                 hotkeyHeldDown = true;
                 SendCut();
                 Dbg.WriteWithCaller("Process text");
-                SendPaste(process.ProcessTextVariables(mainForm.MemorySlot(0).Text, settings.sendPaste).PlainText, "Hotkey Process");
+                SendPaste(process.ProcessTextVariables(mainForm.MemorySlot(0).Text, 0, settings.sendPaste).PlainText, "Hotkey Process");
             }
         }
 
@@ -253,7 +253,7 @@ public partial class MainMethods
                 hotkeyHeldDown = true;
                 SendCut();
                 Dbg.WriteWithCaller("Process text");
-                SendPaste(process.ProcessTextVariables(mainForm.MemorySlot(1).Text, settings.sendPaste).PlainText);
+                SendPaste(process.ProcessTextVariables(mainForm.MemorySlot(1).Text, 0, settings.sendPaste).PlainText);
             }
         }
 
@@ -264,7 +264,7 @@ public partial class MainMethods
                 hotkeyHeldDown = true;
                 SendCut();
                 Dbg.WriteWithCaller("Process text");
-                SendPaste(process.ProcessTextVariables(mainForm.MemorySlot(2).Text, settings.sendPaste).PlainText);
+                SendPaste(process.ProcessTextVariables(mainForm.MemorySlot(2).Text, 0, settings.sendPaste).PlainText);
             }
         }
 
@@ -275,7 +275,7 @@ public partial class MainMethods
                 hotkeyHeldDown = true;
                 SendCut();
                 Dbg.WriteWithCaller("Process text");
-                SendPaste(process.ProcessTextVariables(mainForm.MemorySlot(3).Text, settings.sendPaste).PlainText);
+                SendPaste(process.ProcessTextVariables(mainForm.MemorySlot(3).Text, 0, settings.sendPaste).PlainText);
             }
         }
 
@@ -510,7 +510,7 @@ public partial class MainMethods
             if (textBox.Text.Length > 0)
             {
                 //Dbg.WriteWithCaller("Process text");
-                process.ProcessTextVariables(textBox.Text, true);
+                process.ProcessTextVariables(textBox.Text, 0, true);
             }
             else
             {

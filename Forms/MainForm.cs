@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 using TextBox = System.Windows.Forms.TextBox;
 
-[assembly: AssemblyVersion("1.9.*")]
+[assembly: AssemblyVersion("1.10.*")]
 
 namespace ClipboardTool;
 [SupportedOSPlatform("windows")]
@@ -393,7 +393,7 @@ public partial class MainForm : Form
     public void ActionProcessText(object sender, EventArgs e)
     {
         Dbg.WriteWithCaller("Process text");
-        Process.ProcessTextVariables(textCustom.Text, true);
+        Process.ProcessTextVariables(textCustom.Text, 0, true);
     }
 
     private void ActionShowOptions(object sender, EventArgs e)

@@ -19,9 +19,11 @@
         public static readonly Command ClipboardPlain = new Command(name: "$cp", description: "Clipboard (plain text)", Commands);
         public static readonly Command ClipboardUpper = new Command(name: "$cu", description: "Clipboard in upper case", Commands);
         public static readonly Command ClipboardLower = new Command(name: "$cl", description: "Clipboard in lower case", Commands);
-        public static readonly Command Number = new Command(name: "$i", description: "Output the number from the upDown spinner ", Commands);
-        public static readonly Command Increment = new Command(name: "$+", description: "Output the number from the upDown spinner, then increment it", Commands);
-        public static readonly Command Decrement = new Command(name: "$-", description: "Output the number from the upDown spinner, then decrement it", Commands);
+        public static readonly Command Number = new Command(name: "$number", description: "Output the number from the upDown spinner ", Commands);
+        public static readonly Command NumberIncrementPost = new Command(name: "$postinc", description: "Increments the number of the spinner AFTER processing is done", Commands);
+        public static readonly Command NumberDecrementPost = new Command(name: "$postdec", description: "Decrements the number of the spinner AFTER processing is done", Commands);
+        public static readonly Command NumberIncrementPre = new Command(name: "$preinc", description: "Increments the number of the spinner BEFORE processing is done", Commands);
+        public static readonly Command NumberDecrementPre = new Command(name: "$predec", description: "Decrements the number of the spinner BEFORE processing is done", Commands);
         public static readonly Command PadNumber2 = new Command(name: "$n2", description: "Flag: pad number to 2 digits with zeroes (1 becomes 01)", Commands);
         public static readonly Command PadNumber3 = new Command(name: "$n3", description: "Flag: pad number to 3 digits with zeroes (1 becomes 001)", Commands);
         public static readonly Command MemSlot1 = new Command(name: "$m1", description: "Contents of memory slot 1", Commands);
@@ -33,6 +35,9 @@
         public static readonly Command ValueSplitSemicolon = new Command(name: "$vsc", description: "Split value in slot 1 with SEMICOLON, output value[number]", Commands);
         public static readonly Command ValueSplitSpace = new Command(name: "$vsp", description: "Split value in slot 1 with SPACE, output value[number]", Commands);
         public static readonly Command List = new Command(name: "$list", description: "Split lines in main textbox(skips line 1), output value[number]", Commands);
+        public static readonly Command ListLines1 = new Command(name: "$lln1", description: "Split lines in mem1 for use in processing from other slot/text library", Commands);
+        public static readonly Command ListLines2 = new Command(name: "$lln2", description: "Split lines in mem2 for use in processing from other slot/text library", Commands);
+        public static readonly Command ListLines3 = new Command(name: "$lln3", description: "Split lines in mem3 for use in processing from other slot/text library", Commands);
         public static readonly Command Prompt = new Command(name: "$prompt", description: "Opens a popup box to insert a text value", Commands);
         public static readonly Command Math = new Command(name: "$Math", description: "Flag: Solves equations enclosed in [] brackets", Commands);
         public static readonly Command Round = new Command(name: "$Round", description: "Flag: Alters $Math to round off results. ", Commands);
@@ -43,7 +48,7 @@
         public static readonly Command ClipboardCharToInt = new Command(name: "$cci", description: "Convert text to character numbers for debugging", Commands);
         public static readonly Command None = new Command(name: "$X", description: "No processing, but separates a tag from the rest of the text", Commands);
 
-        public static string GetListAsText(int padCommand = 8, string separator = "")
+        public static string GetListAsText(int padCommand = 10, string separator = "")
         {
             string result = string.Empty;
             foreach (Command cmd in Commands)

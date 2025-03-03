@@ -70,9 +70,11 @@ See the Text Library Window section below for more details
 | $t        | current time                                                              |
 | $cp       | clipboard (plain text)                                                    |
 | $cl / $cu | clipboard in lower/upper case                                             |
-| $i        | output the number from the upDown spinner                                 |
-| $+        | output number, then increment it                                          |
-| $-        | output number, then decrement it                                          |
+| $number   | output the number from the upDown spinner                                 |
+| $postinc  | Increments the number of the spinner AFTER processing is done             |
+| $postdec  | Decrements the number of the spinner AFTER processing is done             |
+| $preinc   | Increments the number of the spinner BEFORE processing is done            |
+| $predec   | Decrements the number of the spinner BEFORE processing is done            |
 | $n2, $n3  | Flag: pad number with 1-2 zeroes (01, 001).                               |
 | $m1 - $m3 | contents of the memory slots                                              |
 | $eq       | Flag: Convert \"\" to \", and removes single \"                           |

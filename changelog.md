@@ -1,5 +1,17 @@
 ﻿# Changelog
 
+## v1.10
+
+### Important change to number function
+- $i,$+,$- function names removed
+- $number replaces $i, Outputs the number.
+- $postinc increments the number spinner after processing
+- $postdec decrements the number spinner after processing
+- $preinc increments the number spinner before processing
+- $predec decrements the number spinner before processing
+
+Only $number outputs the number spinner value, the others are silent
+
 ## v1.9
 
 - Added Autorun option to start application when starting Windows

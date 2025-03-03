@@ -1,4 +1,5 @@
 ﻿using DebugTools;
+using System.Diagnostics;
 using System.Runtime.Versioning;
 
 namespace ClipboardTool.Classes;
@@ -15,8 +16,13 @@ public class ProcessText(MainForm parent)
     /// </summary>
     /// <param name="plainText"></param>
     /// <returns>string PlainText, string RichText</returns>
-    public (string PlainText, string? RichText) ProcessTextVariables(string customText, bool forceClipboardUpdate = false) //(string, string)
+    public (string PlainText, string? RichText) ProcessTextVariables(string customText, int recursionDepth, bool forceClipboardUpdate = false) //(string, string)
     {
+        if (recursionDepth > 2)
+        {
+            Debug.WriteLine($"Halting processing at recursion depth of 2");
+            return ("", null);
+        }
         //Debug.WriteLine("ProcessTextVariables start, clipboardupdate: " + forceClipboardUpdate);
         if (customText == null) return (PlainText: string.Empty, RichText: null);
         string plainText;// = string.Empty;
@@ -25,6 +31,35 @@ public class ProcessText(MainForm parent)
         int padNumber = 1;
         //string clip = Clipboard.GetText(TextDataFormat.UnicodeText);
         string clip = Clipboard.GetText();
+
+        int modifyNumberSpinnerValue = 0;
+
+        // Update the number spinner before processing
+        if (customText.Contains(ProcessingCommands.NumberIncrementPost.Name))
+        {
+            customText = customText.Replace(ProcessingCommands.NumberIncrementPost.Name, "");
+            modifyNumberSpinnerValue += 1;
+        }
+
+        if (customText.Contains(ProcessingCommands.NumberDecrementPost.Name))
+        {
+            customText = customText.Replace(ProcessingCommands.NumberDecrementPost.Name, "");
+            modifyNumberSpinnerValue -= 1;
+        }
+
+        // Update the number spinner after processing
+        if (customText.Contains(ProcessingCommands.NumberIncrementPre.Name))
+        {
+            customText = customText.Replace(ProcessingCommands.NumberIncrementPre.Name, "");
+            mainForm.NumberSpinner++;
+        }
+
+        if (customText.Contains(ProcessingCommands.NumberDecrementPre.Name))
+        {
+            customText = customText.Replace(ProcessingCommands.NumberDecrementPre.Name, "");
+            mainForm.NumberSpinner--;
+        }
+
 
         // replace text in clipboard string. place first to allow for other processing on the result text. Uses mem slots 1 & 2
         if (customText.Contains(ProcessingCommands.Replace.Name))
@@ -52,20 +87,6 @@ public class ProcessText(MainForm parent)
         // output counter number
         customText = customText.Replace(ProcessingCommands.Number.Name, mainForm.NumberSpinner.ToString().PadLeft(padNumber, '0'));
 
-        // output counter number, then increment it
-        if (customText.Contains(ProcessingCommands.Increment.Name))
-        {
-            customText = customText.Replace(ProcessingCommands.Increment.Name, mainForm.NumberSpinner.ToString().PadLeft(padNumber, '0'));
-            mainForm.NumberSpinner++;
-        }
-
-        // output counter number, then decrement it
-        if (customText.Contains(ProcessingCommands.Decrement.Name))
-        {
-            customText = customText.Replace(ProcessingCommands.Decrement.Name, mainForm.NumberSpinner.ToString().PadLeft(padNumber, '0'));
-            mainForm.NumberSpinner--;
-        }
-
         // Excel double quote fix
         if (customText.Contains(ProcessingCommands.ExcelQuotes.Name))
         {
@@ -79,7 +100,21 @@ public class ProcessText(MainForm parent)
         // split lines in main textbox, output lines by counter number
         if (customText.Contains(ProcessingCommands.List.Name))
         {
-            customText = ListSplit(customText);
+            customText = ListSplit(customText, recursionDepth);
+        }
+
+        // split lines in slot 1-3 for use in processing text from other slot or text library. Processes line contents wit no clipboard output.
+        if (customText.Contains(ProcessingCommands.ListLines1.Name))
+        {
+            customText = customText.Replace(ProcessingCommands.ListLines1.Name, ListLineFromSlot(1, recursionDepth));
+        }
+        if (customText.Contains(ProcessingCommands.ListLines2.Name))
+        {
+            customText = customText.Replace(ProcessingCommands.ListLines2.Name, ListLineFromSlot(2, recursionDepth));
+        }
+        if (customText.Contains(ProcessingCommands.ListLines3.Name))
+        {
+            customText = customText.Replace(ProcessingCommands.ListLines3.Name, ListLineFromSlot(3, recursionDepth));
         }
 
         //"$prompt Popup prompt to fill in a value\n" + // testing if the control can revert back to the active application
@@ -145,6 +180,9 @@ public class ProcessText(MainForm parent)
             richText = null;
         }
 
+        // update the number spinner after all text processing is done
+        mainForm.NumberSpinner += modifyNumberSpinnerValue;
+
         //Debug.WriteLine("ProcessTextVariables send result");
 
         if (plainText.Length < 1)
@@ -165,38 +203,7 @@ public class ProcessText(MainForm parent)
         clip = clip.Replace(mainForm.MemorySlot(1).Text, mainForm.MemorySlot(2).Text);
     }
 
-    private string ListSplit(string customText)
-    {
-        string[] values = customText.Split(Environment.NewLine, StringSplitOptions.None);
 
-        if (mainForm.NumberSpinner < 1) mainForm.NumberSpinner = 1; // skip the first line with the $list
-
-        int num = mainForm.NumberSpinner;
-        if (num >= values.Length)
-        {
-            return string.Empty;
-        }
-
-        string currentline = values[num];
-
-        if (values.Length > 0)
-        {
-            if (currentline.Contains(ProcessingCommands.List.Name)) //skip this line
-            {
-                mainForm.NumberSpinner++;
-                return string.Empty;
-            }
-            Dbg.WriteWithCaller("Process text");
-            customText = ProcessTextVariables(currentline, false).PlainText;
-        }
-        else
-        {
-            customText = string.Empty;
-        }
-
-        mainForm.NumberSpinner++;
-        return customText;
-    }
 
     private string SeparatorList(string customText, int slot = 1)
     {
@@ -230,5 +237,75 @@ public class ProcessText(MainForm parent)
         }
         mainForm.NumberSpinner++;
         return customText;
+    }
+
+    private string ListLineFromSlot(int slotNumber, int recursionDepth)
+    {
+        string[] values = mainForm.MemorySlot(slotNumber).Text.Split(Environment.NewLine, StringSplitOptions.None);
+        return GetSplitLines(recursionDepth, values);
+    }
+
+    private string ListSplit(string customText, int recursionDepth)
+    {
+        string[] values = customText.Split(Environment.NewLine, StringSplitOptions.None);
+
+        //if (mainForm.NumberSpinner < 1) mainForm.NumberSpinner = 1; // skip the first line with the $list
+
+        //int num = mainForm.NumberSpinner;
+        //if (num >= values.Length)
+        //{
+        //    return string.Empty;
+        //}
+
+        //string currentline = values[num];
+
+        //if (values.Length > 0)
+        //{
+        //    if (currentline.Contains(ProcessingCommands.List.Name)) //skip this line
+        //    {
+        //        mainForm.NumberSpinner++;
+        //        return string.Empty;
+        //    }
+        //    Dbg.WriteWithCaller("Process text");
+        //    customText = ProcessTextVariables(currentline, recursionDepth, false).PlainText;
+        //}
+        //else
+        //{
+        //    customText = string.Empty;
+        //}
+        string result = GetSplitLines(recursionDepth, values);
+        mainForm.NumberSpinner++;
+        return result;
+    }
+
+    private string GetSplitLines(int recursionDepth, string[] values)
+    {
+        string result = "";
+        if (mainForm.NumberSpinner < 1) mainForm.NumberSpinner = 1; // skip the first line with the $list
+
+        int num = mainForm.NumberSpinner-1;
+        if (num >= values.Length)
+        {
+            return string.Empty;
+        }
+
+        string currentline = values[num];
+
+        if (values.Length > 0)
+        {
+            if (currentline.Contains(ProcessingCommands.List.Name)) //skip this line
+            {
+                mainForm.NumberSpinner++;
+                return string.Empty;
+            }
+            Dbg.WriteWithCaller("Process text");
+            result = ProcessTextVariables(currentline, recursionDepth, false).PlainText;
+        }
+        else
+        {
+            result = string.Empty;
+        }
+
+        return result;
     }
 }
