@@ -119,7 +119,7 @@ public partial class MainForm : Form
         }
     }
 
-    public void ShowChangeLog(string heading = "Clipboard Tool change log")
+    public void ShowChangeLog(string heading = "Clipboard Tool changelog")
     {
         string changes = "Could not load change log file, click the link to view the online version";
         string changelogURL = "https://github.com/snjo/ClipboardTool/blob/master/changelog.md";

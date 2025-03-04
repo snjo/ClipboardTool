@@ -49,6 +49,10 @@ Changes to improve number control and List from Slot ($lln) commands
 
 Only $number outputs the number spinner value, the others are silent
 
+### Other changes
+- Changelog is now shown after an application update
+- Changelog can be opened from the Options menu
+
 ## v1.9
 
 - Added Autorun option to start application when starting Windows
