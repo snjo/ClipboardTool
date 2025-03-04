@@ -262,19 +262,7 @@ public partial class TextLibrary : Form
             clipboardtext = Clipboard.GetText();
         }
 
-        string title;
-
         Debug.WriteLine($"Adding new from clipboard");
-
-        //List<PromptTextBoxConfig> promptConfig = [];
-        //promptConfig.Add(new PromptTextBoxConfig(1, "Title", "", TextPrompt.IllegalFileCharacters));
-        //promptConfig.Add(new PromptTextBoxConfig(5, "Contents", clipboardtext, null));
-
-        //TextPrompt textPrompt = new(promptConfig, "Add new from clipboard", "Set title and click OK to pin entry." + Environment.NewLine + "Cancel adds entry but does not pin.")
-        //{
-        //    ShowColorPicker = true,
-
-        //};
 
         TextPrompt textPrompt = UpdateTextEntryPrompt("Add new from clipboard", 
             "Set title and click OK to save entry.", 
@@ -283,21 +271,19 @@ public partial class TextLibrary : Form
         DialogResult promptResult = textPrompt.ShowDialog();
         if (promptResult == DialogResult.OK)
         {
-            title = textPrompt.TextResult.First();
+            if (textPrompt.TextResult.Count < 2)
+            {
+                Dbg.WriteWithCaller($"textPrompt TextResult length too short {textPrompt.TextResult.Count}");
+                return;
+            }
+            string title = textPrompt.TextResult[0];
+            string content = textPrompt.TextResult[1];
             Color color = textPrompt.ColorPicked;
 
-            bool saveSuccessful = false;
-            if (clipboardtext.Length > 0)
-            {
-                saveSuccessful = SaveEntry(textPrompt.TextResult.First(), clipboardtext, color);
-            }
-            int row = gridTextLibrary.Rows.Add(saveSuccessful, title, clipboardtext);
+            bool saveSuccessful = SaveEntry(title, content, color);
+            int row = gridTextLibrary.Rows.Add(saveSuccessful, title, content);
             SetEntryColor(row, color);
         }
-        //else
-        //{
-        //    gridTextLibrary.Rows.Add(false, "", clipboardtext);
-        //}
     }
 
 
