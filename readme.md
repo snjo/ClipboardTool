@@ -104,20 +104,22 @@ Fill slots 1-3 with individual lists of values and reference one or multiple of 
 Make sure to increment the number each time you process the text using $postinc (Increment the spinner number at the end)
 Values in the lists will also be processed if any commands are present.
 	
-	PROCESS SLOT: ID: $number Name: $lln1, team: $lln2 $postinc
-	MEMORY SLOT 1: Joe
-	               Mary
-				   Frank
-				   Sarah
-	MEMORY SLOT 1: Blue
-	               Red
-				   Green
-				   Blue
+	PROCESS SLOT:    ID: $number Name: $lln1, team: $lln2 $postinc
+ 
+	MEMORY SLOT 1:   Joe
+	                 Mary
+	                 Frank
+	                 Sarah
+		  
+	MEMORY SLOT 1:   Blue
+	                 Red
+	                 Green
+	                 Blue
 
-	OUTPUT: ID: 1, Name: Joe, team: Blue
-	        ID: 2, Name: Mary, team Red
-			ID: 3, Name: Frank, team Green
-			ID: 4, Name: Sarah, team Blue
+	OUTPUT:          ID: 1, Name: Joe, team: Blue
+	                 ID: 2, Name: Mary, team Red
+	                 ID: 3, Name: Frank, team Green
+	                 ID: 4, Name: Sarah, team Blue
 
 -----------------------------------------
 
