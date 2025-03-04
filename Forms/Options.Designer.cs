@@ -64,6 +64,7 @@
             label4 = new Label();
             tabControl1 = new TabControl();
             tabPageGeneral = new TabPage();
+            optionAutoStart = new CheckBox();
             checkBoxMathWarning = new CheckBox();
             label9 = new Label();
             label8 = new Label();
@@ -84,7 +85,7 @@
             buttonRTFDefaultColors = new Button();
             label5 = new Label();
             textBoxRTFfonts = new TextBox();
-            optionAutoStart = new CheckBox();
+            buttonChangeLog = new Button();
             ((System.ComponentModel.ISupportInitialize)HotkeyGrid).BeginInit();
             tabControl1.SuspendLayout();
             tabPageGeneral.SuspendLayout();
@@ -415,6 +416,7 @@
             // 
             // tabPageGeneral
             // 
+            tabPageGeneral.Controls.Add(buttonChangeLog);
             tabPageGeneral.Controls.Add(optionAutoStart);
             tabPageGeneral.Controls.Add(checkBoxMathWarning);
             tabPageGeneral.Controls.Add(label9);
@@ -436,6 +438,16 @@
             tabPageGeneral.TabIndex = 0;
             tabPageGeneral.Text = "General";
             tabPageGeneral.UseVisualStyleBackColor = true;
+            // 
+            // optionAutoStart
+            // 
+            optionAutoStart.AutoSize = true;
+            optionAutoStart.Location = new Point(26, 32);
+            optionAutoStart.Name = "optionAutoStart";
+            optionAutoStart.Size = new Size(253, 19);
+            optionAutoStart.TabIndex = 67;
+            optionAutoStart.Text = "Automatically start when starting Windows";
+            optionAutoStart.UseVisualStyleBackColor = true;
             // 
             // checkBoxMathWarning
             // 
@@ -656,15 +668,15 @@
             textBoxRTFfonts.Size = new Size(417, 85);
             textBoxRTFfonts.TabIndex = 65;
             // 
-            // optionAutoStart
+            // buttonChangeLog
             // 
-            optionAutoStart.AutoSize = true;
-            optionAutoStart.Location = new Point(26, 32);
-            optionAutoStart.Name = "optionAutoStart";
-            optionAutoStart.Size = new Size(253, 19);
-            optionAutoStart.TabIndex = 67;
-            optionAutoStart.Text = "Automatically start when starting Windows";
-            optionAutoStart.UseVisualStyleBackColor = true;
+            buttonChangeLog.Location = new Point(21, 413);
+            buttonChangeLog.Name = "buttonChangeLog";
+            buttonChangeLog.Size = new Size(123, 23);
+            buttonChangeLog.TabIndex = 68;
+            buttonChangeLog.Text = "Open Changelog";
+            buttonChangeLog.UseVisualStyleBackColor = true;
+            buttonChangeLog.Click += ButtonChangeLog_Click;
             // 
             // Options
             // 
@@ -753,5 +765,6 @@
         private Label label13;
         private Button button1;
         private CheckBox optionAutoStart;
+        private Button buttonChangeLog;
     }
 }

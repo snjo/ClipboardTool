@@ -303,4 +303,9 @@ public partial class Options : Form
             return "Narrow Non-breaking Space";
         return c.ToString();
     }
+
+    private void ButtonChangeLog_Click(object sender, EventArgs e)
+    {
+        mainForm.ShowChangeLog();
+    }
 }

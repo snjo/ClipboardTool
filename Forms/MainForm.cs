@@ -70,7 +70,7 @@ public partial class MainForm : Form
         iconUpper = notifyIconUpper?.Icon;
         iconLower = notifyIconLower?.Icon;
         iconNormal = systrayIcon?.Icon;
-        helpForm.SetText(ProcessingCommands.GetListAsText());
+        helpForm.SetText("Text processing commands", ProcessingCommands.GetListAsText());
         HotkeyList = HotkeyTools.LoadHotkeys(HotkeyList, HotkeyNames, this);
         if (settings.RegisterHotkeys) // optional
         {
@@ -79,18 +79,18 @@ public partial class MainForm : Form
         UpdateCapsLock(forceUpdate: true);
         Autorun.Autorun.UpdatePathIfEnabled(ApplicationName);
 
-        ShowChangelog(showEvenIfOld: false);
+        ShowChangelogIfUpdated(showEvenIfOld: false);
     }
 
-    private void ShowChangelog(bool showEvenIfOld)
+    private void ShowChangelogIfUpdated(bool showEvenIfOld)
     {
         string version = Application.ProductVersion;
         bool newer = false;
         (int oldMajor, int oldMinor, int oldBuild) = versionTextToNumbers(Settings.Default.LastVersionNumber);
-        Dbg.WriteLine($"Version text: {version}");
-        Dbg.WriteLine($"Version: Major: {oldMajor}, Minor: {oldMinor}, Build: {oldBuild}");
+        Dbg.WriteLine($"Application Version text: {version}");
+        Dbg.WriteLine($"Old Version: Major: {oldMajor}, Minor: {oldMinor}, Build: {oldBuild}");
         (int major, int minor, int build) = versionTextToNumbers(version);
-        Dbg.WriteLine($"Version: Major: {major}, Minor: {minor}, Build: {build}");
+        Dbg.WriteLine($"New Version: Major: {major}, Minor: {minor}, Build: {build}");
 
         if (major > oldMajor)
         {
@@ -108,12 +108,39 @@ public partial class MainForm : Form
         }
         if (newer || showEvenIfOld)
         {
-
-
-            //MessageBox.Show($"Clipboard Tool has been updated.\n\n Changelog:\n{changes}");
-            ShowChangeLog();
+            Dbg.WriteLine("Showing change log");
+            ShowChangeLog("Clipboard Tool has been updated");
             Settings.Default.LastVersionNumber = version;
             Settings.Default.Save();
+        }
+        else
+        {
+            Dbg.WriteLine("Not showing changelog, Major.Minor version is the same, disregarding Build.");
+        }
+    }
+
+    public void ShowChangeLog(string heading = "Clipboard Tool change log")
+    {
+        string changes = "Could not load change log file, click the link to view the online version";
+        string changelogURL = "https://github.com/snjo/ClipboardTool/blob/master/changelog.md";
+        if (File.Exists("changelog.md"))
+        {
+            changes = File.ReadAllText("changelog.md");
+        }
+        if (changeLogForm == null || changeLogForm.IsDisposed)
+        {
+            changeLogForm = new HelpForm();
+        }
+
+        if (changes != "")
+        {
+            changeLogForm.SetTitle("Changelog");
+            changeLogForm.SetText(heading, changelogURL + "\n\n" + changes);
+            changeLogForm.Show();
+        }
+        else
+        {
+            Dbg.WriteLine("Couldn't load changelog, not showing form");
         }
     }
 
@@ -392,31 +419,8 @@ public partial class MainForm : Form
             helpForm = new HelpForm();
         }
 
-        helpForm.SetText(ProcessingCommands.GetListAsText());
+        helpForm.SetText("Text processing commands", ProcessingCommands.GetListAsText());
         helpForm.Show();
-    }
-
-    private void ShowChangeLog()
-    {
-        string changes = "";
-        if (File.Exists("changelog.md"))
-        {
-            changes = File.ReadAllText("changelog.md");
-        }
-        if (changeLogForm == null || changeLogForm.IsDisposed)
-        {
-            changeLogForm = new HelpForm();
-        }
-
-        if (changes != "")
-        {
-            changeLogForm.SetText("ClipboardTool has been updated\nhttps://github.com/snjo/ClipboardTool/blob/master/changelog.md\n\n" + changes);
-            changeLogForm.Show();
-        }
-        else
-        {
-            Dbg.WriteLine("Couldn't load changelog, not showing form");
-        }
     }
 
     private void ActionSaveCustomText(object sender, EventArgs e)

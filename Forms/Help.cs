@@ -20,17 +20,23 @@ public partial class HelpForm : Form
         Hide();
     }
 
-    public void SetText(string text)
+    public void SetText(string heading, string text)
     {
         richTextBox1.Text = "";
         if (OperatingSystem.IsWindows())
             richTextBox1.SelectionFont = new Font(richTextBox1.Font, FontStyle.Bold);
-        richTextBox1.AppendText("Text processing commands\n\n");
+        //richTextBox1.AppendText("Text processing commands\n\n");
+        richTextBox1.AppendText(heading + "\n\n");
         if (OperatingSystem.IsWindows())
             richTextBox1.SelectionFont = new Font(richTextBox1.Font, FontStyle.Regular);
 
         richTextBox1.AppendText(text);
 
+    }
+
+    public void SetTitle(string text)
+    {
+        this.Text = text;
     }
 
     private void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

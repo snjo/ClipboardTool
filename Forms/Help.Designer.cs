@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HelpForm));
             button1 = new Button();
             richTextBox1 = new RichTextBox();
             linkLabel1 = new LinkLabel();
@@ -76,6 +77,7 @@
             Controls.Add(linkLabel1);
             Controls.Add(richTextBox1);
             Controls.Add(button1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "HelpForm";
             Text = "Help";
             Load += Help_Load;
