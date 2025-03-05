@@ -90,9 +90,16 @@ See the Text Library Window section below for more details
 | $DTW      | Translates digits in curly braces to numeral words. ex: $DTW{12} = twelve |
 | $DTU      | Flag: output from DTW is all upper case                                   |
 
+
+
+### How commands are processed
+
+The commands are processed in a specific order, with some command types firing before others. They are mostly not processed in the order they are placed in the text.
+
 #### Flags
 
-Commands marked as Flag do not output text directly, but alters the rest of the text or commands in some way.
+Commands marked as Flag do not output text directly, but alters the rest of the text or commands in some way.  
+Flag commands are only interpreted once, so for instance multiple Number Increments will only fire once.
 
 ### Using multiple lists from slots at once
 

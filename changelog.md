@@ -13,7 +13,7 @@ These are being changed to avoid name collision with other commands, and improve
 - New commands: $lln1 $lln2 $lln3
 These allow referencing lists of values from multiple slots when processing text from the Processing slot or Text Library.
 
-Fill slots 1-3 with individual lists of values and reference one or multiple of them in another text like this.
+Fill slots 1-3 with individual lists of values and reference one or multiple of them in another text.
 Make sure to increment the number each time you process the text using $postinc (Increment the spinner number at the end)
 Values in the lists will also be processed if any commands are present.
 	
