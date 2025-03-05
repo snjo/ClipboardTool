@@ -19,20 +19,20 @@ Values in the lists will also be processed if any commands are present.
 	
 	Example:
 	
-	PROCESS SLOT: ID: $number Name: $lln1, team: $lln2 $postinc
-	MEMORY SLOT 1: Joe
-	               Mary
-	               Frank
-	               Sarah
-	MEMORY SLOT 1: Blue
-	               Red
-	               Green
-	               Blue
+	PROCESS SLOT:   ID: $number Name: $lln1, team: $lln2 $postinc
+	MEMORY SLOT 1:  Joe
+	                Mary
+	                Frank
+	                Sarah
+	MEMORY SLOT 1:  Blue
+	                Red
+	                Green
+	                Blue
 
-	OUTPUT: ID: 1, Name: Joe, team: Blue
-	        ID: 2, Name: Mary, team Red
-	        ID: 3, Name: Frank, team Green
-	        ID: 4, Name: Sarah, team Blue
+	OUTPUT:         ID: 1, Name: Joe, team: Blue
+	                ID: 2, Name: Mary, team Red
+	                ID: 3, Name: Frank, team Green
+	                ID: 4, Name: Sarah, team Blue
 
 
 
