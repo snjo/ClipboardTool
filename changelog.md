@@ -24,7 +24,7 @@ Values in the lists will also be processed if any commands are present.
 	                Mary
 	                Frank
 	                Sarah
-	MEMORY SLOT 1:  Blue
+	MEMORY SLOT 2:  Blue
 	                Red
 	                Green
 	                Blue
