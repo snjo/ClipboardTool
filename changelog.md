@@ -41,7 +41,7 @@ Values in the lists will also be processed if any commands are present.
 Changes to improve number control and List from Slot ($lln) commands
 
 
-- $ i, $ +, $ - function names removed 
+- $i, $ +, $ - function names removed 
 - $number replaces $i, Outputs the number.
 - $postinc increments the number spinner after processing
 - $postdec decrements the number spinner after processing
