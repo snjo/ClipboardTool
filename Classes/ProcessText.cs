@@ -256,6 +256,13 @@ public class ProcessText(MainForm parent)
     {
         recursionDepth++;
         string[] values = customText.Split(Environment.NewLine, StringSplitOptions.None);
+        Debug.WriteLine($"First entry of split lines{values[0]}");
+
+        if (mainForm.NumberSpinner < 2)
+        {
+            Debug.WriteLine($"First line is just the $list command, incrementing to 2");
+            mainForm.NumberSpinner = 2;
+        }
         string result = GetSplitLines(recursionDepth, values);
         mainForm.NumberSpinner++;
         return result;
@@ -264,7 +271,7 @@ public class ProcessText(MainForm parent)
     private string GetSplitLines(int recursionDepth, string[] values)
     {
         string result = "";
-        if (mainForm.NumberSpinner < 1) mainForm.NumberSpinner = 1; // skip the first line with the $list
+        if (mainForm.NumberSpinner < 1) mainForm.NumberSpinner = 1; // start at first position if 0. $list has its own check to ensure starting at 2
 
         int num = mainForm.NumberSpinner-1;
         if (num >= values.Length)
