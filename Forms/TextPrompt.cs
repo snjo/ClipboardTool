@@ -1,6 +1,5 @@
 ﻿using ClipboardTool.Classes;
 using ClipboardTool.Forms;
-using Microsoft.VisualBasic.Devices;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
@@ -15,7 +14,7 @@ public partial class TextPrompt : Form
     public static readonly string[] IllegalFileCharacters = ["\\", "/", ":", "*", "?", "<", ">", "|"];
 
     public List<string> TextResult = [];
-    List<TextBox> textBoxes = [];
+    private readonly List<TextBox> textBoxes = [];
     public Color ColorPicked = Color.White;
 
     public int AmountOfTextPrompts = 1;
@@ -173,13 +172,11 @@ public partial class TextPrompt : Form
     {
         if (e.KeyCode == Keys.Enter)
         {
-            Debug.WriteLine($"Enter pressed, confirm dialog?");
             bool forceConfirm = false;
             if (e.Modifiers == Keys.Control)
             {
                 forceConfirm = true;
             }
-            Debug.WriteLine($"Enter pressed, confirm dialog? force confirm: {forceConfirm}");
             HandleEnterKeyPress(e, forceConfirm);
         }
 
@@ -203,7 +200,7 @@ public partial class TextPrompt : Form
 
         if (EnterConfirmsDialog)
         {
-            e.Handled = true; // stops ding sound
+            e.Handled = true; // stops ding sound when pressing enter in a single line text box. Allow dings if EnterConfirmsDialog is false.
         }
     }
 

@@ -204,7 +204,7 @@ public class ProcessText(MainForm parent)
         }
         else
         {
-            mainForm.Main.SetClipBoard(plainText, richText, forceClipboardUpdate, "Process Text");
+            mainForm.Main.SetClipBoard(plainText, richText, forceClipboardUpdate);
             return (PlainText: plainText, RichText: richText);
         }
     }
@@ -278,10 +278,10 @@ public class ProcessText(MainForm parent)
 
     private string GetSplitLines(int recursionDepth, string[] values)
     {
-        string result = "";
+        string result;
         if (mainForm.NumberSpinner < 1) mainForm.NumberSpinner = 1; // start at first position if 0. $list has its own check to ensure starting at 2
 
-        int num = mainForm.NumberSpinner-1;
+        int num = mainForm.NumberSpinner - 1;
         if (num >= values.Length)
         {
             return string.Empty;

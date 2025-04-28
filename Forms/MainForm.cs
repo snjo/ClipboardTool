@@ -2,13 +2,10 @@
 using ClipboardTool.Properties;
 using DebugTools;
 using Hotkeys;
-using System.CodeDom.Compiler;
 using System.Globalization;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using System.Threading.Channels;
 using TextBox = System.Windows.Forms.TextBox;
 
 [assembly: AssemblyVersion("1.10.*")]
@@ -86,10 +83,10 @@ public partial class MainForm : Form
     {
         string version = Application.ProductVersion;
         bool newer = false;
-        (int oldMajor, int oldMinor, int oldBuild) = versionTextToNumbers(Settings.Default.LastVersionNumber);
+        (int oldMajor, int oldMinor, int oldBuild) = VersionTextToNumbers(Settings.Default.LastVersionNumber);
         Dbg.WriteLine($"Application Version text: {version}");
         Dbg.WriteLine($"Old Version: Major: {oldMajor}, Minor: {oldMinor}, Build: {oldBuild}");
-        (int major, int minor, int build) = versionTextToNumbers(version);
+        (int major, int minor, int build) = VersionTextToNumbers(version);
         Dbg.WriteLine($"New Version: Major: {major}, Minor: {minor}, Build: {build}");
 
         if (major > oldMajor)
@@ -144,7 +141,7 @@ public partial class MainForm : Form
         }
     }
 
-    private (int,int,int) versionTextToNumbers(string versionText)
+    private static (int, int, int) VersionTextToNumbers(string versionText)
     {
         int major = 0;
         int minor = 0;
@@ -152,15 +149,15 @@ public partial class MainForm : Form
         string[] split = versionText.Split('.');
         if (split.Length > 0)
         {
-            int.TryParse(split[0], out major);
+            _ = int.TryParse(split[0], out major); // _ discards, clears code suggestion.
         }
         if (split.Length > 1)
         {
-            int.TryParse(split[1], out minor);
+            _ = int.TryParse(split[1], out minor);
         }
         if (split.Length > 2)
         {
-            int.TryParse(split[2], out build);
+            _ = int.TryParse(split[2], out build);
         }
         return (major, minor, build);
     }

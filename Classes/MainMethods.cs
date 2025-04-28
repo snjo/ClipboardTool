@@ -195,7 +195,7 @@ public partial class MainMethods
                 hotkeyHeldDown = true;
                 SendCut();
                 string t = LowerCaseOnce();
-                SetClipBoard(t, null, settings.sendPaste, "Hotkey PlainText");
+                SetClipBoard(t, null, settings.sendPaste);
                 SendPaste(t, "Hotkey LowerCase");
             }
         }
@@ -207,7 +207,7 @@ public partial class MainMethods
                 hotkeyHeldDown = true;
                 SendCut();
                 string t = UpperCaseOnce();
-                SetClipBoard(t, null, settings.sendPaste, "Hotkey PlainText");
+                SetClipBoard(t, null, settings.sendPaste);
                 SendPaste(t, "Hotkey UpperCase");
             }
         }
@@ -224,7 +224,7 @@ public partial class MainMethods
                 hotkeyHeldDown = true;
                 SendCut();
                 string t = PlainTextOnce();
-                SetClipBoard(t, null, settings.sendPaste, "Hotkey PlainText");
+                SetClipBoard(t, null, settings.sendPaste);
                 SendPaste(t, "Hotkey PlainText");
             }
         }
@@ -369,7 +369,7 @@ public partial class MainMethods
     public string PlainTextOnce(bool forceClipboardUpdate = false)
     {
         string result = Clipboard.GetText(TextDataFormat.Text);
-        SetClipBoard(result, null, forceClipboardUpdate, "PlainTextOnce");
+        SetClipBoard(result, null, forceClipboardUpdate);
         return result;
         //setClipBoard(clipBoardText);
     }
@@ -379,7 +379,7 @@ public partial class MainMethods
         if (Clipboard.ContainsText())
         {
             string result = Clipboard.GetText(TextDataFormat.Text).ToUpper();
-            SetClipBoard(result, null, forceClipboardUpdate, "UpperCaseOnce");
+            SetClipBoard(result, null, forceClipboardUpdate);
             return result;
         }
         else return string.Empty;
@@ -390,7 +390,7 @@ public partial class MainMethods
         if (Clipboard.ContainsText())
         {
             string result = Clipboard.GetText(TextDataFormat.Text).ToLower();
-            SetClipBoard(result, null, forceClipboardUpdate, "LowerCaseOnce");
+            SetClipBoard(result, null, forceClipboardUpdate);
             return result;
 
         }
@@ -430,7 +430,7 @@ public partial class MainMethods
 
     // CLIPBOARD
 
-    public void SetClipBoard(string plainText, string? richText = "", bool forceClipboardUpdate = false, string source = "unknown")//, TextDataFormat dataFormat = TextDataFormat.Text)
+    public void SetClipBoard(string plainText, string? richText = "", bool forceClipboardUpdate = false)//, TextDataFormat dataFormat = TextDataFormat.Text)
     {
         if ((!settings.updateClipboard && settings.sendType) && !forceClipboardUpdate)
         {

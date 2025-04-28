@@ -4,7 +4,6 @@ using ClipboardTool.Properties;
 using DebugTools;
 using System.Diagnostics;
 using System.Runtime.Versioning;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace ClipboardTool;
 [SupportedOSPlatform("windows")]
@@ -241,7 +240,7 @@ public partial class TextLibrary : Form
         promptConfig.Add(new PromptTextBoxConfig(1, "Title", titleText, TextPrompt.IllegalFileCharacters));
         PromptTextBoxConfig contentsCfg = new(10, "Contents", contentsText, null);
         contentsCfg.textbox.ScrollBars = ScrollBars.Vertical;
-        
+
         promptConfig.Add(contentsCfg);
 
         TextPrompt textPrompt = new(promptConfig, dialogHeading, info, color, enterConfirmsDialog: false)
@@ -264,8 +263,8 @@ public partial class TextLibrary : Form
 
         Debug.WriteLine($"Adding new from clipboard");
 
-        TextPrompt textPrompt = UpdateTextEntryPrompt("Add new from clipboard", 
-            "Set title and click OK to save entry.", 
+        TextPrompt textPrompt = UpdateTextEntryPrompt("Add new from clipboard",
+            "Set title and click OK to save entry.",
             "", clipboardtext, Color.White);
 
         DialogResult promptResult = textPrompt.ShowDialog();
@@ -422,7 +421,7 @@ public partial class TextLibrary : Form
                 {
                     title = cells[titleColumnIndex].Value.ToString() + "";
                 }
-                
+
                 if (title.Trim() == "")
                 {
                     title = "entry " + e.RowIndex;
