@@ -125,7 +125,15 @@ public class ProcessText(MainForm parent)
         //"$prompt Popup prompt to fill in a value\n" + // testing if the control can revert back to the active application
         if (customText.Contains(ProcessingCommands.Prompt.Name))
         {
-            customText = PromptForText.Process(customText);
+            (bool confirm, string? promptText) = PromptForText.Process(customText);
+            if (confirm && promptText != null)
+            {
+                customText = promptText;
+            }
+            else
+            {
+                return ("", null);
+            }
         }
 
         // Convert characters in clipboard string to numbers for debugging text

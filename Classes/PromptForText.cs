@@ -10,16 +10,16 @@ namespace ClipboardTool.Classes;
 
 public static class PromptForText
 {
-    public static string Process(string text)
+    public static (bool confirmedDialog, string? textResult) Process(string text)
     {
         List<int> foundTags = text.IndexOfAll(ProcessingCommands.Prompt.Name);
         Debug.WriteLine($"foundTags {foundTags.Count}");
 
-        List<string> promptResults = TextPrompt.PromptMultiple(foundTags.Count);
+        List<string>? promptResults = TextPrompt.PromptMultiple(foundTags.Count);
 
-        if (promptResults.Count == 0)
+        if (promptResults == null || promptResults.Count == 0)
         {
-            return text.Replace(ProcessingCommands.Prompt.Name, "");
+            return (false, text.Replace(ProcessingCommands.Prompt.Name, ""));
         }
 
         StringBuilder sb = new();
@@ -33,6 +33,6 @@ public static class PromptForText
             lastTagLoc = foundTags[i];
         }
         sb.Insert(0, text[0..lastTagLoc]);
-        return sb.ToString();
+        return (true, sb.ToString());
     }
 }

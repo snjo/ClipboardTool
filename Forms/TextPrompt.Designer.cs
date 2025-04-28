@@ -96,7 +96,7 @@
             Name = "TextPrompt";
             Text = "Text Prompt";
             Load += TextPrompt_Load;
-            KeyPress += Form_KeyPress;
+            KeyDown += Form_KeyDown;
             ResumeLayout(false);
             PerformLayout();
         }

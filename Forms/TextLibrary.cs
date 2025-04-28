@@ -244,7 +244,7 @@ public partial class TextLibrary : Form
         
         promptConfig.Add(contentsCfg);
 
-        TextPrompt textPrompt = new(promptConfig, dialogHeading, info, color)
+        TextPrompt textPrompt = new(promptConfig, dialogHeading, info, color, enterConfirmsDialog: false)
         {
             ShowColorPicker = true,
         };

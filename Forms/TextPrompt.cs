@@ -1,5 +1,6 @@
 ﻿using ClipboardTool.Classes;
 using ClipboardTool.Forms;
+using Microsoft.VisualBasic.Devices;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
@@ -22,6 +23,7 @@ public partial class TextPrompt : Form
     public string InfoText;
     public bool ShowColorPicker;
     public string[] PromptHeadings = [];
+    public bool EnterConfirmsDialog = true;
     public int DialogWidth = 350;
     public List<PromptTextBoxConfig> textPromptConfigs = [];
 
@@ -32,7 +34,7 @@ public partial class TextPrompt : Form
     /// <param name="configs">A list of 1-n text input fields</param>
     /// <param name="title">The form titlebar text</param>
     /// <param name="info">Text at the beginning of the form with instructions</param>
-    public TextPrompt(List<PromptTextBoxConfig> configs, string title, string info, Color color)
+    public TextPrompt(List<PromptTextBoxConfig> configs, string title, string info, Color color, bool enterConfirmsDialog)
     {
         Debug.WriteLine($"Adding TextPrompt with list of configs");
         InitializeComponent();
@@ -49,6 +51,11 @@ public partial class TextPrompt : Form
             Controls.Add(cfg.textbox);
             textBoxes.Add(cfg.textbox);
             cfg.textbox.TextChanged += TextBox_TextChanged;
+            if (cfg.Multiline)
+            {
+                // if Enter confirms, multiline entry can't happen, therefore disabling it regardless of the argument.
+                enterConfirmsDialog = false;
+            }
         }
 
         buttonColorPicker.BackColor = color;
@@ -57,6 +64,7 @@ public partial class TextPrompt : Form
 
         UpdateControls();
         Debug.WriteLine($"show color picker: {ShowColorPicker}");
+        EnterConfirmsDialog = enterConfirmsDialog;
     }
 
     public void UpdateControls()
@@ -96,19 +104,20 @@ public partial class TextPrompt : Form
     public static string? Prompt(string title = "Input text", string info = "", bool showColorPicker = false, string[]? illegalCharacters = null)
     {
         Debug.WriteLine($"Spawning prompt");
-        List<string> result = PromptMultiple(1, title, info, showColorPicker, illegalCharacters);
+        List<string>? result = PromptMultiple(1, title, info, showColorPicker, illegalCharacters);
+        if (result == null) return null;
         if (result.Count < 1) return null;
         return result.First();
     }
 
-    public static List<string> PromptMultiple(int amount = 2, string title = "Input text", string info = "", bool showColorPicker = false, string[]? illegalCharacters = null)
+    public static List<string>? PromptMultiple(int amount = 2, string title = "Input text", string info = "", bool showColorPicker = false, string[]? illegalCharacters = null, bool enterConfirmsDialog = true)
     {
         List<PromptTextBoxConfig> promptconfigs = [];
         for (int i = 0; i < amount; i++)
         {
             promptconfigs.Add(new PromptTextBoxConfig(1, $"Input {i}:", "", illegalCharacters));
         }
-        TextPrompt textPrompt = new(promptconfigs, title, info, Color.White)
+        TextPrompt textPrompt = new(promptconfigs, title, info, Color.White, enterConfirmsDialog)
         {
             ShowColorPicker = showColorPicker
         };
@@ -116,7 +125,7 @@ public partial class TextPrompt : Form
         DialogResult promptResult = textPrompt.ShowDialog();
         if (promptResult == DialogResult.OK)
         {
-            Debug.WriteLine("Prompt result: " + textPrompt.TextResult);
+            Debug.WriteLine("Prompt result: " + textPrompt.TextResult.Count);
             List<string> textResult = textPrompt.TextResult;
             textPrompt.Dispose();
             return textResult;
@@ -125,7 +134,7 @@ public partial class TextPrompt : Form
         {
             Debug.WriteLine("Prompt cancelled, returning null");
             textPrompt.Dispose();
-            return [];
+            return null;
         }
     }
 
@@ -160,27 +169,41 @@ public partial class TextPrompt : Form
         DialogResult = DialogResult.Cancel;
     }
 
-    private void TextBox_KeyPress(object sender, KeyPressEventArgs e)
+    private void Form_KeyDown(object sender, KeyEventArgs e)
     {
-        if (e.KeyChar == (char)Keys.Enter)
+        if (e.KeyCode == Keys.Enter)
         {
-            if (buttonOK.Enabled)
+            Debug.WriteLine($"Enter pressed, confirm dialog?");
+            bool forceConfirm = false;
+            if (e.Modifiers == Keys.Control)
             {
-                AssembleResult();
-                DialogResult = DialogResult.OK;
+                forceConfirm = true;
             }
-            e.Handled = true; // stops ding sound
+            Debug.WriteLine($"Enter pressed, confirm dialog? force confirm: {forceConfirm}");
+            HandleEnterKeyPress(e, forceConfirm);
+        }
+
+        if (e.KeyCode == Keys.Escape)
+        {
+            Debug.WriteLine($"Escape pressed, cancel prompt form");
+            DialogResult = DialogResult.Cancel;
+            e.Handled = true;
         }
     }
 
-    private void Form_KeyPress(object sender, KeyPressEventArgs e)
+    private void HandleEnterKeyPress(KeyEventArgs e, bool forceConfirm)
     {
-        Debug.WriteLine($"Prompt form keypress");
-        if (e.KeyChar == (char)Keys.Escape)
+        // forceConfirm is true if user pressed Control+Enter
+        if ((forceConfirm || EnterConfirmsDialog) && buttonOK.Enabled)
         {
-            Debug.WriteLine($"Cancel prompt form");
-            DialogResult = DialogResult.Cancel;
-            e.Handled = true;
+            Debug.WriteLine($"Enter pressed, confirming dialog");
+            AssembleResult();
+            DialogResult = DialogResult.OK;
+        }
+
+        if (EnterConfirmsDialog)
+        {
+            e.Handled = true; // stops ding sound
         }
     }
 
