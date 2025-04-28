@@ -1,5 +1,16 @@
 ﻿# Changelog
 
+## v1.11 (In progress)
+
+- Confirm multiline text prompts with Control+Enter
+
+### Bugfixes
+
+- Confirm prompts with Enter not working
+- List command did not automatically start at first entry (line 1)
+
+---------
+
 ## v1.10
 
 ### Date and Time command changes
@@ -54,6 +65,8 @@ Only $number outputs the number spinner value, the others are silent
 - Changelog is now shown after an application update
 - Changelog can be opened from the Options menu
 
+---------
+
 ## v1.9
 
 - Added Autorun option to start application when starting Windows
@@ -62,6 +75,8 @@ Only $number outputs the number spinner value, the others are silent
 - Improved Text History, double click Title to edit title and contents in a new window
 - When adding new Text History entries, Cancel no longer adds a new unpinned entry
 - Text History Add button now works with an empty clipboard
+
+---------
 
 ## v1.8
 
@@ -74,15 +89,21 @@ Only $number outputs the number spinner value, the others are silent
 - Math equations in text processing
 - History window renamed to Text Library
 
+---------
+
 ## v1.3
 
 - History Window added. This lets you save text files and quickly load the entries to the clipboard.
 - Added strong naming to the assembly to preserve settings between versions.
 - Added $prompt command for inserting user input into a text
 
+---------
+
 ## v1.2
 
 - Bug fixes
+
+---------
 
 ## v1.1
 
@@ -90,6 +111,8 @@ Only $number outputs the number spinner value, the others are silent
 - Added $rep Replace command
 - Bugfixes
 - Hotkey improvements
+
+---------
 
 ## v1.0
 
