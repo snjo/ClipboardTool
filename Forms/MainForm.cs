@@ -336,7 +336,7 @@ public partial class MainForm : Form
     {
         if (ModifierKeys == Keys.None)
         {
-            Main.DelayKeyStrokes();
+            Main.SendDelayedKeyStrokes();
         }
         //hotkeyHeldDown = false;
     }

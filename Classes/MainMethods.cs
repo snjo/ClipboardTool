@@ -336,6 +336,13 @@ public partial class MainMethods
         mainForm.StartTimerKeystrokes();
     }
 
+    public void SendDelayedKeyStrokes()
+    {
+        mainForm.StopTimerKeystrokes();
+        if (delayedKeystrokes != null)
+            SendKeystrokes(delayedKeystrokes);
+    }
+
     private void SendKeystrokes(string keystrokes)
     {
         switch (keystrokes)
@@ -395,13 +402,6 @@ public partial class MainMethods
 
         }
         else return string.Empty;
-    }
-
-    public void DelayKeyStrokes()
-    {
-        mainForm.StopTimerKeystrokes();
-        if (delayedKeystrokes != null)
-            SendKeystrokes(delayedKeystrokes);
     }
 
     private void SendDate()
