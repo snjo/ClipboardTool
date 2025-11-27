@@ -361,16 +361,39 @@ public partial class MainMethods
                 sendDateChoice = SendDateOption.NotStarted;
                 break;
             default:
+                // fix loose diacritics so the symbol isn't added to the next character
+                // caret / circumflex, handled after SendKeysSafeRegex
+                if (settings.fixDiacriticsInSendKeys)
+                {
+                    keystrokes = fixDiacritic(keystrokes, "~"); // tilde
+                    keystrokes = fixDiacritic(keystrokes, "¨"); // umlaut / diaresis
+                    keystrokes = fixDiacritic(keystrokes, "`"); // grave
+                    keystrokes = fixDiacritic(keystrokes, "´"); // acute
+                }
                 keystrokes = SendKeysSafeRegex().Replace(keystrokes, "{$0}");
+                if (settings.fixDiacriticsInSendKeys)
+                {
+                    // fix ^ being replaced by & on Scandinavian/German keyboards
+                    keystrokes = keystrokes.Replace("{^}", "+(¨) ");
+                }
                 SendKeys.Send(keystrokes);
                 break;
         }
 
-        // warning: ^'s will become &'s on non-US keyboards:
+        // warning: ^'s will become &'s on non-US keyboards unless enabling fixDiacriticsInSendKeys:
         // https://stackoverflow.com/questions/47635218/sending-a-caret-with-system-windows-forms-sendkeys-send-will-send-ampersand
         // use paste method instead of sendkeys if the text includes carets
 
         hotkeyHeldDown = false;
+    }
+
+    private string fixDiacritic(string text, string mark)
+    {
+        if (text.Contains(mark))
+        {
+            text = text.Replace(mark, mark + " ");
+        }
+        return text;
     }
 
     public string PlainTextOnce(bool forceClipboardUpdate = false)

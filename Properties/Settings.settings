@@ -230,5 +230,8 @@
     <Setting Name="LastVersionNumber" Type="System.String" Scope="User">
       <Value Profile="(Default)">none</Value>
     </Setting>
+    <Setting Name="fixDiacriticsInSendKeys" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

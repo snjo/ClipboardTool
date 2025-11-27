@@ -64,6 +64,7 @@
             label4 = new Label();
             tabControl1 = new TabControl();
             tabPageGeneral = new TabPage();
+            buttonChangeLog = new Button();
             optionAutoStart = new CheckBox();
             checkBoxMathWarning = new CheckBox();
             label9 = new Label();
@@ -85,7 +86,8 @@
             buttonRTFDefaultColors = new Button();
             label5 = new Label();
             textBoxRTFfonts = new TextBox();
-            buttonChangeLog = new Button();
+            optionFixDiacriticsInSendKeys = new CheckBox();
+            label14 = new Label();
             ((System.ComponentModel.ISupportInitialize)HotkeyGrid).BeginInit();
             tabControl1.SuspendLayout();
             tabPageGeneral.SuspendLayout();
@@ -416,6 +418,8 @@
             // 
             // tabPageGeneral
             // 
+            tabPageGeneral.Controls.Add(label14);
+            tabPageGeneral.Controls.Add(optionFixDiacriticsInSendKeys);
             tabPageGeneral.Controls.Add(buttonChangeLog);
             tabPageGeneral.Controls.Add(optionAutoStart);
             tabPageGeneral.Controls.Add(checkBoxMathWarning);
@@ -438,6 +442,16 @@
             tabPageGeneral.TabIndex = 0;
             tabPageGeneral.Text = "General";
             tabPageGeneral.UseVisualStyleBackColor = true;
+            // 
+            // buttonChangeLog
+            // 
+            buttonChangeLog.Location = new Point(21, 413);
+            buttonChangeLog.Name = "buttonChangeLog";
+            buttonChangeLog.Size = new Size(123, 23);
+            buttonChangeLog.TabIndex = 68;
+            buttonChangeLog.Text = "Open Changelog";
+            buttonChangeLog.UseVisualStyleBackColor = true;
+            buttonChangeLog.Click += ButtonChangeLog_Click;
             // 
             // optionAutoStart
             // 
@@ -668,15 +682,25 @@
             textBoxRTFfonts.Size = new Size(417, 85);
             textBoxRTFfonts.TabIndex = 65;
             // 
-            // buttonChangeLog
+            // optionFixDiacriticsInSendKeys
             // 
-            buttonChangeLog.Location = new Point(21, 413);
-            buttonChangeLog.Name = "buttonChangeLog";
-            buttonChangeLog.Size = new Size(123, 23);
-            buttonChangeLog.TabIndex = 68;
-            buttonChangeLog.Text = "Open Changelog";
-            buttonChangeLog.UseVisualStyleBackColor = true;
-            buttonChangeLog.Click += ButtonChangeLog_Click;
+            optionFixDiacriticsInSendKeys.AutoSize = true;
+            optionFixDiacriticsInSendKeys.Location = new Point(21, 378);
+            optionFixDiacriticsInSendKeys.Name = "optionFixDiacriticsInSendKeys";
+            optionFixDiacriticsInSendKeys.Size = new Size(361, 19);
+            optionFixDiacriticsInSendKeys.TabIndex = 69;
+            optionFixDiacriticsInSendKeys.Text = "Fix diacritics when using Send Keys (for non-english keyboards)";
+            optionFixDiacriticsInSendKeys.UseVisualStyleBackColor = true;
+            // 
+            // label14
+            // 
+            label14.AutoSize = true;
+            label14.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            label14.Location = new Point(3, 357);
+            label14.Name = "label14";
+            label14.Size = new Size(72, 15);
+            label14.TabIndex = 70;
+            label14.Text = "Localization";
             // 
             // Options
             // 
@@ -766,5 +790,7 @@
         private Button button1;
         private CheckBox optionAutoStart;
         private Button buttonChangeLog;
+        private Label label14;
+        private CheckBox optionFixDiacriticsInSendKeys;
     }
 }

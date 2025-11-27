@@ -43,6 +43,7 @@ public partial class Options : Form
         checkBoxMathWarning.Checked = settings.MathWarning;
         textBoxCulture.Text = settings.Culture;
         optionAutoStart.Checked = Autorun.Autorun.IsEnabled(MainForm.ApplicationName);
+        optionFixDiacriticsInSendKeys.Checked = settings.fixDiacriticsInSendKeys;
 
         FillGrid();
 
@@ -126,7 +127,7 @@ public partial class Options : Form
         settings.RTFallowFontTable = checkBoxRTFfont.Checked;
         settings.MathWarning = checkBoxMathWarning.Checked;
         settings.Culture = textBoxCulture.Text;
-
+        settings.fixDiacriticsInSendKeys = optionFixDiacriticsInSendKeys.Checked;
 
         int i = 0;
         foreach (KeyValuePair<string, Hotkey> kvp in mainForm.HotkeyList)
