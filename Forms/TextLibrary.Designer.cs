@@ -44,14 +44,15 @@
             ((System.ComponentModel.ISupportInitialize)gridTextLibrary).BeginInit();
             SuspendLayout();
             // 
-            // gridHistory
+            // gridTextLibrary
             // 
+            gridTextLibrary.AllowUserToAddRows = false;
             gridTextLibrary.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             gridTextLibrary.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             gridTextLibrary.Columns.AddRange(new DataGridViewColumn[] { ColumnPinned, ColumnTitle, ColumnText, ColumnCopy });
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = SystemColors.Window;
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F);
             dataGridViewCellStyle1.ForeColor = SystemColors.ControlText;
             dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
@@ -59,7 +60,7 @@
             gridTextLibrary.DefaultCellStyle = dataGridViewCellStyle1;
             gridTextLibrary.Location = new Point(4, 32);
             gridTextLibrary.MultiSelect = false;
-            gridTextLibrary.Name = "gridHistory";
+            gridTextLibrary.Name = "gridTextLibrary";
             gridTextLibrary.RowHeadersVisible = false;
             gridTextLibrary.RowHeadersWidth = 20;
             gridTextLibrary.RowTemplate.Height = 50;
@@ -99,7 +100,7 @@
             // buttonAddFromClipboard
             // 
             buttonAddFromClipboard.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            buttonAddFromClipboard.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            buttonAddFromClipboard.Font = new Font("Segoe UI", 9F);
             buttonAddFromClipboard.Location = new Point(477, 4);
             buttonAddFromClipboard.Name = "buttonAddFromClipboard";
             buttonAddFromClipboard.Size = new Size(45, 23);

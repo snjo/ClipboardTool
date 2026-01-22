@@ -236,6 +236,8 @@ public partial class TextLibrary : Form
 
     private static TextPrompt UpdateTextEntryPrompt(string dialogHeading, string info, string titleText, string? contentsText, Color color)
     {
+        Debug.WriteLine($"Found Color {color}");
+        if (color == Color.Empty) color = Color.White;
         List<PromptTextBoxConfig> promptConfig = [];
         promptConfig.Add(new PromptTextBoxConfig(1, "Title", titleText, TextPrompt.IllegalFileCharacters));
         PromptTextBoxConfig contentsCfg = new(10, "Contents", contentsText, null);
@@ -309,9 +311,17 @@ public partial class TextLibrary : Form
 
         if (titleCell.Value != null)
         {
-            string oldTitle = titleCell.Value.ToString() + "";
+            string oldTitle = "";
+            if (titleCell.Value != null)
+            {
+                oldTitle = titleCell.Value.ToString() + "";
+            }
             DataGridViewCell contentCell = gridTextLibrary.Rows[rowIndex].Cells[textColumnIndex];
-            string contents = contentCell.Value.ToString() + "";
+            string contents = "";
+            if (contentCell.Value != null)
+            {
+                contents = contentCell.Value.ToString() + "";
+            }
             TextPrompt textPrompt = UpdateTextEntryPrompt("Edit Text", "Update title and contents", oldTitle, contents, GetRowColor(rowIndex));
             DialogResult promptResult = textPrompt.ShowDialog();
             if (promptResult != DialogResult.OK) return;
