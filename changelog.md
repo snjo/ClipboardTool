@@ -8,7 +8,6 @@
 
 - Confirm prompts with Enter not working
 - List command did not automatically start at first entry (line 1)
-- 
 
 ---------
 
