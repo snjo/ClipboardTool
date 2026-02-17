@@ -2,6 +2,7 @@
 using ClipboardTool.Properties;
 using DebugTools;
 using Hotkeys;
+using Microsoft.VisualBasic.Devices;
 using System.Globalization;
 using System.Reflection;
 using System.Runtime.InteropServices;
@@ -539,5 +540,10 @@ public partial class MainForm : Form
         textTextLibrary.WindowState = FormWindowState.Normal;
         textTextLibrary.BringToFront();
         SetForegroundWindow(textTextLibrary.Handle);
+
+        System.Drawing.Point mousePos = Control.MousePosition;
+        textTextLibrary.Top = mousePos.Y - 10;
+        textTextLibrary.Left = mousePos.X - 150;
+
     }
 }
