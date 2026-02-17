@@ -36,6 +36,7 @@ public partial class Options : Form
         optionUpdateClipboard.Checked = settings.updateClipboard;
         checkBoxHistoryMinimize.Checked = settings.HistoryMinimizeAfterCopy;
         checkBoxTrayCapslock.Checked = settings.TrayIconCapslockStatus;
+        checkBoxTextLibrarySnapToMouse.Checked = settings.TextLibrarySnapToMouse;
         textBoxRTFcolors.Text = settings.RTFcolors;
         textBoxRTFfonts.Text = settings.RTFfonts;
         checkBoxRTFcolor.Checked = settings.RTFallowColorTable;
@@ -44,7 +45,7 @@ public partial class Options : Form
         textBoxCulture.Text = settings.Culture;
         optionAutoStart.Checked = Autorun.Autorun.IsEnabled(MainForm.ApplicationName);
         optionFixDiacriticsInSendKeys.Checked = settings.fixDiacriticsInSendKeys;
-
+        
         FillGrid();
 
         labelVersion.Text = Application.ProductVersion;
@@ -121,6 +122,7 @@ public partial class Options : Form
         settings.updateClipboard = optionUpdateClipboard.Checked;
         settings.HistoryMinimizeAfterCopy = checkBoxHistoryMinimize.Checked;
         settings.TrayIconCapslockStatus = checkBoxTrayCapslock.Checked;
+        settings.TextLibrarySnapToMouse = checkBoxTextLibrarySnapToMouse.Checked;
         settings.RTFcolors = textBoxRTFcolors.Text;
         settings.RTFfonts = textBoxRTFfonts.Text;
         settings.RTFallowColorTable = checkBoxRTFcolor.Checked;

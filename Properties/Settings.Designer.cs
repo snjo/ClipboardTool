@@ -948,5 +948,17 @@ namespace ClipboardTool.Properties {
                 this["fixDiacriticsInSendKeys"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool TextLibrarySnapToMouse {
+            get {
+                return ((bool)(this["TextLibrarySnapToMouse"]));
+            }
+            set {
+                this["TextLibrarySnapToMouse"] = value;
+            }
+        }
     }
 }

@@ -64,6 +64,8 @@
             label4 = new Label();
             tabControl1 = new TabControl();
             tabPageGeneral = new TabPage();
+            label14 = new Label();
+            optionFixDiacriticsInSendKeys = new CheckBox();
             buttonChangeLog = new Button();
             optionAutoStart = new CheckBox();
             checkBoxMathWarning = new CheckBox();
@@ -86,8 +88,7 @@
             buttonRTFDefaultColors = new Button();
             label5 = new Label();
             textBoxRTFfonts = new TextBox();
-            optionFixDiacriticsInSendKeys = new CheckBox();
-            label14 = new Label();
+            checkBoxTextLibrarySnapToMouse = new CheckBox();
             ((System.ComponentModel.ISupportInitialize)HotkeyGrid).BeginInit();
             tabControl1.SuspendLayout();
             tabPageGeneral.SuspendLayout();
@@ -111,7 +112,7 @@
             optionStartToolbar.AutoSize = true;
             optionStartToolbar.Location = new Point(26, 80);
             optionStartToolbar.Name = "optionStartToolbar";
-            optionStartToolbar.Size = new Size(118, 19);
+            optionStartToolbar.Size = new Size(119, 19);
             optionStartToolbar.TabIndex = 1;
             optionStartToolbar.Text = "Start with Toolbar";
             optionStartToolbar.UseVisualStyleBackColor = true;
@@ -129,7 +130,7 @@
             // optionResetCounter
             // 
             optionResetCounter.AutoSize = true;
-            optionResetCounter.Location = new Point(21, 280);
+            optionResetCounter.Location = new Point(21, 303);
             optionResetCounter.Name = "optionResetCounter";
             optionResetCounter.Size = new Size(252, 19);
             optionResetCounter.TabIndex = 3;
@@ -166,7 +167,7 @@
             // buttonSave
             // 
             buttonSave.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            buttonSave.Location = new Point(365, 484);
+            buttonSave.Location = new Point(365, 512);
             buttonSave.Name = "buttonSave";
             buttonSave.Size = new Size(75, 23);
             buttonSave.TabIndex = 38;
@@ -177,7 +178,7 @@
             // buttonCancel
             // 
             buttonCancel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            buttonCancel.Location = new Point(284, 484);
+            buttonCancel.Location = new Point(284, 512);
             buttonCancel.Name = "buttonCancel";
             buttonCancel.Size = new Size(75, 23);
             buttonCancel.TabIndex = 39;
@@ -188,9 +189,9 @@
             // optionCut
             // 
             optionCut.AutoSize = true;
-            optionCut.Location = new Point(22, 155);
+            optionCut.Location = new Point(22, 178);
             optionCut.Name = "optionCut";
-            optionCut.Size = new Size(216, 19);
+            optionCut.Size = new Size(215, 19);
             optionCut.TabIndex = 40;
             optionCut.Text = "Cut text (Ctrl+X) when using hotkey";
             optionCut.UseVisualStyleBackColor = true;
@@ -198,9 +199,9 @@
             // optionType
             // 
             optionType.AutoSize = true;
-            optionType.Location = new Point(22, 205);
+            optionType.Location = new Point(22, 228);
             optionType.Name = "optionType";
-            optionType.Size = new Size(250, 19);
+            optionType.Size = new Size(249, 19);
             optionType.TabIndex = 41;
             optionType.Text = "Send text as keystrokes when using hotkey";
             optionType.UseVisualStyleBackColor = true;
@@ -209,9 +210,9 @@
             // optionPaste
             // 
             optionPaste.AutoSize = true;
-            optionPaste.Location = new Point(22, 180);
+            optionPaste.Location = new Point(22, 203);
             optionPaste.Name = "optionPaste";
-            optionPaste.Size = new Size(314, 19);
+            optionPaste.Size = new Size(313, 19);
             optionPaste.TabIndex = 42;
             optionPaste.Text = "Paste text (Ctrl+V) when using hotkey (recommended)";
             optionPaste.UseVisualStyleBackColor = true;
@@ -220,7 +221,7 @@
             // optionUpdateClipboard
             // 
             optionUpdateClipboard.AutoSize = true;
-            optionUpdateClipboard.Location = new Point(22, 230);
+            optionUpdateClipboard.Location = new Point(22, 253);
             optionUpdateClipboard.Name = "optionUpdateClipboard";
             optionUpdateClipboard.Size = new Size(292, 19);
             optionUpdateClipboard.TabIndex = 44;
@@ -283,7 +284,7 @@
             // 
             linkLabel1.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             linkLabel1.AutoSize = true;
-            linkLabel1.Location = new Point(11, 488);
+            linkLabel1.Location = new Point(11, 516);
             linkLabel1.Name = "linkLabel1";
             linkLabel1.Size = new Size(49, 15);
             linkLabel1.TabIndex = 53;
@@ -295,7 +296,7 @@
             // 
             linkLabel2.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             linkLabel2.AutoSize = true;
-            linkLabel2.Location = new Point(66, 488);
+            linkLabel2.Location = new Point(66, 516);
             linkLabel2.Name = "linkLabel2";
             linkLabel2.Size = new Size(100, 15);
             linkLabel2.TabIndex = 54;
@@ -308,7 +309,7 @@
             label10.AutoSize = true;
             label10.Location = new Point(3, 37);
             label10.Name = "label10";
-            label10.Size = new Size(100, 15);
+            label10.Size = new Size(99, 15);
             label10.TabIndex = 55;
             label10.Text = "Slot .txt file folder";
             // 
@@ -358,7 +359,7 @@
             // checkBoxHistoryMinimize
             // 
             checkBoxHistoryMinimize.AutoSize = true;
-            checkBoxHistoryMinimize.Location = new Point(21, 305);
+            checkBoxHistoryMinimize.Location = new Point(21, 328);
             checkBoxHistoryMinimize.Name = "checkBoxHistoryMinimize";
             checkBoxHistoryMinimize.Size = new Size(193, 19);
             checkBoxHistoryMinimize.TabIndex = 60;
@@ -369,7 +370,7 @@
             // 
             labelVersion.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             labelVersion.AutoSize = true;
-            labelVersion.Location = new Point(172, 488);
+            labelVersion.Location = new Point(172, 516);
             labelVersion.Name = "labelVersion";
             labelVersion.Size = new Size(45, 15);
             labelVersion.TabIndex = 61;
@@ -380,7 +381,7 @@
             checkBoxTrayCapslock.AutoSize = true;
             checkBoxTrayCapslock.Location = new Point(26, 105);
             checkBoxTrayCapslock.Name = "checkBoxTrayCapslock";
-            checkBoxTrayCapslock.Size = new Size(164, 19);
+            checkBoxTrayCapslock.Size = new Size(165, 19);
             checkBoxTrayCapslock.TabIndex = 62;
             checkBoxTrayCapslock.Text = "Tray icon Caps Lock status";
             checkBoxTrayCapslock.UseVisualStyleBackColor = true;
@@ -399,7 +400,7 @@
             label4.AutoSize = true;
             label4.Location = new Point(16, 46);
             label4.Name = "label4";
-            label4.Size = new Size(60, 15);
+            label4.Size = new Size(61, 15);
             label4.TabIndex = 64;
             label4.Text = "RTF colors";
             // 
@@ -413,11 +414,12 @@
             tabControl1.Location = new Point(1, 5);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(448, 480);
+            tabControl1.Size = new Size(448, 508);
             tabControl1.TabIndex = 65;
             // 
             // tabPageGeneral
             // 
+            tabPageGeneral.Controls.Add(checkBoxTextLibrarySnapToMouse);
             tabPageGeneral.Controls.Add(label14);
             tabPageGeneral.Controls.Add(optionFixDiacriticsInSendKeys);
             tabPageGeneral.Controls.Add(buttonChangeLog);
@@ -438,16 +440,36 @@
             tabPageGeneral.Location = new Point(4, 24);
             tabPageGeneral.Name = "tabPageGeneral";
             tabPageGeneral.Padding = new Padding(3);
-            tabPageGeneral.Size = new Size(440, 452);
+            tabPageGeneral.Size = new Size(440, 480);
             tabPageGeneral.TabIndex = 0;
             tabPageGeneral.Text = "General";
             tabPageGeneral.UseVisualStyleBackColor = true;
             // 
+            // label14
+            // 
+            label14.AutoSize = true;
+            label14.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            label14.Location = new Point(3, 380);
+            label14.Name = "label14";
+            label14.Size = new Size(72, 15);
+            label14.TabIndex = 70;
+            label14.Text = "Localization";
+            // 
+            // optionFixDiacriticsInSendKeys
+            // 
+            optionFixDiacriticsInSendKeys.AutoSize = true;
+            optionFixDiacriticsInSendKeys.Location = new Point(21, 401);
+            optionFixDiacriticsInSendKeys.Name = "optionFixDiacriticsInSendKeys";
+            optionFixDiacriticsInSendKeys.Size = new Size(360, 19);
+            optionFixDiacriticsInSendKeys.TabIndex = 69;
+            optionFixDiacriticsInSendKeys.Text = "Fix diacritics when using Send Keys (for non-english keyboards)";
+            optionFixDiacriticsInSendKeys.UseVisualStyleBackColor = true;
+            // 
             // buttonChangeLog
             // 
-            buttonChangeLog.Location = new Point(21, 413);
+            buttonChangeLog.Location = new Point(21, 436);
             buttonChangeLog.Name = "buttonChangeLog";
-            buttonChangeLog.Size = new Size(123, 23);
+            buttonChangeLog.Size = new Size(123, 24);
             buttonChangeLog.TabIndex = 68;
             buttonChangeLog.Text = "Open Changelog";
             buttonChangeLog.UseVisualStyleBackColor = true;
@@ -466,7 +488,7 @@
             // checkBoxMathWarning
             // 
             checkBoxMathWarning.AutoSize = true;
-            checkBoxMathWarning.Location = new Point(21, 330);
+            checkBoxMathWarning.Location = new Point(21, 353);
             checkBoxMathWarning.Name = "checkBoxMathWarning";
             checkBoxMathWarning.Size = new Size(222, 19);
             checkBoxMathWarning.TabIndex = 66;
@@ -477,7 +499,7 @@
             // 
             label9.AutoSize = true;
             label9.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label9.Location = new Point(0, 257);
+            label9.Location = new Point(0, 280);
             label9.Name = "label9";
             label9.Size = new Size(60, 15);
             label9.TabIndex = 65;
@@ -487,7 +509,7 @@
             // 
             label8.AutoSize = true;
             label8.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label8.Location = new Point(3, 132);
+            label8.Location = new Point(3, 155);
             label8.Name = "label8";
             label8.Size = new Size(90, 15);
             label8.TabIndex = 64;
@@ -669,7 +691,7 @@
             label5.AutoSize = true;
             label5.Location = new Point(16, 165);
             label5.Name = "label5";
-            label5.Size = new Size(55, 15);
+            label5.Size = new Size(56, 15);
             label5.TabIndex = 66;
             label5.Text = "RTF fonts";
             // 
@@ -682,31 +704,21 @@
             textBoxRTFfonts.Size = new Size(417, 85);
             textBoxRTFfonts.TabIndex = 65;
             // 
-            // optionFixDiacriticsInSendKeys
+            // checkBoxTextLibrarySnapToMouse
             // 
-            optionFixDiacriticsInSendKeys.AutoSize = true;
-            optionFixDiacriticsInSendKeys.Location = new Point(21, 378);
-            optionFixDiacriticsInSendKeys.Name = "optionFixDiacriticsInSendKeys";
-            optionFixDiacriticsInSendKeys.Size = new Size(361, 19);
-            optionFixDiacriticsInSendKeys.TabIndex = 69;
-            optionFixDiacriticsInSendKeys.Text = "Fix diacritics when using Send Keys (for non-english keyboards)";
-            optionFixDiacriticsInSendKeys.UseVisualStyleBackColor = true;
-            // 
-            // label14
-            // 
-            label14.AutoSize = true;
-            label14.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            label14.Location = new Point(3, 357);
-            label14.Name = "label14";
-            label14.Size = new Size(72, 15);
-            label14.TabIndex = 70;
-            label14.Text = "Localization";
+            checkBoxTextLibrarySnapToMouse.AutoSize = true;
+            checkBoxTextLibrarySnapToMouse.Location = new Point(26, 128);
+            checkBoxTextLibrarySnapToMouse.Name = "checkBoxTextLibrarySnapToMouse";
+            checkBoxTextLibrarySnapToMouse.Size = new Size(216, 19);
+            checkBoxTextLibrarySnapToMouse.TabIndex = 71;
+            checkBoxTextLibrarySnapToMouse.Text = "Text library opens at mouse position";
+            checkBoxTextLibrarySnapToMouse.UseVisualStyleBackColor = true;
             // 
             // Options
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(450, 514);
+            ClientSize = new Size(450, 542);
             Controls.Add(tabControl1);
             Controls.Add(labelVersion);
             Controls.Add(linkLabel2);
@@ -792,5 +804,6 @@
         private Button buttonChangeLog;
         private Label label14;
         private CheckBox optionFixDiacriticsInSendKeys;
+        private CheckBox checkBoxTextLibrarySnapToMouse;
     }
 }

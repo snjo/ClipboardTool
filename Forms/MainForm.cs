@@ -542,11 +542,19 @@ public partial class MainForm : Form
         SetForegroundWindow(textTextLibrary.Handle);
 
         //System.Drawing.Point mousePos = Control.MousePosition;
+        if (settings.TextLibrarySnapToMouse)
+        {
+            SnapFormToMousePosition(textTextLibrary);
+        }
+    }
+
+    private void SnapFormToMousePosition(Form form)
+    {
         Point mousepos = Cursor.Position;
         Screen screen = Screen.FromPoint(mousepos);
         Rectangle screenBounds = screen.Bounds;
-        int height = textTextLibrary.Height;
-        int width = textTextLibrary.Width;
+        int height = form.Height;
+        int width = form.Width;
         int taskbarHeight = 50;
         int offsetX = -100;
         int offsetY = -20;
@@ -561,8 +569,7 @@ public partial class MainForm : Form
         int formX = Math.Clamp(mouseX, 0, screen.Bounds.Right - width);
         int formY = Math.Clamp(mouseY, 0, screen.Bounds.Bottom - height - taskbarHeight);
 
-        textTextLibrary.Top = formY;
-        textTextLibrary.Left = formX;
-
+        form.Top = formY;
+        form.Left = formX;
     }
 }
