@@ -3,6 +3,7 @@ using ClipboardTool.Properties;
 using DebugTools;
 using Hotkeys;
 using Microsoft.VisualBasic.Devices;
+using System.Diagnostics;
 using System.Globalization;
 using System.Reflection;
 using System.Runtime.InteropServices;
@@ -553,21 +554,20 @@ public partial class MainForm : Form
         Point mousepos = Cursor.Position;
         Screen screen = Screen.FromPoint(mousepos);
         Rectangle screenBounds = screen.Bounds;
+        int left = screenBounds.Left;
+        int top = screenBounds.Top;
+        int right = screenBounds.Right;
+        int bottom = screenBounds.Bottom;
         int height = form.Height;
         int width = form.Width;
         int taskbarHeight = 50;
         int offsetX = -100;
         int offsetY = -20;
-        int mouseX = Math.Max(0, mousepos.X + offsetX);
-        int mouseY = Math.Max(0, mousepos.Y + offsetY);
+        int mouseX = Math.Max(left, mousepos.X + offsetX);
+        int mouseY = Math.Max(top, mousepos.Y + offsetY);
 
-        if (mouseX < screen.Bounds.Left)
-        {
-            mouseX = screen.Bounds.Left;
-        }
-
-        int formX = Math.Clamp(mouseX, 0, screen.Bounds.Right - width);
-        int formY = Math.Clamp(mouseY, 0, screen.Bounds.Bottom - height - taskbarHeight);
+        int formX = Math.Clamp(mouseX, left, right - width);
+        int formY = Math.Clamp(mouseY, top, bottom - height - taskbarHeight);
 
         form.Top = formY;
         form.Left = formX;
