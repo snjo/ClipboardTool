@@ -1,5 +1,6 @@
 ﻿using ClipboardTool.Classes;
 using ClipboardTool.Forms;
+using DebugTools;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
@@ -211,6 +212,14 @@ public partial class TextPrompt : Form
 
     private void ColorPicker()
     {
+        colorDialog1.Dispose();
+        colorDialog1 = new ColorDialog();
+        string colorFilePath = Path.Join(TextLibrary.TextLibraryFolder, TextLibrary.colorFolder, TextLibrary.colorFileName);
+        int[]? colors = TextLibrary.GetSavedColors(colorFilePath);
+        if (colors != null)
+        {
+            colorDialog1.CustomColors = TextLibrary.GetSavedColors(colorFilePath);
+        }
         DialogResult result = colorDialog1.ShowDialog();
 
         if (result == DialogResult.OK)
@@ -219,6 +228,15 @@ public partial class TextPrompt : Form
             //textBoxes.First().BackColor = ColorPicked;
             buttonColorPicker.BackColor = ColorPicked;
             buttonColorPicker.ForeColor = ColorHelpers.TextColorFromBackColor(ColorPicked);
+            if (TextLibrary.ArraysAreIdentical(colorDialog1.CustomColors, colors))
+            {
+                Dbg.WriteWithCaller("Custom colors have not changed");
+            }
+            else
+            {
+                Dbg.WriteWithCaller("Custom colors have changed, saving to file");
+                TextLibrary.SaveColors(colorDialog1.CustomColors);
+            }
         }
     }
 
