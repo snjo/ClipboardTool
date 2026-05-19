@@ -35,8 +35,9 @@ public partial class TextLibrary : Form
         //gridTextLibrary.DataSource = bindingList;
         gridTextLibrary.ColumnCount = 4;
         gridTextLibrary.Columns[0].DataPropertyName = "PinnedEntry";
-        gridTextLibrary.Columns[1].DataPropertyName = "EntryName";
+        gridTextLibrary.Columns[1].DataPropertyName = "Title";
         gridTextLibrary.Columns[2].DataPropertyName = "TextContentWithoutTags";
+
         RefreshGrid();
     }
 
@@ -135,13 +136,13 @@ public partial class TextLibrary : Form
         }
     }
 
-    private void SetEntryColor(int rowIndex, Color color)
+    private void UpdateEntryColor(int rowIndex)
     {
         DataGridViewRow row = gridTextLibrary.Rows[rowIndex];
-
+        Color color;
         if (row.DataBoundItem is TextLibraryEntry entry)
         {
-            Debug.WriteLine($"Entry is TextLibraryEntry {entry.EntryName} with color {entry.BackgroundColor}");
+            //Debug.WriteLine($"Entry is TextLibraryEntry {entry.Title} with color {entry.BackgroundColor}");
             color = entry.BackgroundColor;
         }
         else
@@ -149,28 +150,31 @@ public partial class TextLibrary : Form
             Debug.WriteLine($"Entry is incorrect type {row.DataBoundItem}");
             color = Color.Red;
         }
-        
+
         if (row != null)
         {
             if (row.Cells[1] != null)
             {
+
                 row.Cells[titleColumnIndex].Style.BackColor = color;
                 Color mixColor = ColorHelpers.MixColor(color, Color.White, 0.5f);
                 row.Cells[textColumnIndex].Style.BackColor = mixColor;
 
                 row.Cells[titleColumnIndex].Style.ForeColor = ColorHelpers.TextColorFromBackColor(color, 0.6f);
                 row.Cells[textColumnIndex].Style.ForeColor = ColorHelpers.TextColorFromBackColor(mixColor, 0.6f);
+
+                //Debug.WriteLine($"Setting color on row {row.Index} to {color}: {row.Cells[titleColumnIndex].Style.BackColor}");
             }
         }
     }
 
-    private bool SaveEntry(string? filename, string? text, Color? color)
+    private bool SaveEntry(string? title, string? text, Color? color)
     {
-        if (filename == null || text == null) return false;
-        filename = filename.Trim();
-        if (filename.Length == 0) return false;
+        if (title == null || text == null) return false;
+        title = title.Trim();
+        if (title.Length == 0) return false;
         if (color == Color.Empty) color = Color.White;
-        string path = Path.Join(TextLibraryFolder, filename + entryFileExtension);
+        string path = Path.Join(TextLibraryFolder, title + entryFileExtension);
         PromptCreateTextLibraryFolder();
         try
         {
@@ -322,7 +326,49 @@ public partial class TextLibrary : Form
     }
 
 
-    private void RenameEntry(int rowIndex)
+    private void RenameEntry(TextLibraryEntry entry)
+    {
+        string oldTitle = entry.Title;
+        string oldContents = entry.TextContentWithoutTags;
+        Color oldColor = entry.BackgroundColor;
+        TextPrompt textPrompt = UpdateTextEntryPrompt("Edit Text", "Update title and contents", oldTitle, oldContents, oldColor);
+        DialogResult promptResult = textPrompt.ShowDialog();
+        if (promptResult != DialogResult.OK) return;
+
+        string newTitle = textPrompt.TextResult[0].Trim();
+        string newContent = textPrompt.TextResult[1];
+        Color newColor = textPrompt.ColorPicked;
+        entry.Title = newTitle;
+        entry.TextContentWithoutTags = newContent;
+        entry.BackgroundColor = newColor;
+
+        Dbg.WriteWithCaller("Renaming entry to: " + newTitle);
+
+        //delete old file
+        if (oldTitle.Length > 0)
+        {
+            string oldEntryPath = Path.Join(TextLibraryFolder, oldTitle + entryFileExtension);
+            if (File.Exists(oldEntryPath))
+            {
+                try
+                {
+                    File.Delete(oldEntryPath);
+                    Dbg.WriteWithCaller("Rename: Deleted old entry file " + oldEntryPath);
+                }
+                catch
+                {
+                    Dbg.WriteWithCaller("Rename: Can't delete old entry file " + oldEntryPath);
+                }
+            }
+        }
+
+        //save new file
+        //titleCell.Value = newTitle;
+
+        entry.PinnedEntry = SaveEntry(entry.Title, entry.TextContentWithoutTags, entry.BackgroundColor);
+    }
+
+    /*private void xRenameEntry(int rowIndex)
     {
         if (rowIndex > gridTextLibrary.Rows.Count - 1)
         {
@@ -368,7 +414,7 @@ public partial class TextLibrary : Form
 
             //update color
 
-            SetEntryColor(rowIndex, textPrompt.ColorPicked);
+            UpdateEntryColor(rowIndex, textPrompt.ColorPicked);
 
             Dbg.WriteWithCaller("Renaming entry to: " + newTitle);
 
@@ -396,7 +442,7 @@ public partial class TextLibrary : Form
             SetPinnedCheckboxValue(rowIndex, (SaveEntry(rowIndex)));
 
         }
-    }
+    }*/
 
     private void GridTextLibrary_CellClick(object sender, DataGridViewCellEventArgs e)
     {
@@ -413,10 +459,10 @@ public partial class TextLibrary : Form
         // Pin or unpin (save file)
         if (e.ColumnIndex == checkboxColumnIndex)
         {
-            ClickCheckbox(e);
+            //ClickCheckbox(e);
         }
     }
-
+    /*
     private void ClickCheckbox(DataGridViewCellEventArgs e)
     {
         if (gridTextLibrary.Rows[e.RowIndex] == null)
@@ -453,7 +499,7 @@ public partial class TextLibrary : Form
                         cells[titleColumnIndex].Value = title;
                         cells[textColumnIndex].Value = textPrompt.TextResult[1];
                         //update color
-                        SetEntryColor(e.RowIndex, textPrompt.ColorPicked);
+                        UpdateEntryColor(e.RowIndex, textPrompt.ColorPicked);
                     }
                     else
                     {
@@ -486,7 +532,7 @@ public partial class TextLibrary : Form
                 SetPinnedCheckboxValue(e.RowIndex, false);
             }
         }
-    }
+    }*/
 
     private void ClickCopyButton(DataGridViewCellEventArgs e)
     {
@@ -545,9 +591,9 @@ public partial class TextLibrary : Form
 
     private void ButtonColor_Click(object sender, EventArgs e)
     {
-        ColorPicker();
+        //ColorPicker();
     }
-
+    /*
     private void ColorPicker()
     {
         if (gridTextLibrary.SelectedCells.Count <= 0) return;
@@ -567,7 +613,7 @@ public partial class TextLibrary : Form
         {
             Color newColor = colorDialog1.Color;
             int row = gridTextLibrary.SelectedCells[0].RowIndex;
-            SetEntryColor(row, newColor);
+            UpdateEntryColor(row, newColor);
             SaveEntry(row);
 
             if (ArraysAreIdentical(colorDialog1.CustomColors, colors))
@@ -580,7 +626,7 @@ public partial class TextLibrary : Form
                 SaveColors(colorDialog1.CustomColors);
             }
         }
-    }
+    }*/
 
     public static int[]? GetSavedColors(string colorFilePath)
     {
@@ -671,7 +717,11 @@ public partial class TextLibrary : Form
             if (cell.ColumnIndex == titleColumnIndex)
             {
                 Dbg.WriteWithCaller("Rename entry started");
-                RenameEntry(cell.RowIndex);
+                if (cell.OwningRow.DataBoundItem is TextLibraryEntry entry)
+                {
+                    RenameEntry(entry);
+                    RefreshGrid();
+                }
             }
         }
     }
@@ -691,22 +741,36 @@ public partial class TextLibrary : Form
         bindingList = FilteredEntries(textBoxSearch.Text);
         Debug.WriteLine($"   Binding list entries: {bindingList.Count}");
         gridTextLibrary.DataSource = bindingList;
+
+        RefreshColors();
+    }
+
+    private int RefreshColors()
+    {
         int rowNumber = 0;
         foreach (DataGridViewRow row in gridTextLibrary.Rows)
         {
-            SetEntryColor(rowNumber, Color.Red);
+            UpdateEntryColor(rowNumber);
             rowNumber++;
         }
+
+        return rowNumber;
     }
 
     public BindingList<TextLibraryEntry> FilteredEntries(string filter)
     {
-        return ToBindingList((TextLibraryEntries.Where(x => x.EntryName.Contains(filter, StringComparison.InvariantCultureIgnoreCase) || x.TextContentWithoutTags.Contains(filter, StringComparison.InvariantCultureIgnoreCase))));
+        return ToBindingList((TextLibraryEntries.Where(x => x.Title.Contains(filter, StringComparison.InvariantCultureIgnoreCase) || x.TextContentWithoutTags.Contains(filter, StringComparison.InvariantCultureIgnoreCase))));
     }
 
     private void TextBoxSearch_TextChanged(object sender, EventArgs e)
     {
         RefreshGrid();
+    }
+
+    private void TextLibrary_Shown(object sender, EventArgs e)
+    {
+        Debug.WriteLine($"TextLibrary_Shown triggered");
+        RefreshColors();
     }
 
     public static BindingList<T> ToBindingList<T>(IEnumerable<T> range)
