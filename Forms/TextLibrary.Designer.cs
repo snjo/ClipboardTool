@@ -31,16 +31,18 @@
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TextLibrary));
             gridTextLibrary = new DataGridView();
-            ColumnPinned = new DataGridViewCheckBoxColumn();
-            ColumnTitle = new DataGridViewTextBoxColumn();
-            ColumnText = new DataGridViewTextBoxColumn();
-            ColumnCopy = new DataGridViewButtonColumn();
             buttonAddFromClipboard = new Button();
-            button1 = new Button();
+            buttonPin = new Button();
             checkBoxMinimize = new CheckBox();
             colorDialog1 = new ColorDialog();
             buttonColor = new Button();
             linkLabelHistoryFolder = new LinkLabel();
+            textBoxSearch = new TextBox();
+            label1 = new Label();
+            PinnedEntry = new DataGridViewCheckBoxColumn();
+            EntryName = new DataGridViewTextBoxColumn();
+            TextContentWithoutTags = new DataGridViewTextBoxColumn();
+            ColumnCopy = new DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)gridTextLibrary).BeginInit();
             SuspendLayout();
             // 
@@ -49,7 +51,7 @@
             gridTextLibrary.AllowUserToAddRows = false;
             gridTextLibrary.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             gridTextLibrary.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            gridTextLibrary.Columns.AddRange(new DataGridViewColumn[] { ColumnPinned, ColumnTitle, ColumnText, ColumnCopy });
+            gridTextLibrary.Columns.AddRange(new DataGridViewColumn[] { PinnedEntry, EntryName, TextContentWithoutTags, ColumnCopy });
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = SystemColors.Window;
             dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F);
@@ -70,33 +72,6 @@
             gridTextLibrary.CellEndEdit += GridTextLibrary_CellEndEdit;
             gridTextLibrary.MouseDoubleClick += GridTextLibrary_MouseDoubleClick;
             // 
-            // ColumnPinned
-            // 
-            ColumnPinned.HeaderText = "📌";
-            ColumnPinned.Name = "ColumnPinned";
-            ColumnPinned.ReadOnly = true;
-            ColumnPinned.Width = 30;
-            // 
-            // ColumnTitle
-            // 
-            ColumnTitle.HeaderText = "Title";
-            ColumnTitle.Name = "ColumnTitle";
-            ColumnTitle.ReadOnly = true;
-            // 
-            // ColumnText
-            // 
-            ColumnText.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            ColumnText.HeaderText = "Text";
-            ColumnText.Name = "ColumnText";
-            // 
-            // ColumnCopy
-            // 
-            ColumnCopy.HeaderText = "Copy";
-            ColumnCopy.Name = "ColumnCopy";
-            ColumnCopy.Text = ">";
-            ColumnCopy.UseColumnTextForButtonValue = true;
-            ColumnCopy.Width = 50;
-            // 
             // buttonAddFromClipboard
             // 
             buttonAddFromClipboard.Anchor = AnchorStyles.Top | AnchorStyles.Right;
@@ -109,16 +84,16 @@
             buttonAddFromClipboard.UseVisualStyleBackColor = true;
             buttonAddFromClipboard.Click += ButtonAddFromClipboard_Click;
             // 
-            // button1
+            // buttonPin
             // 
-            button1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            button1.Location = new Point(362, 3);
-            button1.Name = "button1";
-            button1.Size = new Size(28, 23);
-            button1.TabIndex = 5;
-            button1.Text = "📌";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += ActionAlwaysOnTop;
+            buttonPin.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            buttonPin.Location = new Point(362, 3);
+            buttonPin.Name = "buttonPin";
+            buttonPin.Size = new Size(28, 23);
+            buttonPin.TabIndex = 5;
+            buttonPin.Text = "📌";
+            buttonPin.UseVisualStyleBackColor = true;
+            buttonPin.Click += ActionAlwaysOnTop;
             // 
             // checkBoxMinimize
             // 
@@ -155,15 +130,62 @@
             linkLabelHistoryFolder.Text = "Text Library Folder";
             linkLabelHistoryFolder.LinkClicked += OpenTextLibraryFolder;
             // 
+            // textBoxSearch
+            // 
+            textBoxSearch.Location = new Point(54, 5);
+            textBoxSearch.Name = "textBoxSearch";
+            textBoxSearch.Size = new Size(133, 23);
+            textBoxSearch.TabIndex = 9;
+            textBoxSearch.TextChanged += TextBoxSearch_TextChanged;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(12, 9);
+            label1.Name = "label1";
+            label1.Size = new Size(36, 15);
+            label1.TabIndex = 10;
+            label1.Text = "Filter:";
+            // 
+            // PinnedEntry
+            // 
+            PinnedEntry.HeaderText = "📌";
+            PinnedEntry.Name = "PinnedEntry";
+            PinnedEntry.ReadOnly = true;
+            PinnedEntry.Width = 30;
+            // 
+            // EntryName
+            // 
+            EntryName.DataPropertyName = "EntryName";
+            EntryName.HeaderText = "Title";
+            EntryName.Name = "EntryName";
+            EntryName.ReadOnly = true;
+            // 
+            // TextContentWithoutTags
+            // 
+            TextContentWithoutTags.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            TextContentWithoutTags.HeaderText = "Text";
+            TextContentWithoutTags.Name = "TextContentWithoutTags";
+            // 
+            // ColumnCopy
+            // 
+            ColumnCopy.HeaderText = "Copy";
+            ColumnCopy.Name = "ColumnCopy";
+            ColumnCopy.Text = ">";
+            ColumnCopy.UseColumnTextForButtonValue = true;
+            ColumnCopy.Width = 50;
+            // 
             // TextLibrary
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(525, 545);
+            Controls.Add(label1);
+            Controls.Add(textBoxSearch);
             Controls.Add(linkLabelHistoryFolder);
             Controls.Add(buttonColor);
             Controls.Add(checkBoxMinimize);
-            Controls.Add(button1);
+            Controls.Add(buttonPin);
             Controls.Add(buttonAddFromClipboard);
             Controls.Add(gridTextLibrary);
             Icon = (Icon)resources.GetObject("$this.Icon");
@@ -177,14 +199,16 @@
         #endregion
         private DataGridView gridTextLibrary;
         private Button buttonAddFromClipboard;
-        private Button button1;
+        private Button buttonPin;
         private CheckBox checkBoxMinimize;
         private ColorDialog colorDialog1;
         private Button buttonColor;
-        private DataGridViewCheckBoxColumn ColumnPinned;
-        private DataGridViewTextBoxColumn ColumnTitle;
-        private DataGridViewTextBoxColumn ColumnText;
-        private DataGridViewButtonColumn ColumnCopy;
         private LinkLabel linkLabelHistoryFolder;
+        private TextBox textBoxSearch;
+        private Label label1;
+        private DataGridViewCheckBoxColumn PinnedEntry;
+        private DataGridViewTextBoxColumn EntryName;
+        private DataGridViewTextBoxColumn TextContentWithoutTags;
+        private DataGridViewButtonColumn ColumnCopy;
     }
 }

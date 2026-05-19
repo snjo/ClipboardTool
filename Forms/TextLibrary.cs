@@ -4,8 +4,10 @@ using ClipboardTool.Properties;
 using DebugTools;
 using System.Diagnostics;
 using System.Runtime.Versioning;
+using System.ComponentModel;
 
 namespace ClipboardTool;
+
 [SupportedOSPlatform("windows")]
 
 public partial class TextLibrary : Form
@@ -19,14 +21,23 @@ public partial class TextLibrary : Form
     readonly string colorFolder = "Colors";
     readonly string colorFileName = "colors.txt";
     readonly string entryFileExtension = ".txt";
-    readonly List<KeyValuePair<string, string[]>> TextLibraryEntries = [];
+    //readonly List<KeyValuePair<string, string[]>> TextLibraryEntries = [];
+    readonly List<TextLibraryEntry> TextLibraryEntries = [];
+    BindingList<TextLibraryEntry> bindingList = [];
 
     public TextLibrary(MainForm mainForm)
     {
         InitializeComponent();
         this.mainForm = mainForm;
+        gridTextLibrary.AutoGenerateColumns = false;
         LoadTextLibraryFiles();
         checkBoxMinimize.Checked = Settings.Default.HistoryMinimizeAfterCopy;
+        //gridTextLibrary.DataSource = bindingList;
+        gridTextLibrary.ColumnCount = 4;
+        gridTextLibrary.Columns[0].DataPropertyName = "PinnedEntry";
+        gridTextLibrary.Columns[1].DataPropertyName = "EntryName";
+        gridTextLibrary.Columns[2].DataPropertyName = "TextContentWithoutTags";
+        RefreshGrid();
     }
 
     private static string TextLibraryFolder
@@ -77,9 +88,10 @@ public partial class TextLibrary : Form
             {
                 if (File.Exists(file))
                 {
-                    Dbg.WriteWithCaller("Loading file: " + file);
+                    //Dbg.WriteWithCaller("Loading file: " + file);
                     string[] entryText = File.ReadAllLines(file);
-                    TextLibraryEntries.Add(new KeyValuePair<string, string[]>(file, entryText));
+                    TextLibraryEntries.Add(new TextLibraryEntry(Path.GetFileNameWithoutExtension(file), entryText));
+                    //Debug.WriteLine($"   TextLibrary entries: {TextLibraryEntries.Count}, latest {TextLibraryEntries.Last().EntryName}");
                 }
                 else
                 {
@@ -91,30 +103,34 @@ public partial class TextLibrary : Form
         {
             Dbg.WriteWithCaller("Could not locate or create folder for TextLibrary text: " + TextLibraryFolder + Environment.NewLine + "Set the folder in Options");
         }
-        gridTextLibrary.Rows.Clear();
-        int countRows = 0;
-        foreach (KeyValuePair<string, string[]> entry in TextLibraryEntries)
-        {
-            Color c = Color.White;
-            int tagCount = 0;
-            if (entry.Value[0].Length > 0)
-            {
-                if (entry.Value[0].Contains(colorTag))
-                {
-                    c = ColorHelpers.ParseColor(entry.Value[0][colorTag.Length..]);
+        //gridTextLibrary.Rows.Clear();
+        //TextLibraryEntries.Clear();
 
+        int countRows = 0;
+        foreach (TextLibraryEntry entry in TextLibraryEntries)
+        {
+            Color entryColor = Color.White;
+            int tagCount = 0;
+            if (entry.TextContentRaw[0].Length > 0)
+            {
+                if (entry.TextContentRaw[0].Contains(colorTag))
+                {
+                    entryColor = ColorHelpers.ParseColor(entry.TextContentRaw[0][colorTag.Length..]);
+                    entry.BackgroundColor = entryColor;
                     tagCount++;
                 }
             }
             string textWithoutTags = string.Empty;
-            for (int i = tagCount; i < entry.Value.Length; i++)
+            for (int i = tagCount; i < entry.TextContentRaw.Length; i++)
             {
-                textWithoutTags += entry.Value[i];
-                if (i < entry.Value.Length - 1)
+                textWithoutTags += entry.TextContentRaw[i];
+                if (i < entry.TextContentRaw.Length - 1)
                     textWithoutTags += Environment.NewLine;
             }
-            gridTextLibrary.Rows.Add(true, Path.GetFileNameWithoutExtension(entry.Key), textWithoutTags);
-            SetEntryColor(countRows, c);
+            //gridTextLibrary.Rows.Add(true, Path.GetFileNameWithoutExtension(entry.EntryName), textWithoutTags);
+            //TextLibraryEntries.Add(new TextLibraryEntry(Path.GetFileNameWithoutExtension(entry.EntryName), textWithoutTags));
+            entry.TextContentWithoutTags = textWithoutTags;
+            //SetEntryColor(countRows, c);
             countRows++;
         }
     }
@@ -122,6 +138,18 @@ public partial class TextLibrary : Form
     private void SetEntryColor(int rowIndex, Color color)
     {
         DataGridViewRow row = gridTextLibrary.Rows[rowIndex];
+
+        if (row.DataBoundItem is TextLibraryEntry entry)
+        {
+            Debug.WriteLine($"Entry is TextLibraryEntry {entry.EntryName} with color {entry.BackgroundColor}");
+            color = entry.BackgroundColor;
+        }
+        else
+        {
+            Debug.WriteLine($"Entry is incorrect type {row.DataBoundItem}");
+            color = Color.Red;
+        }
+        
         if (row != null)
         {
             if (row.Cells[1] != null)
@@ -282,8 +310,14 @@ public partial class TextLibrary : Form
             Color color = textPrompt.ColorPicked;
 
             bool saveSuccessful = SaveEntry(title, content, color);
-            int row = gridTextLibrary.Rows.Add(saveSuccessful, title, content);
-            SetEntryColor(row, color);
+            //int row = gridTextLibrary.Rows.Add(saveSuccessful, title, content);
+            //SetEntryColor(row, color);
+            TextLibraryEntry newEntry = new TextLibraryEntry(title, [])
+            {
+                TextContentWithoutTags = content,
+                BackgroundColor = color
+            };
+            TextLibraryEntries.Add(newEntry);
         }
     }
 
@@ -333,6 +367,7 @@ public partial class TextLibrary : Form
             contentCell.Value = newContent;
 
             //update color
+
             SetEntryColor(rowIndex, textPrompt.ColorPicked);
 
             Dbg.WriteWithCaller("Renaming entry to: " + newTitle);
@@ -645,4 +680,36 @@ public partial class TextLibrary : Form
         Settings.Default.HistoryMinimizeAfterCopy = checkBoxMinimize.Checked;
         Settings.Default.Save();
     }
+
+    private void RefreshGrid()
+    {
+        Debug.WriteLine($"RefreshGrid");
+        gridTextLibrary.DataSource = null;
+        Debug.WriteLine($"   Text library entries: {TextLibraryEntries.Count}");
+        bindingList = FilteredEntries(textBoxSearch.Text);
+        Debug.WriteLine($"   Binding list entries: {bindingList.Count}");
+        gridTextLibrary.DataSource = bindingList;
+        int rowNumber = 0;
+        foreach (DataGridViewRow row in gridTextLibrary.Rows)
+        {
+            SetEntryColor(rowNumber, Color.Red);
+            rowNumber++;
+        }
+    }
+
+    public BindingList<TextLibraryEntry> FilteredEntries(string filter)
+    {
+        return ToBindingList((TextLibraryEntries.Where(x => x.EntryName.Contains(filter, StringComparison.InvariantCultureIgnoreCase) || x.TextContentWithoutTags.Contains(filter, StringComparison.InvariantCultureIgnoreCase))));
+    }
+
+    private void TextBoxSearch_TextChanged(object sender, EventArgs e)
+    {
+        RefreshGrid();
+    }
+
+    public static BindingList<T> ToBindingList<T>(IEnumerable<T> range)
+    {
+        return new BindingList<T>(range.ToList());
+    }
+
 }
