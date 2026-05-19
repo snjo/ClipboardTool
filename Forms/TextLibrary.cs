@@ -168,6 +168,11 @@ public partial class TextLibrary : Form
         }
     }
 
+    private bool SaveEntry(TextLibraryEntry entry)
+    {
+        return SaveEntry(entry.Title, entry.TextContentWithoutTags, entry.BackgroundColor);
+    }
+
     private bool SaveEntry(string? title, string? text, Color? color)
     {
         if (title == null || text == null) return false;
@@ -205,37 +210,9 @@ public partial class TextLibrary : Form
         }
     }
 
-    private bool SaveEntry(int row)
+    private void DeleteEntry(string? title)
     {
-        bool result = false;
-        if (gridTextLibrary.Rows.Count > row)
-        {
-            if (gridTextLibrary.Rows[row] == null) return false;
-            if (gridTextLibrary.Rows[row].Cells[titleColumnIndex] == null) return false;
-            if (gridTextLibrary.Rows[row].Cells[titleColumnIndex].Value == null) return false;
-            if ((gridTextLibrary.Rows[row].Cells[titleColumnIndex].Value.ToString() + "").Length == 0) return false;
-            if (gridTextLibrary.Rows[row].Cells[textColumnIndex] == null) return false;
-
-            string filename = gridTextLibrary.Rows[row].Cells[titleColumnIndex].Value.ToString() + "";
-            if (gridTextLibrary.Rows[row].Cells[textColumnIndex].Value == null)
-                gridTextLibrary.Rows[row].Cells[textColumnIndex].Value = string.Empty;
-            string text = gridTextLibrary.Rows[row].Cells[textColumnIndex].Value.ToString() + "";
-            Dbg.WriteWithCaller("Saving: " + filename);
-            Color color = GetRowColor(row);
-            result = SaveEntry(filename, text, color);
-            SetPinnedCheckboxValue(row, result);
-        }
-        return result;
-    }
-
-    private Color GetRowColor(int row)
-    {
-        return gridTextLibrary.Rows[row].Cells[titleColumnIndex].Style.BackColor;
-    }
-
-    private void DeleteEntry(string? filename)
-    {
-        if (filename == null)
+        if (title == null)
         {
             Dbg.WriteWithCaller("Can't Delete file, value is null");
             return;
@@ -244,7 +221,7 @@ public partial class TextLibrary : Form
         {
             if (Directory.Exists(TextLibraryFolder))
             {
-                string file = Path.Join(TextLibraryFolder, filename + entryFileExtension);
+                string file = Path.Join(TextLibraryFolder, title + entryFileExtension);
                 if (File.Exists(file))
                 {
                     File.Delete(file);
@@ -257,12 +234,12 @@ public partial class TextLibrary : Form
             }
             else
             {
-                Dbg.WriteWithCaller("Can't Delete file (not found): " + filename);
+                Dbg.WriteWithCaller("Can't Delete file (not found): " + title);
             }
         }
         catch
         {
-            Dbg.WriteWithCaller("Exception: Can't Delete file : " + filename);
+            Dbg.WriteWithCaller("Exception: Can't Delete file : " + title);
         }
     }
 
@@ -313,7 +290,7 @@ public partial class TextLibrary : Form
             string content = textPrompt.TextResult[1];
             Color color = textPrompt.ColorPicked;
 
-            bool saveSuccessful = SaveEntry(title, content, color);
+            
             //int row = gridTextLibrary.Rows.Add(saveSuccessful, title, content);
             //SetEntryColor(row, color);
             TextLibraryEntry newEntry = new TextLibraryEntry(title, [])
@@ -321,7 +298,9 @@ public partial class TextLibrary : Form
                 TextContentWithoutTags = content,
                 BackgroundColor = color
             };
+            bool saveSuccessful = SaveEntry(newEntry);
             TextLibraryEntries.Add(newEntry);
+            RefreshGrid();
         }
     }
 
@@ -365,7 +344,7 @@ public partial class TextLibrary : Form
         //save new file
         //titleCell.Value = newTitle;
 
-        entry.PinnedEntry = SaveEntry(entry.Title, entry.TextContentWithoutTags, entry.BackgroundColor);
+        entry.PinnedEntry = SaveEntry(entry);
     }
 
     /*private void xRenameEntry(int rowIndex)
@@ -459,11 +438,34 @@ public partial class TextLibrary : Form
         // Pin or unpin (save file)
         if (e.ColumnIndex == checkboxColumnIndex)
         {
-            //ClickCheckbox(e);
+            ClickCheckbox(e);
+        }
+    }
+
+    private void ClickCheckbox(DataGridViewCellEventArgs e)
+    {
+        if (gridTextLibrary.Rows[e.RowIndex] == null)
+        {
+            Dbg.WriteWithCaller("Row is null");
+            return;
+        }
+        if (gridTextLibrary.Rows[e.RowIndex].DataBoundItem is TextLibraryEntry entry)
+        {
+            Debug.WriteLine($"Click checkbox on entry {e.RowIndex} {entry.Title}");
+            bool newPinStatus = !entry.PinnedEntry;
+            if (newPinStatus == true)
+            {
+                entry.PinnedEntry = SaveEntry(entry);
+            }
+            else
+            {
+                entry.PinnedEntry = false;
+                DeleteEntry(entry.Title);
+            }
         }
     }
     /*
-    private void ClickCheckbox(DataGridViewCellEventArgs e)
+    private void xClickCheckbox(DataGridViewCellEventArgs e)
     {
         if (gridTextLibrary.Rows[e.RowIndex] == null)
         {
@@ -532,7 +534,8 @@ public partial class TextLibrary : Form
                 SetPinnedCheckboxValue(e.RowIndex, false);
             }
         }
-    }*/
+    }
+    */
 
     private void ClickCopyButton(DataGridViewCellEventArgs e)
     {
@@ -591,8 +594,46 @@ public partial class TextLibrary : Form
 
     private void ButtonColor_Click(object sender, EventArgs e)
     {
-        //ColorPicker();
+        PickSelectedEntryColor();
     }
+    
+    private void PickSelectedEntryColor()
+    {
+        if (gridTextLibrary.SelectedCells.Count <= 0) return;
+        colorDialog1.Dispose();
+        colorDialog1 = new ColorDialog();
+        string colorFilePath = Path.Join(TextLibraryFolder, colorFolder, colorFileName);
+        int[]? colors = GetSavedColors(colorFilePath);
+        if (colors != null)
+        {
+            colorDialog1.CustomColors = GetSavedColors(colorFilePath);
+        }
+
+        DialogResult result = colorDialog1.ShowDialog();
+
+        if (result == DialogResult.OK)
+        {
+            Color newColor = colorDialog1.Color;
+            int row = gridTextLibrary.SelectedCells[0].RowIndex;
+            if (gridTextLibrary.SelectedCells[0].OwningRow.DataBoundItem is TextLibraryEntry entry)
+            {
+                entry.BackgroundColor = newColor;
+                SaveEntry(entry);
+                RefreshGrid();
+            }
+            
+            if (ArraysAreIdentical(colorDialog1.CustomColors, colors))
+            {
+                Dbg.WriteWithCaller("Custom colors have not changed");
+            }
+            else
+            {
+                Dbg.WriteWithCaller("Custom colors have changed, saving to file");
+                SaveColors(colorDialog1.CustomColors);
+            }
+        }
+    }
+
     /*
     private void ColorPicker()
     {
@@ -697,7 +738,16 @@ public partial class TextLibrary : Form
 
     private void GridTextLibrary_CellEndEdit(object sender, DataGridViewCellEventArgs e)
     {
-        SaveEntry(e.RowIndex);
+        if (gridTextLibrary.Rows[e.RowIndex] == null)
+        {
+            Dbg.WriteWithCaller("Row is null");
+            return;
+        }
+        if (gridTextLibrary.Rows[e.RowIndex].DataBoundItem is TextLibraryEntry entry)
+        {
+            SaveEntry(entry);
+        }
+        //SaveEntry(e.RowIndex);
     }
 
     private void OpenTextLibraryFolder(object sender, LinkLabelLinkClickedEventArgs e)
