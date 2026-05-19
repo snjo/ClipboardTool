@@ -17,9 +17,9 @@ public partial class TextLibrary : Form
     private readonly int textColumnIndex = 2;
     private readonly int buttonColumnIndex = 3;
     readonly MainForm mainForm;
-    readonly string colorTag = "//Color:";
-    readonly string colorFolder = "Colors";
-    readonly string colorFileName = "colors.txt";
+    public static readonly string colorTag = "//Color:";
+    public static readonly string colorFolder = "Colors";
+    public static readonly string colorFileName = "colors.txt";
     readonly string entryFileExtension = ".txt";
     //readonly List<KeyValuePair<string, string[]>> TextLibraryEntries = [];
     readonly List<TextLibraryEntry> TextLibraryEntries = [];
@@ -40,7 +40,7 @@ public partial class TextLibrary : Form
         RefreshGrid();
     }
 
-    private static string TextLibraryFolder
+    public static string TextLibraryFolder
     {
         get
         {
@@ -554,9 +554,12 @@ public partial class TextLibrary : Form
 
         colorDialog1.Dispose();
         colorDialog1 = new ColorDialog();
-        int[]? colors = GetSavedColors();
+        string colorFilePath = Path.Join(TextLibraryFolder, colorFolder, colorFileName);
+        int[]? colors = GetSavedColors(colorFilePath);
         if (colors != null)
-            colorDialog1.CustomColors = GetSavedColors();
+        {
+            colorDialog1.CustomColors = GetSavedColors(colorFilePath);
+        }
 
         DialogResult result = colorDialog1.ShowDialog();
 
@@ -574,15 +577,14 @@ public partial class TextLibrary : Form
             else
             {
                 Dbg.WriteWithCaller("Custom colors have changed, saving to file");
-                SaveColors();
+                SaveColors(colorDialog1.CustomColors);
             }
         }
     }
 
-    private int[]? GetSavedColors()
+    public static int[]? GetSavedColors(string colorFilePath)
     {
         List<int> colorList = [];
-        string colorFilePath = Path.Join(TextLibraryFolder, colorFolder, colorFileName);
 
         if (File.Exists(colorFilePath))
         {
@@ -600,7 +602,7 @@ public partial class TextLibrary : Form
         return [.. colorList];
     }
 
-    private static bool ArraysAreIdentical(int[]? array1, int[]? array2)
+    public static bool ArraysAreIdentical(int[]? array1, int[]? array2)
     {
         if (array1 == null && array2 == null) return true;
         if (array1 == null || array2 == null) return false;
@@ -612,10 +614,10 @@ public partial class TextLibrary : Form
         return true;
     }
 
-    private void SaveColors()
+    public static void SaveColors(int[] colors)
     {
         List<string> customColors = [];
-        foreach (int c in colorDialog1.CustomColors)
+        foreach (int c in colors)//colorDialog1.CustomColors)
         {
             customColors.Add(c.ToString());
         }
