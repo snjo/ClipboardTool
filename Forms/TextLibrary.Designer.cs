@@ -31,10 +31,6 @@
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TextLibrary));
             gridTextLibrary = new DataGridView();
-            PinnedEntry = new DataGridViewCheckBoxColumn();
-            EntryName = new DataGridViewTextBoxColumn();
-            TextContentWithoutTags = new DataGridViewTextBoxColumn();
-            ColumnCopy = new DataGridViewButtonColumn();
             buttonAddFromClipboard = new Button();
             buttonPin = new Button();
             checkBoxMinimize = new CheckBox();
@@ -43,6 +39,10 @@
             linkLabelHistoryFolder = new LinkLabel();
             textBoxSearch = new TextBox();
             label1 = new Label();
+            PinnedEntry = new DataGridViewCheckBoxColumn();
+            EntryName = new DataGridViewTextBoxColumn();
+            TextContentWithoutTags = new DataGridViewTextBoxColumn();
+            ColumnCopy = new DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)gridTextLibrary).BeginInit();
             SuspendLayout();
             // 
@@ -71,34 +71,6 @@
             gridTextLibrary.CellClick += GridTextLibrary_CellClick;
             gridTextLibrary.CellEndEdit += GridTextLibrary_CellEndEdit;
             gridTextLibrary.MouseDoubleClick += GridTextLibrary_MouseDoubleClick;
-            // 
-            // PinnedEntry
-            // 
-            PinnedEntry.HeaderText = "📌";
-            PinnedEntry.Name = "PinnedEntry";
-            PinnedEntry.ReadOnly = true;
-            PinnedEntry.Width = 30;
-            // 
-            // EntryName
-            // 
-            EntryName.DataPropertyName = "EntryName";
-            EntryName.HeaderText = "Title";
-            EntryName.Name = "EntryName";
-            EntryName.ReadOnly = true;
-            // 
-            // TextContentWithoutTags
-            // 
-            TextContentWithoutTags.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            TextContentWithoutTags.HeaderText = "Text";
-            TextContentWithoutTags.Name = "TextContentWithoutTags";
-            // 
-            // ColumnCopy
-            // 
-            ColumnCopy.HeaderText = "Copy";
-            ColumnCopy.Name = "ColumnCopy";
-            ColumnCopy.Text = ">";
-            ColumnCopy.UseColumnTextForButtonValue = true;
-            ColumnCopy.Width = 50;
             // 
             // buttonAddFromClipboard
             // 
@@ -174,6 +146,34 @@
             label1.Size = new Size(45, 15);
             label1.TabIndex = 10;
             label1.Text = "Search:";
+            // 
+            // PinnedEntry
+            // 
+            PinnedEntry.HeaderText = "💾";
+            PinnedEntry.Name = "PinnedEntry";
+            PinnedEntry.ReadOnly = true;
+            PinnedEntry.Width = 30;
+            // 
+            // EntryName
+            // 
+            EntryName.DataPropertyName = "EntryName";
+            EntryName.HeaderText = "Title";
+            EntryName.Name = "EntryName";
+            EntryName.ReadOnly = true;
+            // 
+            // TextContentWithoutTags
+            // 
+            TextContentWithoutTags.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            TextContentWithoutTags.HeaderText = "Text";
+            TextContentWithoutTags.Name = "TextContentWithoutTags";
+            // 
+            // ColumnCopy
+            // 
+            ColumnCopy.HeaderText = "Copy";
+            ColumnCopy.Name = "ColumnCopy";
+            ColumnCopy.Text = ">";
+            ColumnCopy.UseColumnTextForButtonValue = true;
+            ColumnCopy.Width = 50;
             // 
             // TextLibrary
             // 
