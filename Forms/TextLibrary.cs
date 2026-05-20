@@ -104,8 +104,6 @@ public partial class TextLibrary : Form
         {
             Dbg.WriteWithCaller("Could not locate or create folder for TextLibrary text: " + TextLibraryFolder + Environment.NewLine + "Set the folder in Options");
         }
-        //gridTextLibrary.Rows.Clear();
-        //TextLibraryEntries.Clear();
 
         int countRows = 0;
         foreach (TextLibraryEntry entry in TextLibraryEntries)
@@ -290,9 +288,6 @@ public partial class TextLibrary : Form
             string content = textPrompt.TextResult[1];
             Color color = textPrompt.ColorPicked;
 
-            
-            //int row = gridTextLibrary.Rows.Add(saveSuccessful, title, content);
-            //SetEntryColor(row, color);
             TextLibraryEntry newEntry = new TextLibraryEntry(title, [])
             {
                 TextContentWithoutTags = content,
@@ -342,86 +337,8 @@ public partial class TextLibrary : Form
         }
 
         //save new file
-        //titleCell.Value = newTitle;
-
         entry.PinnedEntry = SaveEntry(entry);
     }
-
-    /*private void xRenameEntry(int rowIndex)
-    {
-        if (rowIndex > gridTextLibrary.Rows.Count - 1)
-        {
-            Dbg.WriteWithCaller("rowIndex error");
-            return;
-        }
-
-        DataGridViewCell titleCell = gridTextLibrary.Rows[rowIndex].Cells[titleColumnIndex];
-        if (titleCell == null)
-        {
-            Dbg.WriteWithCaller("Cell is null");
-            return;
-        }
-
-        if (titleCell.Value == null)
-        {
-            Dbg.WriteWithCaller("Cell value null, setting empty string");
-            titleCell.Value = string.Empty;
-        }
-
-        if (titleCell.Value != null)
-        {
-            string oldTitle = "";
-            if (titleCell.Value != null)
-            {
-                oldTitle = titleCell.Value.ToString() + "";
-            }
-            DataGridViewCell contentCell = gridTextLibrary.Rows[rowIndex].Cells[textColumnIndex];
-            string contents = "";
-            if (contentCell.Value != null)
-            {
-                contents = contentCell.Value.ToString() + "";
-            }
-            TextPrompt textPrompt = UpdateTextEntryPrompt("Edit Text", "Update title and contents", oldTitle, contents, GetRowColor(rowIndex));
-            DialogResult promptResult = textPrompt.ShowDialog();
-            if (promptResult != DialogResult.OK) return;
-
-            string newTitle = textPrompt.TextResult[0].Trim();
-            string newContent = textPrompt.TextResult[1];
-
-            //update contents
-            contentCell.Value = newContent;
-
-            //update color
-
-            UpdateEntryColor(rowIndex, textPrompt.ColorPicked);
-
-            Dbg.WriteWithCaller("Renaming entry to: " + newTitle);
-
-            //delete old file
-            if (oldTitle.Length > 0)
-            {
-                string oldEntryPath = Path.Join(TextLibraryFolder, oldTitle + entryFileExtension);
-                if (File.Exists(oldEntryPath))
-                {
-                    try
-                    {
-                        File.Delete(oldEntryPath);
-                        Dbg.WriteWithCaller("Rename: Deleted old entry file " + oldEntryPath);
-                    }
-                    catch
-                    {
-                        Dbg.WriteWithCaller("Rename: Can't delete old entry file " + oldEntryPath);
-                    }
-                }
-            }
-
-            //save new file
-            titleCell.Value = newTitle;
-
-            SetPinnedCheckboxValue(rowIndex, (SaveEntry(rowIndex)));
-
-        }
-    }*/
 
     private void GridTextLibrary_CellClick(object sender, DataGridViewCellEventArgs e)
     {
@@ -464,78 +381,6 @@ public partial class TextLibrary : Form
             }
         }
     }
-    /*
-    private void xClickCheckbox(DataGridViewCellEventArgs e)
-    {
-        if (gridTextLibrary.Rows[e.RowIndex] == null)
-        {
-            Dbg.WriteWithCaller("Row is null");
-            return;
-        }
-        else
-        {
-            bool oldCheckState = GetPinnedCheckboxValue(e.RowIndex);
-            bool pinned = !oldCheckState;
-            if (pinned)
-            {
-                string title;
-                DataGridViewCellCollection cells = gridTextLibrary.Rows[e.RowIndex].Cells;
-
-                if (cells[textColumnIndex].Value == null) return;
-
-                if (cells[titleColumnIndex].Value == null)
-                {
-                    cells[titleColumnIndex].Value = string.Empty;
-                }
-
-                if (cells[titleColumnIndex].Value.ToString() == string.Empty)
-                {
-                    string? contentText = cells[textColumnIndex].Value.ToString();
-
-                    TextPrompt textPrompt = UpdateTextEntryPrompt("Save text", "Update title and contents. You must use a valid file name.", "", contentText, GetRowColor(e.RowIndex));
-                    DialogResult promptResult = textPrompt.ShowDialog();
-
-                    if (promptResult == DialogResult.OK)
-                    {
-                        title = textPrompt.TextResult[0];
-                        cells[titleColumnIndex].Value = title;
-                        cells[textColumnIndex].Value = textPrompt.TextResult[1];
-                        //update color
-                        UpdateEntryColor(e.RowIndex, textPrompt.ColorPicked);
-                    }
-                    else
-                    {
-                        return;
-                        //title = "entry " + e.RowIndex;
-                        //cells[titleColumnIndex].Value = title;
-                    }
-                }
-                else
-                {
-                    title = cells[titleColumnIndex].Value.ToString() + "";
-                }
-
-                if (title.Trim() == "")
-                {
-                    title = "entry " + e.RowIndex;
-                    cells[titleColumnIndex].Value = title;
-                }
-
-                string text = cells[textColumnIndex].Value.ToString() + "";
-                pinned = SaveEntry(title, text, cells[titleColumnIndex].Style.BackColor);
-                SetPinnedCheckboxValue(cells[textColumnIndex].RowIndex, pinned);
-            }
-            else
-            {
-                Dbg.WriteWithCaller("Unpinned. Trying to delete corresponding file");
-                DataGridViewCellCollection cells = gridTextLibrary.Rows[e.RowIndex].Cells;
-                if (cells[titleColumnIndex].Value != null)
-                    DeleteEntry(cells[titleColumnIndex].Value.ToString());
-                SetPinnedCheckboxValue(e.RowIndex, false);
-            }
-        }
-    }
-    */
 
     private void ClickCopyButton(DataGridViewCellEventArgs e)
     {
@@ -561,21 +406,6 @@ public partial class TextLibrary : Form
                 Clipboard.Clear();
             }
         }
-    }
-
-    private bool GetPinnedCheckboxValue(int rowIndex)
-    {
-        DataGridViewCheckBoxCell? checkboxCell = gridTextLibrary.Rows[rowIndex].Cells[checkboxColumnIndex] as DataGridViewCheckBoxCell;
-        checkboxCell ??= new DataGridViewCheckBoxCell();
-        return Convert.ToBoolean(checkboxCell.Value);
-    }
-
-    private bool SetPinnedCheckboxValue(int rowIndex, bool newValue)
-    {
-        DataGridViewCheckBoxCell? checkboxCell = gridTextLibrary.Rows[rowIndex].Cells[checkboxColumnIndex] as DataGridViewCheckBoxCell;
-        checkboxCell ??= new DataGridViewCheckBoxCell();
-        checkboxCell.Value = newValue;
-        return Convert.ToBoolean(checkboxCell.Value);
     }
 
     private bool alwaysOnTop = false;
@@ -633,41 +463,6 @@ public partial class TextLibrary : Form
             }
         }
     }
-
-    /*
-    private void ColorPicker()
-    {
-        if (gridTextLibrary.SelectedCells.Count <= 0) return;
-
-        colorDialog1.Dispose();
-        colorDialog1 = new ColorDialog();
-        string colorFilePath = Path.Join(TextLibraryFolder, colorFolder, colorFileName);
-        int[]? colors = GetSavedColors(colorFilePath);
-        if (colors != null)
-        {
-            colorDialog1.CustomColors = GetSavedColors(colorFilePath);
-        }
-
-        DialogResult result = colorDialog1.ShowDialog();
-
-        if (result == DialogResult.OK)
-        {
-            Color newColor = colorDialog1.Color;
-            int row = gridTextLibrary.SelectedCells[0].RowIndex;
-            UpdateEntryColor(row, newColor);
-            SaveEntry(row);
-
-            if (ArraysAreIdentical(colorDialog1.CustomColors, colors))
-            {
-                Dbg.WriteWithCaller("Custom colors have not changed");
-            }
-            else
-            {
-                Dbg.WriteWithCaller("Custom colors have changed, saving to file");
-                SaveColors(colorDialog1.CustomColors);
-            }
-        }
-    }*/
 
     public static int[]? GetSavedColors(string colorFilePath)
     {
@@ -785,13 +580,9 @@ public partial class TextLibrary : Form
 
     private void RefreshGrid()
     {
-        Debug.WriteLine($"RefreshGrid");
         gridTextLibrary.DataSource = null;
-        Debug.WriteLine($"   Text library entries: {TextLibraryEntries.Count}");
         bindingList = FilteredEntries(textBoxSearch.Text);
-        Debug.WriteLine($"   Binding list entries: {bindingList.Count}");
         gridTextLibrary.DataSource = bindingList;
-
         RefreshColors();
     }
 
@@ -819,7 +610,7 @@ public partial class TextLibrary : Form
 
     private void TextLibrary_Shown(object sender, EventArgs e)
     {
-        Debug.WriteLine($"TextLibrary_Shown triggered");
+        // must run the color refresh after the form is fully loaded, otherwise the colors will not be used on the first refresh
         RefreshColors();
     }
 

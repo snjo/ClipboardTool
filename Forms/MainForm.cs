@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 using TextBox = System.Windows.Forms.TextBox;
 
-[assembly: AssemblyVersion("1.10.*")]
+[assembly: AssemblyVersion("1.11.*")]
 
 namespace ClipboardTool;
 [SupportedOSPlatform("windows")]
