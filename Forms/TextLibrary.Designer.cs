@@ -160,7 +160,7 @@
             // 
             // textBoxSearch
             // 
-            textBoxSearch.Location = new Point(54, 5);
+            textBoxSearch.Location = new Point(59, 5);
             textBoxSearch.Name = "textBoxSearch";
             textBoxSearch.Size = new Size(133, 23);
             textBoxSearch.TabIndex = 9;
@@ -169,11 +169,11 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(12, 9);
+            label1.Location = new Point(9, 9);
             label1.Name = "label1";
-            label1.Size = new Size(36, 15);
+            label1.Size = new Size(45, 15);
             label1.TabIndex = 10;
-            label1.Text = "Filter:";
+            label1.Text = "Search:";
             // 
             // TextLibrary
             // 

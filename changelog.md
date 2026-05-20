@@ -3,6 +3,7 @@
 ## v1.11 (In progress)
 
 - Text library snaps to mouse position when opened. Can be disabled in Options.
+- Text library filter added, search for entries in the textbox at the top of the window.
 - Confirm multiline text prompts with Control+Enter
 - Option: Fix diacritics in Send Keys for non-english keyboards
 
@@ -12,6 +13,7 @@
 - List command did not automatically start at first entry (line 1)
 - Fixed Text library crash when double clicking on empty entry
 - Prevented creating unsaved entry, new entries are now only made with the Add button.
+- Fixed custom colors not loading in color dialog
 
 ---------
 
