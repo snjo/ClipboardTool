@@ -28,9 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TextLibrary));
             gridTextLibrary = new DataGridView();
+            PinnedEntry = new DataGridViewCheckBoxColumn();
+            EntryName = new DataGridViewTextBoxColumn();
+            TextContentWithoutTags = new DataGridViewTextBoxColumn();
+            ColumnCopy = new DataGridViewButtonColumn();
             buttonAddFromClipboard = new Button();
             buttonPin = new Button();
             checkBoxMinimize = new CheckBox();
@@ -39,10 +44,7 @@
             linkLabelHistoryFolder = new LinkLabel();
             textBoxSearch = new TextBox();
             label1 = new Label();
-            PinnedEntry = new DataGridViewCheckBoxColumn();
-            EntryName = new DataGridViewTextBoxColumn();
-            TextContentWithoutTags = new DataGridViewTextBoxColumn();
-            ColumnCopy = new DataGridViewButtonColumn();
+            toolTip1 = new ToolTip(components);
             ((System.ComponentModel.ISupportInitialize)gridTextLibrary).BeginInit();
             SuspendLayout();
             // 
@@ -72,81 +74,6 @@
             gridTextLibrary.CellEndEdit += GridTextLibrary_CellEndEdit;
             gridTextLibrary.MouseDoubleClick += GridTextLibrary_MouseDoubleClick;
             // 
-            // buttonAddFromClipboard
-            // 
-            buttonAddFromClipboard.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            buttonAddFromClipboard.Font = new Font("Segoe UI", 9F);
-            buttonAddFromClipboard.Location = new Point(477, 4);
-            buttonAddFromClipboard.Name = "buttonAddFromClipboard";
-            buttonAddFromClipboard.Size = new Size(45, 23);
-            buttonAddFromClipboard.TabIndex = 4;
-            buttonAddFromClipboard.Text = "Add";
-            buttonAddFromClipboard.UseVisualStyleBackColor = true;
-            buttonAddFromClipboard.Click += ButtonAddFromClipboard_Click;
-            // 
-            // buttonPin
-            // 
-            buttonPin.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            buttonPin.Location = new Point(362, 3);
-            buttonPin.Name = "buttonPin";
-            buttonPin.Size = new Size(28, 23);
-            buttonPin.TabIndex = 5;
-            buttonPin.Text = "📌";
-            buttonPin.UseVisualStyleBackColor = true;
-            buttonPin.Click += ActionAlwaysOnTop;
-            // 
-            // checkBoxMinimize
-            // 
-            checkBoxMinimize.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            checkBoxMinimize.AutoSize = true;
-            checkBoxMinimize.Location = new Point(340, 523);
-            checkBoxMinimize.Name = "checkBoxMinimize";
-            checkBoxMinimize.Size = new Size(182, 19);
-            checkBoxMinimize.TabIndex = 6;
-            checkBoxMinimize.Text = "Minimize when clicking Copy";
-            checkBoxMinimize.UseVisualStyleBackColor = true;
-            checkBoxMinimize.CheckedChanged += CheckBoxMinimize_CheckedChanged;
-            // 
-            // buttonColor
-            // 
-            buttonColor.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            buttonColor.Location = new Point(396, 3);
-            buttonColor.Name = "buttonColor";
-            buttonColor.Size = new Size(75, 23);
-            buttonColor.TabIndex = 7;
-            buttonColor.Text = "Color";
-            buttonColor.UseVisualStyleBackColor = true;
-            buttonColor.Click += ButtonColor_Click;
-            // 
-            // linkLabelHistoryFolder
-            // 
-            linkLabelHistoryFolder.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            linkLabelHistoryFolder.AutoSize = true;
-            linkLabelHistoryFolder.Location = new Point(4, 524);
-            linkLabelHistoryFolder.Name = "linkLabelHistoryFolder";
-            linkLabelHistoryFolder.Size = new Size(103, 15);
-            linkLabelHistoryFolder.TabIndex = 8;
-            linkLabelHistoryFolder.TabStop = true;
-            linkLabelHistoryFolder.Text = "Text Library Folder";
-            linkLabelHistoryFolder.LinkClicked += OpenTextLibraryFolder;
-            // 
-            // textBoxSearch
-            // 
-            textBoxSearch.Location = new Point(59, 5);
-            textBoxSearch.Name = "textBoxSearch";
-            textBoxSearch.Size = new Size(133, 23);
-            textBoxSearch.TabIndex = 9;
-            textBoxSearch.TextChanged += TextBoxSearch_TextChanged;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(9, 9);
-            label1.Name = "label1";
-            label1.Size = new Size(45, 15);
-            label1.TabIndex = 10;
-            label1.Text = "Search:";
-            // 
             // PinnedEntry
             // 
             PinnedEntry.HeaderText = "💾";
@@ -174,6 +101,85 @@
             ColumnCopy.Text = ">";
             ColumnCopy.UseColumnTextForButtonValue = true;
             ColumnCopy.Width = 50;
+            // 
+            // buttonAddFromClipboard
+            // 
+            buttonAddFromClipboard.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            buttonAddFromClipboard.Font = new Font("Segoe UI", 9F);
+            buttonAddFromClipboard.Location = new Point(477, 4);
+            buttonAddFromClipboard.Name = "buttonAddFromClipboard";
+            buttonAddFromClipboard.Size = new Size(45, 23);
+            buttonAddFromClipboard.TabIndex = 4;
+            buttonAddFromClipboard.Text = "Add";
+            toolTip1.SetToolTip(buttonAddFromClipboard, "Add a new text entry (copies the clipboard)");
+            buttonAddFromClipboard.UseVisualStyleBackColor = true;
+            buttonAddFromClipboard.Click += ButtonAddFromClipboard_Click;
+            // 
+            // buttonPin
+            // 
+            buttonPin.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            buttonPin.Location = new Point(362, 3);
+            buttonPin.Name = "buttonPin";
+            buttonPin.Size = new Size(28, 23);
+            buttonPin.TabIndex = 5;
+            buttonPin.Text = "📌";
+            toolTip1.SetToolTip(buttonPin, "Window always on top");
+            buttonPin.UseVisualStyleBackColor = true;
+            buttonPin.Click += ActionAlwaysOnTop;
+            // 
+            // checkBoxMinimize
+            // 
+            checkBoxMinimize.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            checkBoxMinimize.AutoSize = true;
+            checkBoxMinimize.Location = new Point(340, 523);
+            checkBoxMinimize.Name = "checkBoxMinimize";
+            checkBoxMinimize.Size = new Size(182, 19);
+            checkBoxMinimize.TabIndex = 6;
+            checkBoxMinimize.Text = "Minimize when clicking Copy";
+            checkBoxMinimize.UseVisualStyleBackColor = true;
+            checkBoxMinimize.CheckedChanged += CheckBoxMinimize_CheckedChanged;
+            // 
+            // buttonColor
+            // 
+            buttonColor.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            buttonColor.Location = new Point(396, 3);
+            buttonColor.Name = "buttonColor";
+            buttonColor.Size = new Size(75, 23);
+            buttonColor.TabIndex = 7;
+            buttonColor.Text = "Color";
+            toolTip1.SetToolTip(buttonColor, "Change color of the selected text entry");
+            buttonColor.UseVisualStyleBackColor = true;
+            buttonColor.Click += ButtonColor_Click;
+            // 
+            // linkLabelHistoryFolder
+            // 
+            linkLabelHistoryFolder.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            linkLabelHistoryFolder.AutoSize = true;
+            linkLabelHistoryFolder.Location = new Point(4, 524);
+            linkLabelHistoryFolder.Name = "linkLabelHistoryFolder";
+            linkLabelHistoryFolder.Size = new Size(103, 15);
+            linkLabelHistoryFolder.TabIndex = 8;
+            linkLabelHistoryFolder.TabStop = true;
+            linkLabelHistoryFolder.Text = "Text Library Folder";
+            linkLabelHistoryFolder.LinkClicked += OpenTextLibraryFolder;
+            // 
+            // textBoxSearch
+            // 
+            textBoxSearch.Location = new Point(59, 5);
+            textBoxSearch.Name = "textBoxSearch";
+            textBoxSearch.Size = new Size(133, 23);
+            textBoxSearch.TabIndex = 9;
+            toolTip1.SetToolTip(textBoxSearch, "Show all text entries matching the search word");
+            textBoxSearch.TextChanged += TextBoxSearch_TextChanged;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(9, 9);
+            label1.Name = "label1";
+            label1.Size = new Size(45, 15);
+            label1.TabIndex = 10;
+            label1.Text = "Search:";
             // 
             // TextLibrary
             // 
@@ -211,5 +217,6 @@
         private DataGridViewTextBoxColumn EntryName;
         private DataGridViewTextBoxColumn TextContentWithoutTags;
         private DataGridViewButtonColumn ColumnCopy;
+        private ToolTip toolTip1;
     }
 }
