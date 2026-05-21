@@ -6,6 +6,7 @@ using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 
 namespace ClipboardTool;
+
 [SupportedOSPlatform("windows")]
 
 public partial class TextPrompt : Form

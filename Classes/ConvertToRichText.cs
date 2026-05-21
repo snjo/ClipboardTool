@@ -1,8 +1,11 @@
 ﻿using ClipboardTool.Properties;
 using DebugTools;
+using System.Runtime.Versioning;
 using System.Text;
 
 namespace ClipboardTool.Classes;
+
+[SupportedOSPlatform("windows")]
 
 internal class ConvertToRichText
 {
@@ -16,9 +19,9 @@ internal class ConvertToRichText
         //https://www.biblioscape.com/rtf15_spec.htm
         Dbg.WriteWithCaller("Parsing Rich Text: ");
 
-        RichTextBox rtfBox = new RichTextBox();
-        StringBuilder builder = new StringBuilder();
-        string plainTextResult = "";
+        RichTextBox rtfBox = new();
+        StringBuilder builder = new();
+        //string plainTextResult;
         string richTextResult = "";
         string tagStart = "<";
         string tagEnd = ">";
@@ -128,7 +131,7 @@ internal class ConvertToRichText
                 rtfBox.Rtf = richTextResult;
             }
         }
-        plainTextResult = rtfBox.Text; // destroys unicode like smileys
+        string plainTextResult = rtfBox.Text; // destroys unicode like smileys
         rtfBox.Dispose();
         //Dbg.WriteWithCaller("Original Text: " + plainText);
         //Debug.WriteLine("Plain text result: " + plainTextResult);

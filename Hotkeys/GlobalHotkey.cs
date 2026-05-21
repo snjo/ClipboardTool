@@ -3,6 +3,7 @@ using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 
 namespace Hotkeys;
+
 [SupportedOSPlatform("windows")]
 
 public class GlobalHotkey

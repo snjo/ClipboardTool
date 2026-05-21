@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Runtime.Versioning;
 
 namespace Hotkeys;
+
 [SupportedOSPlatform("windows")]
 
 public class HotkeyTools

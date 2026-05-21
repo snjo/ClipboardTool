@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Runtime.Versioning;
 
 namespace ClipboardTool;
+
 [SupportedOSPlatform("windows")]
 
 public partial class Toolbar : Form

@@ -1,8 +1,12 @@
-﻿namespace Hotkeys
+﻿using System.Runtime.Versioning;
+
+namespace Hotkeys
 {
+    [SupportedOSPlatform("windows")]
     [Serializable]
     public class Hotkey
     {
+
         public string Key = String.Empty;
         public bool Ctrl;
         public bool Alt;

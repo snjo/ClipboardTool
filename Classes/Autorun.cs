@@ -18,6 +18,7 @@ using Microsoft.Win32;
 using System.Runtime.Versioning;
 
 namespace Autorun;
+
 [SupportedOSPlatform("windows")]
 public static class Autorun
 {

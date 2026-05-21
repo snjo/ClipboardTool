@@ -2,9 +2,9 @@
 using ClipboardTool.Forms;
 using ClipboardTool.Properties;
 using DebugTools;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.Versioning;
-using System.ComponentModel;
 
 namespace ClipboardTool;
 
@@ -291,12 +291,12 @@ public partial class TextLibrary : Form
             string content = textPrompt.TextResult[1];
             Color color = textPrompt.ColorPicked;
 
-            TextLibraryEntry newEntry = new TextLibraryEntry(title, [])
+            TextLibraryEntry newEntry = new(title, [])
             {
                 TextContentWithoutTags = content,
                 BackgroundColor = color
             };
-            bool saveSuccessful = SaveEntry(newEntry);
+            SaveEntry(newEntry);
             TextLibraryEntries.Add(newEntry);
             RefreshGrid();
         }
@@ -433,7 +433,7 @@ public partial class TextLibrary : Form
     {
         PickSelectedEntryColor();
     }
-    
+
     private void PickSelectedEntryColor()
     {
         if (gridTextLibrary.SelectedCells.Count <= 0) return;
@@ -451,14 +451,14 @@ public partial class TextLibrary : Form
         if (result == DialogResult.OK)
         {
             Color newColor = colorDialog1.Color;
-            int row = gridTextLibrary.SelectedCells[0].RowIndex;
+            //int row = gridTextLibrary.SelectedCells[0].RowIndex;
             if (gridTextLibrary.SelectedCells[0].OwningRow.DataBoundItem is TextLibraryEntry entry)
             {
                 entry.BackgroundColor = newColor;
                 SaveEntry(entry);
                 RefreshGrid();
             }
-            
+
             if (ArraysAreIdentical(colorDialog1.CustomColors, colors))
             {
                 Dbg.WriteWithCaller("Custom colors have not changed");
@@ -623,7 +623,7 @@ public partial class TextLibrary : Form
 
     public static BindingList<T> ToBindingList<T>(IEnumerable<T> range)
     {
-        return new BindingList<T>(range.ToList());
+        return new BindingList<T>([.. range]);
     }
 
 }

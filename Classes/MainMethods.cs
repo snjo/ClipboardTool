@@ -6,6 +6,7 @@ using System.Runtime.Versioning;
 using System.Text.RegularExpressions;
 
 namespace ClipboardTool.Classes;
+
 [SupportedOSPlatform("windows")]
 
 public partial class MainMethods
@@ -365,10 +366,10 @@ public partial class MainMethods
                 // caret / circumflex, handled after SendKeysSafeRegex
                 if (settings.fixDiacriticsInSendKeys)
                 {
-                    keystrokes = fixDiacritic(keystrokes, "~"); // tilde
-                    keystrokes = fixDiacritic(keystrokes, "¨"); // umlaut / diaresis
-                    keystrokes = fixDiacritic(keystrokes, "`"); // grave
-                    keystrokes = fixDiacritic(keystrokes, "´"); // acute
+                    keystrokes = FixDiacritic(keystrokes, "~"); // tilde
+                    keystrokes = FixDiacritic(keystrokes, "¨"); // umlaut / diaresis
+                    keystrokes = FixDiacritic(keystrokes, "`"); // grave
+                    keystrokes = FixDiacritic(keystrokes, "´"); // acute
                 }
                 keystrokes = SendKeysSafeRegex().Replace(keystrokes, "{$0}");
                 if (settings.fixDiacriticsInSendKeys)
@@ -387,7 +388,7 @@ public partial class MainMethods
         hotkeyHeldDown = false;
     }
 
-    private string fixDiacritic(string text, string mark)
+    private static string FixDiacritic(string text, string mark)
     {
         if (text.Contains(mark))
         {

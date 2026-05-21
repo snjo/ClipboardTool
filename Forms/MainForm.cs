@@ -2,8 +2,6 @@
 using ClipboardTool.Properties;
 using DebugTools;
 using Hotkeys;
-using Microsoft.VisualBasic.Devices;
-using System.Diagnostics;
 using System.Globalization;
 using System.Reflection;
 using System.Runtime.InteropServices;
@@ -13,6 +11,7 @@ using TextBox = System.Windows.Forms.TextBox;
 [assembly: AssemblyVersion("1.11.*")]
 
 namespace ClipboardTool;
+
 [SupportedOSPlatform("windows")]
 
 public partial class MainForm : Form
@@ -549,7 +548,7 @@ public partial class MainForm : Form
         }
     }
 
-    private void SnapFormToMousePosition(Form form)
+    private static void SnapFormToMousePosition(Form form)
     {
         Point mousepos = Cursor.Position;
         Screen screen = Screen.FromPoint(mousepos);

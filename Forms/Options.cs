@@ -7,6 +7,7 @@ using System.Globalization;
 using System.Runtime.Versioning;
 
 namespace ClipboardTool;
+
 [SupportedOSPlatform("windows")]
 
 public partial class Options : Form
@@ -45,7 +46,7 @@ public partial class Options : Form
         textBoxCulture.Text = settings.Culture;
         optionAutoStart.Checked = Autorun.Autorun.IsEnabled(MainForm.ApplicationName);
         optionFixDiacriticsInSendKeys.Checked = settings.fixDiacriticsInSendKeys;
-        
+
         FillGrid();
 
         labelVersion.Text = Application.ProductVersion;

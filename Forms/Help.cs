@@ -2,6 +2,7 @@
 using System.Runtime.Versioning;
 
 namespace ClipboardTool;
+
 [SupportedOSPlatform("windows")]
 public partial class HelpForm : Form
 {
@@ -45,7 +46,7 @@ public partial class HelpForm : Form
         Process.Start(new ProcessStartInfo() { FileName = url, UseShellExecute = true });
     }
 
-    private void richTextBox1_LinkClicked(object sender, LinkClickedEventArgs e)
+    private void RichTextBox1_LinkClicked(object sender, LinkClickedEventArgs e)
     {
         if (e.LinkText == null) return;
         string url = e.LinkText;

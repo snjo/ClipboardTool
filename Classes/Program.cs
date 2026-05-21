@@ -1,6 +1,7 @@
 using System.Runtime.Versioning;
 
 namespace ClipboardTool;
+
 [SupportedOSPlatform("windows")]
 
 internal static class Program
