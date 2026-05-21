@@ -544,6 +544,30 @@ public partial class MainMethods
 
     }
 
+    public static void SnapFormToMousePosition(Form form)
+    {
+        Point mousepos = Cursor.Position;
+        Screen screen = Screen.FromPoint(mousepos);
+        Rectangle screenBounds = screen.Bounds;
+        int left = screenBounds.Left;
+        int top = screenBounds.Top;
+        int right = screenBounds.Right;
+        int bottom = screenBounds.Bottom;
+        int height = form.Height;
+        int width = form.Width;
+        int taskbarHeight = 50;
+        int offsetX = -100;
+        int offsetY = -20;
+        int mouseX = Math.Max(left, mousepos.X + offsetX);
+        int mouseY = Math.Max(top, mousepos.Y + offsetY);
+
+        int formX = Math.Clamp(mouseX, left, right - width);
+        int formY = Math.Clamp(mouseY, top, bottom - height - taskbarHeight);
+
+        form.Top = formY;
+        form.Left = formX;
+    }
+
     [GeneratedRegex("[+^%~(){}]")]
     private static partial Regex SendKeysSafeRegex();
 }

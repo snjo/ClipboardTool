@@ -294,4 +294,9 @@ public partial class TextPrompt : Form
         }
         return result;
     }
+
+    private void TextPrompt_Shown(object sender, EventArgs e)
+    {
+        MainMethods.SnapFormToMousePosition(this);
+    }
 }
