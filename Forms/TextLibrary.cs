@@ -173,7 +173,10 @@ public partial class TextLibrary : Form
 
     private bool SaveEntry(string? title, string? text, Color? color)
     {
-        if (title == null || text == null) return false;
+        if (title == null || text == null)
+        {
+            return false;
+        }
         title = title.Trim();
         if (title.Length == 0) return false;
         if (color == Color.Empty) color = Color.White;
@@ -372,6 +375,10 @@ public partial class TextLibrary : Form
             bool newPinStatus = !entry.PinnedEntry;
             if (newPinStatus == true)
             {
+                if (entry.Title == "")
+                {
+                    RenameEntry(entry);
+                }
                 entry.PinnedEntry = SaveEntry(entry);
             }
             else
