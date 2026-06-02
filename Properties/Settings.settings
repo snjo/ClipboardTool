@@ -21,7 +21,7 @@
       <Value Profile="(Default)">T</Value>
     </Setting>
     <Setting Name="hkCapsLockKey" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Back</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="hkProcessTextKey" Type="System.String" Scope="User">
       <Value Profile="(Default)">P</Value>

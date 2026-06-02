@@ -97,7 +97,7 @@ namespace ClipboardTool.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Back")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string hkCapsLockKey {
             get {
                 return ((string)(this["hkCapsLockKey"]));
