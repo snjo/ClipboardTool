@@ -1,5 +1,7 @@
 ﻿using DebugTools;
+using System;
 using System.Diagnostics;
+using System.Globalization;
 using System.Runtime.Versioning;
 
 namespace ClipboardTool.Classes;
@@ -80,6 +82,12 @@ public class ProcessText(MainForm parent)
         // date and time
         customText = customText.Replace(ProcessingCommands.Date.Name, DateTime.Now.ToShortDateString());
         customText = customText.Replace(ProcessingCommands.Time.Name, DateTime.Now.ToShortTimeString());
+
+        customText = customText.Replace(ProcessingCommands.Year.Name, DateTime.Now.ToString("yyyy"));
+        customText = customText.Replace(ProcessingCommands.MonthNumber.Name, DateTime.Now.ToString("MM"));
+        customText = customText.Replace(ProcessingCommands.MonthName.Name, DateTime.Now.ToString("MMMM"));
+        customText = customText.Replace(ProcessingCommands.DayNumber.Name, DateTime.Now.ToString("dd"));
+        customText = customText.Replace(ProcessingCommands.DayName.Name, DateTime.Now.ToString("dddd"));
 
         // clipboard, case conversion
         customText = customText.Replace(ProcessingCommands.ClipboardPlain.Name, clipboardText);

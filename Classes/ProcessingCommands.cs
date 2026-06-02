@@ -16,6 +16,11 @@
         public static readonly List<Command> Commands = [];
         public static readonly Command Date = new(name: "$date", description: "Outputs current date. Format/Culture can be set in Options", Commands);
         public static readonly Command Time = new(name: "$time", description: "Outputs current time", Commands);
+        public static readonly Command Year = new(name: "$year", description: "Outputs current year.", Commands);
+        public static readonly Command DayNumber = new(name: "$daynumber", description: "Outputs current day number.", Commands);
+        public static readonly Command MonthNumber = new(name: "$monthnumber", description: "Outputs current month number.", Commands);
+        public static readonly Command DayName = new(name: "$dayname", description: "Outputs current day name.", Commands);
+        public static readonly Command MonthName = new(name: "$monthname", description: "Outputs current month name.", Commands);
         public static readonly Command ClipboardPlain = new(name: "$cp", description: "Clipboard (plain text)", Commands);
         public static readonly Command ClipboardUpper = new(name: "$cu", description: "Clipboard in upper case", Commands);
         public static readonly Command ClipboardLower = new(name: "$cl", description: "Clipboard in lower case", Commands);
@@ -48,7 +53,7 @@
         public static readonly Command ClipboardCharToInt = new(name: "$cci", description: "Convert text to character numbers for debugging", Commands);
         public static readonly Command None = new(name: "$X", description: "No processing, but separates a tag from the rest of the text", Commands);
 
-        public static string GetListAsText(int padCommand = 10, string separator = "")
+        public static string GetListAsText(int padCommand = 14, string separator = "")
         {
             string result = string.Empty;
             foreach (Command cmd in Commands)
