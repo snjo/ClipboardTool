@@ -2,8 +2,9 @@
 
 ## v1.11 (In progress)
 
-- Text library snaps to mouse position when opened. Can be disabled in Options.
 - Text library filter added, search for entries in the textbox at the top of the window.
+- Text library snaps to mouse position when opened. Can be disabled in Options.
+- Added text processing commands: $year, $monthnumber, $monthname, $daynumber, $dayname
 - Confirm multiline text prompts with Control+Enter
 - Option: Fix diacritics in Send Keys for non-english keyboards
 
