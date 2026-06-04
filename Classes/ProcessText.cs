@@ -228,22 +228,27 @@ public class ProcessText(MainForm parent)
 
     private string SeparatorList(string customText, int slot = 1)
     {
-        char separator;
+        string separator;
         string command;
         if (customText.Contains(ProcessingCommands.ValueSplitComma.Name)) // comma separator
         {
-            separator = ',';
+            separator = ",";
             command = ProcessingCommands.ValueSplitComma.Name;
         }
         else if (customText.Contains(ProcessingCommands.ValueSplitSemicolon.Name)) // semicolon separator
         {
-            separator = ';';
+            separator = ";";
             command = ProcessingCommands.ValueSplitSemicolon.Name;
         }
         else if (customText.Contains(ProcessingCommands.ValueSplitSpace.Name)) // space separator
         {
-            separator = ' ';
+            separator = " ";
             command = ProcessingCommands.ValueSplitSpace.Name;
+        }
+        else if (customText.Contains(ProcessingCommands.ValueSplitEnter.Name)) // space separator
+        {
+            separator = Environment.NewLine;
+            command = ProcessingCommands.ValueSplitEnter.Name;
         }
         else return customText;
 

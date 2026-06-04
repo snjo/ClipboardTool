@@ -39,6 +39,7 @@
         public static readonly Command ValueSplitComma = new(name: "$vcm", description: "Split value in slot 1 with COMMA, output value[number]", Commands);
         public static readonly Command ValueSplitSemicolon = new(name: "$vsc", description: "Split value in slot 1 with SEMICOLON, output value[number]", Commands);
         public static readonly Command ValueSplitSpace = new(name: "$vsp", description: "Split value in slot 1 with SPACE, output value[number]", Commands);
+        public static readonly Command ValueSplitEnter = new(name: "$vse", description: "Split value in slot 1 with ENTER (new line), output value[number]", Commands);
         public static readonly Command List = new(name: "$list", description: "Split lines in main textbox (skips line 1), output value[number]", Commands);
         public static readonly Command ListLines1 = new(name: "$lln1", description: "Split lines in mem1 for use in processing from other slot/text library", Commands);
         public static readonly Command ListLines2 = new(name: "$lln2", description: "Split lines in mem2 for use in processing from other slot/text library", Commands);
