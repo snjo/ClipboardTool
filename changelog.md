@@ -5,6 +5,7 @@
 - Text library filter added, search for entries in the textbox at the top of the window.
 - Text library snaps to mouse position when opened. Can be disabled in Options.
 - Added text processing commands: $year, $monthnumber, $monthname, $daynumber, $dayname
+- Added Value Split command for Enter / NewLine: $vse
 - Confirm multiline text prompts with Control+Enter
 - Option: Fix diacritics in Send Keys for non-english keyboards
 
