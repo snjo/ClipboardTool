@@ -72,6 +72,7 @@
             gridTextLibrary.TabIndex = 3;
             gridTextLibrary.CellClick += GridTextLibrary_CellClick;
             gridTextLibrary.CellEndEdit += GridTextLibrary_CellEndEdit;
+            gridTextLibrary.KeyDown += gridTextLibrary_KeyDown;
             gridTextLibrary.MouseDoubleClick += GridTextLibrary_MouseDoubleClick;
             // 
             // PinnedEntry
@@ -198,6 +199,7 @@
             Name = "TextLibrary";
             Text = "Text Library";
             Shown += TextLibrary_Shown;
+            PreviewKeyDown += TextLibrary_PreviewKeyDown;
             ((System.ComponentModel.ISupportInitialize)gridTextLibrary).EndInit();
             ResumeLayout(false);
             PerformLayout();

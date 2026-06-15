@@ -621,6 +621,25 @@ public partial class TextLibrary : Form
         RefreshColors();
     }
 
+    private void TextLibrary_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+    {
+        Debug.WriteLine($"Form Key down preview: {e.KeyCode}");
+        if (e.KeyCode == Keys.F3)
+        {
+            textBoxSearch.Focus();
+            //Debug.WriteLine($"Setting focus to search box");
+        }
+    }
+
+    private void gridTextLibrary_KeyDown(object sender, KeyEventArgs e)
+    {
+        if (e.KeyCode == Keys.F3)
+        {
+            e.Handled = true; // must prevent the grid from receiving F3, otherwise a sorting exception occurs.
+            textBoxSearch.Focus();
+        }
+    }
+
     public static BindingList<T> ToBindingList<T>(IEnumerable<T> range)
     {
         return new BindingList<T>([.. range]);

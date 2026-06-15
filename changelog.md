@@ -3,6 +3,7 @@
 ## v1.11 (In progress)
 
 - Text library filter added, search for entries in the textbox at the top of the window.
+- Text library: F3 activates the search textbox
 - Text library snaps to mouse position when opened. Can be disabled in Options.
 - Added text processing commands: $year, $monthnumber, $monthname, $daynumber, $dayname
 - Added Value Split command for Enter / NewLine: $vse
