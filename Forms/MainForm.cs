@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 using TextBox = System.Windows.Forms.TextBox;
 
-[assembly: AssemblyVersion("1.11.*")]
+[assembly: AssemblyVersion("1.12.*")]
 
 namespace ClipboardTool;
 
