@@ -1,6 +1,8 @@
 ﻿# Changelog
 
-## v1.11 (In progress)
+## v1.12 (In progress)
+
+## v1.11
 
 - Text library filter added, search for entries in the textbox at the top of the window.
 - Text library: F3 activates the search textbox
