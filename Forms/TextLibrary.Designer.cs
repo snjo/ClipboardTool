@@ -70,7 +70,7 @@
             gridTextLibrary.RowHeadersWidth = 20;
             gridTextLibrary.RowTemplate.Height = 50;
             gridTextLibrary.Size = new Size(518, 487);
-            gridTextLibrary.TabIndex = 3;
+            gridTextLibrary.TabIndex = 21;
             gridTextLibrary.CellClick += GridTextLibrary_CellClick;
             gridTextLibrary.CellEndEdit += GridTextLibrary_CellEndEdit;
             gridTextLibrary.KeyDown += gridTextLibrary_KeyDown;
@@ -111,7 +111,7 @@
             buttonAddFromClipboard.Location = new Point(477, 4);
             buttonAddFromClipboard.Name = "buttonAddFromClipboard";
             buttonAddFromClipboard.Size = new Size(45, 23);
-            buttonAddFromClipboard.TabIndex = 4;
+            buttonAddFromClipboard.TabIndex = 5;
             buttonAddFromClipboard.Text = "Add";
             toolTip1.SetToolTip(buttonAddFromClipboard, "Add a new text entry (copies the clipboard)");
             buttonAddFromClipboard.UseVisualStyleBackColor = true;
@@ -123,7 +123,7 @@
             buttonPin.Location = new Point(362, 3);
             buttonPin.Name = "buttonPin";
             buttonPin.Size = new Size(28, 23);
-            buttonPin.TabIndex = 5;
+            buttonPin.TabIndex = 3;
             buttonPin.Text = "📌";
             toolTip1.SetToolTip(buttonPin, "Window always on top");
             buttonPin.UseVisualStyleBackColor = true;
@@ -136,7 +136,7 @@
             checkBoxMinimize.Location = new Point(340, 523);
             checkBoxMinimize.Name = "checkBoxMinimize";
             checkBoxMinimize.Size = new Size(182, 19);
-            checkBoxMinimize.TabIndex = 6;
+            checkBoxMinimize.TabIndex = 12;
             checkBoxMinimize.Text = "Minimize when clicking Copy";
             checkBoxMinimize.UseVisualStyleBackColor = true;
             checkBoxMinimize.CheckedChanged += CheckBoxMinimize_CheckedChanged;
@@ -147,7 +147,7 @@
             buttonColor.Location = new Point(396, 3);
             buttonColor.Name = "buttonColor";
             buttonColor.Size = new Size(75, 23);
-            buttonColor.TabIndex = 7;
+            buttonColor.TabIndex = 4;
             buttonColor.Text = "Color";
             toolTip1.SetToolTip(buttonColor, "Change color of the selected text entry");
             buttonColor.UseVisualStyleBackColor = true;
@@ -160,7 +160,7 @@
             linkLabelHistoryFolder.Location = new Point(4, 524);
             linkLabelHistoryFolder.Name = "linkLabelHistoryFolder";
             linkLabelHistoryFolder.Size = new Size(103, 15);
-            linkLabelHistoryFolder.TabIndex = 8;
+            linkLabelHistoryFolder.TabIndex = 11;
             linkLabelHistoryFolder.TabStop = true;
             linkLabelHistoryFolder.Text = "Text Library Folder";
             linkLabelHistoryFolder.LinkClicked += OpenTextLibraryFolder;
@@ -170,7 +170,7 @@
             textBoxSearch.Location = new Point(59, 5);
             textBoxSearch.Name = "textBoxSearch";
             textBoxSearch.Size = new Size(133, 23);
-            textBoxSearch.TabIndex = 9;
+            textBoxSearch.TabIndex = 1;
             toolTip1.SetToolTip(textBoxSearch, "Show all text entries matching the search word");
             textBoxSearch.TextChanged += TextBoxSearch_TextChanged;
             // 
@@ -189,7 +189,7 @@
             buttonClearFilter.Location = new Point(198, 5);
             buttonClearFilter.Name = "buttonClearFilter";
             buttonClearFilter.Size = new Size(27, 23);
-            buttonClearFilter.TabIndex = 11;
+            buttonClearFilter.TabIndex = 2;
             buttonClearFilter.Text = "❌";
             toolTip1.SetToolTip(buttonClearFilter, "Clear filter");
             buttonClearFilter.UseVisualStyleBackColor = true;
