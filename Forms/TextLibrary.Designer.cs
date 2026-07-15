@@ -45,6 +45,7 @@
             textBoxSearch = new TextBox();
             label1 = new Label();
             toolTip1 = new ToolTip(components);
+            buttonClearFilter = new Button();
             ((System.ComponentModel.ISupportInitialize)gridTextLibrary).BeginInit();
             SuspendLayout();
             // 
@@ -182,11 +183,24 @@
             label1.TabIndex = 10;
             label1.Text = "Search:";
             // 
+            // buttonClearFilter
+            // 
+            buttonClearFilter.Font = new Font("Segoe UI", 8F);
+            buttonClearFilter.Location = new Point(198, 5);
+            buttonClearFilter.Name = "buttonClearFilter";
+            buttonClearFilter.Size = new Size(27, 23);
+            buttonClearFilter.TabIndex = 11;
+            buttonClearFilter.Text = "❌";
+            toolTip1.SetToolTip(buttonClearFilter, "Clear filter");
+            buttonClearFilter.UseVisualStyleBackColor = true;
+            buttonClearFilter.Click += ButtonClearFilter_Click;
+            // 
             // TextLibrary
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(525, 545);
+            Controls.Add(buttonClearFilter);
             Controls.Add(label1);
             Controls.Add(textBoxSearch);
             Controls.Add(linkLabelHistoryFolder);
@@ -220,5 +234,6 @@
         private DataGridViewTextBoxColumn TextContentWithoutTags;
         private DataGridViewButtonColumn ColumnCopy;
         private ToolTip toolTip1;
+        private Button buttonClearFilter;
     }
 }

@@ -37,8 +37,18 @@ public partial class TextLibrary : Form
         gridTextLibrary.Columns[0].DataPropertyName = "PinnedEntry";
         gridTextLibrary.Columns[1].DataPropertyName = "Title";
         gridTextLibrary.Columns[2].DataPropertyName = "TextContentWithoutTags";
-
         RefreshGrid();
+    }
+
+    protected override bool ProcessCmdKey(ref Message msg, Keys key)
+    {
+        //Datagrid throws sorting exception if F3 is pressed, intercept F3 and set focus to the search box.
+        if (key == Keys.F3)
+        {
+            textBoxSearch.Focus();
+            return true;
+        }
+        return base.ProcessCmdKey(ref msg, key);
     }
 
     public static string TextLibraryFolder
@@ -623,21 +633,26 @@ public partial class TextLibrary : Form
 
     private void TextLibrary_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
     {
-        Debug.WriteLine($"Form Key down preview: {e.KeyCode}");
-        if (e.KeyCode == Keys.F3)
-        {
-            textBoxSearch.Focus();
-            //Debug.WriteLine($"Setting focus to search box");
-        }
+        //Debug.WriteLine($"Form Key down preview: {e.KeyCode}");
+        //if (e.KeyCode == Keys.F3)
+        //{
+        //    textBoxSearch.Focus();
+        //    //Debug.WriteLine($"Setting focus to search box");
+        //}
     }
 
     private void gridTextLibrary_KeyDown(object sender, KeyEventArgs e)
     {
-        if (e.KeyCode == Keys.F3)
-        {
-            e.Handled = true; // must prevent the grid from receiving F3, otherwise a sorting exception occurs.
-            textBoxSearch.Focus();
-        }
+        //if (e.KeyCode == Keys.F3)
+        //{
+        //    e.Handled = true; // must prevent the grid from receiving F3, otherwise a sorting exception occurs.
+        //    textBoxSearch.Focus();
+        //}
+    }
+
+    private void ButtonClearFilter_Click(object sender, EventArgs e)
+    {
+        textBoxSearch.Text = "";
     }
 
     public static BindingList<T> ToBindingList<T>(IEnumerable<T> range)
