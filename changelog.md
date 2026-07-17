@@ -3,6 +3,9 @@
 ## v1.12 (In progress)
 
 - Added button to clear the current filter text in Text Library
+
+### Bugfixes
+
 - Fixed F3 causing error when pressed in Text Library
 
 ## v1.11
