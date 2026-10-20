@@ -3,6 +3,9 @@
 ## v1.12 (In progress)
 
 - Added button to clear the current filter text in Text Library
+- Added $trim to trim white space at the start and end of text
+- Added $ctlb and $lbtc to convert commas to line breaks and vice versa
+- Changed $rep, Replace no longer alters the clipboard directly, works like other commands
 
 ### Bugfixes
 
