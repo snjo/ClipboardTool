@@ -185,6 +185,21 @@ public class ProcessText(MainForm parent)
             customText = customText.Replace(ProcessingCommands.DigitToWord.Name, "");
         }
 
+        if (customText.Contains(ProcessingCommands.Trim.Name))
+        {
+            customText = customText.Replace(ProcessingCommands.Trim.Name, "").Trim();
+        }
+
+        if (customText.Contains(ProcessingCommands.LineBreakToComma.Name))
+        {
+            customText = customText.Replace(ProcessingCommands.LineBreakToComma.Name, "").Replace(Environment.NewLine, ", ");
+        }
+
+        if (customText.Contains(ProcessingCommands.CommaToLineBreak.Name))
+        {
+            customText = customText.Replace(ProcessingCommands.CommaToLineBreak.Name, "").Replace(", ", Environment.NewLine).Replace(",", Environment.NewLine);
+        }
+
         // Remove None-Command, used for separating the end of a tag from text, or splitting up what could be construed as a tag. For edge cases.
         customText = customText.Replace(ProcessingCommands.None.Name, "");
 
@@ -219,9 +234,11 @@ public class ProcessText(MainForm parent)
 
     private void ReplaceText(ref string customText, ref string clip)
     {
-        customText = customText.Replace(ProcessingCommands.Replace.Name, string.Empty);
-        Clipboard.SetText(clip.Replace(mainForm.MemorySlot(1).Text, mainForm.MemorySlot(2).Text));
+        //customText = customText.Replace(ProcessingCommands.Replace.Name, string.Empty);
+        //Clipboard.SetText(clip.Replace(mainForm.MemorySlot(1).Text, mainForm.MemorySlot(2).Text));
+        //clip = clip.Replace(mainForm.MemorySlot(1).Text, mainForm.MemorySlot(2).Text);
         clip = clip.Replace(mainForm.MemorySlot(1).Text, mainForm.MemorySlot(2).Text);
+        customText = customText.Replace(ProcessingCommands.Replace.Name, clip);
     }
 
 

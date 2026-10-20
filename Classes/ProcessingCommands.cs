@@ -35,7 +35,7 @@
         public static readonly Command MemSlot2 = new(name: "$m2", description: "Contents of memory slot 2", Commands);
         public static readonly Command MemSlot3 = new(name: "$m3", description: "Contents of memory slot 3", Commands);
         public static readonly Command ExcelQuotes = new(name: "$eq", description: "Flag: Convert \"\" to \", and removes single \"", Commands);
-        public static readonly Command Replace = new(name: "$rep", description: "Replace text in clipboard. Use mem slot 1 & 2 as from/to strings", Commands);
+        public static readonly Command Replace = new(name: "$rep", description: "Clipboard plaintext, but with text replaced. Use mem slot 1 & 2 as from/to strings", Commands);
         public static readonly Command ValueSplitComma = new(name: "$vcm", description: "Split value in slot 1 with COMMA, output value[number]", Commands);
         public static readonly Command ValueSplitSemicolon = new(name: "$vsc", description: "Split value in slot 1 with SEMICOLON, output value[number]", Commands);
         public static readonly Command ValueSplitSpace = new(name: "$vsp", description: "Split value in slot 1 with SPACE, output value[number]", Commands);
@@ -45,6 +45,9 @@
         public static readonly Command ListLines2 = new(name: "$lln2", description: "Split lines in mem2 for use in processing from other slot/text library", Commands);
         public static readonly Command ListLines3 = new(name: "$lln3", description: "Split lines in mem3 for use in processing from other slot/text library", Commands);
         public static readonly Command Prompt = new(name: "$prompt", description: "Opens a popup box to insert a text value", Commands);
+        public static readonly Command Trim = new(name: "$trim", description: "Flag: Trims white space from start and end of the text", Commands);
+        public static readonly Command LineBreakToComma = new(name: "$lbtc", description: "Flag: Replaces Line Breaks with ', '", Commands);
+        public static readonly Command CommaToLineBreak = new(name: "$ctlb", description: "Flag: Replaces ', ' and ',' to Line Breaks", Commands);
         public static readonly Command Math = new(name: "$Math", description: "Flag: Solves equations enclosed in [] brackets", Commands);
         public static readonly Command Round = new(name: "$Round", description: "Flag: Alters $Math to round off results. ", Commands);
         public static readonly Command RTF = new(name: "$RTF", description: "Output Rich Text (.rtf format)", Commands);
